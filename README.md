@@ -1,2 +1,0 @@
-# BSS
-CRM - BSS Project
