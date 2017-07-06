@@ -1,0 +1,84 @@
+
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<script src="highcharts.js"></script>
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<script>
+
+$(function () {
+
+    
+
+    // Build the chart
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+         credits: {
+        enabled: false
+      },
+        title: {
+            text: 'Group % Share YTD'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>',
+            enabled:true
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                 showInLegend: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+          legend: {
+        enabled: true,
+        
+       
+        },
+        series: [{
+            name: 'Bookings',
+              data: [
+                { name: 'Austrilia', y: 3078865 ,color:'#ADFF2F'},
+                {
+                    name: 'Thailand',
+                    y: 6064034,
+                    sliced: true,
+                    selected: true,
+                    color:'#0000FF'
+                },
+                { name: 'Malaysia', y:4169527,color:'#8B0000'},
+                { name: 'Indonesia', y:2810065,color:'#008000'}, 
+                { name: 'Singapore', y:1925621,color:'#6A5ACD'},
+                { name: 'philippines', y:2426549,color:'#ADD8E6'},
+                {name:'India',y:732235,color:'#CD853F'},
+                {name:'Vietnam',y:2220255,color:'#5F9EA0'},
+                {name:'Other',y:641965,color:'#DB7093'}
+            ]
+        }]
+    });
+});
+
+</script>
+
+</head>
+
+<body>
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+</body>
+</html>
+ 
+
+ 

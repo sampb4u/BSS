@@ -1,0 +1,65 @@
+
+   <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+
+
+</style>                
+	<div ng-controller="productline" ng-init="viewproductLine()">
+  
+	     
+		 <div class="row">
+		    <div class="col-xs-12 col-md-12">
+        		<div class="well with-header with-footer">								 
+					<div class="header bordered-blue" id="pageHeadding">Product Line Mapping</div>	 
+                    	
+                        <form name="productLineForm" ng-submit="productLineSubmit();">
+	<div class="table-scrollable">
+		<table class="table table-hover table-striped table-bordered">
+		<thead class="bordered-blue">
+		<tr>
+		<th>Product Line Code</th>
+		<th>Product Line Description</th>
+		<th>Product Category</th>
+		<th>Product</th>		
+		</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in productlinenames">            
+				<td><input type="text" class="form-control" name="plcode" ng-model="x.plcode" placeholder="Product Line Code" readonly/></td>
+				<td><input type="text" class="form-control" name="pldesc" ng-model="x.pldesc" placeholder="Product Line Description" readonly /></td>
+				<td>
+                	<select class="form-control" name="pccode" ng-model="x.pccode" ng-options="pccode.productcategorycode  as pccode.productcategory for pccode in productcatagories"  ng-change="getProducts(x.pccode,$index);">                		
+                	</select>
+                    
+                </td>
+				<td><select class="form-control" name="product" ng-model="x.product" ng-options="product.productName as product.productName for product in productsarray"></select></td>
+                
+			</tr>
+		 
+			 
+			
+		</tbody>
+		</table>
+		</div>        
+		<br />
+		<div class="row">
+						   <div class="col-sm-12" align="center">
+								<button type="submit" class="btn btn-blue"><i class="glyphicon glyphicon-save"></i>Save</button>
+								<!--<button type="reset" class="btn btn-blue" ng-click="reset(YearlyBudgetForm)">Reset</button>-->
+						  </div>
+						  	
+						</div>		
+</form>
+					  </div>
+					</div>
+		 </div>
+			
+		</div>
+

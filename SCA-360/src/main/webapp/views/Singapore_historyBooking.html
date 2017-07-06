@@ -1,0 +1,373 @@
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:20px;
+	right: 8%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script>
+//$(document).ready(function()
+//{
+	var countryCode = sessionStorage.getItem('countryCode');
+	var url = "bookingVsBudetYearCountryWise.do?countryCode="+countryCode+"&id=local";
+	var curType = "SGD (\u0024)";
+	renderCurrencyDynamic(url);
+	$(document).ready(function()
+	{
+			$("#SGD").click(function()
+			{
+				url = "bookingVsBudetYearCountryWise.do?countryCode="+countryCode+"&id=local";
+				renderCurrencyDynamic(url);
+				curType = "SGD (\u0024)";
+				$('#SGD').addClass("dropBackColor");
+				$('#USD').removeClass("dropBackColor");
+	        });
+			$("#USD").click(function()
+			{
+				url = "bookingVsBudetYearCountryWise.do?countryCode="+countryCode+"&id=dollar";
+				renderCurrencyDynamic(url);
+				curType = "USD (\u0024)";
+				$('#SGD').removeClass("dropBackColor");
+				$('#USD').addClass("dropBackColor");
+	        });
+			
+	
+	});
+	function renderCurrencyDynamic(url)	
+	{
+    $.getJSON(url, function(json) 
+	{
+		var chartData = {
+ 							"chart": {
+										"palette": "1",
+									    "caption": "Booking Vs Budget",
+										"xaxisname": "",
+										"decimals":'1',
+										"yaxisname": curType,
+										"xAxisNameFont": "Helvetica",
+										 "xAxisNameFontSize": "14",
+										 "xAxisNameFontBold":"1",
+										"yAxisNameFontBold":"1",
+										"yAxisNameFontSize": "14",
+										"yAxisNameFont": "Helvetica",
+										"yFormatNumberScale":"1",
+										 "numberScaleValue": "1000,1000,1000",
+										 "numberScaleUnit": "K,M,B",
+										"showsum": "1",
+										"showvalues": "0",
+										"exportenabled": "1",
+										"exportatclient": "0",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",
+										"numberPrefix": "",
+									    "numbersuffix": "",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										"legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										"divLineDashed": "1",
+										"showAlternateHGridColor": "0",
+										"subcaptionFontBold": "0",
+										"subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"14",
+										"rotatelabels": "0",		
+										"rotatevalues": "1",
+										"baseFontColor":"#000000"
+									 },
+									"categories": [
+											        {
+											            "category": json['category']
+												    }
+											       ],
+									"dataset": json['dataset']
+								};
+										
+		FusionCharts.ready(function () 
+		{           
+	 		 var fusioncharts = new FusionCharts({		
+				        type: 'mscombi2d',
+						renderAt: 'container',
+						width: '100%',
+						height: '500',
+				        dataFormat: 'json',
+	        			dataSource:chartData	
+					    });	
+						var renderTable = function (chart, containerId) 
+			  			{
+								var chartData = chart.getDataAsCSV(),
+					        				      rows,
+												  row,
+												  i,
+												  length,
+												  tableBody = '',
+												  tableBody1 = '',
+												  tableBody2 = '',
+												  tableBody3 = '',
+												  tableBody4 = '',
+												  tableBody5 = '',
+												  //tableBody6 = '',
+												  tableHeader = '';
+												  tableHeader1 = '';     
+												  tableHeader2 = '';     
+												  tableHeader3 = '';     
+												  tableHeader4 = '';     
+												  tableHeader5 = ''; 
+												  //tableHeader6 = ''; 	
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');     
+            // Retrieve the data from the rows and compute body string from the data rows
+			var accuBudget = 0;
+			var accuBooking = 0;
+			var arryBudget = [];
+			var arryBookings = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{	
+				//alert(JSON.stringify(rows[i]));		
+                row = rows[i].split(',');
+				var sumofBudget = 0;
+				var sumofBooking = 0;
+				for(var j=1;j<=2;j++)
+				{
+					//alert(row[j]);
+					if(j<=1)
+					{
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBudget += parseInt(value);						
+					}
+				   else
+				    {
+						//alert(row[j]);
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+					}
+				}
+				//arryBudget.push(sumofBudget);
+				//arryBookings.push(sumofBooking);
+				
+				if(sumofBudget==null){var convertBudget = 0; }else{var convertBudget = convertMillions(sumofBudget);}
+				if(sumofBooking==null){var convertBooking = 0; }else{var convertBooking = convertMillions(sumofBooking);}
+				//var convertBudget = convertMillions(sumofBudget);
+				//if(convertBudget==null) { convertBudget = "0M"; }
+				//var convertBooking = convertMillions(sumofBooking);
+				var totalBudget = 0;
+				
+				//if(convertBooking==null) { convertBooking = "0M"; }
+				var budgetPercent = convertBudget.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent = convertBooking.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentSuccess = bookingPercent/budgetPercent*100;
+				//if(isFinite(percentSuccess)) { percentSuccess = percentSuccess; } else { percentSuccess = 0; }
+				if(isNaN(percentSuccess)|| percentSuccess == "Infinity") {var percentSuccessFixed = "0 "; }else{var percentSuccessFixed = percentSuccess.toFixed(2);}
+				
+				var percentSuccessFix = percentSuccessFixed+ " %";
+				//if(isNaN(percentSuccess)) { percentSuccessFixed = "0 %"; }
+				
+				arryBudget.push(budgetPercent);
+				arryBookings.push(bookingPercent);
+				
+				accuBudget = Number(accuBudget)+Number(sumofBudget);
+				var convertAccuBudget = convertMillions(accuBudget);
+				if(convertAccuBudget==null) { convertAccuBudget = "0M"; }
+				//alert(sumofBooking);
+				if(isNaN(sumofBooking)) { sumofBooking = "0"; }
+				
+				accuBooking = Number(accuBooking)+Number(sumofBooking);
+				var convertAccuBooking = convertMillions(accuBooking);
+				//alert(convertAccuBooking);
+				if(convertAccuBooking==null) { convertAccuBooking = "0M"; }
+				
+				//var percentAccuSuccess = accuBooking/accuBudget*100;
+				//var percentAccuSuccessFixed = percentAccuSuccess.toFixed(2)+ " %";
+				//if(isNaN(percentAccuSuccess)) { percentAccuSuccessFixed = "0 %"; }
+				
+				if(i>1)
+				{
+					
+				}
+				
+                tableBody += '<th>' + row[0] + '</th>' ;
+				tableBody1 += '<td>' + convertBudget + '</td>' ;
+				tableBody2 += '<td>' + convertBooking + '</td>' ;
+				tableBody3 += '<td>' + percentSuccessFix + '</td>' ;
+				//tableBody4 += '<td>' + convertAccuBudget + '</td>' ;
+				//tableBody5 += '<td>' + convertAccuBooking + '</td>' ;
+				//tableBody4 += '<td></td>' ;
+				//tableBody5 += '<td></td>' ;
+				
+				//tableBody6 += '<td>' + percentAccuSuccessFixed + '</td>' ;
+            }
+			for(var k=0;k<arryBudget.length;k++)
+			{
+				if(k>0)
+				{
+					var growthBudget = (arryBudget[k]-arryBudget[k-1])/arryBudget[k-1]*100;
+					if(isNaN(growthBudget) || growthBudget=="Infinity") { growthBudget = "0%"; } else { growthBudget = growthBudget.toFixed(2) +"%"; }
+					tableBody4 += '<td>' + growthBudget + '</td>' ;
+
+					var growthBooking = (arryBookings[k]-arryBookings[k-1])/arryBookings[k-1]*100;
+					//alert(growthBooking);
+					if(isNaN(growthBooking)) { growthBooking = "0%"; } else { growthBooking = growthBooking.toFixed(2) +"%"; }
+					tableBody5 += '<td>' + growthBooking + '</td>' ;
+					
+					
+				}
+			}
+	 
+            // Compute header string from first row
+            row = rows[0].split(',');
+            tableHeader = '<th></th>';
+			tableHeader1 = '<th>Budget</th>';
+			tableHeader2 = '<th>Bookings</th>';
+			tableHeader3 = '<th>% Success</th>';
+			tableHeader4 = '<th>Growth - Budget</th>';
+			tableHeader5 = '<th>Growth - Bookings</th>';
+     
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr>'+tableHeader+tableBody+'</tr><tr>'+tableHeader1+tableBody1+'</tr><tr>'+tableHeader2+tableBody2+'</tr><tr>'+tableHeader3+tableBody3+'</tr><tr><td colspan="15" height="20px;"></td></tr><tr>'+tableHeader4+'<td></td>'+tableBody4+'</tr><tr>'+tableHeader5+'<td></td>'+tableBody5+'</tr></tbody</table>';							
+						};
+						fusioncharts.render();
+				        fusioncharts.addEventListener('renderComplete', function () 
+						{
+			        	    renderTable(fusioncharts, 'table-container');
+				        });																			
+						
+				}); 
+		});
+  }
+	//});
+	function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+	/*function convertMillions(sumofBudget)
+	{
+		 if (Math.abs(sumofBudget) >= 1000000000) 
+		 {
+	        return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000000) 
+		 {
+		      return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 else if (Math.abs(sumofBudget) <1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 
+	
+	}	*/
+</script>
+<div class="row">
+		<div class="col-sm-12" align="left" >
+				<div class="dropdown">
+					 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+					 <div class="dropdown-content">
+						<a href="#/app/Singapore_historyBooking" id="SGD"><span>SGD &#x24;</span></a>
+						<a href="#/app/Singapore_historyBooking" id="USD"><span>USD &#x24;</span></a>
+					  </div>
+				</div>
+		</div>
+</div>
+<br/>
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 		 
+		 </div>
+	</div>
+</div>
+  <div class="row">
+  	<div class="col-sm-12">
+		<div id="table-container"  style="padding-left:1%;"></div>
+	</div>
+  </div>  
+<br />
+

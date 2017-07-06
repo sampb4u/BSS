@@ -1,0 +1,504 @@
+﻿<style>
+  .imagewidth
+  {
+  width:30px;
+  cursor:pointer;
+  }
+  </style>
+ 
+<script>
+function changeGrid()
+{
+var fullunit =  document.getElementById("fullunit").checked;
+var project =  document.getElementById("project").checked;
+var spareproject =   document.getElementById("spareproject").checked;
+
+	if(fullunit==true)
+	{
+	   document.getElementById("fullunitTable").style.display="block";
+		document.getElementById("projectTable").style.display="none";
+		document.getElementById("sparepartsTable").style.display="none";
+		document.getElementById("internal").disabled=true;
+ 		document.getElementById("overseas").disabled=true;
+		
+		
+		//document.getElementById("chkfullunit").style.display="block";
+//		document.getElementById("chkproject").style.display="none";
+//		document.getElementById("chkspareproject").style.display="none";
+//		document.getElementById("internal").disabled=true;
+//		document.getElementById("overseas").disabled=true;
+		 
+	}
+	else if(project==true)
+	{
+	
+	 document.getElementById("fullunitTable").style.display="none";
+		document.getElementById("projectTable").style.display="block";
+		document.getElementById("sparepartsTable").style.display="none";
+		document.getElementById("internal").disabled=true;
+ 		document.getElementById("overseas").disabled=true;
+		//document.getElementById("chkfullunit").style.display="none";
+//		document.getElementById("chkproject").style.display="block";
+//		document.getElementById("chkspareproject").style.display="none";
+//		document.getElementById("internal").disabled=true;
+//		document.getElementById("overseas").disabled=true;
+		 
+	}
+	else if(spareproject==true)
+	{
+	
+	document.getElementById("fullunitTable").style.display="none";
+		document.getElementById("projectTable").style.display="none";
+		document.getElementById("sparepartsTable").style.display="block";
+		document.getElementById("internal").disabled=true;
+ 		document.getElementById("overseas").disabled=true;
+		//document.getElementById("chkfullunit").style.display="none";
+//		document.getElementById("chkproject").style.display="none";
+//		document.getElementById("chkspareproject").style.display="block";
+//		document.getElementById("internal").disabled=true;
+//		document.getElementById("overseas").disabled=true;
+	}
+}
+
+	function enableInternalOverseas()
+	{
+		
+		document.getElementById("internal").disabled=false;
+		document.getElementById("overseas").disabled=false;
+	}
+	
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+ </script>
+ <script>
+  $(document).ready(function(){
+
+ $("#quotepopup").click(function()
+ {
+
+ 	$("#addquote").show();
+	$("#applicationdatasheetpopup").hide();
+	
+ });
+ $("#applicationpop").click(function()
+ {
+ 	$("#addquote").hide();
+	$("#applicationdatasheetpopup").show();
+	
+ });
+
+ 
+});
+ </script>
+<!--added tables-->
+ <script>
+$(document).ready(function(){
+    $("#fullunit").click(function(){
+        $("#projectTable").hide();
+		$("#fullunitTable").show();
+    });
+   // $("#fullunit").click(function(){
+        
+   // });
+});
+</script>
+<body>
+<div ng-controller="ModalDemoCtrl">
+                         
+                               
+                                <div class="modal-body">
+                                <div class="horizontal-space"></div>
+						<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+								 
+							<div class="header bordered-blue">
+             Quotation Response Full Unit
+            </div>	 
+								 
+								 
+								 	
+									
+									<div class="row">
+									
+										<div class="col-sm-12">
+										
+										
+												
+											
+                                               
+                                           
+										
+										</div>
+									
+									</div>
+									
+								 	<div class="row">
+									
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Sales Inquiry No.">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Sales Man">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+									
+									</div>
+									<div class="row">
+									<div class="col-sm-6">
+										<div class="radio"> 
+												<label>
+													
+													<span class="text"> Response For </span>
+													
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio45" type="radio" class="colored-blue" checked="checked">
+													<span class="text"> Internal</span>
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio45" type="radio" class="colored-blue" >
+													<span class="text"> Overseas</span>
+												</label>
+												  
+											</div>
+									</div>
+										
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control"  placeholder="Response ID">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+										
+									
+									</div>
+									<div class="row">
+									
+										<div class="col-sm-6"><div class="form-group">
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Customer">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control"  placeholder="Ship From Country">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+										
+									
+									</div>
+									<div class="row">
+									
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <select class="form-control"><option value="">Attention</option>
+														</select>
+                                                     
+                                                    </span>
+                                                </div></div>
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control"  placeholder="Response Date">
+                                                        <i class="glyphicon glyphicon-calendar calendar"></i>
+                                                    </span>
+                                                </div></div>
+										
+									
+									</div>
+									<div class="row">
+									
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Telephone Number">
+                                                        <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span>
+                                                </div></div>
+												<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Validity Date">
+                                                        <i class="glyphicon glyphicon-calendar calendar"></i>
+                                                    </span>
+                                                </div></div>
+												
+										
+										
+									
+									</div>
+									<div class="row">
+									
+										<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Fax">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+												
+												
+											<div class="col-sm-6"><div class="form-group">
+                                                    
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Email">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                </div></div>
+										
+									
+									</div>
+									
+									<div class="row">
+									
+									<div class="col-sm-6">
+												<div class="radio"> 
+												<label>
+													
+													<span class="text"> Display Accessories </span>
+													
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-blue" checked="checked">
+													<span class="text"> Yes</span>
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-blue" >
+													<span class="text"> No</span>
+												</label>
+												  
+											</div>
+										
+											
+                                               
+                                            </div>
+												<div class="col-sm-6">
+												<div class="radio"> 
+												<label>
+													
+													<span class="text"> Break Cost </span>
+													
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio456" type="radio" class="colored-blue" checked="checked">
+													<span class="text"> Yes</span>
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio456" type="radio" class="colored-blue" >
+													<span class="text"> No</span>
+												</label>
+												  
+											</div>
+										
+											
+                                               
+                                            </div>
+												</div>
+									
+								
+								
+							
+							
+							
+							
+						
+							
+  								
+							
+							
+							
+							
+							
+								<div ng-controller="ModalDemoCtrl">
+								<div class="table-scrollable">
+								<table class="table table-hover table-striped table-bordered" border="0">
+								<thead class="bordered-blue">
+								<tr>
+									<th><a href="" style="text-align:center;"><img  ng-click="addRow(); " class="imagewidth" src="image/Medical__Health_care-100-20-128.png" style="width:30px; height:30px;"/></a></th>
+									  <th></th>
+									  <th>Date</th>
+							
+								
+								
+								<!--<th> <a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></th>-->
+								</tr>
+								</thead>
+								 
+                                <tr ng-repeat="rowContent in rows">
+										 <!--<td><a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></td>-->
+										 
+										 <td><select class="form-control"><option value="">Factory</option></select></td>
+										 <td><span class="input-icon icon-right"><input type="text" class="form-control"><i class="glyphicon glyphicon-user circular"></i>
+                                                    </span></td>
+										  <td><span class="input-icon icon-right"><input type="text" class="form-control" placeholder="Date"><i class="glyphicon glyphicon-calendar calendar"></i>
+                                                    </span></td>
+										 
+										 
+									
+                                 </tr>
+								</table>
+								
+							</div>
+							</div>
+							<br>
+								<div class="table-scrollable">
+								<table class="table table-hover table-striped table-bordered" border="0">
+								<thead class="bordered-blue">
+								<tr>
+									
+									<th>Sl.No.</th>
+									<th>Model MegNo</th>
+									<th>Product Description</th>
+									<th>Qty</th>
+									<th>Unit Price</th>
+									<th>Total</th>
+									<th>DM</th>
+									<th>Discount</th>
+									<th>Net Amount</th>
+									<th>Special Price</th>
+									<th>Special Delivery Price</th>
+									<th>Remarks</th>
+							
+								
+								
+								<!--<th> <a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></th>-->
+								</tr>
+								</thead>
+								 
+                                 <tr >
+										 <!--<td><a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></td>-->
+										 
+										 <td style="height:30px;"></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										
+										   <td></td>
+										    <td></td>
+											 <td></td>
+											  <td></td>
+											   <td></td>
+											    <td></td>
+												 <td></td>
+												  <td></td>
+									
+									
+                                 </tr>
+								   <tr >
+										 <!--<td><a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></td>-->
+										 
+									 <td  style="height:30px;"></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										  <td></td>
+										   <td></td>
+										
+											 <td></td>
+											  <td></td>
+											   <td></td>
+											    <td></td>
+												 <td></td>
+												  <td></td>
+									
+									
+                                 </tr>
+								   <tr >
+										 <!--<td><a href="#" class="btn btn-blue" ng-click="deleteRow(); ">Delete Row</a></td>-->
+										 
+										 <td  style="height:30px;"></td>
+										 <td></td>
+										 <td></td>
+										 <td></td>
+										  <td></td>
+										   <td></td>
+										 
+											 <td></td>
+											  <td></td>
+											   <td></td>
+											    <td></td>
+												 <td></td>
+												  <td></td>
+									
+                                 </tr>
+								</table>
+								
+							</div>
+							<br>
+						<div class="row">
+						<div class="col-sm-4">
+						</div>
+						
+							<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="TotalAmount  " >
+						</div>
+						<div class="col-sm-3">
+						
+						<input type="text" class="form-control" placeholder="Amount" style="width:100px;">
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-sm-4">
+						</div>
+							<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="Freight Charges" >
+						</div>
+						<div class="col-sm-3">
+						
+						<input type="text" class="form-control" placeholder="Amount" style="width:100px;">
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-sm-4">
+						</div>
+							<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="Final Amount" >
+						</div>
+						<div class="col-sm-3">
+						
+						<input type="text" class="form-control" placeholder="Amount" style="width:100px;">
+						</div>
+						</div>
+						<br>
+						<div class="row" align="center">
+							<button type="button" class="btn btn-blue" ng-click="ok()">Save</button>
+							<button type="button" class="btn btn-blue" ng-click="cancel()">Cancel</button>
+						</div>
+ 									
+								<br>
+                               
+                            <!--</script>--> 
+
+                         
+                        
+                  
+
+						
+			
+                         
+		
+		
+		</div>
+	</body>
+					
+
+   

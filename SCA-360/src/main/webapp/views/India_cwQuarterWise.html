@@ -1,0 +1,338 @@
+<style>
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1800%;
+	right:6%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+				var renderTable = function (chart, containerId) {
+					//	 After the chart is rendered we export the data as CSV, parse it and then create a markup
+				   //  equivalent to a table by parsing the exported CSV.
+					var chartData = chart.getDataAsCSV(),
+						rows,
+						row,
+						rowValue,
+						i,
+						length,
+						tableData2 = '';
+						tableBody5 = '',
+						tableHeader = '';
+						rowHeading1 = "";
+					// Get all the rows by splitting data with '\n' seperator
+					rows = chartData.replace(/"/g, '').split('\n');
+					
+					rowHeading1 = rows[0].split(',');
+					var rowValue="";
+					for(var r = 1;r<(rows.length);r++)
+					{
+						rowValue += rows[r].split(',');
+					}
+					
+					var arrayObj = [];
+					var arrayObj2 = [];
+					var arrayObj3 = [];
+					var convertBooking = [];
+					
+					var getTotalValueObj = [];
+					// Retrieve the data from the rows and compute body string from the data rows
+					var tableBody6 = '';
+					for (i = 1, length = rows.length; i < length; i++) 
+					{
+						row = rows[i].split(',');
+						
+						var tableValue = [];
+						var tableValue2 = [];
+						var tableValue3 = [];
+						var getTotalVal  = 0;
+						var sumofBooking = 0;
+						var totalBooking = 0;
+						for(var j=1;j<row.length;j++)
+						{
+								if(j>=1)
+									{
+									   
+									   if(row[j]!=null)
+									   {
+										if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+										
+									   }
+									   else
+									   {
+											value = 0;
+									   }
+									   if(convertMillions(value)==null) { var convertVal5 = "0K"; } else { var convertVal5 = convertMillions(value); }
+										sumofBooking += parseInt(convertVal5);	
+										//alert(sumofBooking);														
+										
+										if(convertVal5==null ){var convertVal6 = "0K"; }else{var convertVal6 = convertVal5;}
+									    tableValue.push("<td>"+ convertVal6 +"</td>");
+									}
+									getTotalVal +=parseInt(value);
+							
+							tableValue2.push("<td>frhftg</td>");
+							}
+						tableBody6 += "<tr id='tableRows"+i+"'><td>"+ rowHeading1[i]+"</td></tr>";
+						
+						tableBody5 += '<th>' + row[0] + '</th>' ;
+					arrayObj.push(tableValue);	
+					arrayObj2.push(tableValue2);
+					getTotalValueObj.push(getTotalVal);
+					}
+					tableData2 +=tableBody6;
+					// Create the table string and append it to the table container
+					document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr style="color:#000000"><th></th>'+tableBody5+'</tr><tr>'+tableData2+'</tr><tr id="total1"><th>Total</th></tr></tbody</table>';
+				 
+					
+					for(var y=0;y<getTotalValueObj.length;y++)
+					{
+						if(convertMillions(getTotalValueObj[y])==null) { var totalValue = "0k"; } else { var totalValue = convertMillions(getTotalValueObj[y]); }
+						$('#total1').append("<td>"+ totalValue +"</td>");
+					}
+				  for(var l=1;l<=6;l++)
+				  {
+					for(var p=0;p<4;p++)
+					{
+						$('#tableRows'+ l).append(arrayObj[p][l-1]);
+					}
+				  }
+				  
+				};
+		
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		/*function convertMillions(sumofBudget)
+			{
+				 if (Math.abs(sumofBudget) >= 1000000000) 
+				 {
+					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000000) 
+				 {
+					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+				 else if (Math.abs(sumofBudget) <1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }	
+		  }*/
+		var countryCode = sessionStorage.getItem('countryCode');
+		var yAxisName = "INR (\u20B9)";
+		var ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+countryCode+"&id=local";
+		loadChartforAll(ajaxLink,yAxisName);
+$(document).ready(function()
+			{
+				$("#INR").click(function()
+				{
+					yAxisName = "INR (\u20B9)";
+					ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+countryCode+"&id=local";
+					loadChartforAll(ajaxLink,yAxisName);
+					$('#INR').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");
+					
+				});
+				$("#USD").click(function()
+				{
+					yAxisName = "USD (\u0024)";
+					ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+countryCode+"&id=dollar";
+					loadChartforAll(ajaxLink,yAxisName);
+					$('#INR').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+				});	
+			});
+function loadChartforAll(ajaxLink,yAxisName)
+{
+  $.getJSON(ajaxLink, function(json) 
+  {
+	var chartData =  {
+								"chart": {
+											"caption": "Quarterly Bookings",
+											"bgcolor": "FFFFFF",
+									        "decimals":'1',
+											"yaxisname": yAxisName,
+											"xAxisNameFont": "Helvetica",
+											 "xAxisNameFontSize": "14",
+											 "xAxisNameFontBold":"1",
+											"yAxisNameFontBold":"1",
+											"yAxisNameFontSize": "14",
+											"yAxisNameFont": "Helvetica",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+											 "numberScaleUnit": "K,M,B",
+											"showsum": "1",
+											"showvalues": "1",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+									        "bgColor": "#ffffff",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+											"xAxisNameFontBold":"1",
+											 "yAxisNameFontBold":"1",
+											"yAxisNameFontSize": "14",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "1",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"14",
+											"rotatelabels": "0",		
+											"rotatevalues": "1",
+											"baseFontColor":"#000000",
+											"plotToolText":"$seriesname $label Bookings $datavalue"	
+										},
+										"categories": [
+														{
+															"category": [
+																			{
+																				"label": "Jan-Mar"
+																			},
+																			{
+																				"label": "Apr-Jun"
+																			},
+																			{
+																				"label": "Jul-Sept"
+																			},
+																			{
+																				"label": "Oct-Dec"
+																			}
+																		]
+														}
+							  						 ],
+													"dataset": json['dataset']												
+										}
+ 	FusionCharts.ready(function () 
+	{           
+ 		 var revenueChart = new FusionCharts({		
+		        type: 'mscolumn2d',
+			    renderAt: 'container',
+		        width: '100%',
+		        height: '500',
+			    dataFormat: 'json',
+			    dataSource: chartData
+								    });
+		revenueChart.addEventListener('renderComplete', function () {
+            			
+						//alert("sdfjkhgruh");
+            	renderTable(revenueChart, 'table-container');
+       				 });							
+									revenueChart.render();		
+							 })		 
+						 });
+						 
+						 }	 							 
+					// });
+</script>
+<div class="row">
+<div class="col-sm-12">
+		<span class="dropdown" style="display:visible;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/India_cwQuarterWise" id="INR"><span>INR &#x20B9;</span></a>
+				<a href="#/app/India_cwQuarterWise" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div> 
+		</div>
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 
+		 </div>
+	</div>
+</div>
+  <div class="row">
+  	<div class="col-sm-12">
+		<div id="table-container"  style="padding-left:1%;"></div>
+	</div>
+  </div>  
+<br />
+

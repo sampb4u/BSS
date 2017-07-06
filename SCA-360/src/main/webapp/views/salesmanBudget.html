@@ -1,0 +1,356 @@
+﻿ <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.asdok 
+		{
+			  position: relative;
+			  padding-top: 25px;
+			  background-color:#ffffff;
+			  color:#333333;
+		}
+		.asdok.positioned 
+		{
+			  position: absolute;
+			  width:95%;
+			  box-shadow: 0 0 15px #333;
+		}
+		.container1 
+		{
+			  overflow-y: auto;
+			 /* height: 300px;*/
+		}
+		.table 
+		{
+			 border-spacing: 0; border-width: 0; padding: 0; border-width: 0;
+		}
+		.table td + .table td 
+		{
+			  border-left:1px solid #eee;
+			  text-align:left;
+		}
+		.table td, .table th 
+		{
+			  border-bottom:1px solid #eee;
+			  color: #000;
+			  width:0%;
+		}
+		.table th span
+		{
+			  position: absolute;
+			  background: transparent;
+			  color: #333333;
+			  top: 0;
+		}
+		.table th:first-child div
+		{
+			  border: none;
+		}
+
+</style>
+
+<section id="content" data-ng-controller="salesmanBudget" ng-init ="loadCountryBySales();loadCurrentYear();loadCountryByCurrency();addCountrySalesmansGrid(AddBudget.year,AddBudget.countrycode);">
+<div class="row">  
+    <div class="col-xs-12 col-md-12">
+        	<div class="well with-header with-footer" style="background-color:#FFFFFF;height:700px;">
+				<div class="header bordered-blue" id="pageHeadding" >
+           			Salesman Budget
+            	</div>
+			
+			<form name="SalesmanBudgetForm" ng-submit="AddSalesmanBudget(AddBudget,SalesmanBudgetForm)" novalidate>
+				<div class="row" >
+					<div class="col-sm-4" >
+                    	<div class="form-group floating-label-wrapper">
+							<div  ng-class="{ 'has-error' : SalesmanBudgetForm.year.$invalid && (SalesmanBudgetForm.year.$dirty || submitted)}">
+							<select class="form-control" name="year" data-ng-model="AddBudget.year" id="Year" placeholder="Year" data-ng-required="true" ng-options="year.year as year.year for year in yearNames" ng-change="addCountrySalesmansGrid(AddBudget.year,AddBudget.countrycode);" with-floating-label><option value="">Select</option>
+							</select>
+							<p ng-show="SalesmanBudgetForm.year.$error.required && (SalesmanBudgetForm.year.$dirty || submitted)" class="help-block"> Select Year</p>
+							</div>
+					</div>
+					
+					
+				</div>
+					
+				<div class="col-sm-4">
+					<div class="form-group floating-label-wrapper" >
+							<div  ng-class="{ 'has-error' : SalesmanBudgetForm.countrycode.$invalid && (SalesmanBudgetForm.countrycode.$dirty || submitted)}">
+							<select class="form-control" name="countrycode" data-ng-model="AddBudget.countrycode" id="Country" placeholder="Country" data-ng-required="true" ng-options="countrycode.countrycode as countrycode.country for countrycode in countryNamesArr | orderBy:'-country':true" ng-change="getcurrencyByCountry(AddBudget.countrycode);addCountrySalesmansGrid(AddBudget.year,AddBudget.countrycode);" with-floating-label><option value="">Select</option>
+							</select>
+							<p ng-show="SalesmanBudgetForm.countrycode.$error.required && (SalesmanBudgetForm.countrycode.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+							</div>
+					</div>
+					
+				</div>
+				
+				
+					<div class="col-sm-4" >
+				<div class="form-group floating-label-wrapper" >
+				<div  ng-class="{ 'has-error' : SalesmanBudgetForm.currency.$invalid && (SalesmanBudgetForm.currency.$dirty || submitted)}">
+				<select class="form-control" name="currency" data-ng-model="AddBudget.currency"  id="Currency" placeholder="Currency"  data-ng-required="true" ng-options="currency.id as currency.currency for currency in currencyArrData" ng-change="addCountrySalesmansGrid22(AddBudget.year,AddBudget.countrycode);" with-floating-label data-ng-disabled="isDisabled"> <option value="">Select</option>
+				</select>
+               
+				<p ng-show="SalesmanBudgetForm.currency.$error.required && (SalesmanBudgetForm.currency.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+				</div>
+				</div>
+
+				</div>
+				</div>
+                
+					<br />
+					<br />
+                   
+				
+				
+                <div class="widget flat radius-bordered">
+                        <div class="widget-main ">
+                            <tabset flat="true">
+                                <tab style="font-weight:bold;color:#000000;" heading="Quarter 1 ">
+                                  <div ng-init="currentPage = 1; itemsPerPage = 10;">
+								  <table class="table" style="border:none;">
+							 
+										<thead>
+											<tr>
+											
+											
+												<th style="display:none;"><span>Action</span></th>
+                                                <th class="boldclass"><span><b>Salesman Code</b></span></th>
+												<th class="boldclass"><span><b>Salesman Name</b></span></th>
+												<th class="boldclass" ><span><b>January</b></span></th>
+												<th class="boldclass" ><span><b>February</b></span></th>
+												<th class="boldclass" ><span><b>March</b></span></th>
+												<th class="boldclass"><span><b>Q1</b></span></th>
+									
+											</tr>
+										</thead>									
+										<tbody>
+											<!--<tr ng-repeat='BudgetData in salemandata'>-->
+                                            <tr ng-repeat="addSalesBudget in filteredItems = items">
+												<!--<td style="display:none;">
+<button type="button" id="right_All_1" class="btn btn-primary" ng-click='addCountrySalesmansGrid();' ng-if="BudgetData.id == '1'"><i class="glyphicon glyphicon-plus-sign""></i></button>												
+<button type="button" id="right_All_1" class="btn btn-primary" ng-click='removeSalesmanRow(BudgetData.id);' ng-if="BudgetData.id != '1'"><i class="glyphicon glyphicon-remove-sign"></i></button>
+
+<span ng-if="$index!= '1'">
+	<button type="button" id="right_All_1" class="btn btn-primary" ng-click='removeSalesmanRow(BudgetData.id);' ng-if="$index<=updateLength" ng-disabled='true'><i class="glyphicon glyphicon-remove-sign"></i></button>
+	<button type="button" id="right_All_1" class="btn btn-primary" ng-click='removeSalesmanRow(BudgetData.id);' ng-if="$index>updateLength" ng-disabled='false'><i class="glyphicon glyphicon-remove-sign"></i></button>
+	
+
+</span>				
+
+												</td>-->
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanCode" placeholder="Salesman Code" name="salesmanCode{{$index}}" ng-model="addSalesBudget.salesmanCode" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanCode}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    </div></td>
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanName" placeholder="Salesman Name" name="salesmanName{{$index}}" ng-model="addSalesBudget.salesmanName" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanName}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    </div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.janBudget{{$index}}.$invalid && (SalesmanBudgetForm.janBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="JanBudget" placeholder="Budget in USD" name="janBudget{{$index}}" ng-model="addSalesBudget.janBudget"  tooltip-placement="bottom" tooltip="{{addSalesBudget.janBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarteroneTotal(addSalesBudget.janBudget,addSalesBudget.febBudget,addSalesBudget.marBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.janBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.janBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.febBudget{{$index}}.$invalid && (SalesmanBudgetForm.febBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="FebBudget" placeholder="Budget in USD" name="febBudget{{$index}}" ng-model="addSalesBudget.febBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.febBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarteroneTotal(addSalesBudget.janBudget,addSalesBudget.febBudget,addSalesBudget.marBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.febBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.febBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.marBudget{{$index}}.$invalid && (SalesmanBudgetForm.marBudget{{$index}}.$dirty || submitted)}">
+                                                                                                        <input type="text" class="form-control" id="MarBudget" placeholder="Budget in USD" name="marBudget{{$index}}" ng-model="addSalesBudget.marBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.marBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarteroneTotal(addSalesBudget.janBudget,addSalesBudget.febBudget,addSalesBudget.marBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                                                                        <p ng-show="SalesmanBudgetForm.marBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.marBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                                                                   
+                                                   </div></div></td>
+												<td><div class="form-group">																																																											
+	<input type="text" class="form-control" placeholder="Q1" name="quarterone{{$index}}" readonly data-ng-model="addSalesBudget.quarterone" tooltip-placement="bottom" tooltip="{{addSalesBudget.quarterone}}"/>
+</div></td>
+											</tr>
+										</tbody>
+									</table>
+								  </div>
+								  
+                                </tab>
+                                <tab style="font-weight:bold;color:#000000;" heading="Quarter 2">
+								  <table class="table" style="border:none;">
+										<thead>
+											<tr>
+                                            <th class="boldclass"><span><b>Salesman Code</b></span></th>
+											<th class="boldclass"><span><b>Salesman Name</b></span></th>
+											<th class="boldclass" ><span><b>April</b></span></th>
+												<th class="boldclass" ><span><b>May</b></span></th>
+												<th class="boldclass" ><span><b>June</b></span></th>
+												<th class="boldclass"><span><b>Q2</b></span></th>
+												
+											</tr>
+										</thead>									
+										<tbody>
+											<tr ng-repeat="addSalesBudget in filteredItems = items">
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanCode" placeholder="Salesman Code" name="salesmanCode{{$index}}" ng-model="addSalesBudget.salesmanCode" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanCode}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    </div></td>
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanName" placeholder="Salesman Name" name="salesmanName{{$index}}" ng-model="addSalesBudget.salesmanName" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanName}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    
+                                                </div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.aprBudget{{$index}}.$invalid && (SalesmanBudgetForm.aprBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="AprBudget" placeholder="Budget in USD" name="aprBudget{{$index}}" ng-model="addSalesBudget.aprBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.aprBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuartertwoTotal(addSalesBudget.aprBudget,addSalesBudget.mayBudget,addSalesBudget.junBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.aprBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.aprBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.mayBudget{{$index}}.$invalid && (SalesmanBudgetForm.mayBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="MayBudget" placeholder="Budget in USD" name="mayBudget{{$index}}" ng-model="addSalesBudget.mayBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.mayBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuartertwoTotal(addSalesBudget.aprBudget,addSalesBudget.mayBudget,addSalesBudget.junBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.mayBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.mayBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.junBudget{{$index}}.$invalid && (SalesmanBudgetForm.junBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="JunBudget" placeholder="Budget in USD" name="junBudget{{$index}}" ng-model="addSalesBudget.junBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.junBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuartertwoTotal(addSalesBudget.aprBudget,addSalesBudget.mayBudget,addSalesBudget.junBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.junBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.junBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group">																																																										
+														<input type="text" class="form-control"  name="quartertwo{{$index}}"  readonly   data-ng-model="addSalesBudget.quartertwo"  data-ng-pattern="/^[0-9.\s]*$/"  tooltip-placement="bottom" placeholder="Q2"  tooltip="{{addSalesBudget.quartertwo}}">
+												</div></td>
+											</tr>
+										</tbody>
+									</table>
+                                </tab>
+                                <tab style="font-weight:bold;color:#000000;" heading="Quarter 3">
+									<table class="table" style="border:none;">
+										<thead>
+											<tr>
+                                            <th class="boldclass"><span><b>Salesman Code</b></span></th>
+											<th class="boldclass"><span><b>Salesman Name</b></span></th>
+											<th class="boldclass" ><span><b>July</b></span></th>
+												<th class="boldclass"><span><b>August</b></span></th>
+												<th class="boldclass"><span><b>September</b></span></th>
+												<th class="boldclass"><span><b>Q3</b></span></th>
+											</tr>
+										</thead>									
+										<tbody>
+											<tr ng-repeat="addSalesBudget in filteredItems = items">
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanCode" placeholder="Salesman Code" name="salesmanCode{{$index}}" ng-model="addSalesBudget.salesmanCode" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanCode}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    </div></td>
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanName" placeholder="Salesman Name" name="salesmanName{{$index}}" ng-model="addSalesBudget.salesmanName" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanName}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    
+                                                </div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.julBudget{{$index}}.$invalid && (SalesmanBudgetForm.julBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="JulBudget" placeholder="Budget in USD" name="julBudget{{$index}}" ng-model="addSalesBudget.julBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.julBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterthreeTotal(addSalesBudget.julBudget,addSalesBudget.augBudget,addSalesBudget.sepBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.julBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.julBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.augBudget{{$index}}.$invalid && (SalesmanBudgetForm.augBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="AugBudget" placeholder="Budget in USD" name="augBudget{{$index}}" ng-model="addSalesBudget.augBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.augBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterthreeTotal(addSalesBudget.julBudget,addSalesBudget.augBudget,addSalesBudget.sepBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.augBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.augBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.sepBudget{{$index}}.$invalid && (SalesmanBudgetForm.sepBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="SepBudget" placeholder="Budget in USD" name="sepBudget{{$index}}" ng-model="addSalesBudget.sepBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.sepBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterthreeTotal(addSalesBudget.julBudget,addSalesBudget.augBudget,addSalesBudget.sepBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.sepBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.sepBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group">
+                                                		<input type="text" class="form-control" placeholder="Q3" name="quarterthree{{$index}}"    data-ng-model="addSalesBudget.quarterthree"  data-ng-pattern="/^[0-9.\s]*$/"  tooltip-placement="bottom" tooltip="{{addSalesBudget.quarterthree}}" readonly/>
+                                                 	</div></td>
+											</tr>
+										</tbody>
+									</table>
+                                </tab>
+								<tab style="font-weight:bold;color:#000000;" heading="Quarter 4">
+									<table class="table" style="border:none;">
+										<thead>
+											<tr>
+                                            	<th class="boldclass"><span><b>Salesman Code</b></span></th>
+												<th class="boldclass"><span><b>Salesman Name</b></span></th>
+												<th class="boldclass"><span><b>October</b></span></th>
+												<th class="boldclass"><span><b>November</b></span></th>
+												<th class="boldclass"><span><b>December</b></span></th>
+												<th class="boldclass"><span><b>Q4</b></span></th>
+												<th class="boldclass"><span><b>Total</b></span></th>
+											</tr>
+										</thead>									
+										<tbody>
+											<tr ng-repeat="addSalesBudget in filteredItems = items">
+                                            	<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanCode" placeholder="Salesman Code" name="salesmanCode{{$index}}" ng-model="addSalesBudget.salesmanCode" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanCode}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    </div></td>
+												<td><div class="form-group">
+                                                        <span class="input-icon icon-right">
+                                                            <input type="text" class="form-control" id="SalesmanName" placeholder="Salesman Name" name="salesmanName{{$index}}" ng-model="addSalesBudget.salesmanName" tooltip-placement="bottom" tooltip="{{addSalesBudget.salesmanName}}" readonly>
+                                                            <i class="glyphicon glyphicon-user circular"></i>
+                                                        </span>
+                                                    
+                                                	</div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.octBudget{{$index}}.$invalid && (SalesmanBudgetForm.octBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="OctBudget" placeholder="Budget in USD" name="octBudget{{$index}}" ng-model="addSalesBudget.octBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.octBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterfourTotal(addSalesBudget.octBudget,addSalesBudget.novBudget,addSalesBudget.decBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.octBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.octBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.novBudget{{$index}}.$invalid && (SalesmanBudgetForm.novBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="NovBudget" placeholder="Budget in USD" name="novBudget{{$index}}" ng-model="addSalesBudget.novBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.novBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterfourTotal(addSalesBudget.octBudget,addSalesBudget.novBudget,addSalesBudget.decBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);">
+                                                        <p ng-show="SalesmanBudgetForm.novBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.novBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group"><div ng-class="{ 'has-error' : SalesmanBudgetForm.decBudget{{$index}}.$invalid && (SalesmanBudgetForm.decBudget{{$index}}.$dirty || submitted)}">
+                                                        <input type="text" class="form-control" id="DecBudget" placeholder="Budget in USD" name="decBudget{{$index}}" ng-model="addSalesBudget.decBudget" tooltip-placement="bottom" tooltip="{{addSalesBudget.decBudget}}" ng-pattern="/^[0-9.\s]*$/" ng-keyup="getQuarterfourTotal(addSalesBudget.octBudget,addSalesBudget.novBudget,addSalesBudget.decBudget);getYearBudgetTotal(addSalesBudget.quarterone,addSalesBudget.quartertwo,addSalesBudget.quarterthree,addSalesBudget.quarterfour);"> 
+                                                        <p ng-show="SalesmanBudgetForm.decBudget{{$index}}.$error.pattern  && (SalesmanBudgetForm.decBudget{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Budget </p>
+                                                   
+                                                </div></div></td>
+												<td><div class="form-group">																																																											
+															<input type="text" class="form-control"  name="quarterfour{{$index}}" readonly    data-ng-model="addSalesBudget.quarterfour"  data-ng-pattern="/^[0-9.\s]*$/"  tooltip-placement="bottom" placeholder="Q4"  tooltip="{{addSalesBudget.quarterfour}}"/>
+													</div></td>
+												<td><div class="form-group">
+                                                        <input type="text" class="form-control" id="GrandTotal" placeholder="Budget in USD" name="grandTotal{{$index}}" ng-model="addSalesBudget.grandTotal" tooltip-placement="bottom" tooltip="{{addSalesBudget.grandTotal}}" readonly="readonly">
+                                                   
+                                                </div></td>
+												<td style="diplay:none;"><input type="hidden" data-ng-model="addSalesBudget.slno"></td>
+											</tr>
+										</tbody>
+									</table>
+                                </tab>
+                            </tabset>
+                        </div>
+                </div>
+                <br />
+                <br />
+                <pagination total-items="totalItems" ng-model="currentPage" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+            <br />
+                			<h6>Page: {{currentPage}} / {{numPages}}</h6>
+			
+				<div class="row">
+						   <div class="col-sm-12" align="center">
+								<button type="submit" class="btn btn-blue btn-hide"><i class="glyphicon glyphicon-save"></i>Save</button>
+								<!--<button type="reset" class="btn btn-blue" ng-click="reset(SalesmanBudgetForm)">Reset</button>-->
+						  </div>
+						  	
+						</div>
+			</form>				
+		</div>
+		</div>
+		</div>
+		 
+</section>

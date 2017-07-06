@@ -1,0 +1,111 @@
+﻿<div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+                                 <h3 style="font-weight:bold;">Tax Type</h3>
+								 <hr>
+								 	<div class="row">
+										
+										<div class="col-sm-6"><input type="text" class="form-control" placeholder="Tax Type" autofocous></div>
+										<div class="col-sm-6"><input type="text" class="form-control"  placeholder="Description"></div>
+										
+									
+									</div>
+									<br>
+									
+									
+									
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="control-group">
+											<div class="radio"> 
+												<label>
+													Status : <input name="form-field-radio" type="radio" class="colored-blue" checked="checked">
+													<span class="text"> Active</span>
+												</label>&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-blue">
+													<span class="text"> Inactive</span>
+												</label>
+											</div>
+                        				</div>
+									</div> 
+										
+										
+										
+									
+									
+								 
+                                </div>
+								<br>
+                                <div style="text-align:center;">
+                                    <button class="btn btn-blue" ng-click="ok()">Save</button>
+                                    <button class="btn btn-blue" ng-click="cancel()">Cancel</button>
+                                </div>
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Add Tax Type</button>
+						   </p>
+                         
+                        </div>
+                  
+
+						<div class="horizontal-space"></div>
+						<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue">
+               Added Tax
+            </div>
+<div class="table-scrollable">
+		<table class="table table-hover table-striped table-bordered">
+		<thead class="bordered-blue">
+		<tr>
+		<th>Tax Type</th>
+		<th>Description</th>
+		<th>Status</th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">1</a></div></td>
+		<td>Description</td>
+		<td>Active</td>
+		
+		</tr>
+		
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">2</a></div></td>
+		<td>Description</td>
+		<td>Active</td>
+		</tr>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">3</a></div></td>
+		<td>Description</td>
+		<td>Active</td>
+		</tr>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">4</a></div></td>
+		<td>Description</td>
+		<td>Active</td>
+		</tr>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">5</a></div></td>
+		<td>Description</td>
+		<td>Active</td>
+		</tr>
+		
+		</tbody>
+		</table>
+		</div>
+		
+					<!--<div class="footer">
+						<code>class="table table-striped"</code>
+					</div>-->
+		</div>
+	</div>
+</div>
+

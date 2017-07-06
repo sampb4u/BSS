@@ -1,0 +1,72 @@
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+ <script type="text/javascript" src="fusioncharts.js"></script>
+<script type="text/javascript" src="fusioncharts.theme.fint.js"></script>-->
+<script>
+$(document).ready(function(){
+	
+	$.getJSON("productType.do", function(json) {
+		
+
+ FusionCharts.ready(function () {
+           
+ 		 var revenueChart = new FusionCharts({
+		
+        type: 'column2d',
+	    renderAt: 'container',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+						"chart": {
+							"caption": "Units By Product Type",
+							//"subcaption": "Harry's SuperMart",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",								
+							"decimals":'0',
+							"xAxisname": "Products",
+							"yaxisname": "USD (M)",
+							"baseFont":"Helvetica",		
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							"useroundedges": "1",
+							//"numberprefix": "$",
+							//"numbersuffix": " USD",
+							"yaxismaxvalue": "250000",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"plotBorderAlpha": "10",
+							"legendBorderAlpha": "1",
+							"legendShadow": "0",
+							 "paletteColors": "#0075c2",
+							//"borderAlpha": "20",
+							"showCanvasBorder": "0",
+							//"placeValuesInside": "1",
+							"showsum": "1",
+							"legendPosition":"right",
+							"rotatelabels": "0",		
+							"rotatevalues": "0"
+						},
+						  //"categories": category,,
+						"data":json["data"]
+					}
+
+	    }).render();
+		
+		//alert("10");
+ })
+ 
+	});
+ 
+ });
+</script>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'></div>
+	</div>
+</div>
+

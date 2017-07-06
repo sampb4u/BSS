@@ -1,0 +1,1012 @@
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top: 3066%;
+	right: 16%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script type="text/javascript">
+$("#btn1").hide();
+$("#btn2").hide();
+		function renderTable(chart, containerId)
+		{
+		
+            // After the chart is rendered we export the data as CSV, parse it and then create a markup
+            // equivalent to a table by parsing the exported CSV.
+            var data = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowSum
+                i,
+                length,                
+                tableHeader = '',
+				tableData = '',
+				rowHeading = "",
+				yearHeadigs = "",
+				tableBody3 = '';
+				
+            // Get all the rows by splitting data with '\n' seperator
+			//alert(JSON.stringify(data));
+            rows = data.replace(/"/g, '').split('\n');
+			//alert(rows);
+            // Retrieve the data from the rows and compute body string from the data rows
+			//var val1 = 0;
+			
+			rowHeading = rows[0].split(',');
+			var arrayObj = [];
+			var arrayObj1 = [];
+			var sumofTotalBooking = 0;
+			var convertBooking = [];
+			var finalTableData = [];
+			var finalTableData2 = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+				//alert(rows[i]);
+                row = rows[i].split(',');
+			  //alert(row);
+				var sumofRow = 0;	
+				var sumofBooking = 0;
+				var tableBody1 = '';
+				var sumPercent = "";
+				var tableData = [];
+				var tableData2 = [];
+				for(var j=0;j<row.length;j++)
+				{
+				     //alert(row[j]);
+					if(j>=1)
+					{
+					    if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+						if(row[j]==null) { var productValue = 0; } else { var productValue = row[j]; }
+						if(convertMillions(productValue)==null) { var convertproductValue="0K"; } else { var convertproductValue=convertMillions(productValue); }						 						//sumPercent +=parseInt(convertproductValue);
+						tableData.push("<td>"+convertproductValue+"</td>");
+						tableData2.push(productValue);
+					}				   					
+					tableBody1 += "<tr id='tableRow"+ j + "'><th>"+ rowHeading[j] +"</th></tr>";	
+										
+					
+				}
+			 // alert(convertproductValue);
+			 	yearHeadigs += "<td>"+ row[0] +"</td>";
+				if(convertMillions(sumofBooking)==null){var totalSum = "0K";}else{var totalSum = convertMillions(sumofBooking);}
+				convertBooking.push("<th>"+totalSum+"</th>");
+				//arrayObj1.push(sumPercent);
+				var sumPercent = 0;			
+			
+				finalTableData.push(tableData);
+				finalTableData2.push(tableData2);
+				sumofTotalBooking +=parseInt(sumofBooking);
+				
+            }   			
+			tableData =tableBody1;
+			//alert(tableData);
+			document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody>'+ tableData +'<tr id="total"><th>Total</th></tr></tbody></table>';			
+			$('#tableRow0').append(yearHeadigs);
+			$('#tableRow0').append("<td>%</td>");
+			$('#tableRow0').css("font-weight","bold");
+			
+			
+			
+			for(var k=0;k<finalTableData.length;k++)
+			{
+			  	var rowVal =[];
+				for(var l=0;l<finalTableData[k].length;l++)
+				{
+				    //alert(finalTableData[k][k]);
+					var count = Number(l)+1;
+					$('#tableRow'+ count).append(finalTableData[k][l]);
+					var TotalValue = 0;
+					for(var m=0;m<finalTableData.length;m++)
+					{
+						
+						TotalValue +=parseInt(finalTableData2[m][l]);
+						
+					}
+					rowVal.push(TotalValue);
+					
+				}
+				var count1=Number(k)+1;
+				$('#total').append(convertBooking[k]);
+				//$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+			}
+			var totalPercentage = 0;
+			for(var t=0;t<rowVal.length;t++)
+			{
+			   //alert(rowVal[t]);
+				var next = Number(t)+1;
+				//alert(arrayObj1[t]);
+				if(rowVal[t]=="NaN"){var rowVal2="0";}else{rowVal2=rowVal[t];}
+				var data1 = convertMillions(rowVal2).replace ( /[^\+|\-0-9.]/ig, '' );
+				var data2 = convertMillions(sumofTotalBooking).replace ( /[^\+|\-0-9.]/ig, '' );
+				if(calculatePercentage(data1,data2)=="NaN"){var rowVal3="0";}else{rowVal3=calculatePercentage(data1,data2);}
+				//alert(rowVal3);
+				var percentcol = "<td>"+ rowVal3  +" %</td>";
+				$('#tableRow'+ next).append(percentcol);				
+				totalPercentage +=parseFloat(rowVal3);
+			}			
+			$('#total').append("<td></td>");
+			 //alert(percentcol); 
+        };
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		/*function convertMillions(sumofBudget)
+			{
+				 if (Math.abs(sumofBudget) >= 1000000000) 
+				 {
+					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000000) 
+				 {
+					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+			
+			}*/
+		function calculatePercentage(rowTotalVal,totalValue)
+		{
+		   //alert(totalValue);
+			var percent =  (rowTotalVal/totalValue)*100;
+			 //alert(percent);
+			return percent.toFixed(2);
+			//sumoftotalPercent = sumoftotalPercent+percent;
+			//alert(sumoftotalPercent);
+			
+		}
+		//======Clustered Chart Table=========//
+		var renderTableClust = function (chart, containerId) {
+			//	 After the chart is rendered we export the data as CSV, parse it and then create a markup
+           //  equivalent to a table by parsing the exported CSV.
+            var chartData = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowValue,
+                i,
+                length,
+				tableData2 = '',
+                tableBody5 = '',
+                tableHeader = '',
+				rowHeading1 = "";
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');
+			//alert(rows.length);
+			
+			rowHeading1 = rows[0].split(',');
+			//rowValue = rows[1].split(',');
+			var rowValue="";
+			for(var r = 1;r<(rows.length);r++)
+			{
+				rowValue += rows[r].split(',');
+			}
+			
+			var arrayObj = [];
+			var arrayObj2 = [];
+			var arrayObj3 = [];
+			var convertBooking = [];
+			
+			var getTotalValueObj = [];
+            // Retrieve the data from the rows and compute body string from the data rows
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+                row = rows[i].split(',');
+				var tableBody6 = '';
+				var tableValue = [];
+				var tableValue2 = [];
+				var tableValue3 = [];
+				var getTotalVal  = 0;
+				var sumofBooking = 0;
+				var totalBooking = 0;
+				for(var j=0;j<row.length;j++)
+				{
+						if(j>=1)
+							{
+							   //alert(row[i]);
+							   if(row[j]!=null)
+							   {
+								if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+							   }
+							   else
+							   {
+							   		value = 0;
+							   }
+							   if(convertMillions(value)==null) { var convertVal4 = "oK"; } else { var convertVal5 = convertMillions(value); }
+								sumofBooking += parseInt(convertVal5);					
+								tableBody6 += "<tr id='tableRows"+ j + "'><th>"+ rowHeading1[j] +"</th></tr>";
+							}
+							if(convertVal5==null ){var convertVal6 = "0K"; }else{var convertVal6 = convertVal5;}
+					tableValue.push("<td>"+ convertVal6 +"</td>");
+					tableValue2.push("<td></td>");
+					tableValue3.push("<td></td>");
+					if(value==null) { value =0; } else { value=value; }
+					getTotalVal +=parseInt(value);
+					
+				}
+				
+                tableBody5 += '<td>' + row[0] + '</td>' ;
+				//convertBooking.push(convertMillions(tableValue));
+				//alert(convertBooking);
+				
+			arrayObj.push(tableValue);	
+			arrayObj2.push(tableValue2);
+			arrayObj3.push(tableValue2);
+			
+			getTotalValueObj.push(getTotalVal);
+			
+            }
+			//alert(arrayObj);
+     		tableData2 +=tableBody6;
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr style=" font-weight:bold"><th></th><th colspan="3" style="text-align:center">Assy in SMTH Factory</th><th colspan="3" style="text-align:center">Unit from SHIV/SCT/SHI</th><th colspan="3" style="text-align:center">Total</th></tr><tr style="background-color:#ffffff; color:#000000;font-weight:bold;"><th>Description</th>'+tableBody5+tableBody5+tableBody5+'</tr><tr>'+tableData2+'</tr><tr id="total1"><th>Total</th></tr></tbody</table>';
+		 
+			
+			for(var y=0;y<getTotalValueObj.length;y++)
+			{
+				//if(getTotalValueObj[y]==null) { var totalValue = "0k"; } else { var totalValue = getTotalValueObj[y]; }
+				if(convertMillions(getTotalValueObj[y])==null) { var totalValue = "0k"; } else { var totalValue = convertMillions(getTotalValueObj[y]); }
+				$('#total1').append("<td>"+ totalValue +"</td>");
+			}
+			
+		  for(var l=1;l<=7;l++)
+		  {
+				  
+		  	for(var p=0;p<3;p++)
+			{
+		  		$('#tableRows'+l).append(arrayObj[p][l]);
+			}
+			for(p=0;p<3;p++)
+			{
+			$('#tableRows'+l).append(arrayObj2[p][l]);
+			}
+			for(p=0;p<3;p++)
+			{
+			$('#tableRows'+l).append(arrayObj3[p][l]);
+			}
+		  }
+		  
+        };
+		//=========clustered end=======//
+		var group="country";
+		var countryCode=sessionStorage.getItem("countryCode");
+		sessionStorage.setItem("drillStatus",'false');
+		var drillAjaxLink = "countrybyproductdrilldown.do";
+		var clusteredAjaxLink = "clustredforcountry.do";
+		sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+		sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+		var curType = "AUD (\u0024)";
+		var cType = "local";
+		sessionStorage.setItem("cType",cType);
+		sessionStorage.setItem("curType",curType);
+		var url = "countrybyproduct.do?group="+group+"&countryCode="+countryCode+"&id=local";
+		
+		sessionStorage.setItem("clusStatus",'false');
+		renderCurrencyDynamic(url,curType);
+		$(document).ready(function()
+		{
+				$("#AUD").click(function()
+				{
+					//alert("THB");
+
+					
+					curType =  "AUD (\u0024)";
+					sessionStorage.setItem("cType","local");
+					sessionStorage.setItem("curType",curType);
+					if(sessionStorage.getItem("drillStatus")=='false')
+					{
+						//alert(url);
+						url = "countrybyproduct.do?group="+group+"&countryCode="+countryCode+"&id=local";
+						renderCurrencyDynamic(url,curType);
+							
+					}
+					else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='false') 
+					{
+						drillDown(sessionStorage.getItem('drillYear'),sessionStorage.getItem('drillCat'),curType,'local');
+					}
+					else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='true')
+					{
+						var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem('drillCat')+"&countryCode="+countryCode+"&id=local";
+						loadClusteredChart(clusDrillAjaxLink,curType);	
+						
+					}
+					$('#AUD').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");	
+				});
+				$("#USD").click(function()
+				{
+					//alert("USD");
+					curType = "USD (\u0024)";
+					sessionStorage.setItem("cType","dollar");
+					sessionStorage.setItem("curType",curType);
+					if(sessionStorage.getItem("drillStatus")=='false')
+					{
+						url = "countrybyproduct.do?group="+group+"&countryCode="+countryCode+"&id=dollar";
+					    renderCurrencyDynamic(url,curType);	
+						//alert(url);
+					}
+					else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='false')
+					{
+						drillDown(sessionStorage.getItem('drillYear'),sessionStorage.getItem('drillCat'),curType,'dollar');
+						
+					}
+					else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='true')
+					{
+						var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem('drillCat')+"&countryCode="+countryCode+"&id=dollar";
+						loadClusteredChart(clusDrillAjaxLink,curType);
+					}
+					$('#AUD').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+				});
+				
+		});
+//$(document).ready(function(){
+  	function renderCurrencyDynamic(url,curType)	
+	{
+  		var ok = "Group By Product YTD";
+		//alert(url);
+		//var sumoftotalPercent = 0;	
+	//$.getJSON("SCAgroupbyproduct.do", function(json) {	
+	 $.getJSON(url, function(json)
+	  {
+	 // alert(JSON.stringify(json));
+ 		 FusionCharts.ready(function()
+	 		 {
+	  	   var chartData = {
+							 "chart": {
+													
+								 "caption": ok,
+								 "palette": "2",
+								 "formatNumberScale":'1',					
+								 "decimals":'1',
+								 "xaxisname": "Category",
+								 "yaxisname": curType,
+								 "exportatclient": "1",
+								 "exportenabled": "1",
+								 "exporthandler": "http://export.api3.fusioncharts.com",
+								 "html5exporthandler": "http://export.api3.fusioncharts.com",																								
+								 "showsum": "1",
+								 "showvalues": "0",
+								 "bgColor": "#ffffff",
+								 "useroundedges": "1",
+								"borderAlpha": "20",
+								"showCanvasBorder": "0",
+								 "usePlotGradientColor": "0",
+								"plotBorderAlpha": "10",
+								"xAxisNameFont": "Helvetica",
+								 "xAxisNameFontSize": "14",
+								 "xAxisNameFontBold":"1",
+								"yAxisNameFontBold":"1",
+								"yAxisNameFontSize": "14",
+								"yAxisNameFont": "Helvetica",
+								"yFormatNumberScale":"1",
+								 "numberScaleValue": "1000,1000,1000",
+								 "numberScaleUnit": "K,M,B",
+							   "reverseLegend":"1",
+								"legendBorderAlpha": "0",
+								"legendPosition":"right",
+								//"legendShadow": "1",
+								"valueFontColor": "#000000",
+								"showXAxisLine": "1",
+								"xAxisLineColor": "#999999",
+								"divlineColor": "#999999",
+								"divLineDashed": "1",
+								"showAlternateHGridColor": "0",
+								"subcaptionFontBold": "0",
+								"subcaptionFontSize": "14",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"14",
+								"rotatelabels": "0",		
+								"rotatevalues": "1",
+								"baseFontColor":"#000000",
+								"plottooltext": "$label  $seriesname : $datavalue",
+								//"theme":"fint"   		
+								 },
+								// "categories": [{"category":json['category']}],
+								// "dataset": json['data']
+								"categories":json['xaxis'],
+								"dataset":json['data']
+							};
+		   var fusioncharts = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData,
+						events: {
+								  dataPlotClick: function (event,dataObj) 
+								  {	
+									//alert(JSON.stringify(dataObj));
+									//alert(event);
+									sessionStorage.setItem("firstDataObject",JSON.stringify(json['data']));
+									sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['xaxis']));
+									//alert(JSON.stringify(json['data']));
+									//alert(JSON.stringify(json['xaxis']));
+									var currency = sessionStorage.getItem("curType");
+									var cType = sessionStorage.getItem("cType");
+									sessionStorage.setItem("drillStatus",'true');
+									sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+									sessionStorage.setItem("drillCat",dataObj.datasetName);
+									drillDown(dataObj.categoryLabel,dataObj.datasetName,currency,cType);
+								  },	
+								  dataPlotRollOver:function(event,dataObj)
+								  {
+									$(this).css('cursor', 'pointer');
+								  }
+							  }
+									
+				});
+				
+        fusioncharts.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(fusioncharts, 'table-container');
+        });
+				 fusioncharts.render();
+		  });
+		});
+	}
+	//});	
+	
+	function drillDown(y,c,currency,cType)
+	{
+		
+			$('#btn1').addClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			//sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+			//alert(sessionStorage.getItem("drillAjaxLink"));
+			if(cType!="local")
+			{
+			  var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&catageory="+c+"&countryCode="+countryCode+"&id="+cType;
+			}
+			else
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&catageory="+c+"&countryCode="+countryCode+"&id="+cType;
+			}
+		$.getJSON(DrillAjaxLink,function(json)
+		{
+		//alert(DrillAjaxLink);
+		// alert(JSON.stringify(json));
+		  var titleName = c;
+		  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": c + " Products",
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": currency,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "0",
+										"xAxisNameFont": "Helvetica",
+										 "xAxisNameFontSize": "14",
+										 "xAxisNameFontBold":"1",
+										"yAxisNameFontBold":"1",
+										"yAxisNameFontSize": "14",
+										"yAxisNameFont": "Helvetica",
+										"yFormatNumberScale":"1",
+										 "numberScaleValue": "1000,1000,1000",
+										 "numberScaleUnit": "K,M,B",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"14",
+										"rotatelabels": "0",		
+										"rotatevalues": "1",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+			fusioncharts1.addEventListener('renderComplete', function () {
+            
+            	renderTable(fusioncharts1, 'table-container');
+       				 });
+						    fusioncharts1.render();
+			});
+			$("#btn1").show();
+			$("#btn2").show();
+		    $('#goback').show();
+	}
+	function loadStackedChart(DrillAjaxLink,curType)
+	{
+			$.getJSON(DrillAjaxLink,function(json)
+		{
+		  var titleName = sessionStorage.getItem("drillCat");
+		  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": sessionStorage.getItem("drillCat") + " Products",
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": curType,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "0",
+										"xAxisNameFont": "Helvetica",
+										 "xAxisNameFontSize": "14",
+										 "xAxisNameFontBold":"1",
+										"yAxisNameFontBold":"1",
+										"yAxisNameFontSize": "14",
+										"yAxisNameFont": "Helvetica",
+										"yFormatNumberScale":"1",
+										 "numberScaleValue": "1000,1000,1000",
+										 "numberScaleUnit": "K,M,B",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"14",
+										"rotatelabels": "0",		
+										"rotatevalues": "1",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+			fusioncharts1.addEventListener('renderComplete', function () {
+            			$("#table-container1").hide();
+						$("#table-container").show();
+						
+            	renderTable(fusioncharts1, 'table-container');
+       				 });
+						    fusioncharts1.render();
+					});				
+	}
+	function loadClusteredChart(clusDrillAjaxLink,curType)
+	{
+		$.getJSON(clusDrillAjaxLink, function(json)
+				//alert(json); 
+				{
+			  var titleName = sessionStorage.getItem("drillCat");
+			  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": sessionStorage.getItem("drillCat") + " Products",
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": curType,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "1",
+										"xAxisNameFont": "Helvetica",
+										 "xAxisNameFontSize": "14",
+										 "xAxisNameFontBold":"1",
+										"yAxisNameFontBold":"1",
+										"yAxisNameFontSize": "14",
+										"yAxisNameFont": "Helvetica",
+										"yFormatNumberScale":"1",
+										 "numberScaleValue": "1000,1000,1000",
+										 "numberScaleUnit": "K,M,B",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"14",
+										"rotatelabels": "0",		
+										"rotatevalues": "1",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'mscolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+							
+			fusioncharts1.addEventListener('renderComplete', function () {
+            				$("#table-container").hide();
+							$("#table-container1").show();
+							
+            	renderTableClust(fusioncharts1, 'table-container1');
+       				 });
+						    fusioncharts1.render();
+					});
+	}
+		    $(".stack").click(function(){
+			
+						$(this).addClass("switchButton");
+						$('#btn2').removeClass("switchButton");
+						$('#btn2').addClass("switchButton2");
+						//sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+						//sessionStorage.setItem("clusteredAjaxLink","");
+						sessionStorage.setItem("clusStatus",'false');
+						sessionStorage.getItem("curType");
+						//sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+						//sessionStorage.setItem("drillCat",dataObj.datasetName);
+			if(sessionStorage.getItem("cType")!="local")
+			{
+			  var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+sessionStorage.getItem("drillYear")+"&catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+			}
+			else
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+sessionStorage.getItem("drillYear")+"&catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+			}
+			
+				loadStackedChart(DrillAjaxLink,curType);
+				
+			});
+		//});
+		//$("#btn2").show(function(){
+		   $(".Clust").click(function(){
+		   		$('#btn1').addClass("switchButton2");
+				 $('#btn1').removeClass("switchButton");
+				 $(this).addClass("switchButton");
+				  sessionStorage.setItem("clusStatus",'true');
+				  sessionStorage.getItem("curType");
+				  //sessionStorage.setItem("drillAjaxLink","");
+		   		//$.getJSON("countrybyproductdrilldown.do",{year:y,catageory:c},function(json)//for group url===//
+				//{
+				//sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+				if(sessionStorage.getItem("cType")!="local")
+				{
+				  var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+				}
+				else
+				{
+				  var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+				}
+				loadClusteredChart(clusDrillAjaxLink,curType);
+		   });
+//		//});	
+	
+	$(document).ready(function(){
+	   $("#goback").click(function(){
+	   		$('#goback').hide();
+			 var json = new Object();
+			 json.data = $.parseJSON(sessionStorage.getItem("firstDataObject"));			
+		    json.category = $.parseJSON(sessionStorage.getItem("firstCategoryObject"));
+			//alert(JSON.stringify(json['data']));
+			//alert(JSON.stringify(json['category']));
+			if(sessionStorage.getItem("cType")!="local")
+			{	
+				var curType = sessionStorage.getItem("curType",curType);
+				 url = "countrybyproduct.do?group="+group+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+			}
+			else
+			{
+				var curType = sessionStorage.getItem("curType",curType);
+				url = "countrybyproduct.do?group="+group+"&countryCode="+countryCode+"&id="+sessionStorage.getItem("cType");
+			}
+			
+				//$('#btn1').addClass("switchButton2");
+				sessionStorage.setItem("drillStatus",'false');
+				sessionStorage.setItem("clusStatus",'false');
+				//sessionStorage.setItem("drillAjaxLink","");
+				//sessionStorage.setItem("clusteredAjaxLink","");
+				 $('#btn2').removeClass("switchButton");
+			 $("#table-container1").hide();
+			 $("#table-container").show();
+			 $("#btn1").hide();
+			 $("#btn2").hide();
+			  renderCurrencyDynamic(url,curType);
+		//var sumoftotalPercent = 0;
+		//var ok = "Group By Product YTD";
+		//var chartData3 = {
+//								 "chart": {
+//														
+//									 "caption": ok,
+//									 "palette": "2",
+//									 "formatNumberScale":'1',					
+//									 "decimals":'1',
+//									 "xaxisname": "Category",
+//									 "yaxisname": yAxisname,
+//									 "exportatclient": "1",
+//									 "exportenabled": "1",
+//									 "exporthandler": "http://export.api3.fusioncharts.com",
+//									 "html5exporthandler": "http://export.api3.fusioncharts.com",																								
+//									 "showsum": "1",
+//									 "showvalues": "0",
+//									 "xAxisNameFont": "Helvetica",
+//									 "xAxisNameFontSize": "14",
+//									 "xAxisNameFontBold":"1",
+//									"yAxisNameFontBold":"1",
+//									"yAxisNameFontSize": "14",
+//									"yAxisNameFont": "Helvetica",
+//									"yFormatNumberScale":"1",
+//									 "numberScaleValue": "1000,1000,1000",
+//									 "numberScaleUnit": "K,M,B",
+//									 "bgColor": "#ffffff",
+//									 "useroundedges": "1",
+//									"borderAlpha": "20",
+//									"showCanvasBorder": "0",
+//									 "usePlotGradientColor": "0",
+//									"plotBorderAlpha": "10",
+//								   "reverseLegend":"1",
+//									"legendBorderAlpha": "0",
+//									"legendPosition":"right",
+//									//"legendShadow": "1",
+//									"valueFontColor": "#000000",
+//									"showXAxisLine": "1",
+//									"xAxisLineColor": "#999999",
+//									"divlineColor": "#999999",
+//									"divLineDashed": "1",
+//									"showAlternateHGridColor": "0",
+//									"subcaptionFontBold": "0",
+//									"subcaptionFontSize": "14",
+//									"baseFont":"Helvetica",		
+//									"baseFontSize":"14",
+//									"rotatelabels": "0",		
+//									"rotatevalues": "1",
+//									"baseFontColor":"#000000",
+//									"plottooltext": "$label $seriesname :  $datavalue",
+//									//"theme":"fint"   		
+//									 },
+//									"categories":json['category'],
+//									"dataset":json['data']
+//							
+//						};	
+//			
+//			var fusioncharts2 = new FusionCharts({
+//				    type: 'stackedcolumn2d',
+//				    renderAt: 'chart-container',
+//				    width: '100%',
+//				    height: '80%',
+//				    dataFormat: 'json',
+//				    dataSource: chartData3,
+//						events: {
+//								  dataPlotClick: function (event,dataObj) 
+//								  {	
+//									//alert(JSON.stringify(dataObj));
+//									sessionStorage.setItem("firstDataObject",JSON.stringify(json['data']));
+//									sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+//									var curType = sessionStorage.getItem("curType");
+//									var cType = sessionStorage.getItem("cType");
+//									sessionStorage.setItem("drillStatus",'true');
+//									sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+//									sessionStorage.setItem("drillCat",dataObj.datasetName);
+//									drillDown(dataObj.categoryLabel,dataObj.datasetName,curType,cType);
+//								  },	
+//								  dataPlotRollOver:function(event,dataObj)
+//								  {
+//									$(this).css('cursor', 'pointer');
+//								  }
+//							  }
+//									
+//				});
+//				fusioncharts2.addEventListener('renderComplete', function () {
+           					 $("#table-container").show();
+							$("#table-container1").hide();
+//			renderTable(fusioncharts2, 'table-container');
+//        });
+//				 fusioncharts2.render();
+					// $("#btn1").hide();
+					//$("#btn2").hide();
+	   });
+	});
+
+</script>
+<div class="row">
+		<div class="col-sm-12" align="left" >
+				<div class="dropdown" style=" display: visible;">
+					 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+					 <div class="dropdown-content">
+						<a href="#/app/Australia_GroupByProduct_YTD" id="AUD"><span>AUD &#x24;</span></a>
+						<a href="#/app/Australia_GroupByProduct_YTD" id="USD"><span>USD &#x24;</span></a>
+					  </div>
+				</div>
+		</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+		<button type="button" id="btn1" class="stack" style="float:center; cursor:pointer;">Stacked</button>
+		<button type="button" id="btn2" class="Clust" style="float:center; cursor:pointer;">Clustered</button>
+		</div>
+		<div class="col-sm-4">
+		<p><input type="button" id="goback" value="< Go Back" class="switchButton" style=" border:none; float: right; margin-right:20px; display:none;"/></p>
+		</div>
+			<div id="chart-container" style="width:100%; height: 500px; margin: 0 ">
+      			<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  			</div>
+			</div>
+		<div id="table-container" style="padding-left:2%; padding-right:2%;"></div><br />
+		<div id="table-container1" style="padding-left:2%; padding-right:2%;"></div><br />
+	</div>
+</div> 
+ 
+
+

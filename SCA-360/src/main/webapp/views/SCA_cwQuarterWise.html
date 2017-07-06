@@ -1,0 +1,649 @@
+<!--<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #d3d3d3 ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #67E6EC;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+//$(document).ready(function()
+//{
+	$(".all").addClass("active");
+	var ajaxLink = "cwQwarterlyBooking.do";
+	var yAxisName = "USD (M)";
+	var status = "all";
+	loadChartforAll(ajaxLink,yAxisName,status);	
+	var ifCond = "0";
+	buttonActive(ifCond);	
+	var array = [{"TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","OT":"USD (\u0024)"}];
+	var countryNameArray = [{"TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","OT":"Other"}];
+	$('.renderchart').click(function()
+	{
+		
+		var status = $(this).attr('id');
+		buttonActive("1");
+		jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+		
+		sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+		
+		if(status=="all")//BookingVsBudetYear.do
+		{
+		
+			var ajaxLink = "cwQwarterlyBooking.do";
+			var yAxisName = "USD (M)";
+			//var countryCaption = status;
+			//loadChartforAll(ajaxLink,yAxisName,status);
+			$('#curDropdown').hide();
+			var getId = status.toUpperCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");	
+			//sessionStorage.setItem("currencyType","USD (M)");		
+			
+		}
+		else
+		{
+			var ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+status+"&id=local";
+			//sessionStorage.setItem("currencyType",array[0][status]);
+			$('#curDropdown').show();
+			$('#scaSpan').text(array[0][status]);
+			//var countryCaption = status;
+			var yAxisName = array[0][status];
+			//loadChartforAll(ajaxLink,yAxisName,status);
+			var getId = status.toLowerCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+			
+		}
+		loadChartforAll(ajaxLink,yAxisName,status);
+		$(".hb").removeClass("active");				
+		$("."+ status).addClass("active");				
+	});
+	$(document).ready(function()
+			{
+				$("#SCA").click(function()
+				{
+				//	alert("SCA");
+					yAxisName = array[0][sessionStorage.getItem("selectedCountry")];
+					//loadChartforAll(ajaxLink,'all',yAxisName,status);
+					//currencyType = array[0][sessionStorage.getItem("selectedCountry")];
+					ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+					loadChartforAll(ajaxLink,yAxisName,sessionStorage.getItem("selectedCountry"));
+					//asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+					$('#SCA').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");
+					
+				});
+				$("#USD").click(function()
+				{
+						//alert("USD");
+							yAxisName = "USD (\u0024)";
+							//loadChartforAll(ajaxLink,yAxisName,"all");
+					//currencyType = "USD (M)";
+					ajaxLink = "cwQwarterlyBookingCountryWise.do?countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+					loadChartforAll(ajaxLink,yAxisName,sessionStorage.getItem("selectedCountry"));
+					//asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+					$('#SCA').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+					
+				});	
+			});
+			function buttonActive(ifCond)
+			{
+				jQuery( ".hb .countFlag").parent().addClass("hb-country");
+				jQuery( ".hb #ALL").parent().addClass("hb-refresh");	
+				
+			}
+	function loadChartforAll(ajaxLink,yAxisName,status)
+	{
+	
+	//alert(status);
+		if(status!="all")
+		{
+			var caption = countryNameArray[0][status]+" - Quarterly Bookings";
+			
+		}
+		else
+		{
+			var caption = "Quarterly Bookings";
+		}
+	
+  $.getJSON(ajaxLink, function(json) 
+  {
+  	//alert(JSON.stringify(json));
+	
+	var chartData = {
+								"chart": {
+											"caption": caption,
+											"bgcolor": "FFFFFF",
+									        "decimals":'1',
+											"yaxisname": yAxisName,
+											"showsum": "1",
+											"showvalues": "1",
+											"xAxisNameFont": "Helvetica",
+											 "xAxisNameFontSize": "14",
+											 "xAxisNameFontBold":"1",
+											"yAxisNameFontBold":"1",
+											"yAxisNameFontSize": "14",
+											"yAxisNameFont": "Helvetica",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+											 "numberScaleUnit": "K,M,B",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											
+									        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										    "numberPrefix": "",
+									        "numbersuffix": "",
+									        "bgColor": "#ffffff",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"17",
+											"rotatelabels": "0",		
+											"rotatevalues": "1",
+											"baseFontColor":"#000000",
+											"plotToolText":"$seriesname $label Bookings $datavalue"	
+										},
+										"categories": [
+														{
+															"category": [
+																			{
+																				"label": "Jan-Mar"
+																			},
+																			{
+																				"label": "Apr-Jun"
+																			},
+																			{
+																				"label": "Jul-Sept"
+																			},
+																			{
+																				"label": "Oct-Dec"
+																			}
+																		]
+														}
+							  						 ],
+													"dataset": json['dataset']												
+										}
+			FusionCharts.ready(function () 
+			{           
+				 var revenueChart = new FusionCharts({		
+						type: 'mscolumn2d',
+						renderAt: 'container',
+						width: '100%',
+						height: '500',
+						dataFormat: 'json',
+						dataSource: chartData
+											});
+				 revenueChart.addEventListener('renderComplete', function () 
+						{
+			        	    renderTable(revenueChart, 'table-container');
+				        });
+									revenueChart.render();		
+						 });	 							 
+			});
+	}
+						var renderTable = function (chart, containerId) {
+					//	 After the chart is rendered we export the data as CSV, parse it and then create a markup
+				   //  equivalent to a table by parsing the exported CSV.
+					var chartData = chart.getDataAsCSV(),
+						rows,
+						row,
+						rowValue,
+						i,
+						length,
+						tableData2 = '';
+						tableBody5 = '',
+						tableHeader = '';
+						rowHeading1 = "";
+					// Get all the rows by splitting data with '\n' seperator
+					rows = chartData.replace(/"/g, '').split('\n');
+					
+					rowHeading1 = rows[0].split(',');
+					//alert(rowHeading1);
+					//rowValue = rows[1].split(',');
+					var rowValue="";
+					for(var r = 1;r<(rows.length);r++)
+					{
+						rowValue += rows[r].split(',');
+					}
+					
+					var arrayObj = [];
+					var arrayObj2 = [];
+					var arrayObj3 = [];
+					var convertBooking = [];
+					
+					var getTotalValueObj = [];
+					// Retrieve the data from the rows and compute body string from the data rows
+					var tableBody6 = '';
+					for (i = 1, length = rows.length; i < length; i++) 
+					{
+						row = rows[i].split(',');
+						
+						var tableValue = [];
+						var tableValue2 = [];
+						var tableValue3 = [];
+						var getTotalVal  = 0;
+						var sumofBooking = 0;
+						var totalBooking = 0;
+						for(var j=1;j<row.length;j++)
+						{
+								if(j>=1)
+									{
+									   
+									   if(row[j]!=null)
+									   {
+									   //	alert(row[j]);
+										if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+										
+									   }
+									   else
+									   {
+											value = 0;
+									   }
+									   if(convertMillions(value)==null) { var convertVal5 = "0K"; } else { var convertVal5 = convertMillions(value); }
+										sumofBooking += parseInt(convertVal5);	
+										//alert(sumofBooking);														
+										
+										if(convertVal5==null ){var convertVal6 = "0K"; }else{var convertVal6 = convertVal5;}
+									    tableValue.push("<td>"+ convertVal6 +"</td>");
+									}
+									getTotalVal +=parseInt(value);
+							
+							//tableValue2.push("<td>frhftg</td>");
+							//tableValue3.push("<td>fghg</td>");
+						
+							}
+						tableBody6 += "<tr id='tableRows"+i+"'><td>"+ rowHeading1[i]+"</td></tr>";
+						
+						tableBody5 += '<th>' + row[0] + '</th>' ;
+						//convertBooking.push(convertMillions(tableValue));
+						//alert(tableBody5);
+						
+					arrayObj.push(tableValue);	
+					arrayObj2.push(tableValue2);
+					//arrayObj3.push(tableValue2);
+					//alert(arrayObj);
+					getTotalValueObj.push(getTotalVal);
+					//getTotalValueObj.push(sumofBooking);
+					//alert(getTotalValueObj);
+					
+					}
+					tableData2 +=tableBody6;
+					//alert(tableData2);
+					    /*if(arrayObj!=null)
+						{
+						alert(JSON.stringify(arrayObj));
+						$('#tableRows'+1).append(arrayObj[0]);
+						
+						
+						}*/
+					
+					//alert(getTotalValueObj);
+					
+					// Create the table string and append it to the table container
+					document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr style="color:#000000"><th></th>'+tableBody5+'</tr><tr>'+tableData2+'</tr><tr id="total1"><th>Total</th></tr></tbody</table>';
+				 
+					
+					for(var y=0;y<getTotalValueObj.length;y++)
+					{
+						//if(getTotalValueObj[y]==null) { var totalValue = "0k"; } else { var totalValue = getTotalValueObj[y]; }
+						//alert(getTotalValueObj);
+						if(convertMillions(getTotalValueObj[y])==null) { var totalValue = "0k"; } else { var totalValue = convertMillions(getTotalValueObj[y]); }
+						//alert(totalValue);
+						$('#total1').append("<td>"+ totalValue +"</td>");
+					}
+					
+					
+					//for (var q = 1, length = rows.length; q < length; q++) 
+					//{
+						//row = rows[q].split(',');
+						//for(var r=1;r<row.length;r++)
+					//	{
+						//	alert(row.length);
+						//	for(var m = 0; m <4; m++)
+						//	{
+						//	alert(JSON.stringify(arrayObj));
+						//	$('#tableRows'+1).append(arrayObj[m][r]);
+							
+							
+						//	}
+							/*if(r>=1)
+							{
+								if(row[r]!=null)
+								 {
+									alert(row[r]);
+								 }
+								
+							}*/
+							
+					//	}
+						
+				//	}
+					
+					//alert(arrayObj.length);
+					//alert(arrayObj);
+					
+				  for(var l=1;l<=6;l++)
+				  {
+						//row = rows[l].split(','); 
+						//alert(row.length); 
+					for(var p=0;p<4;p++)
+					{
+						//alert($('#tableRows'+l).text());
+					//if(arrayObj[p]!=null){
+						$('#tableRows'+ l).append(arrayObj[p][l-1]);
+						
+						
+						//}
+					}
+					/*<!--for(p=0;p<4;p++)
+					{
+					$('#tableRows'+l).append(arrayObj2[p][l]);
+					}-->*/
+					//for(p=0;p<3;p++)
+//					{
+//					$('#tableRows'+l).append(arrayObj3[p][l]);
+//					}
+				  }
+				  
+				};
+				function convertMillions(sumofBudget) 
+				{
+					//alert(sumofBooking);
+					var thousand = 1000;
+					var million = 1000000;
+					var billion = 1000000000;
+					var trillion = 1000000000000;
+					if (sumofBudget < thousand) {
+						return (sumofBudget/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K';   
+					}
+					
+					else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+						 return  (sumofBudget/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K'; 
+					}
+					
+					else if (sumofBudget >= million && sumofBudget <= billion) {
+						return (sumofBudget/million).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'M';   
+					}
+					
+					else if (sumofBudget >= billion && sumofBudget <= trillion) {
+						return (sumofBudget/billion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'B';   
+					}
+					
+					else {
+						return (sumofBudget/trillion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'T';   
+				   }
+			   }
+			
+			/*function convertMillions(sumofBudget)
+			{
+				 if (Math.abs(sumofBudget) >= 1000000000) 
+				 {
+					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000000) 
+				 {
+					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+				 else if (Math.abs(sumofBudget) <1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }	
+		  }*/
+		  
+	//	 });
+</script>
+<div class="row">
+  <div class="col-sm-9">
+   <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+	<!--/*	<a href="#/app/SCA_cwQuarterWise" class="renderchart active tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="hb hb-xs spin-icon" style="color:#000000; font-size:14px;"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>  
+		<a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-th countFlag" id="th"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-my countFlag" id="my"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-id countFlag" id="id"></i></span></a>  
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-sg countFlag" id="sg"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-ph countFlag" id="ph"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-in countFlag" id="in"></i></span></a> 
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-vn countFlag" id="vn"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="hb hb-xs spin-icon" style="color: #6699FF;font-size:14px;"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+		<a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-au countFlag" id="au"></i></span></a>*/-->
+		
+		
+		  <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+             <a href="#/app/SCA_cwQuarterWise"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+             <a href="#/app/SCA_cwQuarterWise" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		
+	</div>
+	</div>
+	<div class="col-sm-3">
+		<span class="dropdown" style="display:none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_cwQuarterWise" id="SCA"><span id="scaSpan">SCA &#x24;</span></a>
+				<a href="#/app/SCA_cwQuarterWise" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div> 
+</div>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 
+		 </div>
+	</div>
+</div>
+  <div class="row">
+  	<div class="col-sm-12">
+		<div id="table-container"  style="padding-left:1%;"></div>
+	</div>
+  </div>  
+<br />
+
+

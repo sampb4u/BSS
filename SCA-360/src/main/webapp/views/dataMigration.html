@@ -1,0 +1,35 @@
+<style>
+#pageheading
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+</style>
+					
+	   <div ng-controller="dataMigrationCon"> 					
+
+<div class="row">
+    
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue" id="pageheading">
+     Data Migration
+            </div>
+               <form name="migrationForm" novalidate enctype="multipart/form-data">
+               
+                   
+					<div class="row">
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="migrationFormSubmit(migrationForm);">Migration</button>
+					</div>
+				</div>
+               </form>
+          
+        </div>
+    </div>
+</div>
+</div>

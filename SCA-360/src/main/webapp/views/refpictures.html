@@ -1,0 +1,143 @@
+﻿
+  <style>
+  .form-control1
+  {
+  color: #262626;
+  background-color: #ffffff;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.25);
+  height:30px;
+  }
+  </style>
+<!--<div class="horizontal-space"></div>
+<br />-->
+<div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+                                 <h3 style="font-weight:bold;"> Reference Pictures</h3>
+								 <hr>
+								 	
+										
+									 <div class="row">
+			       <div class="col-sm-6">
+				        <div class="form-group">                                
+                 	<select class="form-control"> 
+					    <option value="">Industry</option>
+						<!--<option value="">Progress</option>
+						<option value="">Active</option>
+						<option value="">Disqualify</option>-->						
+					</select>
+			         </div>
+				   </div>
+				   <div class="col-sm-6">
+ 				      <div class="form-group">                                
+                 	<select class="form-control"> 
+					    <option value="">Application</option>
+						<!--<option value="">Progress</option>
+						<option value="">Active</option>
+						<option value="">Disqualify</option>-->						
+					</select>
+			           </div>
+				 </div>
+             </div>
+			 <br/>
+			 <div class="row">
+			       <div class="col-sm-6">
+				        <div class="form-group">                                
+                 	<select class="form-control"> 
+					    <option value="">Product</option>
+						<!--<option value="">Progress</option>
+						<option value="">Active</option>
+						<option value="">Disqualify</option>-->						
+					</select>
+			         </div>
+				   </div>
+				   <div class="col-sm-6">
+ 				      <div class="form-group">                                
+                 	<select class="form-control"> 
+					    <option value="">Customer</option>
+						<!--<option value="">Progress</option>
+						<option value="">Active</option>
+						<option value="">Disqualify</option>-->						
+					</select>
+			           </div>
+				 </div>
+				 
+				 
+				
+             </div><br/><br/>
+			 <div align="center">
+				<button class="btn btn-blue" ng-click="ok();"  >Save</button>
+				<button class="btn btn-blue" ng-click="ok();"  >Cancel</button>
+			</div>	
+									
+									
+								 
+                                </div>
+								
+                                
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Add  Reference Pictures</button>
+						   </p>
+                         
+                        </div>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+             <div class="header bordered-blue">
+             Reference Pictures
+            </div>
+			
+			<div class="table-scrollable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr>
+							<th>Sl.No.</th>
+							<th>Description</th>
+							<th>Picture</th>
+ 						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td></td>
+							<td></td>
+							 
+ 						</tr>
+						<tr>
+							<td>2</td>
+							<td></td>
+							<td></td>
+						 			 
+							 
+						</tr>
+   					</tbody>
+				</table>
+			</div>
+             
+            <!--<div class="footer">
+                <code>class="table table-striped"</code>
+            </div>-->
+        </div>
+ 	</div>
+</div>
+		
+
+
+	
+	
+	
+
+
+
+
+
+
+

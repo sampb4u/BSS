@@ -1,0 +1,222 @@
+<style>
+#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	
+
+#chartdiv2 {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+	background-color:#FFFFFF;
+}					
+</style>
+<!--<script src="amcharts.js"></script>
+<script src="serial.js"></script>
+<script src="themes-light.js"></script>
+<script src="jquery.min.js"></script>-->
+<script>
+$(function () {
+	
+//	alert(7898);
+	
+	
+	
+	
+	
+	//$("#chartdiv").show();
+	$("#chartdiv2").show();
+	
+	/*$("#groped").click(function(){
+		$("#chartdiv").show();
+		$("#chartdiv2").hide();
+		
+	})
+	
+	
+	
+	$("#scattred").click(function(){
+		$("#chartdiv").hide();
+		$("#chartdiv2").show();
+	})*/
+	
+	
+	 $.getJSON("ytdcode.do", function(json) {
+		 
+		 var chart = AmCharts.makeChart("chartdiv2", {
+			    "type": "serial",
+				"theme": "light",
+				 //"titles":[{"text":"Budget VS Booking"}],
+			  "startDuration": 1,
+			    "legend": {
+			        "horizontalGap": 10,
+			       // "maxColumns": 1,
+			        "position": "bottom",
+					"useGraphSettings": true,
+					"markerSize": 10
+			    },
+			    "dataProvider":  json["data"],
+			    "valueAxes": [{
+			        "stackType": "regular",
+			        "axisAlpha": 0.5,
+			        "gridAlpha": 0,
+					"title":"USD",
+			      "position": "left",
+			    }],
+			    "graphs":json["graphs"], 
+			    "colors":json["colors"],
+			    //"rotate": true,
+			    "categoryField": "year",
+			    "categoryAxis": {
+			        "gridPosition": "start",
+			        "axisAlpha": 0.10,
+			        "gridAlpha": 0,
+			        "position": "bottom"
+			    },
+			    "export": {
+			    	"enabled": true
+			     }
+			});
+
+
+		 
+		 
+	 })
+	
+	});
+</script>
+<script>
+var chart = AmCharts.makeChart("chartdiv", {
+	"type": "serial",
+     "theme": "light",
+	 "titles":[{"text":"Budget VS Booking","size":16}],
+	"categoryField": "month",
+	//"rotate": true,
+	"startDuration": 2,
+	"categoryAxis": {
+		"gridPosition": "start",
+		"position": "bottom"
+	},
+  "legend": {
+    "horizontalGap": 5,
+    "useGraphSettings": true,
+    "markerSize": 10
+  },
+	"trendLines": [],
+	"graphs": [
+		{
+			"balloonText": "[[category]] GM:$[[value]] USD",
+			"fillAlphas": 0.8,
+			"id": "AmGraph-1",
+			"lineAlpha": 0.2,
+			 "topRadius":1,
+			"title": "GM",
+			"type": "column",
+			"valueField": "GM"
+		},
+		{
+			"balloonText": "[[category]] GB:$[[value]] USD",
+			"fillAlphas": 0.8,
+			"id": "AmGraph-2",
+			"lineAlpha": 0.2,
+			"title": "GB",
+			"topRadius":1,
+			"type": "column",
+			"valueField": "GB"
+		},
+    {
+			"balloonText": "[[category]] SGM:$[[value]] USD",
+			"fillAlphas": 0.8,
+			"id": "AmGraph-3",
+			"lineAlpha": 0.2,
+			"title": "SGM",
+			"topRadius":1,
+			"type": "column",
+			"valueField": "SGM"
+		},
+		 {
+			"balloonText": "[[category]] PARTS/SERVICES:$[[value]] USD",
+			"fillAlphas": 0.8,
+			"id": "AmGraph-4",
+			"lineAlpha": 0.2,
+			"topRadius":1,
+			"title": "PARTS/SERVICES",
+			"type": "column",
+			"valueField": "PARTS/SERVICES"
+		}
+	],
+	"guides": [],
+	"valueAxes": [
+		{
+			"id": "ValueAxis-1",
+			"position": "left",
+			"axisAlpha": 0,
+			 "title": "USD",
+		}
+	],
+	/*"allLabels": [],
+	"balloon": {},
+	"titles": [],*/
+	"dataProvider": [
+		{
+			"month": "Jan",
+			"GM": 811849,
+			"GB": 384650,
+      		"SGM": 91577,
+			"PARTS/SERVICES": 85415
+		},
+		{
+			"month": "Feb",
+			"GM": 897922,
+			"GB": 108250,
+      		"SGM": 151856,
+			"PARTS/SERVICES": 119852
+		},
+		{
+			"month": "Mar",
+			"GM": 750555,
+			"GB": 509836,
+      		"SGM": 135894,
+			"PARTS/SERVICES": 108658
+		},
+		{
+			"month": "Apr",
+			"GM": 778257,
+			"GB": 442783,
+      		"SGM": 71836,
+			"PARTS/SERVICES": 91923
+		},
+		{
+			"month": "May",
+			"GM": 369835,
+			"GB": 60802,
+      		"SGM": 58402,
+			"PARTS/SERVICES": 33881
+		}
+	],
+    "export": {
+    	"enabled": true
+     }
+
+});
+
+</script>
+<!--<div class="row">
+ 	<div class="col-sm-12">
+		<div id="chartdiv"></div>
+	</div>
+</div>-->
+<br/>
+<div class="row">
+ 	<div class="col-sm-12">	
+		<div id="chartdiv2"></div>
+	</div>
+</div>
+<br/>
+<!--<div class="row">
+    <div class="col-sm-12">
+		<p id="groped" title="Click For Grouped Column" style="font-weight:bold; cursor:pointer;">GROUPED COLUMN</p>
+		<p id="scattred" title="Click For Scattered Column" style="font-weight:bold; cursor:pointer;">SCATTRED COLUMN</p>
+	</div>	
+</div>-->

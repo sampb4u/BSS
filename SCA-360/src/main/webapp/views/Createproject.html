@@ -1,0 +1,162 @@
+﻿  
+	<div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+                                 <h3 style="font-weight:bold;"  >Create Project</h3>
+								 <hr>
+								 <br>
+								 	<div class="row">
+										
+										<div class="col-sm-6"><input type="text" class="form-control" placeholder="Project Code" autofocous></div>
+										<div class="col-sm-6"><input type="text" class="form-control"  placeholder="Project Name"></div>
+									
+									
+									</div>
+									<br>
+									<div class="row">
+										
+											<div class="col-sm-3"><input type="text" class="form-control"  placeholder="Client"></div>
+											<div class="col-sm-3"><input type="text" class="form-control"  placeholder="Client Order"></div>
+											<div class="col-sm-3"><input type="text" class="form-control" placeholder="Order Ref No."></div>
+											<div class="col-sm-3"><input type="text" class="form-control"  placeholder="Factory Referrence"></div>
+									</div>
+									<br>
+									<div class="row">
+										
+										
+										<div class="col-sm-4"><input type="text" class="form-control" placeholder="Date of Start"></div>
+										<div class="col-sm-4"><input type="text" class="form-control"  placeholder="Date of Finish"></div>
+										<div class="col-sm-4"><input type="text" class="form-control"  placeholder="No.Of Days"></div>
+										
+									
+									</div>
+									
+									<br>
+									<div class="row">
+										
+										
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4"><input type="text" class="form-control" placeholder="Date of Actual Finish"></div>
+										<div class="col-sm-4"><input type="text" class="form-control" placeholder="No. of Days"></div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-sm-4"><input type="text" class="form-control"  placeholder="Date of Creation"></div>
+										<div class="col-sm-4"><input type="text" class="form-control"  placeholder="Local Currency"></div>
+										<div class="col-sm-4"><input type="text" class="form-control" placeholder="Conversion Rate to USD"></div>
+									</div>
+									
+									<br>
+                                <div style="text-align:center;">
+                                    <button class="btn btn-blue" ng-click="ok()">Save</button>
+                                    <button class="btn btn-blue" ng-click="cancel()">Cancel</button>
+                               </div>
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Create Project</button>
+						   </p>
+                         
+                        </div>
+									
+<div class="horizontal-space"></div>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue">
+               Added Projects
+            </div>
+<div class="table-scrollable">
+		<table class="table table-hover table-striped table-bordered">
+		<thead class="bordered-blue">
+		<tr>
+		<th>Project Code</th>
+		<th>Project</th>
+		<th>Customer</th>
+		<th>Job Location</th>
+		<th>Order</th>
+		<th>Ref No.</th>
+		<th>Client Order</th>
+		<th>Document</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr>
+		<tr>
+		<td>2</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr><tr>
+		<td>3</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr><tr>
+		<td>4</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr><tr>
+		<td>5</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr><tr>
+		<td>6</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr><tr>
+		<td>7</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		<td>1</td>
+		<td>Steve</td>
+		<td>Jobs</td>
+		<td>25-4-2016</td>
+		</tr>
+		</tbody>
+		</table>
+		</div>
+		
+					<!--<div class="footer">
+						<code>class="table table-striped"</code>
+					</div>-->
+		</div>
+	</div>
+</div>
+		
+

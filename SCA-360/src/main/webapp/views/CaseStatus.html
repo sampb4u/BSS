@@ -1,0 +1,124 @@
+﻿<div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+                                 <h3 style="font-weight:bold;">Case Status</h3>
+								 <hr>
+								 	<div class="row">
+										<div class="col-sm-1"></div>
+										<div class="col-sm-5"><span class="input-icon icon-right"><input type="text" class="form-control" placeholder="Status Code" autofocous><i class="glyphicon glyphicon-user circular"></i></span></div>
+										<div class="col-sm-5"><span class="input-icon icon-right"><input type="text" class="form-control"  placeholder="Status"><i class="glyphicon glyphicon-user circular"></i></span></div>
+										
+									
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-sm-1"></div>
+										<div class="col-sm-10"><textarea rows="1" class="form-control" placeholder="Description" style="resize:none;"></textarea></div>
+									</div>
+									<br>
+									<div class="row" >
+												<div class="col-sm-4"></div>
+											       <div class="col-sm-7">
+                                                         <div class="control-group">
+                                                             <div class="radio"> 
+                                                                <label>
+                                                     Status :  <input name="form-field-radio" type="radio" class="colored-blue" checked="checked">
+                                                          <span class="text"> Active</span>
+                                                               </label>
+                                                               <label>
+                                                                     <input name="form-field-radio" type="radio" class="colored-blue">
+                                                       <span class="text"> Inactive</span>
+                                                             </label>
+                                                          </div>
+                        	                           </div>
+							                         </div>
+                                                  </div>
+									
+										
+										
+									
+									
+								 
+                                </div>
+								<br>
+                                <div style="text-align:center;">
+                                    <button class="btn btn-blue" ng-click="ok1()">Save</button>
+                                    <button class="btn btn-blue" ng-click="cancel()">Cancel</button>
+                                </div>
+								<br>
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Add Case Status</button>
+						   </p>
+                         
+                        </div>
+                  
+
+						<div class="horizontal-space"></div>
+						<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue">
+               Case Status
+            </div>
+<div class="table-scrollable">
+		<table class="table table-hover table-striped table-bordered">
+		<thead class="bordered-blue">
+		<tr>
+		<th>Code</th>
+		<th>Status</th>
+		<th>Description</th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td >
+		<div ng-controller="ModalDemoCtrl">
+		 <a ng-click="open('','myModalContent.html', 'lg')" href="">1</a>
+          </div>                 
+		</td>
+		<td>New</td>
+		<td>New</td>
+		
+		</tr>
+		
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl">
+		 <a ng-click="open('','myModalContent.html', 'lg')" href="">2</a>
+          </div> </td>
+		<td>Assigned</td>
+		<td>Assigned</td>
+		
+		</tr>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl">
+		 <a ng-click="open('','myModalContent.html', 'lg')" href="">3</a>
+          </div></td>
+		<td>Resolved</td>
+		<td>Resolved</td>
+		
+		</tr>
+		<tr>
+		<td><div ng-controller="ModalDemoCtrl">
+		 <a ng-click="open('','myModalContent.html', 'lg')" href="">4</a>
+          </div></td>
+		<td>Closed</td>
+		<td>Closed</td>
+		
+		</tr>
+		
+		</tbody>
+		</table>
+		</div>
+		
+					<!--<div class="footer">
+						<code>class="table table-striped"</code>
+					</div>-->
+		</div>
+	</div>
+</div>
+

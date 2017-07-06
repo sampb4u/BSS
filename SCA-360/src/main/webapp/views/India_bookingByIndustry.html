@@ -1,0 +1,1015 @@
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.goback
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.hb, .hb::after, .hb::before 
+{
+	box-sizing: border-box;
+	transition: all .25s ease;
+	background-color: #55ACEE;
+	border-left: 1px solid #2c3e50;
+	border-right: 1px solid #2c3e50;
+	color: #2ecc71;
+}
+.active
+{
+	background:0 0;
+	border-left:1px solid #2ecc71;
+	border-right:1px solid #2ecc71;
+	color:#2ecc71
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script type="text/javascript">
+	//$(function() 
+	//{
+		function renderTable(chart, containerId, id,productName) 
+		{
+			
+			//alert(JSON.stringify(chart));
+			var length = chart.length;
+			var countArray = [];
+			for (var i1 = 0;i1 < length; i1++) 
+			{
+				countArray.push(chart[i1].length);
+			}
+			var maxCount = Math.max.apply(null, countArray);			
+			var arrayObj = [];
+			var arrayObj1 = [];
+			var arrayObj2 = [];
+			var arrayObj3 = [];
+			var valueObj = [];
+			var valueObj1 = [];
+			var valueObj2 = [];
+			var valueObj3 = [];
+			
+			var rc = id-1;
+            for (var i = 0;i < length; i++) 
+			{	
+				var tableBody = "";
+				var tableBody1 = [];
+				var tableBody2 = [];
+				var tableBody3 = [];
+				var tableBody4 = [];
+				
+				var setValue1 = [];
+				var setValue2 = [];
+				var setValue3 = [];
+				var setValue4 = [];
+				
+				
+				for(var j=0;j<chart[rc].length;j++)
+				{
+					//alert(chart[rc].length);
+					var itemCount = Number(j)+1;					
+					tableBody +="<tr id='tableRow"+ j + "'><td>"+itemCount+"</td><td>"+chart[rc][j]['name']+"</td><td id='col1"+ id + j + "'></td><td id='col2"+ id + j + "'></td><td id='col3"+ id + j + "'></td><td id='col4"+ id + j + "'></td><td id='col5"+ id + j + "'></td><td id='col6"+ id + j + "'></td></tr>";
+					
+					if(i==0)
+					{
+						if(chart[0].length!=0)
+						{
+							if(convertMillions(chart[0][j]['value'])!=null) { var data1 = convertMillions(chart[0][j]['value']); } else { var data1 = "0K"; } 
+							tableBody1.push(data1);	
+							setValue1.push(chart[0][j]['value']);
+						}
+						else
+						{
+							tableBody1.push("oK");
+							setValue1.push('0');
+						}	
+					}
+					if(i==1)
+					{
+						if(chart[1].length!=0)
+						{
+							if(convertMillions(chart[1][j]['value'])!=null) { var data2 = convertMillions(chart[1][j]['value']); } else { var data2 = "0K"; } 
+							tableBody2.push(data2);	
+							setValue2.push(chart[1][j]['value']);
+						}
+						else
+						{
+							tableBody2.push("oK");
+							setValue2.push('0');
+						}	
+					}
+					if(i==2)
+					{
+						if(chart[2].length!=0)
+						{
+							if(convertMillions(chart[2][j]['value'])!=null) { var data3 = convertMillions(chart[2][j]['value']); } else { var data3 = "0K"; } 
+							tableBody3.push(data3);	
+							setValue3.push(chart[2][j]['value']);
+						}
+						else
+						{
+							tableBody3.push("oK");
+							setValue3.push('0');
+						}	
+
+					}
+					if(i==3)
+					{
+						if(chart[3].length!=0)
+						{
+							if(convertMillions(chart[3][j]['value'])!=null) { var data4 = convertMillions(chart[3][j]['value']); } else { var data4 = "0K"; } 
+							tableBody4.push(data4);	
+							setValue4.push(chart[3][j]['value']);
+						}
+						else
+						{
+							tableBody4.push("oK");
+							setValue4.push('0');
+						}	
+					}
+					
+				}
+				arrayObj.push(tableBody1);
+				arrayObj1.push(tableBody2);
+				arrayObj2.push(tableBody3);
+				arrayObj3.push(tableBody4);				
+				
+				valueObj.push(setValue1);
+				valueObj1.push(setValue2);
+				valueObj2.push(setValue3);
+				valueObj3.push(setValue4);				
+				
+            }   
+												
+				var tableHeader = "<tr><th>Item</th><th>"+productName+"</th><th>2016</th><th>2015</th><th>2014</th><th>2013</th><th>Avg (13-15)</th><th>% </th></tr>";
+				document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody>'+tableHeader+tableBody+'<tr id="lastRow'+ id + '"></tr></tbody></table>';			  
+				
+				//alert(arrayObj[0].length);
+				var totalValue1 = 0;
+				var totalValue2 = 0;
+				var totalValue3 = 0;
+				var totalValue4 = 0;
+				var totalValue5 = 0;
+				//alert(maxCount);
+				for(var k=0;k<maxCount;k++)
+				{	
+					if(k<=arrayObj[0].length)
+					{				
+						$('#col1'+ id + k).text(arrayObj[0][k]);						
+					}
+					if(k<=arrayObj1[1].length)
+					{
+						$('#col2'+ id + k).text(arrayObj1[1][k]);
+					}
+					if(k<=arrayObj2[2].length)
+					{
+						$('#col3'+ id + k).text(arrayObj2[2][k]);
+					}
+					if(k<=arrayObj3[3].length)
+					{
+						$('#col4'+ id + k).text(arrayObj3[3][k]);
+					}
+					
+					if(valueObj1[1][k]!=null) { var valueObjCheck1 = valueObj1[1][k]; } else { var valueObjCheck1 = 0; }
+					if(valueObj2[2][k]!=null) { var valueObjCheck2 = valueObj2[2][k]; } else { var valueObjCheck2 = 0; }
+					if(valueObj3[3][k]!=null) { var valueObjCheck3 = valueObj3[3][k]; } else { var valueObjCheck3 = 0; }
+					
+					var average =(parseInt(valueObjCheck1)+parseInt(valueObjCheck2)+parseInt(valueObjCheck3))/3;
+					//alert(average);
+					if(convertMillions(average)!=null) { var Average = convertMillions(average); } else { var Average = "0K"; }
+					$('#col5'+ id + k).text(Average);	
+					
+					if(valueObj[0][k]!=null) { var checkSum = valueObj[0][k]; } else { var checkSum = "0"; }
+					if(valueObj1[1][k]!=null) { var checkSum1 = valueObj1[1][k]; } else { var checkSum1 = "0"; }
+					if(valueObj2[2][k]!=null) { var checkSum2 = valueObj2[2][k]; } else { var checkSum2 = "0"; }
+					if(valueObj3[3][k]!=null) { var checkSum3 = valueObj3[3][k]; } else { var checkSum3 = "0"; }
+					//alert(isNaN(average));
+					if(average!=null) { var checkSum4 = average; } else { var checkSum4 = "0"; }
+					
+					totalValue1 +=parseInt(checkSum);
+					totalValue2 +=parseInt(checkSum1);
+					totalValue3 +=parseInt(checkSum2);
+					totalValue4 +=parseInt(checkSum3);
+					totalValue5 +=parseInt(checkSum4);										
+				}
+				//alert(totalValue5);
+				if(convertMillions(totalValue1)!=null) { var checkTotal = convertMillions(totalValue1); } else { var checkTotal = "0"; }
+				if(convertMillions(totalValue2)!=null) { var checkTotal1 = convertMillions(totalValue2); } else { var checkTotal1 = "0"; }
+				if(convertMillions(totalValue3)!=null) { var checkTotal2 = convertMillions(totalValue3); } else { var checkTotal2 = "0"; }
+				if(convertMillions(totalValue4)!=null) { var checkTotal3 = convertMillions(totalValue4); } else { var checkTotal3 = "0"; }
+				if(convertMillions(totalValue5)!=null) { var checkTotal4 = convertMillions(totalValue5); } else { var checkTotal4 = "0"; }
+								
+			$('#lastRow'+ id).append("<td></td><td></td><th>"+checkTotal+"</th><th>"+checkTotal1+"</th><th>"+checkTotal2+"</th><th>"+checkTotal3+"</th><th>"+checkTotal4+"</th>");
+        }
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		/*function convertMillions(sumofBudget)
+			{
+				 if (Math.abs(sumofBudget) >= 1000000000) 
+				 {
+					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000000) 
+				 {
+					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+			
+			}*/
+
+	var group = "country";
+	var status = sessionStorage.getItem("countryCode");
+	var ajaxLink = "industryShareYtdforcountry.do?countrycode="+status+"&group="+group+"&id=local";
+	sessionStorage.setItem("ajaxLinkDrill","industryShareYtdInnerdrilldown.do");			
+	sessionStorage.setItem("cStatus",status);
+	var cType = "local";
+	sessionStorage.setItem("cType",cType);			
+	loadChartforAll(ajaxLink,cType);
+	sessionStorage.setItem("dillStatus1","");		
+	var years = ["Industry Percentage Share YTD","2013","2014","2015"];		
+	
+	$("#INR").click(function()
+	{
+		//currencyType = "THB (\u0E3F)";
+		sessionStorage.setItem("cType","local");
+		if(sessionStorage.getItem("dillStatus1")=="" || sessionStorage.getItem("dillStatus1")==null)
+		{		
+			var ajaxLink = "industryShareYtdforcountry.do?countrycode="+sessionStorage.getItem("cStatus")+"&group="+group+"&id=local";		
+			loadChartforAll(ajaxLink);
+		}
+		else 
+		{
+			
+			var ajaxLink = "industryShareYtdInnerdrilldown.do";	
+			drillDown(sessionStorage.getItem('code'),sessionStorage.getItem('category'),sessionStorage.getItem('year'),ajaxLink,sessionStorage.getItem("cStatus"),'local');
+			//alert("Drill Function");
+		}
+		$('#INR').addClass("dropBackColor");
+		$('#USD').removeClass("dropBackColor");
+	});
+	$("#USD").click(function()
+	{
+		//currencyType = "USD (M)";
+		sessionStorage.setItem("cType","dollar");
+		if(sessionStorage.getItem("dillStatus1")=="" || sessionStorage.getItem("dillStatus1")==null)
+		{				
+			var ajaxLink = "industryShareYtdforcountry.do?countrycode="+sessionStorage.getItem("cStatus")+"&group="+group+"&id=dollar";		
+			loadChartforAll(ajaxLink);
+		}
+		else 
+		{
+			var ajaxLink = "industryShareYtdInnerdrilldown.do";	
+			drillDown(sessionStorage.getItem('code'),sessionStorage.getItem('category'),sessionStorage.getItem('year'),ajaxLink,sessionStorage.getItem("cStatus"),'dollar');
+			//alert("Drill Function");
+		}
+		
+		$('#INR').removeClass("dropBackColor");
+		$('#USD').addClass("dropBackColor");
+	});	
+	function loadChartforAll(ajaxLink)
+	{
+		//alert(ajaxLink);
+		$.getJSON(ajaxLink, function(json) 
+		{
+			//alert(JSON.stringify(json));
+			FusionCharts.ready(function () 
+			{			
+			
+				var chartData = {
+								    "chart": {
+										        "caption": "Industry Percentage Share YTD",
+										        //"startingangle": "90",
+												"showborder": "0",
+												"exportenabled": "1",
+												"exportatclient": "0",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",								
+												"xAxisNameFont": "Helvetica",
+												 "xAxisNameFontSize": "12",
+												 "xAxisNameFontBold":"1",
+												 "yAxisNameFontBold":"1",
+												"yAxisNameFontSize": "12",
+												"yAxisNameFont": "Helvetica",
+												"formatNumberScale":"1",
+												//"yFormatNumberScale":"1",
+												 "numberScaleValue": "1000,1000,1000",
+												 "numberScaleUnit": "K,M,B",
+												"bgColor": "#ffffff",
+												"decimals":'1',
+												"baseFont":"Helvetica",		
+												"baseFontSize":"12",
+												"captionFontSize":"18",
+												"showlabels": "1",
+												"showlegend": "1",
+												"legendBgColor": "#ffffff",
+												"legendBorderColor":"#000000",
+												"legendBorder":"1",
+												"legendBorderAlpha": "1",
+												"legendShadow": "1",
+												"legendValue":"1",
+												"legendPosition":"bottom",
+												"showCanvasBorder": "0",
+											   	"enablemultislicing": "0",
+												"slicingdistance": "20",
+												"showpercentvalues": "1",
+												"showpercentintooltip": "1",
+												"showvalues":"1",
+												"plottooltext": "$label  : $datavalue $percentvalue "	
+										     },
+								    "data": json['data']
+								};
+			    var DrillDown_revenueChart = new FusionCharts({
+			        type: 'pie2d',
+			        renderAt: 'indicatorDiv',
+			        width: '100%',
+			        height: '580',
+			        dataFormat: 'json',
+			        dataSource: chartData,
+								events: {
+								           dataPlotClick: function (event,dataObj) 
+											{			
+													sessionStorage.setItem("count","0");
+													sessionStorage.setItem("firstData0",JSON.stringify(json['data']));
+													sessionStorage.setItem("firstTableData0",JSON.stringify(json['tableData']));
+													var ajaxDrillVal = sessionStorage.getItem("ajaxLinkDrill");			
+													var cstatus = sessionStorage.getItem("cStatus");
+													var cType = sessionStorage.getItem("cType");
+													sessionStorage.setItem("code",json['data'][dataObj.dataIndex].code);
+													sessionStorage.setItem("category",dataObj.categoryLabel);	
+													sessionStorage.setItem("year",json['data'][dataObj.dataIndex].year);																
+													drillDown(json['data'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data'][dataObj.dataIndex].year,ajaxDrillVal,cstatus,cType);
+													sessionStorage.setItem("dillStatus1",'1');
+								            }
+								        }
+						    });
+							DrillDown_revenueChart.render();
+					        DrillDown_revenueChart.addEventListener('renderComplete', function () 
+							{
+				        	    renderTable(json['tableData'], 'table-container', '1', "Industry Sectors");
+					        });																																    
+					});
+				
+				
+				//==========Last Year Charts==========
+				
+				
+		 FusionCharts.ready(function () {
+		 //-----------2013---------//
+		var revenueChart = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container1',
+      		 width: '100%',
+       		  height: '580',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2013",
+								//"subcaption": "Last Year",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"xAxisNameFont": "Helvetica",
+								"xAxisNameFontSize": "12",
+								"xAxisNameFontBold":"1",
+								"yAxisNameFontBold":"1",
+								"yAxisNameFontSize": "12",
+								"yAxisNameFont": "Helvetica",
+								"formatNumberScale":"1",
+								//"yFormatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"bottom",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue"
+								//"theme": "fint"
+							},
+							"data": json['data1']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data1'][dataObj.dataIndex].code);		
+												//alert(json['data1'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","1");
+										sessionStorage.setItem("firstData1",JSON.stringify(json['data1']));
+										sessionStorage.setItem("firstTableData1",JSON.stringify(json['tableData']));
+										var ajaxDrillVal = sessionStorage.getItem("ajaxLinkDrill");			
+										var cstatus = sessionStorage.getItem("cStatus");
+										var cType = sessionStorage.getItem("cType");																
+										sessionStorage.setItem("code",json['data1'][dataObj.dataIndex].code);
+										sessionStorage.setItem("category",dataObj.categoryLabel);	
+										sessionStorage.setItem("year",json['data1'][dataObj.dataIndex].year);
+										drillDown(json['data1'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data1'][dataObj.dataIndex].year,ajaxDrillVal,cstatus,cType);
+								   		sessionStorage.setItem("dillStatus1",'1');
+								    }
+								 }
+						
+
+	    });
+		revenueChart.render();
+		revenueChart.addEventListener('renderComplete', function () 
+		{
+		 	    renderTable(json['tableData'], 'table-container1', '2', "Industry Sectors");
+		});																																    
+
+ 
+       //----------2014------------//
+	   var revenueChart1 = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container2',
+      		 width: '100%',
+       		 height: '580',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2014",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"xAxisNameFont": "Helvetica",
+								"xAxisNameFontSize": "12",
+								"xAxisNameFontBold":"1",
+								"yAxisNameFontBold":"1",
+								"yAxisNameFontSize": "12",
+								"yAxisNameFont": "Helvetica",
+								"formatNumberScale":"1",
+								//"yFormatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"bottom",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue "
+								//"theme": "fint"
+							},
+							"data": json['data2']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data2'][dataObj.dataIndex].code);		
+												//alert(json['data2'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","2");
+										sessionStorage.setItem("firstData2",JSON.stringify(json['data2']));
+										sessionStorage.setItem("firstTableData2",JSON.stringify(json['tableData']));
+										var ajaxDrillVal = sessionStorage.getItem("ajaxLinkDrill");			
+										var cstatus = sessionStorage.getItem("cStatus");
+										var cType = sessionStorage.getItem("cType");																
+										sessionStorage.setItem("code",json['data2'][dataObj.dataIndex].code);
+										sessionStorage.setItem("category",dataObj.categoryLabel);	
+										sessionStorage.setItem("year",json['data2'][dataObj.dataIndex].year);
+										drillDown(json['data2'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data2'][dataObj.dataIndex].year,ajaxDrillVal,cstatus,cType);
+										sessionStorage.setItem("dillStatus1",'1');
+								    }
+								 }
+						
+
+	    });
+		revenueChart1.render();
+		revenueChart1.addEventListener('renderComplete', function () 
+		{
+		 	    renderTable(json['tableData'], 'table-container2', '3', "Industry Sectors");
+		});																																    
+		
+		
+		//------------2015------------//
+		var revenueChart2 = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container3',
+      		 width: '100%',
+       		 height: '580',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2015",
+								//"subcaption": "Last Year",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"xAxisNameFont": "Helvetica",
+								"xAxisNameFontSize": "12",
+								"xAxisNameFontBold":"1",
+								"yAxisNameFontBold":"1",
+								"yAxisNameFontSize": "12",
+								"yAxisNameFont": "Helvetica",
+								"formatNumberScale":"1",
+								//"yFormatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"bottom",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue "
+								//"theme": "fint"
+							},
+							"data": json['data3']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data3'][dataObj.dataIndex].code);		
+												//alert(json['data3'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","3");
+										sessionStorage.setItem("firstData3",JSON.stringify(json['data3']));
+										sessionStorage.setItem("firstTableData3",JSON.stringify(json['tableData']));
+										var ajaxDrillVal = sessionStorage.getItem("ajaxLinkDrill");			
+										var cstatus = sessionStorage.getItem("cStatus");
+										var cType = sessionStorage.getItem("cType");																
+										sessionStorage.setItem("code",json['data3'][dataObj.dataIndex].code);
+										sessionStorage.setItem("category",dataObj.categoryLabel);	
+										sessionStorage.setItem("year",json['data3'][dataObj.dataIndex].year);
+										drillDown(json['data3'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data3'][dataObj.dataIndex].year,ajaxDrillVal,cstatus,cType);
+										sessionStorage.setItem("dillStatus1",'1');
+								    }
+								 }						
+
+	    });
+		revenueChart2.render();
+		revenueChart2.addEventListener('renderComplete', function () 
+		{
+		 	    renderTable(json['tableData'], 'table-container3','4', "Industry Sectors");
+		});																																    
+
+		 
+		 });				
+				
+				//=======Charts End===================
+		});
+	 }	
+			
+	function drillDown(code,category,year,ajaxDrillVal,cstatus,cType)
+	{
+		//alert(cstatus);
+		var chartContainer = "";
+		var tableContainer = "";
+		var drillId = "";
+		if(sessionStorage.getItem("count")=='0')
+		{
+			chartContainer = "indicatorDiv";
+			tableContainer = "table-container";
+			drillId = 1;
+			
+		}
+	   else
+	    {
+			chartContainer = "container"+sessionStorage.getItem("count");
+			tableContainer = "table-container"+sessionStorage.getItem("count");
+			drillId = Number(sessionStorage.getItem("count"))+1;
+		}
+	
+		if(cType=="local")
+		{
+			var drillAjaxLink = ajaxDrillVal+"?industrysectorcode="+code+"&year="+year+"&countrycode="+cstatus+"&id="+cType;
+			//alert(drillAjaxLink);
+		}
+		else
+		{
+			var drillAjaxLink = ajaxDrillVal+"?industrysectorcode="+code+"&year="+year+"&countrycode="+cstatus+"&id=dollar";
+			//alert(drillAjaxLink);
+		}
+		
+		$.getJSON(drillAjaxLink, function(json) 
+		//$.getJSON("industryShareYtdInner.do", function(json) 
+		{
+			//alert(3);
+			//alert(JSON.stringify(json));
+			$('#goback'+ sessionStorage.getItem("count")).show();
+			FusionCharts.ready(function () 
+			{
+				//alert(2);
+				var drillTitle = category+" - Industry Percentage Share YTD";
+			    var DrillDown_revenueChart = new FusionCharts({
+						type: 'pie2d',
+		        		renderAt: chartContainer,
+				        width: '100%',
+        				 height: '500',
+				        dataFormat: 'json',
+        				dataSource: {
+									    "chart": {
+								    			    "caption": drillTitle,
+													//"startingangle": "90",
+													"showborder": "0",
+													"exportenabled": "1",
+													"exportatclient": "0",
+													"exporthandler": "http://export.api3.fusioncharts.com",
+													"html5exporthandler": "http://export.api3.fusioncharts.com",								
+													
+													//"chartTopMargin":"10",
+													//"captionPadding":"30",
+													"xAxisNameFont": "Helvetica",
+													"xAxisNameFontSize": "12",
+													"xAxisNameFontBold":"1",
+													"yAxisNameFontBold":"1",
+													"yAxisNameFontSize": "12",
+													"yAxisNameFont": "Helvetica",
+													"formatNumberScale":"1",
+													//"yFormatNumberScale":"1",
+													"numberScaleValue": "1000,1000,1000",
+													"numberScaleUnit": "K,M,B",
+													"bgColor": "#ffffff",
+													"baseFont":"Helvetica",		
+													"baseFontSize":"12",
+													"captionFontSize":"18",
+													"showlabels": "1",
+													"showlegend": "1",
+													"legendBgColor": "#ffffff",
+													"legendBorderColor":"#000000",
+													"legendBorder":"1",
+													"legendBorderAlpha": "1",
+													"legendShadow": "1",
+													"legendValue":"1",
+													"legendPosition":"bottom",
+													"showCanvasBorder": "0",
+													"enablemultislicing": "0",
+													"slicingdistance": "20",
+													"showpercentvalues": "1",
+													"showpercentintooltip": "1",
+													"showvalues":"1",
+													"plottooltext": "$label Bookings : $datavalue $percentvalue "		
+												 },
+				    					"data": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {				
+													//alert(JSON.stringify(dataObj));		
+													//alert(JSON.stringify(json['data'][dataObj.dataIndex].code));
+													//asd();
+									            }
+									        }
+							    });
+							    DrillDown_revenueChart.render();   
+								DrillDown_revenueChart.addEventListener('renderComplete', function () 
+								{
+							 	    renderTable(json['tableData'], tableContainer,drillId, "Industries");
+									//alert(JSON.stringify(json['tableData']));
+								});																																    
+								
+						  });
+				 });
+		}
+//});		
+		//$(document).ready(function()
+		//{
+			$('.goback').click(function()
+			{
+				var curId = $(this).attr('id');
+				var curIdSplit= curId.split("goback");
+				//alert(curIdSplit[1]);
+				
+				var chartContainerBack = "";
+				var tableContainer = "";
+				var drillId = "";
+				
+				if(curIdSplit[1]=='0')
+				{
+					chartContainerBack = "indicatorDiv";
+					tableContainer = "table-container";
+					drillId = 1;
+					chartTitle = years[curIdSplit[1]];
+					
+				}
+			   else
+			    {
+					chartContainerBack = "container"+curIdSplit[1];
+					tableContainer = "table-container"+curIdSplit[1];
+					drillId = Number(curIdSplit[1])+1;
+					chartTitle = years[curIdSplit[1]];
+					
+				}
+				
+/*				var loadingDiv = '<div style="font-size:20px; position:fixed; top:50%; left:50%;" id="loading"><img src="image/PreLoader.gif"/> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span></div>';
+				$('#'+ chartContainerBack).html(loadingDiv);
+*/				
+				
+				
+				$('#goback'+ curIdSplit[1]).hide();
+				var sessionObjName = "firstData"+ curIdSplit[1];
+				var tableSessionObjName = "firstTableData"+ curIdSplit[1];
+				var json = new Object();
+				json.data = $.parseJSON(sessionStorage.getItem(sessionObjName));
+				json.tableData = $.parseJSON(sessionStorage.getItem(tableSessionObjName));
+				sessionStorage.setItem("dillStatus"+ drillId,'');	
+				//sessionStorage.setItem("ajaxLinkDrill","");
+				if(sessionStorage.getItem("cType")!="local")
+				{
+					var ajaxLink = "industryShareYtdforcountry.do?countrycode="+sessionStorage.getItem("cStatus")+"&group="+group+"&id="+sessionStorage.getItem("cType");
+					//alert(ajaxLink);
+				}
+				else
+				{
+					var ajaxLink = "industryShareYtdforcountry.do?countrycode="+sessionStorage.getItem("cStatus")+"&group="+group+"&id="+sessionStorage.getItem("cType");
+					//alert(ajaxLink);
+				}
+				loadChartforAll(ajaxLink);		
+			//FusionCharts.ready(function () 
+//			{
+//				//alert(2);
+//			    var DrillDown_revenueChart = new FusionCharts({
+//						type: 'pie2d',
+//		        		renderAt: chartContainerBack,
+//				        width: '100%',
+//        				 height: '580',
+//				        dataFormat: 'json',
+//        				dataSource: {
+//									    "chart": {
+//										        "caption": chartTitle,
+//										        //"startingangle": "90",
+//												"showborder": "0",
+//												"exportenabled": "1",
+//												"exportatclient": "0",
+//												"exporthandler": "http://export.api3.fusioncharts.com",
+//												"html5exporthandler": "http://export.api3.fusioncharts.com",								
+//												
+//												//"chartTopMargin":"10",
+//												//"captionPadding":"30",
+//												"xAxisNameFont": "Helvetica",
+//												"xAxisNameFontSize": "12",
+//												"xAxisNameFontBold":"1",
+//												"yAxisNameFontBold":"1",
+//												"yAxisNameFontSize": "12",
+//												"yAxisNameFont": "Helvetica",
+//												"formatNumberScale":"1",
+//												//"yFormatNumberScale":"1",
+//												"numberScaleValue": "1000,1000,1000",
+//												"numberScaleUnit": "K,M,B",
+//												"bgColor": "#ffffff",
+//												"baseFont":"Helvetica",		
+//												"baseFontSize":"12",
+//												"captionFontSize":"18",
+//												"showlabels": "1",
+//												"showlegend": "1",
+//												"legendBgColor": "#ffffff",
+//												"legendBorderColor":"#000000",
+//												"legendBorder":"1",
+//												"legendBorderAlpha": "1",
+//												"legendShadow": "1",
+//												"legendValue":"1",
+//												"legendPosition":"bottom",
+//												"showCanvasBorder": "0",
+//											   	"enablemultislicing": "0",
+//												"slicingdistance": "20",
+//												"showpercentvalues": "1",
+//												"showpercentintooltip": "1",
+//												"showvalues":"1",
+//												"plottooltext": "$label  : $datavalue $percentvalue "
+//												 },
+//				    					"data": json['data']
+//									},
+//									events: {
+//									           dataPlotClick: function (event,dataObj) 
+//											   {				
+//													if(!isNaN(dataObj.chartX))
+//													{
+//														sessionStorage.setItem("count",curIdSplit[1]);
+//														sessionStorage.setItem(sessionObjName,JSON.stringify(json['data']));
+//														sessionStorage.setItem(tableSessionObjName,JSON.stringify(json['tableData']));
+//														var ajaxDrillVal = sessionStorage.getItem("ajaxLinkDrill");			
+//														var cstatus = sessionStorage.getItem("cStatus");
+//														var cType = sessionStorage.getItem("cType");																
+//														sessionStorage.setItem("code",json['data'][dataObj.dataIndex].code);
+//														sessionStorage.setItem("category",dataObj.categoryLabel);	
+//														sessionStorage.setItem("year",json['data'][dataObj.dataIndex].year);
+//														drillDown(json['data'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data'][dataObj.dataIndex].year,ajaxDrillVal,cstatus,cType);
+//														sessionStorage.setItem("dillStatus1",'1');
+//													}
+//													//asd();
+//									            }
+//									        }
+//							    });
+//							    DrillDown_revenueChart.render();   
+//								DrillDown_revenueChart.addEventListener('renderComplete', function () 
+//								{
+//							 	    renderTable(json['tableData'], tableContainer,drillId, "Industry Sectors");
+//									//alert(JSON.stringify(json['tableData']));
+//								});																																    
+//								
+//						  });				
+			});
+		//});
+</script>
+
+<div class="row">
+<div class="col-sm-12">
+		<span class="dropdown" style="display:visible;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/India_bookingByIndustry" id="INR"><span>INR &#x20B9;</span></a>
+				<a href="#/app/India_bookingByIndustry" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+</div>
+<div style="float: right; margin-right:20px; margin-top:10px;"><p><input type="button" id="goback0" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+	<div class="col-sm-12">
+		<div id="indicatorDiv" style=" background-color:#FFFFFF;">
+			<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			</div>		 				 			 
+		</div>
+	</div>	
+</div>
+<div class="row">
+	<div class="col-sm-12" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container"></div>
+	</div>		
+</div>
+<hr />
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback3"  class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container3'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 	
+			 </div>
+		</div>		
+</div>
+<div class="row">
+	<div class="col-sm-12" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container3"></div>
+	</div>
+</div>
+<hr />
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback2" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container2'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 	
+			 </div>
+		</div>
+</div>
+<div class="row">
+	<div class="col-sm-12" style="border-left: solid 1px  #CCCCCC;">
+		<div id="table-container2"></div>
+	</div>		
+</div>
+<br/>
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback1" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container1'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 
+			 </div>
+		</div>
+</div>
+<div class="row">
+	<div class="col-sm-12" style="border-left: solid 1px  #CCCCCC;">
+		 <div id="table-container1"></div>
+	</div>		
+</div>
+<hr />
+

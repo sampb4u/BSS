@@ -1,0 +1,461 @@
+<script type="text/javascript">
+	$(function() 
+	{
+		//alert(1);
+		$.getJSON("industryShareYtd.do", function(json) 
+		{
+			//alert(JSON.stringify(json['data1']));
+			FusionCharts.ready(function () 
+			{
+			    var DrillDown_revenueChart = new FusionCharts({
+			        type: 'pie2d',
+			        renderAt: 'indicatorDiv',
+			        width: '100%',
+			        height: '400',
+			        dataFormat: 'json',
+			        dataSource: {
+								    "chart": {
+										        "caption": "Industry Percentage Share YTD",
+										        //"startingangle": "90",
+												"showborder": "0",
+												"exportenabled": "1",
+												"exportatclient": "0",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",								
+												
+												//"chartTopMargin":"10",
+												//"captionPadding":"30",
+												"bgColor": "#ffffff",
+												"baseFont":"Helvetica",		
+												"baseFontSize":"12",
+												"captionFontSize":"18",
+												"showlabels": "1",
+												"showlegend": "1",
+												"legendBgColor": "#ffffff",
+												"legendBorderColor":"#000000",
+												"legendBorder":"1",
+												"legendBorderAlpha": "1",
+												"legendShadow": "1",
+												"legendValue":"1",
+												"legendPosition":"right",
+												"showCanvasBorder": "0",
+											   	"enablemultislicing": "0",
+												"slicingdistance": "20",
+												"showpercentvalues": "1",
+												"showpercentintooltip": "1",
+												"showvalues":"1",
+												"plottooltext": "$label  : $datavalue $percentvalue "	
+										     },
+								    "data": json['data']
+								},
+								events: {
+								           dataPlotClick: function (event,dataObj) 
+											{			
+												//if(!isNaN(dataObj.chartX))
+												//{
+													sessionStorage.setItem("count","0");
+													sessionStorage.setItem("firstData0",JSON.stringify(json['data']));
+													drillDown(json['data'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data'][dataObj.dataIndex].year);
+												//}				
+								            }
+								        }
+						    });
+						    DrillDown_revenueChart.render();
+					});
+				
+				
+				//==========Last Year Charts==========
+				
+				
+		 FusionCharts.ready(function () {
+		 //-----------2013---------//
+		var revenueChart = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container1',
+      		 width: '100%',
+       		 height: '400',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2013",
+								//"subcaption": "Last Year",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"right",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue"
+								//"theme": "fint"
+							},
+							"data": json['data1']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data1'][dataObj.dataIndex].code);		
+												//alert(json['data1'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","1");
+										sessionStorage.setItem("firstData1",JSON.stringify(json['data1']));
+										drillDown(json['data1'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data1'][dataObj.dataIndex].year);
+								    }
+								 }
+						
+
+	    }).render();
+ 
+       //----------2014------------//
+	   var revenueChart = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container2',
+      		 width: '100%',
+       		 height: '400',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2014",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"right",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue "
+								//"theme": "fint"
+							},
+							"data": json['data2']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data2'][dataObj.dataIndex].code);		
+												//alert(json['data2'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","2");
+										sessionStorage.setItem("firstData2",JSON.stringify(json['data2']));
+										drillDown(json['data2'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data2'][dataObj.dataIndex].year);
+								    }
+								 }
+						
+
+	    }).render();
+		
+		//------------2015------------//
+		var revenueChart = new FusionCharts({
+		
+        type: 'pie2d',
+	        renderAt: 'container3',
+      		 width: '100%',
+       		 height: '400',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "2015",
+								//"subcaption": "Last Year",
+								"showborder": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartTopMargin":"10",
+								//"captionPadding":"30",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"right",
+								"showCanvasBorder": "0",
+								"enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label  : $datavalue $percentvalue "
+								//"theme": "fint"
+							},
+							"data": json['data3']
+						},
+						events: {
+						           dataPlotClick: function (event,dataObj) 
+									{		
+												//alert(json['data3'][dataObj.dataIndex].code);		
+												//alert(json['data3'][dataObj.dataIndex].year);		
+										sessionStorage.setItem("count","3");
+										sessionStorage.setItem("firstData3",JSON.stringify(json['data3']));
+										drillDown(json['data3'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data3'][dataObj.dataIndex].year);
+								    }
+								 }						
+
+	    }).render();
+		 
+		 });				
+				
+				//=======Charts End===================
+				});
+			});
+			
+function drillDown(code,category,year)
+	{
+		var chartContainer = "";
+		if(sessionStorage.getItem("count")=='0')
+		{
+			chartContainer = "indicatorDiv";
+		}
+	   else
+	    {
+			chartContainer = "container"+sessionStorage.getItem("count");
+		}
+		
+/*		var loadingDiv = '<div style="font-size:20px; position:fixed; top:50%; left:50%;" id="loading"><img src="image/PreLoader.gif"/> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span></div>';
+		$('#'+ chartContainer).html(loadingDiv);
+*/		
+		
+		$.getJSON("industryShareYtdInner.do?industrysectorcode="+code+"&year="+year, function(json) 
+		{
+			$('#goback'+ sessionStorage.getItem("count")).show();
+			FusionCharts.ready(function () 
+			{
+				//alert(2);
+				var drillTitle = category+" Industry Percentage Share YTD";
+			    var DrillDown_revenueChart = new FusionCharts({
+						type: 'pie2d',
+		        		renderAt: chartContainer,
+				        width: '100%',
+        				height: '400',
+				        dataFormat: 'json',
+        				dataSource: {
+									    "chart": {
+								    			    "caption": drillTitle,
+													//"startingangle": "90",
+													"showborder": "0",
+													"exportenabled": "1",
+													"exportatclient": "0",
+													"exporthandler": "http://export.api3.fusioncharts.com",
+													"html5exporthandler": "http://export.api3.fusioncharts.com",								
+													
+													//"chartTopMargin":"10",
+													//"captionPadding":"30",
+													"bgColor": "#ffffff",
+													"baseFont":"Helvetica",		
+													"baseFontSize":"12",
+													"captionFontSize":"18",
+													"showlabels": "1",
+													"showlegend": "1",
+													"legendBgColor": "#ffffff",
+													"legendBorderColor":"#000000",
+													"legendBorder":"1",
+													"legendBorderAlpha": "1",
+													"legendShadow": "1",
+													"legendValue":"1",
+													"legendPosition":"right",
+													"showCanvasBorder": "0",
+													"enablemultislicing": "0",
+													"slicingdistance": "20",
+													"showpercentvalues": "1",
+													"showpercentintooltip": "1",
+													"showvalues":"1",
+													"plottooltext": "$label Bookings : $datavalue $percentvalue "		
+												 },
+				    					"data": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {				
+													//alert(JSON.stringify(dataObj));		
+													//alert(JSON.stringify(json['data'][dataObj.dataIndex].code));
+													//asd();
+									            }
+									        }
+							    });
+							    DrillDown_revenueChart.render();   
+						  });
+				 });
+		}
+		
+		$(document).ready(function()
+		{
+			$('.goback').click(function()
+			{
+				var curId = $(this).attr('id');
+				var curIdSplit= curId.split("goback");
+				//alert(curIdSplit[1]);
+				
+				var chartContainerBack = "";
+				if(curIdSplit[1]=='0')
+				{
+					chartContainerBack = "indicatorDiv";
+				}
+			   else
+			    {
+					chartContainerBack = "container"+curIdSplit[1];
+				}
+				
+/*				var loadingDiv = '<div style="font-size:20px; position:fixed; top:50%; left:50%;" id="loading"><img src="image/PreLoader.gif"/> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span></div>';
+				$('#'+ chartContainerBack).html(loadingDiv);
+*/				
+				
+				
+				$('#goback'+ curIdSplit[1]).hide();
+				var sessionObjName = "firstData"+ curIdSplit[1];
+				var json = new Object();
+				json.data = $.parseJSON(sessionStorage.getItem(sessionObjName));	
+						
+			FusionCharts.ready(function () 
+			{
+				//alert(2);
+			    var DrillDown_revenueChart = new FusionCharts({
+						type: 'pie2d',
+		        		renderAt: chartContainerBack,
+				        width: '100%',
+        				height: '400',
+				        dataFormat: 'json',
+        				dataSource: {
+									    "chart": {
+										        "caption": "Industry Percentage Share YTD",
+										        //"startingangle": "90",
+												"showborder": "0",
+												"exportenabled": "1",
+												"exportatclient": "0",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",								
+												
+												//"chartTopMargin":"10",
+												//"captionPadding":"30",
+												"bgColor": "#ffffff",
+												"baseFont":"Helvetica",		
+												"baseFontSize":"12",
+												"captionFontSize":"18",
+												"showlabels": "1",
+												"showlegend": "1",
+												"legendBgColor": "#ffffff",
+												"legendBorderColor":"#000000",
+												"legendBorder":"1",
+												"legendBorderAlpha": "1",
+												"legendShadow": "1",
+												"legendValue":"1",
+												"legendPosition":"right",
+												"showCanvasBorder": "0",
+											   	"enablemultislicing": "0",
+												"slicingdistance": "20",
+												"showpercentvalues": "1",
+												"showpercentintooltip": "1",
+												"showvalues":"1",
+												"plottooltext": "$label  : $datavalue $percentvalue "
+												 },
+				    					"data": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {				
+													if(!isNaN(dataObj.chartX))
+													{
+														sessionStorage.setItem("count",curIdSplit[1]);
+														sessionStorage.setItem(sessionObjName,JSON.stringify(json['data']));
+														drillDown(json['data'][dataObj.dataIndex].code,dataObj.categoryLabel,json['data'][dataObj.dataIndex].year);
+													}
+													//asd();
+									            }
+									        }
+							    });
+							    DrillDown_revenueChart.render();   
+						  });				
+			});
+		});
+</script>
+<script>
+$(document).ready(function(){
+
+});
+</script>
+<div style="float: right; margin-right:20px; margin-top:10px;"><p><input type="button" id="goback0" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div id="indicatorDiv" style=" background-color:#FFFFFF;">
+	<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	</div>		 				 			 
+</div>
+<hr />
+<br/>
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback1" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container1'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 
+			 </div>
+		</div>
+</div>
+<hr />
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback2" class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container2'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 	
+			 </div>
+		</div>
+</div>
+<hr />
+<div style="float: right; margin-right:20px;"><p><input type="button" id="goback3"  class="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+<div class="row">
+		<div class="col-sm-12">
+			 <div id='container3'>
+				<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				</div>		 				 			 			 	
+			 </div>
+		</div>
+</div>

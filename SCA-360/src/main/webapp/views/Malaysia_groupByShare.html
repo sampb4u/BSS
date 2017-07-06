@@ -1,0 +1,508 @@
+<style>
+.chart-div
+{
+      height:900px;
+}
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+$(document).ready(function(){
+		
+		var renderTable = function (chart, containerId) {
+				// After the chart is rendered we export the data as CSV, parse it and then create a markup
+            // equivalent to a table by parsing the exported CSV.
+            var chartData = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowValue,
+                i,
+                length,
+                tableBody = '',
+				tableBody1 = '',
+                tableHeader = '';
+				tableFooter = '';
+				tableHeader1 = '';
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');
+     		var sum=0;
+			var Total = 0;
+			
+            // Retrieve the data from the rows and compute body string from the data rows
+			for (j = 1, length = rows.length; j < length; j++) 
+			{
+				row = rows[j].split(',');
+				Total += parseInt(row[1]);
+			}
+				var TotalPercentageValue = 0;
+            for (i = 1, length = rows.length; i < length; i++) {
+                row = rows[i].split(',');
+				//alert(row[1]);
+				sum = parseInt(row[1]);
+				var convertedSum = convertMillions(sum);
+				//alert(convertedSum);
+				var convertPercent = calculatePercentage(sum,Total);
+				if(convertPercent==null || convertPercent=="Infinity") { convertPercent = 0; } else { convertPercent = convertPercent; }
+				if(convertedSum==null) { convertedSum = 0; } else { convertedSum = convertedSum; }
+				if(isNaN(convertPercent)){var convertPercentage = 0; } else {var convertPercentage = convertPercent; }
+				tableBody += '<tr><td>' + row[0] + '</td><td>' + convertedSum + '</td><td>'+ convertPercentage +' %</td></tr>';
+				TotalPercentageValue+= parseFloat(convertPercent);
+				//alert(TotalPercentageValue);
+            }
+     			
+            // Compute header string from first row
+            row = rows[0].split(',');
+			tableHeader = '<tr><th>' + row[0] + '</th><th>' + row[1] + '</th><th>%</th></tr>';
+			if(convertMillions(Total)==null){var totalSumValue = "0K";}else{var totalSumValue = convertMillions(Total);}
+			if(isNaN(TotalPercentageValue)){var TotalPercentageValue2 = 0;}else{var TotalPercentageValue2 = TotalPercentageValue;}
+			tableFooter = '<tr><th>Total</th><th>' + totalSumValue + '</th><th>'+ TotalPercentageValue2.toFixed(0) +'%</th></tr>';
+			
+			//alert(tableFooter);
+			
+		   document.getElementById(containerId).innerHTML = '<table width ="200px;" border="1" style="border-collapse:collapse; padding:30px 15px 30px 15px; margin:60px 15px 30px 15px;" class="tableCss"><tbody>' + tableHeader + tableBody + tableFooter +'</tbody</table>';
+     
+        };
+       
+		
+		function convertMillions(sumofBooking)
+			{
+				 if (sumofBooking >= 1000000000) 
+				 {
+					return (sumofBooking / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (sumofBooking >= 1000000) 
+				 {
+					  return (sumofBooking / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (sumofBooking >= 1000) 
+				 {
+					   return (sumofBooking / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+			
+			};
+		function calculatePercentage(rowTotalVal,totalValue)
+		{		   
+			var percent =  (rowTotalVal/totalValue)*100;
+			return percent.toFixed(1);
+		}
+		
+		
+		var ajaxLink = "groupShareYtd.do?countrycode="+countrycode+"&id=local";
+		var countrycode = sessionStorage.getItem("countryCode");
+		loadChart(ajaxLink);
+		
+		$(document).ready(function()
+			{
+				$("#MYR").click(function()
+				{
+					ajaxLink = "groupShareYtd.do?countrycode="+countrycode+"&id=local";
+					loadChart(ajaxLink);
+					$('#MYR').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");
+					
+				});
+				$("#USD").click(function()
+				{
+					ajaxLink = "groupShareYtd.do?countrycode="+countrycode+"&id=dollar";
+					loadChart(ajaxLink);
+					$('#MYR').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+					
+				});	
+			});
+function loadChart(ajaxLink)
+{
+		
+$.getJSON(ajaxLink, function(json) 
+{
+ FusionCharts.ready(function () {
+ 
+ 			 var chartData =  {
+							"chart": {
+								"caption": "Percentage Share YTD",
+								"reverseLegend":"1",
+								"decimals":"1",
+								"xAxisName": "Country",
+               					 "yAxisName": "Value",
+								"startingangle": "90",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"formatnumberscale": "1",
+								"legendPosition":"right",
+								"showCanvasBorder": "0",
+							    "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data']
+						};
+           
+ 		 var revenueChart = new FusionCharts({
+		
+				type: 'pie2d',
+				renderAt: 'container',
+				 width: '100%',
+				height: '400',
+				dataFormat: 'json',
+				dataSource: chartData
+	
+			});
+			 revenueChart.addEventListener('renderComplete', function () {
+//            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(revenueChart, 'table-container');
+        });
+			revenueChart.render();
+		
+		
+		$('#table-container').show();
+		
+		//-----------2013---------//
+		
+		var chartData1 = {
+							"chart": {
+								"caption": "2013",
+								"reverseLegend":"1",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"subcaption": "Last Year",
+								"decimals":"0",
+								"xAxisName": "Country",
+               					 "yAxisName": "Value",
+								"startingangle": "90",
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data1']
+						};
+		var revenueChart1 = new FusionCharts({
+		
+				type: 'pie2d',
+					renderAt: 'container1',
+					 width: '100%',
+					 height: '400',
+					dataFormat: 'json',
+					dataSource: chartData1 
+		
+				});
+			revenueChart1.addEventListener('renderComplete', function () {
+//            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(revenueChart1, 'table-container1');
+        });		
+		
+		revenueChart1.render();
+ 		$('#table-container1').show();
+       //----------2014------------//
+	   
+	   var chartData2 = {
+							"chart": {
+								"caption": "2014",
+								"reverseLegend":"1",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"subcaption": "Last Year",
+								"decimals":"0",
+								"xAxisName": "Country",
+               					 "yAxisName": "Value",
+								"startingangle": "90",
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data2']
+						};
+	   
+			   var revenueChart2 = new FusionCharts({
+				
+				type: 'pie2d',
+					renderAt: 'container2',
+					  width: '100%',
+					 height: '400',
+					dataFormat: 'json',
+					dataSource: chartData2
+		
+				});
+				revenueChart2.addEventListener('renderComplete', function () {
+//            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(revenueChart2, 'table-container2');
+        });	
+				revenueChart2.render();
+		$('#table-container2').show();
+		//------------2015------------//
+		
+		var chartData3 = {
+							"chart": {
+								"caption": "2015",
+								"reverseLegend":"1",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"subcaption": "Last Year",
+								"decimals":"0",
+								"xAxisName": "Country",
+               					 "yAxisName": "Value",
+								"startingangle": "90",
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								 "alignCaptionWithCanvas": "5",
+								 "captionHorizontalPadding": "2",
+                				"captionOnTop": "1",
+               					 "captionAlignment": "middle",						
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data3']
+						};
+				var revenueChart3 = new FusionCharts({
+				
+				type: 'pie2d',
+					renderAt: 'container3',
+				   width: '100%',
+					height: '400',
+					dataFormat: 'json',
+					dataSource: chartData3
+		
+				});
+				revenueChart3.addEventListener('renderComplete', function () {
+//            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(revenueChart3, 'table-container3');
+        });	
+				revenueChart3.render();
+				$('#table-container3').show();
+ 
+ })
+ 
+}); 
+
+	}
+});
+</script>
+<div class="row">
+	 <div class="col-sm-12">
+		<span class="dropdown" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/Malaysia_groupByShare" id="MYR"><span>MYR &#x24;</span></a>
+				<a href="#/app/Malaysia_groupByShare" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+</div>
+</div>
+
+<div class="row">
+  	<div class="col-sm-9">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>
+		 </div>
+	</div>
+	<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container" style="display:none;"></div>
+	</div>
+</div>
+
+<hr />
+<div class="row">	
+	<div class="col-sm-9">
+    	 <div id='container3'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>
+		 </div>
+	</div>
+	<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container3" style="display:none;"></div>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col-sm-9">
+    	 <div id='container2'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>
+		 </div>
+	</div>
+	<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container2" style="display:none;"></div>
+	</div>
+</div>
+<hr />
+<div class="row">
+  	<div class="col-sm-9">
+    	 <div id='container1'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>
+		 </div>
+	</div>
+	<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+	  <div id="table-container1" style="display:none;"></div>
+	</div>
+</div>
+
+

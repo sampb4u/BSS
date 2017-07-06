@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--<script src="jquery.min.js"></script>
+ <script src="highcharts.js"></script>
+<script src="highcharts-more.js"></script>-->
+<!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
+ <script>
+ 
+ 
+ 
+ $(document).ready(function(){
+	 
+	
+ 
+	 Highcharts.setOptions ({
+	        colors:[
+	            '#5a9bd4',
+	            '#faa75b',
+	            '#7ac36a',
+	            '#9e67ab',
+	            '#f15a60',
+	            '#ce7058',
+	            '#d77fb4'
+	        ]
+	    });
+
+	    var chart = new Highcharts.Chart({
+	    chart: {
+	        renderTo:'container',
+	        type:'column'
+	    },
+	    title:{
+	        text:'Budget vs Booking'
+	    },
+	    credits:{enabled:false},
+	    legend:{
+	    },
+	    tooltip:{
+	        shared:true        
+	    },
+	    plotOptions: {
+	        series: {
+	            shadow:false,
+	            borderWidth:0,
+	            pointPadding:0
+	        }
+	    },
+	    xAxis:{
+	        categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec' ],
+	        lineColor:'#999',
+	        lineWidth:1,
+	        tickColor:'#666',
+	        tickLength:9,
+	        title:{
+	            text:'Months',
+	            style:{
+	                color:'#333'
+	            }
+	        }
+	    },
+	    yAxis:{
+	        lineColor:'#999',
+	        lineWidth:1,
+	        tickColor:'#666',
+	        tickWidth:1,
+	        tickLength:3,
+	        gridLineColor:'#ddd',
+	        title:{
+	            text:'Values',
+	            rotation:0,
+	            margin:50,
+	            style:{
+	                color:'#333'
+	            }
+	        }
+	    },    
+	    series: [{
+	        
+	        name:'BOOKING',
+	        data: [1373490,1277880,1504943,1384800,522921]
+	    },{
+	        name:'BUDGET',
+	        data: [1751086,1751086,1751086,1711199,1711199,1711199,1711199,1711199,1711199,1545205,1545205,1545205]
+	    } ]
+	    
+	    
+	    
+	    
+	   });
+	 
+ })
+ </script>
+</head>
+<body>
+<div id="container" style="height:400px"></div>
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+<style>
+.chart-div
+{
+      height:900px;
+}
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+$(document).ready(function()
+{
+	var countrycode = sessionStorage.getItem("countryCode");
+	var ajaxLink = "productShareYtdCountryWise.do?countrycode="+countrycode+"&id=local";
+	loadChartforAll(ajaxLink);	
+	
+	$(document).ready(function()
+			{
+				$("#PHP").click(function()
+				{
+					//alert("THB");
+					ajaxLink = "productShareYtdCountryWise.do?countrycode="+countrycode+"&id=local";
+					loadChartforAll(ajaxLink);
+					$('#PHP').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");
+					
+				});
+				$("#USD").click(function()
+				{
+					//	alert("USD");
+					ajaxLink = "productShareYtdCountryWise.do?countrycode="+countrycode+"&id=dollar";
+					loadChartforAll(ajaxLink);
+					$('#PHP').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+					
+				});	
+			});	
+
+function loadChartforAll(ajaxLink)
+{
+	$.getJSON(ajaxLink, function(json)
+	{
+		var renderTable = function (chart, containerId) 
+		{
+            var chartData = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowValue,
+                i,
+                length,
+                tableBody = '',
+				tableBody1 = '',
+                tableHeader = '';
+				tableFooter = '';
+				tableHeader1 = '';
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');
+     		var sum=0;
+			var Total = 0;
+            // Retrieve the data from the rows and compute body string from the data rows
+			for (j = 1, length = rows.length; j < length; j++) 
+			{
+				row = rows[j].split(',');
+				Total += parseFloat(row[1]);
+			}
+
+            for (i = 1, length = rows.length; i < length; i++) {
+                row = rows[i].split(',');
+				//alert(row[1]);
+				sum = parseFloat(row[1]);
+				var convertedSum = convertMillions(sum);
+				if(convertedSum==null) { convertedSum = "oK"; }
+				var convertPercent = calculatePercentage(sum,Total);
+				if(convertPercent==null || convertPercent=="Infinity") { convertPercent = 0; } else { convertPercent = convertPercent; }
+				tableBody += '<tr><td>' + row[0] + '</td><td>' + convertedSum + '</td><td>'+ convertPercent +' %</td></tr>';
+            }
+     
+            // Compute header string from first row
+            row = rows[0].split(',');
+			tableHeader = '<tr><th>' + row[0] + '</th><th>' + row[1] + '</th><th>%</th></tr>';
+			tableFooter = '<tr><th></th><th>' + convertMillions(Total) + '</th><th></th></tr>';
+			
+		   document.getElementById(containerId).innerHTML = '<table width ="200px;" border="1" style="border-collapse:collapse; padding:30px 15px 30px 15px; margin:60px 15px 30px 15px;" class="tableCss"><tbody>' + tableHeader + tableBody + tableFooter +'</tbody</table>';
+     
+        };
+       
+		function convertMillions(sumofBooking) 
+		{
+			//alert(sumofBooking);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBooking < thousand) {
+				return (sumofBooking/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K';   
+			}
+			
+			else if (sumofBooking >= thousand && sumofBooking <= 1000000) {
+				 return  (sumofBooking/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K'; 
+			}
+			
+			else if (sumofBooking >= million && sumofBooking <= billion) {
+				return (sumofBooking/million).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'M';   
+			}
+			
+			else if (sumofBooking >= billion && sumofBooking <= trillion) {
+				return (sumofBooking/billion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'B';   
+			}
+			
+			else {
+				return (sumofBooking/trillion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'T';   
+		   }
+	   }
+		/*function convertMillions(sumofBooking)
+			{
+				 if (sumofBooking >= 1000000000) 
+				 {
+					return (sumofBooking / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (sumofBooking >= 1000000) 
+				 {
+					  return (sumofBooking / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (sumofBooking >= 1000) 
+				 {
+					   return (sumofBooking / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+			
+			};*/
+		function calculatePercentage(rowTotalVal,totalValue)
+		{		   
+			var percent =  (rowTotalVal/totalValue)*100;
+			return percent.toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' );
+		}
+
+		 FusionCharts.ready(function () {           
+			   var chartData = {
+							"chart": {
+								"caption": "Product Percentage Share YTD",
+								//"subcaption": "Last Year",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								"startingangle": "90",
+								"decimals":"1",
+								"formatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"showborder": "0",
+								"xAxisNameFont": "Helvetica",
+								 "xAxisNameFontSize": "12",
+								 "xAxisNameFontBold":"1",
+								"yAxisNameFontBold":"1",
+								"yAxisNameFontSize": "12",
+								"yAxisNameFont": "Helvetica",
+								"yFormatNumberScale":"1",
+								 "numberScaleValue": "1000,1000,1000",
+								 "numberScaleUnit": "K,M,B",
+								//"chartTopMargin":"10",
+								"captionPadding":"30",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendValue":"1",
+								"legendPosition":"right",
+								"showCanvasBorder": "0",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data']
+						};
+		   		   
+ 		 var revenueChart = new FusionCharts({		
+		        type: 'pie2d',
+	    	    renderAt: 'container',
+       			width: '100%',
+	       		height: '400',
+		        dataFormat: 'json',
+	    	    dataSource: chartData,
+	    });
+		revenueChart.addEventListener('renderComplete', function () 
+		{
+            renderTable(revenueChart, 'table-container');
+        });
+		revenueChart.render();		
+		
+		//-----------2013---------//
+	var chartData1 = {
+							"chart": {
+								"caption": "2013",
+								//"subcaption": "Last Year",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								"startingangle": "90",
+								"chartBottomMargin":"0",
+								"decimals":"1",
+								"formatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								//"chartLeftMargin":"-10",
+								"captionPadding":"30",
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data1']
+						};		
+		
+		var revenueChart1 = new FusionCharts({		
+	        type: 'pie2d',
+	        renderAt: 'container1',
+            width: '100%',
+      		height: '400',
+	        dataFormat: 'json',
+	        dataSource: chartData1,
+	    });
+		revenueChart1.addEventListener('renderComplete', function () 
+		{
+            renderTable(revenueChart1, 'table-container1');
+        });
+		revenueChart1.render();		
+ 
+       //----------2014------------//
+
+	   var chartData2 = {
+							"chart": {
+								"caption": "2014",
+								//"subcaption": "Last Year",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								"startingangle": "90",
+								"captionPadding":"30",
+								"decimals":"1",
+								"formatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								//"chartLeftMargin":"-3",
+								"chartBottomMargin":"0",
+								"showborder": "0",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data2']
+						};
+
+	   	   	   
+	   var revenueChart2 = new FusionCharts({		
+	        type: 'pie2d',
+	        renderAt: 'container2',
+    		width: '100%',
+       		height: '400',
+	        dataFormat: 'json',
+	        dataSource: chartData2
+	    });
+		revenueChart2.addEventListener('renderComplete', function () 
+		{
+            renderTable(revenueChart2, 'table-container2');
+        });
+		revenueChart2.render();		
+		
+		
+		//------------2015------------//
+
+		var chartData3 = {
+							"chart": {
+								"caption": "2015",
+								//"subcaption": "Last Year",
+								"startingangle": "90",
+								"captionPadding":"30",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",								
+								
+								//"chartLeftMargin":"-1",
+								"chartBottomMargin":"0",
+								"showborder": "0",
+								"decimals":"1",
+								"formatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"bgColor": "#ffffff",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"12",
+								"captionFontSize":"18",
+								 "alignCaptionWithCanvas": "5",
+								 "captionHorizontalPadding": "2",
+                				"captionOnTop": "1",
+               					 "captionAlignment": "middle",						
+								"showlabels": "1",
+								"showlegend": "1",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor":"#000000",
+								"legendBorder":"1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition":"right",
+							   "enablemultislicing": "0",
+								"slicingdistance": "20",
+								"showpercentvalues": "1",
+								"showpercentintooltip": "1",
+								"showvalues":"1",
+								"plottooltext": "$label Bookings : $datavalue $percentvalue ",
+								//"theme": "fint"
+							},
+							"data": json['data3']
+						};		
+		
+		var revenueChart3 = new FusionCharts({		
+	        type: 'pie2d',
+	        renderAt: 'container3',
+      		width: '100%',
+       		height: '400',
+	        dataFormat: 'json',
+	        dataSource: chartData3
+	    });
+		revenueChart3.addEventListener('renderComplete', function () 
+		{
+            renderTable(revenueChart3, 'table-container3');
+        });
+		revenueChart3.render();		
+		
+ 
+ })
+ 
+}); 
+}
+});
+</script>
+<div class="row">
+<div class="col-sm-12">
+		<span class="dropdown"  id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/Philippines_groupByProductShare" id="PHP"><span>PHP &#x20b1;</span></a>
+				<a href="#/app/Philippines_groupByProductShare" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+</div>
+</div> 
+	<div class="row">
+		<div class="col-sm-9">
+			 <div id='container'>
+			      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				  </div>		 				 
+			 </div>
+		</div>
+		<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+		  <div id="table-container"></div>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-sm-9">
+			 <div id='container3'>
+			      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				  </div>		 				 			 
+			 </div>
+		</div>
+		<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+		  <div id="table-container3"></div>
+		</div>		
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-sm-9">
+			 <div id='container2'>
+			      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				  </div>		 				 			 
+			 </div>
+		</div>
+		<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+		  <div id="table-container2"></div>
+		</div>		
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-sm-9">
+			 <div id='container1'>
+			      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+				  </div>		 				 			 
+			 </div>
+		</div>
+		<div class="col-sm-3" style="border-left: solid 1px  #CCCCCC;">
+		  <div id="table-container1"></div>
+		</div>		
+	</div>
+	<hr />		
+	<br />
+	<br />
+
+

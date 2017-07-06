@@ -1,0 +1,91 @@
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+ <script type="text/javascript" src="fusioncharts.js"></script>
+<script type="text/javascript" src="fusioncharts.theme.fint.js"></script>-->
+<script>
+$(document).ready(function(){
+
+		$.getJSON("otdRequestDate.do", function(json) 
+		{
+ FusionCharts.ready(function () {
+           
+ 		 var revenueChart = new FusionCharts({
+		
+        type: 'column2d',
+	    renderAt: 'container',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+							"chart": {
+								"caption": "Job Close Before Request Date ",
+							//"subCaption": "Harry's SuperMart",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",								
+							"useroundedges": "1",
+							"xAxisname": "Product Line",
+							"yAxisName": " Days (Jobs)",
+							"numberPrefix": " ",
+							"numbersuffix": " Jobs",
+							"decimals":'0',
+							"paletteColors": "#0075c2,#1aaf5d",
+							"bgColor": "#ffffff",
+							"baseFont":"Helvetica",		
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							//"showsum": "1",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999",
+							"subcaptionFontBold": "1",
+							"subcaptionFontSize": "14"
+							},
+							"data": json['data'],
+							"trendlines": [
+								{
+									"line": [
+										{
+											"startvalue": "65000",
+											"color": "#1aaf5d",
+											"dashed": "1",
+											"tooltext": "Yearly sales target was $startDataValue",
+											"displayvalue": "Target"
+										}
+									]
+								}
+							]
+						}
+
+	    }).render();
+		
+		//alert("10");
+ })
+   });
+ });
+</script>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 
+		 </div>
+	</div>
+</div>
+

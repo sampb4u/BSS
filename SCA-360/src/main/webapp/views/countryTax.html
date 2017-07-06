@@ -1,0 +1,88 @@
+﻿ <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+</style>
+
+<div ng-controller="CountryTaxController" ng-init="addCurrencyTaxdataForm();getIndicators();getCustomergruop();loadCountryNames();">									
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Country Tax Master</div>
+         <form name="countryTaxForm" novalidate ng-submit="savecountryTax(countryTax,countryTaxForm,countryTax.countrycode);" enctype="multipart/form-data">
+              <div class="row">
+              <div class="col-sm-3">
+              </div>
+              <div class="col-sm-3">
+              <div class="floating-label-wrapper">
+                                        	<div  ng-class="{ 'has-error' : countryTaxForm.countrycode.$invalid && (countryTaxForm.countrycode.$dirty)}">
+             <!-- <label for="Countrycode"></label>-->
+              <select class="form-control" id="Country"  data-ng-model="countryTax.countrycode" ng-options="countrycode.countrycode as countrycode.country for countrycode in countryNames | orderBy:'-country':true" placeholder="Country" name="countrycode" ng-change="getCountryTax(countryTax.countrycode);" ng-required="true" with-floating-label>
+                                                            <option value="">Select Country</option>
+                                                            
+                                                            </select>
+                                                             <p ng-show="countryTaxForm.countrycode.$error.required && (countryTaxForm.countrycode.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                            </div>
+                                                            </div>
+              </div>
+                
+             </div>
+              <br/>
+              <br/>
+              <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-6">
+            <div class="table-scrollable">
+                        <table class="table table-hover table-striped table-bordered">
+                            <thead class="bordered-blue">
+                                <tr>
+                                    <th style="width:1%">Action</th>
+                                <th style="width:1%">Tax</th>
+                                  <th style="width:2%">Percentage</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="CurrencyTaxdata in CurrencyTaxFormData">
+                                <td> <input type="hidden" ng-model="CurrencyTaxdata.id"  name="id{{$index}}"/>						
+                                    <button type="button" class="btn btn-primary" id="right_All_1"   ng-if="CurrencyTaxdata.id==1" ng-click='addCurrencyTaxdataForm();'>
+                                          <span style="font-family: Geneva, Arial, Helvetica, sans-serif;"> </span> <i class="glyphicon glyphicon-plus-sign"></i>
+                                                          </button>
+                                                          <button type="button" id="right_All_1" class="btn btn-danger" ng-if="CurrencyTaxdata.id!=1"  ng-click='removeFormRow(CurrencyTaxdata.id);'>
+                                                            <span style="font-family: Geneva, Arial, Helvetica, sans-serif;"></span><i class="glyphicon glyphicon-remove-sign"></i>
+                                                            </button>	</td>
+                                                            <td style="width:1%"><div class="form-group">
+                                        	<div  ng-class="{ 'has-error' : countryTaxForm.tax{{$index}}.$invalid && (countryTaxForm.tax{{$index}}.$dirty)}"> <input type="text"   class="form-control" placeholder="Tax" ng-model="CurrencyTaxdata.tax" id="Tax" name="tax{{$index}}" ng-required="true" /> <p ng-show="countryTaxForm.tax{{$index}}.$error.required && (countryTaxForm.tax{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p></div></div></td>
+                                                            <td style="width:1%"> <div class="form-group">
+                                        	<div  ng-class="{ 'has-error' : countryTaxForm.percentage{{$index}}.$invalid && (countryTaxForm.percentage{{$index}}.$dirty)}"><input type="text"   class="form-control" id="Percentage" ng-model="CurrencyTaxdata.percentage"  name="percentage{{$index}}" ng-required="true" placeholder="Percentage" /> <p ng-show="countryTaxForm.percentage{{$index}}.$error.required && (countryTaxForm.percentage{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p></div></div></td>
+                                    
+                                                            
+                        </tr>		
+                            </tbody>
+                        </table>
+                    </div></div><br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+               <div class="row" >
+                            <div class="col-sm-12" align="center">
+                                <button type="submit" class="btn btn-blue" ><i class="glyphicon glyphicon-save"></i>Save</button>
+                                <!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(countryTaxForm)">Reset</button>-->
+                                
+                            </div>
+                            <div class="col-sm-6"></div>	
+                        </div>                                             
+            </div>
+		
+      </form>
+	</div>		
+									
+
+</div>

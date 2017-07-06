@@ -1,0 +1,1389 @@
+<!--<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #FFFFFF ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #d3d3d3;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+</style>
+
+<script type="text/javascript">
+
+$("#btn1").hide();
+$("#btn2").hide();
+var group = "sca";
+var ajaxLink = "SCAgroupbyproduct.do?id=dollar";
+sessionStorage.setItem("drillStatus",'false');
+var drillAjaxLink = "SCAgroupbyproductdrilldown.do";
+var clusteredAjaxLink = "clustredforgroup.do";
+var status = "all";
+var currencyType = "USD (M)";
+var cType = "local";
+sessionStorage.setItem("currencyType",currencyType);
+sessionStorage.setItem("cType",cType);
+sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+sessionStorage.setItem("status","all");
+loadChartforAll(ajaxLink,status,currencyType); 
+
+//sessionStorage.setItem("currencyType","USD (M)");
+
+var ifCond = "0";
+buttonActive(ifCond);
+
+sessionStorage.setItem("clusStatus",'false');
+
+var array = [{"all":"USD (M)","TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","OT":"USD (\u0024)"}];
+var countryNameArray = [{"all":"SCA","TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","OT":"Other"}];
+  
+  
+$(document).ready(function()
+{
+	$('.renderchart').click(function()
+	{
+		var status = $(this).attr('id');
+		buttonActive("1");
+		jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+		$("#btn1").hide();
+		$("#btn2").hide();
+		$('#goback').hide();
+		
+		sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+		if(status=="all")
+		{
+			currencyType = "USD (M)";
+			var ajaxLink = "SCAgroupbyproduct.do?id=dollar";
+			var drillAjaxLink = "SCAgroupbyproductdrilldown.do";
+			var clusteredAjaxLink = "clustredforgroup.do";
+			sessionStorage.setItem("cType",cType);
+			sessionStorage.setItem("currencyType",currencyType);
+			sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+			sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+			sessionStorage.setItem("status",status);
+			//loadChartforAll(ajaxLink);
+			$('#curDropdown').hide();	
+			var getId = status.toUpperCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");		
+			//sessionStorage.setItem("currencyType","USD (M)");
+			sessionStorage.setItem("drillStatus",'false');
+			sessionStorage.setItem("clusStatus",'false');
+			$('#btn1').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			$("#table-container1").hide();
+			$("#table-container").show();
+			
+		}
+		else
+		{
+			currencyType = array[0][status];
+			var ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+status+"&id=local";
+			var drillAjaxLink = "countrybyproductdrilldown.do";
+			var clusteredAjaxLink = "clustredforcountry.do";
+			sessionStorage.setItem("cType",cType);
+			sessionStorage.setItem("currencyType",currencyType);
+			sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+			sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+			sessionStorage.setItem("status",status);
+			//loadChartforAll(ajaxLink);	
+			var getId = status.toLowerCase();
+			$('#curDropdown').show();
+			$('#scaSpan').text(array[0][status]);
+			//alert(JSON.stringify(array[0][status]));
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+			//sessionStorage.setItem("currencyType",array[0][status]);
+			sessionStorage.setItem("drillStatus",'false');
+			sessionStorage.setItem("clusStatus",'false');
+			$('#btn1').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			$("#table-container1").hide();
+			$("#table-container").show();
+			
+		}
+		$(this).addClass("active");		
+		loadChartforAll(ajaxLink,status,currencyType);	
+			
+	});
+});
+$(document).ready(function()
+{
+	$("#SCA").click(function()
+	{
+		currencyType = array[0][sessionStorage.getItem("selectedCountry")];
+		sessionStorage.setItem("cType","local");
+		sessionStorage.setItem("currencyType",currencyType);
+		var titleName = countryNameArray[0][sessionStorage.getItem("selectedCountry")] + " - " + sessionStorage.getItem("drillCat") + " Products";
+		//alert(titleName);
+		if(sessionStorage.getItem("drillStatus")=='false')
+		{
+			ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+			loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+		}
+		else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='false')
+		{					
+			drillDown(sessionStorage.getItem('drillYear'),sessionStorage.getItem('drillCat'),'local');
+			//alert(sessionStorage.getItem('drillCat'));
+		}
+		else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='true')
+		{		
+			var clusteredAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem('drillCat')+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+			loadClusteredChart(clusteredAjaxLink,titleName);	
+			//alert(clusDrillAjaxLink);						 				 			
+		}
+		//alert(sessionStorage.getItem("clusStatus"));
+		$('#SCA').addClass("dropBackColor");
+		$('#USD').removeClass("dropBackColor");	
+		
+		
+	});
+	$("#USD").click(function()
+	{
+		//alert("USD");
+		currencyType = "USD (\u0024)";
+		sessionStorage.setItem("cType","dollar");
+		sessionStorage.setItem("currencyType",currencyType);
+		var titleName = countryNameArray[0][sessionStorage.getItem("selectedCountry")] + " - " + sessionStorage.getItem("drillCat") + " Products";
+		if(sessionStorage.getItem("drillStatus")=='false')
+		{
+			//alert(1);
+			ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+			loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);			
+		}		
+		else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='false')
+		{
+			
+			drillDown(sessionStorage.getItem('drillYear'),sessionStorage.getItem('drillCat'),'dollar');
+			//alert(sessionStorage.getItem('drillCat'));
+		}
+		else if(sessionStorage.getItem("drillStatus")=='true' && sessionStorage.getItem("clusStatus")=='true')
+		{
+			var clusteredAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem('drillCat')+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+			//alert(clusDrillAjaxLink);
+			loadClusteredChart(clusteredAjaxLink,titleName);
+		}
+		//alert(sessionStorage.getItem("clusStatus"));
+		$('#SCA').removeClass("dropBackColor");
+		$('#USD').addClass("dropBackColor");
+			
+	});	
+});
+
+
+	function buttonActive(ifCond)
+	{
+		jQuery( ".hb .countFlag").parent().addClass("hb-country");
+		jQuery( ".hb #ALL").parent().addClass("hb-refresh");	
+		
+	}
+
+		function renderTable(chart, containerId)
+		{
+	//	alert(JSON.stringify(chart.getDataAsCSV()));
+            // After the chart is rendered we export the data as CSV, parse it and then create a markup
+            // equivalent to a table by parsing the exported CSV.
+            var data = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowSum
+                i,
+                length,                
+                tableHeader = '';
+				tableData = '';
+				rowHeading = "";
+				yearHeadigs = "";
+				tableBody3 = '';
+				
+            // Get all the rows by splitting data with '\n' seperator
+			//alert(JSON.stringify(data));
+            rows = data.replace(/"/g, '').split('\n');
+			//alert(rows);
+            // Retrieve the data from the rows and compute body string from the data rows
+			//var val1 = 0;
+			
+			rowHeading = rows[0].split(',');
+			var arrayObj = [];
+			var arrayObj1 = [];
+			var sumofTotalBooking = 0;
+			var convertBooking = [];
+			var finalTableData = [];
+			var finalTableData2 = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+				//alert(rows[i]);
+                row = rows[i].split(',');
+			  //alert(row);
+				var sumofRow = 0;	
+				var sumofBooking = 0;
+				var tableBody1 = '';
+				var sumPercent = "";
+				var tableData = [];
+				var tableData2 = [];
+				for(var j=0;j<row.length;j++)
+				{
+				     //alert(row[j]);
+					if(j>=1)
+					{
+					    if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+						if(row[j]==null) { var productValue = 0; } else { var productValue = row[j]; }
+						if(convertMillions(productValue)==null) { var convertproductValue="0K"; } else { var convertproductValue=convertMillions(productValue); }						 						//sumPercent +=parseInt(convertproductValue);
+						tableData.push("<td style='color:#0066CC;text-align:center'>"+convertproductValue+"</td>");
+						tableData2.push(productValue);
+					}				   					
+					tableBody1 += "<tr style='color:;text-align:center' id='tableRow"+ j + "'><th >"+ rowHeading[j] +"</th></tr>";	
+										
+					
+				}
+			 // alert(convertproductValue);
+				yearHeadigs += "<td>"+ row[0] +"</td>";
+				if(convertMillions(sumofBooking)==null){var totalSum="0K";}else{totalSum=convertMillions(sumofBooking);}
+				convertBooking.push("<th style='color:;text-align:center'>"+ totalSum +"</th>");
+				//arrayObj1.push(sumPercent);
+				var sumPercent = 0;			
+			
+				finalTableData.push(tableData);
+				finalTableData2.push(tableData2);
+				sumofTotalBooking +=parseInt(sumofBooking);
+				
+            }   			
+			tableData =tableBody1;
+			//alert(tableData);
+			document.getElementById(containerId).innerHTML = '<table width ="70%;"  align="center" border="1" style="border-collapse:collapse;" class="tableCss"><tbody>'+ tableData +'<tr id="total" ><th>Total</th></tr></tbody></table>';			
+			$('#tableRow0').append(yearHeadigs);
+			$('#tableRow0').append("<td style='color:;text-align:center'>%</td>");
+			$('#tableRow0').css("font-weight","bold");
+			
+			
+			
+			for(var k=0;k<finalTableData.length;k++)
+			{
+			  	var rowVal =[];
+				for(var l=0;l<finalTableData[k].length;l++)
+				{
+				    //alert(finalTableData[k][k]);
+					var count = Number(l)+1;
+					$('#tableRow'+ count).append(finalTableData[k][l]);
+					var TotalValue = 0;
+					for(var m=0;m<finalTableData.length;m++)
+					{
+						
+						TotalValue +=parseInt(finalTableData2[m][l]);
+						
+					}
+					rowVal.push(TotalValue);
+					
+				}
+				var count1=Number(k)+1;
+				$('#total').append(convertBooking[k]);
+				//alert(TotalValue);
+				//$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+			}
+			
+			var totalPercentage = 0;
+			for(var t=0;t<rowVal.length;t++)
+			{
+			   //alert(sumofTotalBooking);
+				var next = Number(t)+1;
+				
+				if(rowVal[t]=="NaN"){var rowVal2="0";}else{rowVal2=rowVal[t];}
+				
+				var data1 = convertMillions(rowVal2).replace ( /[^\+|\-0-9.]/ig, '' );//replace(/\+|\-/ig, '-')
+				//alert(data1);
+				var data2 = convertMillions(sumofTotalBooking).replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				if(calculatePercentage(data1,data2)=="NaN"){var rowVal3="0";}else{rowVal3=calculatePercentage(data1,data2);}
+				
+				var percentcol = "<td style='color:#0066CC;text-align:center'>"+ rowVal3  +" %</td>"
+				$('#tableRow'+ next).append(percentcol);				
+				totalPercentage +=parseFloat(rowVal3);
+				//alert(percentcol); 
+			}
+			$('#total').append("<td></td>");			
+			//$('#total').append("<td><b>"+ totalPercentage.toFixed(0) +" %</b></td>");
+			
+        };
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		//function convertMillions(sumofBudget)
+//			{
+//				 if (Math.abs(sumofBudget) >= 1000000000) 
+//				 {
+//					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+//				 }
+//				 else if (Math.abs(sumofBudget) >= 1000000) 
+//				 {
+//					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+//				 }
+//				 else if (Math.abs(sumofBudget) >= 1000) 
+//				 {
+//					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+//				 }				
+//			
+//			}
+		function calculatePercentage(rowTotalVal,totalValue)
+		{
+		   //alert(rowTotalVal);
+			var percent =  (rowTotalVal/totalValue)*100;
+			 //alert(percent);
+			return percent.toFixed(2);
+			//sumoftotalPercent = sumoftotalPercent+percent;
+			//alert(sumoftotalPercent);
+			
+		}
+		//======Clustered Chart Table=========//
+		var renderTableClust = function (chart, containerId) {
+			//	 After the chart is rendered we export the data as CSV, parse it and then create a markup
+           //  equivalent to a table by parsing the exported CSV.
+            var chartData = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowValue,
+                i,
+                length,
+				tableData2 = '';
+                tableBody5 = '',
+                tableHeader = '';
+				rowHeading1 = "";
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');
+			//alert(rows);
+			
+			rowHeading1 = rows[0].split(',');
+			//alert(rowHeading1);
+			//rowValue = rows[1].split(',');
+			var rowValue="";
+			for(var r = 1;r<(rows.length);r++)
+			{
+				rowValue += rows[r].split(',');
+			}
+			
+			var arrayObj = [];
+			var arrayObj2 = [];
+			var arrayObj3 = [];
+			var convertBooking = [];
+			
+			var getTotalValueObj = [];
+            // Retrieve the data from the rows and compute body string from the data rows
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+                row = rows[i].split(',');
+				var tableBody6 = '';
+				var tableValue = [];
+				var tableValue2 = [];
+				var tableValue3 = [];
+				var getTotalVal  = 0;
+				var sumofBooking = 0;
+				var totalBooking = 0;
+				for(var j=0;j<row.length;j++)
+				{
+						if(j>=1)
+							{
+							   //alert(row[i]);
+							   if(row[j]!=null)
+							   {
+								if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+							   }
+							   else
+							   {
+							   		value = 0;
+							   }
+							   if(convertMillions(value)==null) { var convertVal5 = "oK"; } else { var convertVal5 = convertMillions(value); }
+								sumofBooking += parseInt(convertVal5);					
+								tableBody6 += "<tr id='tableRows"+ j + "'><th>"+ rowHeading1[j] +"</th></tr>";
+							}
+							if(convertVal5==null ){var convertVal6 = "0K"; }else{var convertVal6 = convertVal5;}
+					tableValue.push("<td>"+ convertVal6 +"</td>");
+					tableValue2.push("<td></td>");
+					tableValue3.push("<td></td>");
+					if(value==null) { value =0; } else { value=value; }
+					getTotalVal +=parseInt(value);
+					
+				}
+				
+                tableBody5 += '<td>' + row[0] + '</td>' ;
+				//convertBooking.push(convertMillions(tableValue));
+				//alert(convertBooking);
+				
+			arrayObj.push(tableValue);	
+			arrayObj2.push(tableValue2);
+			arrayObj3.push(tableValue2);
+			//alert(arrayObj);
+			getTotalValueObj.push(getTotalVal);
+			
+            }
+			//alert(arrayObj);
+     		tableData2 +=tableBody6;
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr><th></th><th colspan="3" style="text-align:center">Assy in SMTH Factory</th><th colspan="3" style="text-align:center">Unit from SHIV/SCT/SHI</th><th colspan="3" style="text-align:center">Total</th></tr><tr style="background-color:#ffffff; color:#000000"><th>Description</th>'+tableBody5+tableBody5+tableBody5+'</tr><tr>'+tableData2+'</tr><tr id="total1"><th>Total</th></tr></tbody</table>';
+		 
+			
+			for(var y=0;y<getTotalValueObj.length;y++)
+			{
+				//if(getTotalValueObj[y]==null) { var totalValue = "0k"; } else { var totalValue = getTotalValueObj[y]; }
+				if(convertMillions(getTotalValueObj[y])==null) { var totalValue = "0k"; } else { var totalValue = convertMillions(getTotalValueObj[y]); }
+				$('#total1').append("<td>"+ totalValue +"</td>");
+			}
+			
+		  for(var l=1;l<=7;l++)
+		  {
+				  
+		  	for(var p=0;p<3;p++)
+			{
+		  		$('#tableRows'+l).append(arrayObj[p][l]);
+			}
+			for(p=0;p<3;p++)
+			{
+			$('#tableRows'+l).append(arrayObj2[p][l]);
+			}
+			for(p=0;p<3;p++)
+			{
+			$('#tableRows'+l).append(arrayObj3[p][l]);
+			}
+		  }
+		  
+        };
+		//=========clustered end=======//
+//$(document).ready(function()
+//{
+  	function loadChartforAll(ajaxLink,status,currencyType)
+	{
+		//alert(ajaxLink);
+		//==============================
+			if(sessionStorage.getItem("status")=="all")
+			{
+				 var captionName = "Group By Product YTD";
+				 //currencyType = sessionStorage.getItem("currencyType","USD (M)");
+				// ajaxLink = "SCAgroupbyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+			     //loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+				// alert(ajaxLink);
+				// alert(captionName);
+			
+			}
+			else if(sessionStorage.getItem("cType")!="local")
+			{
+				 //alert(sessionStorage.getItem("cType"));
+			     var captionName = countryNameArray[0][sessionStorage.getItem("selectedCountry")]+" - Group By Product YTD";
+			    // currencyType = sessionStorage.getItem("currencyType",array[0][sessionStorage.getItem("status")]);
+			   //  ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id="+sessionStorage.getItem("cType");
+			    // loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+			  // alert(currencyType);
+			  // alert(ajaxLink);
+			   //alert(captionName);
+			}
+			else
+			{
+				 //alert(sessionStorage.getItem("cType"));
+			     var captionName = countryNameArray[0][sessionStorage.getItem("selectedCountry")]+" - Group By Product YTD";
+			    // currencyType = sessionStorage.getItem("currencyType",array[0][sessionStorage.getItem("status")]);
+			   //  ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id="+sessionStorage.getItem("cType");
+			    // loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+			   // alert(currencyType);
+			   // alert(ajaxLink);
+				// alert(captionName);
+			}
+		
+		
+		//====================
+		
+		//if(status!=="all")
+//  		{
+//  		 
+//		  var captionName = countryNameArray[0][status]+" - Group By Product YTD";
+//		}
+//		else
+//		{
+//			 var captionName = "Group By Product YTD";
+//			 //currencyType = "USD (M)";
+//		}
+		//var renderTable = function (chart, containerId) {
+	
+		var sumoftotalPercent = 0;	
+	 $.getJSON(ajaxLink, function(json) {
+	//alert(JSON.stringify(json));
+ 		 FusionCharts.ready(function()
+	 		 {
+	  	   var chartData = {
+							 "chart": {
+													
+								 "caption": captionName,
+								 "palette": "2",
+								 "formatNumberScale":'1',					
+								 "decimals":'1',
+								 "xaxisname": "Category",
+								 "yaxisname": currencyType,
+								 "exportatclient": "1",
+								 "exportenabled": "1",
+								 "exporthandler": "http://export.api3.fusioncharts.com",
+								 "html5exporthandler": "http://export.api3.fusioncharts.com",																								
+								 "showsum": "1",
+								 "showvalues": "0",
+								 "bgColor": "#808080",
+								 "useroundedges": "1",
+								"borderAlpha": "20",
+								"showCanvasBorder": "0",
+								 "usePlotGradientColor": "0",
+								"plotBorderAlpha": "10",
+							   "reverseLegend":"1",
+								"legendBorderAlpha": "0",
+								"legendPosition":"right",
+								//"legendShadow": "1",
+								"valueFontColor": "#000000",
+								"showXAxisLine": "1",
+								"xAxisLineColor": "#999999",
+								"divlineColor": "#999999",
+								"divLineDashed": "1",
+								"showAlternateHGridColor": "0",
+								"subcaptionFontBold": "0",
+								"subcaptionFontSize": "14",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"14",
+								"rotatelabels": "0",		
+								"rotatevalues": "0",
+								"baseFontColor":"#000000",
+								"yFormatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+       							"numberScaleUnit": "K,M,B",
+								"plottooltext": "$label  $seriesname : $datavalue",
+								"canvasBgColor": "#B0E2FF	",
+						"showCanvasBorder": "1",
+					"canvasBorderColor": "#666666",
+					"canvasBorderThickness": "4",
+					"canvasBorderAlpha": "80",
+					"legendBgColor":"#808080"
+								//"theme":"fint"   		
+								 },
+								// "categories": [{"category":json['category']}],
+								// "dataset": json['data']
+								"categories":json['xaxis'],
+								"dataset":json['data']
+							};
+		   var fusioncharts = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData,
+						events: {
+								  dataPlotClick: function (event,dataObj) 
+								  {	
+									//alert(JSON.stringify(dataObj));
+									sessionStorage.setItem("firstDataObject",JSON.stringify(json['data']));
+									sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['xaxis']));
+									//alert(JSON.stringify(json['data']));
+									//alert(JSON.stringify(json['xaxis']));
+									sessionStorage.setItem("drillStatus",'true');
+									var cType = sessionStorage.getItem("cType");
+									
+									sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+									sessionStorage.setItem("drillCat",dataObj.datasetName);
+									//var currencyType = sessionStorage.getItem("currencyType");
+									drillDown(dataObj.categoryLabel,dataObj.datasetName,cType);
+								  },	
+								  dataPlotRollOver:function(event,dataObj)
+								  {
+									$(this).css('cursor', 'pointer');
+								  }
+							  }
+									
+				});
+				
+        fusioncharts.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(fusioncharts, 'table-container');
+        });
+				 fusioncharts.render();
+		  });
+		});
+	}	
+	//});	
+	
+	function drillDown(y,c,cType)
+	{
+	
+			// $(this).addClass("switchButton");
+			$('#btn1').addClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			//$('#btn2').removeClass("switchButton");
+			sessionStorage.setItem("drillStatus",'true');
+			sessionStorage.setItem("clusStatus",'false');
+			//sessionStorage.getItem("drillAjaxLink");
+			//sessionStorage.getItem("drillAjaxLink");
+			//alert('#btn1');
+			var countryStatus = sessionStorage.getItem("status");
+			
+			if(sessionStorage.getItem("status")=="all")
+			{
+			//alert("all");
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&catageory="+c+"&id=dollar";
+			     //currencyType = "USD (M)";
+				var titleName = c + " Products";
+				//alert(titleName);
+				
+			}
+			else if(cType!="local")
+			{
+			//alert("local");
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&catageory="+c+"&countryCode="+countryStatus+"&id="+cType;
+				
+				var titleName = countryNameArray[0][countryStatus] + " - " + c + " Products";
+				//alert(titleName);
+			}
+			else 
+			{
+				//alert("profdvvbk");
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&catageory="+c+"&countryCode="+countryStatus+"&id="+cType;
+				var titleName = countryNameArray[0][countryStatus] + " - " + c + " Products";
+				//alert(titleName);
+			}
+			
+		$.getJSON(DrillAjaxLink,function(json)
+		{
+			//alert(JSON.stringify(json));
+		 // var titleName = c;
+		  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": titleName,
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": currencyType,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "0",
+										//"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										// "numberPrefix": "",
+										//"numbersuffix": "",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"17",
+										"rotatelabels": "0",		
+										"rotatevalues": "0",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"yFormatNumberScale":"1",
+										"numberScaleValue": "1000,1000,1000",
+       									"numberScaleUnit": "K,M,B",
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+			fusioncharts1.addEventListener('renderComplete', function () {
+            
+            	renderTable(fusioncharts1, 'table-container');
+       				 });
+						    fusioncharts1.render();
+					});
+					
+		$("#btn1").show();
+		$("#btn2").show();
+		$('#goback').show();
+	}
+	function loadClusteredChart(clusDrillAjaxLink,titleName)
+	{
+				$.getJSON(clusDrillAjaxLink, function(json)
+				//alert(json); 
+				{
+			//  var titleName = sessionStorage.getItem("drillCat");
+			  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": titleName,
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": currencyType,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "0",
+										//"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										// "numberPrefix": "",
+										//"numbersuffix": "",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"showvalues": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"17",
+										"rotatelabels": "0",		
+										"rotatevalues": "0",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"yFormatNumberScale":"1",
+										"numberScaleValue": "1000,1000,1000",
+       								    "numberScaleUnit": "K,M,B",
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'mscolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+							
+			fusioncharts1.addEventListener('renderComplete', function () {
+            				$("#table-container").hide();
+							$("#table-container1").show();
+							
+            	renderTableClust(fusioncharts1, 'table-container1');
+       				 });
+						    fusioncharts1.render();
+				});	
+		
+		}	
+	function loadStackedChart(DrillAjaxLink,titleName)
+	{					
+		$.getJSON(DrillAjaxLink,function(json)
+		{
+		 // var titleName = sessionStorage.getItem("drillCat");
+		  var chartData2 = {
+							 "chart": {
+										"palette": "2",
+										 "caption": titleName,
+										"decimals":'1',
+										//"subcaption": "Harry's SuperMart",
+										"xaxisname": "Products",
+										"yaxisname": currencyType,
+										"exportatclient": "1",
+										"exportenabled": "1",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",												
+										"showsum": "1",
+										"showvalues": "0",
+										//"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										// "numberPrefix": "",
+										//"numbersuffix": "",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										 "legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										 "divLineDashed": "1",
+										 "showAlternateHGridColor": "0",
+										 "subcaptionFontBold": "0",
+										  "subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"17",
+										"rotatelabels": "0",		
+										"rotatevalues": "0",
+										"baseFontColor":"#000000",
+										"showLegend":'1',
+										"yFormatNumberScale":"1",
+										"numberScaleValue": "1000,1000,1000",
+       									"numberScaleUnit": "K,M,B",
+										"plottooltext": " $label $seriesname :  $datavalue"
+										//"theme":"fint"   		
+										 },
+										"categories":json['xaxis'],
+										"dataset":json['data']
+									};
+		  var fusioncharts1 = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: chartData2,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+			fusioncharts1.addEventListener('renderComplete', function () {
+            			$("#table-container1").hide();
+						$("#table-container").show();
+						
+            	renderTable(fusioncharts1, 'table-container');
+       				 });
+						    fusioncharts1.render();
+							
+							});	
+		}	
+
+	$(document).ready(function(){
+	   $("#goback").click(function(){
+	   		$('#goback').hide();
+			 var json = new Object();
+			 json.data = $.parseJSON(sessionStorage.getItem("firstDataObject"));			
+		    json.category = $.parseJSON(sessionStorage.getItem("firstCategoryObject"));
+			sessionStorage.setItem("drillStatus",'false');
+			sessionStorage.setItem("clusStatus",'false');
+			if(sessionStorage.getItem("status")=="all")
+			{
+				// var captionName = "Group By Product YTD";
+				 currencyType = sessionStorage.getItem("currencyType","USD (M)");
+				 ajaxLink = "SCAgroupbyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+			     //loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+				// alert(ajaxLink);
+				// alert(captionName);
+			
+			}
+			else if(sessionStorage.getItem("cType")!="local")
+			{
+				 //alert(sessionStorage.getItem("cType"));
+			    // var captionName = countryNameArray[0][sessionStorage.getItem("selectedCountry")]+" - Group By Product YTD";
+			     currencyType = sessionStorage.getItem("currencyType",array[0][sessionStorage.getItem("status")]);
+			     ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id="+sessionStorage.getItem("cType");
+			    // loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+			  // alert(currencyType);
+			  // alert(ajaxLink);
+			  // alert(captionName);
+			}
+			else
+			{
+				 //alert(sessionStorage.getItem("cType"));
+			    // var captionName = countryNameArray[0][sessionStorage.getItem("selectedCountry")]+" - Group By Product YTD";
+			     currencyType = sessionStorage.getItem("currencyType",array[0][sessionStorage.getItem("status")]);
+			     ajaxLink = "countrybyproduct.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id="+sessionStorage.getItem("cType");
+			    // loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),currencyType);
+			   // alert(currencyType);
+			   // alert(ajaxLink);
+				// alert(captionName);
+			}
+			loadChartforAll(ajaxLink,status,currencyType);
+		$('#btn2').removeClass("switchButton");
+		
+		var sumoftotalPercent = 0;
+		//var ok = "Group By Product YTD";
+		
+		//var chartData3 = {
+//								 "chart": {
+//														
+//									 "caption": captionName,
+//									 "palette": "2",
+//									 "formatNumberScale":'1',					
+//									 "decimals":'1',
+//									 "xaxisname": "Category",
+//									 "yaxisname": currencyType,
+//									 "exportatclient": "1",
+//									 "exportenabled": "1",
+//									 "exporthandler": "http://export.api3.fusioncharts.com",
+//									 "html5exporthandler": "http://export.api3.fusioncharts.com",																								
+//									 "showsum": "1",
+//									 "showvalues": "0",
+//									 "bgColor": "#ffffff",
+//									 "useroundedges": "1",
+//									"borderAlpha": "20",
+//									"showCanvasBorder": "0",
+//									 "usePlotGradientColor": "0",
+//									"plotBorderAlpha": "10",
+//								   "reverseLegend":"1",
+//									"legendBorderAlpha": "0",
+//									"legendPosition":"right",
+//									//"legendShadow": "1",
+//									"valueFontColor": "#000000",
+//									"showXAxisLine": "1",
+//									"xAxisLineColor": "#999999",
+//									"divlineColor": "#999999",
+//									"divLineDashed": "1",
+//									"showAlternateHGridColor": "0",
+//									"subcaptionFontBold": "0",
+//									"subcaptionFontSize": "14",
+//									"baseFont":"Helvetica",		
+//									"baseFontSize":"14",
+//									"rotatelabels": "0",		
+//									"rotatevalues": "1",
+//									"yFormatNumberScale":"1",
+//								    "numberScaleValue": "1000,1000,1000",
+//       							    "numberScaleUnit": "K,M,B",
+//									"baseFontColor":"#000000",
+//									"plottooltext": "$label $seriesname :  $datavalue",
+//									//"theme":"fint"   		
+//									 },
+//									"categories":json['category'],
+//									"dataset":json['data']
+//							
+//						};	
+//			
+//			var fusioncharts2 = new FusionCharts({
+//				    type: 'stackedcolumn2d',
+//				    renderAt: 'chart-container',
+//				    width: '100%',
+//				    height: '80%',
+//				    dataFormat: 'json',
+//				    dataSource: chartData3,
+//						events: {
+//								  dataPlotClick: function (event,dataObj) 
+//								  {	
+//									//alert(JSON.stringify(dataObj));
+//									sessionStorage.setItem("firstDataObject",JSON.stringify(json['data']));
+//									sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+//									sessionStorage.setItem("drillStatus",'true');
+//									//sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+//									//sessionStorage.setItem("drillCat",dataObj.datasetName);
+//									//var currencyType = sessionStorage.getItem("currencyType");
+//									var cType = sessionStorage.getItem("cType");
+//									drillDown(dataObj.categoryLabel,dataObj.datasetName,cType);
+//								  },	
+//								  dataPlotRollOver:function(event,dataObj)
+//								  {
+//									$(this).css('cursor', 'pointer');
+//								  }
+//							  }
+//									
+//				});
+//				fusioncharts2.addEventListener('renderComplete', function () {
+           					 $("#table-container").show();
+							$("#table-container1").hide();
+//			renderTable(fusioncharts2, 'table-container');
+//        });
+//				 fusioncharts2.render();
+					 $("#btn1").hide();
+					$("#btn2").hide();
+	   });
+  });
+	   $(".stack").click(function(){
+						$(this).addClass("switchButton");
+						$('#btn2').removeClass("switchButton");
+						$('#btn2').addClass("switchButton2");
+			
+			//sessionStorage.getItem("cType");
+			//alert(sessionStorage.getItem("drillAjaxLink"));
+			sessionStorage.setItem("clusStatus",'false');
+			//sessionStorage.setItem("clusteredAjaxLink","");
+			var countryStatus = sessionStorage.getItem("status");
+
+			if(sessionStorage.getItem("status")=="all")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+sessionStorage.getItem("drillYear")+"&catageory="+sessionStorage.getItem("drillCat")+"&id=dollar";
+				currencyType = sessionStorage.getItem("currencyType","USD (M)");
+				var titleName = sessionStorage.getItem("drillCat") + " Products";
+				
+			}
+			else if(sessionStorage.getItem("cType")!="local")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+sessionStorage.getItem("drillYear")+"&catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryStatus+"&id="+sessionStorage.getItem("cType");
+				currencyType = sessionStorage.getItem("currencyType",array[0][countryStatus]);
+				//alert(sessionStorage.getItem("cType"));
+				var titleName = countryNameArray[0][countryStatus] + " - " + sessionStorage.getItem("drillCat") + " Products";
+				//alert(titleName);
+			}
+			else
+			{
+				
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+sessionStorage.getItem("drillYear")+"&catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryStatus+"&id="+sessionStorage.getItem("cType");
+				currencyType = sessionStorage.getItem("currencyType",array[0][countryStatus]);
+				//alert(sessionStorage.getItem("cType"));
+				var titleName = countryNameArray[0][countryStatus] + " - " + sessionStorage.getItem("drillCat") + " Products";
+				//alert(titleName);
+			}
+			loadStackedChart(DrillAjaxLink,titleName);
+			});	
+			
+	   $(".Clust").click(function(){
+		   			
+				 
+				 $(this).addClass("switchButton");
+		   		 $('#btn1').addClass("switchButton2");
+				 $('#btn1').removeClass("switchButton");
+				
+				 sessionStorage.getItem("cType");
+				 sessionStorage.setItem("clusStatus",'true');
+				 //
+				 	//$('#btn1').addClass("switchButton");
+					//$('#btn2').addClass("switchButton2");
+				 //
+				// alert(sessionStorage.getItem("clusteredAjaxLink"));
+				// sessionStorage.setItem("drillAjaxLink","");
+				 //sessionStorage.setItem("clusteredAjaxLink",clusteredAjaxLink);
+				// alert(sessionStorage.getItem("cType"));
+			var countryStatus = sessionStorage.getItem("status");
+			if(sessionStorage.getItem("status")=="all")
+			{
+				var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem("drillCat")+"&id=dollar";
+				currencyType = sessionStorage.getItem("currencyType","USD (M)");
+				var titleName = sessionStorage.getItem("drillCat") + " Products";
+			}
+			else if(sessionStorage.getItem("cType")!="local")
+			{
+				//alert(cType);
+				var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryStatus+"&id="+sessionStorage.getItem("cType");
+				currencyType = sessionStorage.getItem("currencyType",array[0][countryStatus]);
+				//alert(sessionStorage.getItem("cType"));
+				var titleName = countryNameArray[0][countryStatus] + " - " + sessionStorage.getItem("drillCat") + " Products";
+				//alert(titleName);
+			}
+			else
+			{
+				//alert(cType);
+				var clusDrillAjaxLink = sessionStorage.getItem("clusteredAjaxLink")+"?catageory="+sessionStorage.getItem("drillCat")+"&countryCode="+countryStatus+"&id="+sessionStorage.getItem("cType");
+				currencyType = sessionStorage.getItem("currencyType",array[0][countryStatus]);
+				//alert(sessionStorage.getItem("cType"));
+				var titleName = countryNameArray[0][countryStatus] + " - " + sessionStorage.getItem("drillCat") + " Products";
+				//alert(titleName);
+			}
+			//alert(1);
+			loadClusteredChart(clusDrillAjaxLink,titleName);				 				 
+		});
+	   
+	   
+	//});
+
+</script>
+<div class="row">
+  <div class="col-sm-9">
+ <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+ 		
+		
+		
+		    <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+             <a href="#/app/SCA_GroupByProduct_YTD" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		
+	</div> 
+	</div>
+	<div class="col-sm-3">
+		<span class="dropdown" style="display: none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_GroupByProduct_YTD" id="SCA"><span id="scaSpan">SCA &#x24;</span></a>
+				<a href="#/app/SCA_GroupByProduct_YTD" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+</div> 
+<div class="row" style=" position:relative; bottom: 30px;">
+	<div class="col-sm-12">
+	   <div id="btns" style="padding-left:2%; padding-right:2%;"></div><br />
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+		<button type="button" id="btn1" class="stack" style="float:center; cursor:pointer;">Stacked</button>
+		<button type="button" id="btn2" class="Clust" style="float:center; cursor:pointer;">Clustered</button>
+		</div>
+		<div class="col-sm-4">
+		<p><input type="button" id="goback" value="< Go Back" class="switchButton" style=" border:none; float: right; margin-right:20px; display:none;"/></p>
+		</div>
+			<div id="chart-container" style="width:100%; height: 500px; margin: 0 ">
+      			<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+					<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  			</div>
+			</div>
+		<div id="table-container" style="padding-left:2%; padding-right:2%;"></div><br />
+		<div id="table-container1" style="padding-left:2%; padding-right:2%;"></div><br />
+	</div>
+</div> 
+ 
+
+

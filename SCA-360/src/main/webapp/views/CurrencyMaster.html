@@ -1,0 +1,128 @@
+﻿ <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}</style>
+
+<div ng-controller="CurrencyMasterController" ng-init="addCurrencydataForm();getIndicators();getCustomergruop();">									
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Currency Exchange Rate Master</div>
+	  <div class="row">
+	  <div class="col-sm-3">
+	  </div>
+	  <div class="col-sm-3">
+	  <label><b>Year</b></label>
+	  <select class="form-control" >
+													<option value="">---SELECT----</option>
+												
+													<option value="2017">2017</option>
+													<option value="2016">2016</option>
+													<option value="2015">2015</option>
+											
+													</select>
+	  </div>
+	    <div class="col-sm-3">
+	  <label><b>Month</b></label>
+	  <select class="form-control"  name="customerGroup"  >
+													<option value="">---SELECT----</option>
+													<option value="2017">1</option>
+													<option value="2016">2</option>
+													<option value="2015">3</option>
+													<option value="2017">4</option>
+													<option value="2016">5</option>
+													<option value="2015">6</option>
+													<option value="2017">7</option>
+													<option value="2016">8</option>
+													<option value="2015">9</option>
+													<option value="2017">10</option>
+													<option value="2016">11</option>
+													<option value="2015">12</option>
+													
+											
+													</select>
+	  </div>
+	 </div>
+	  <br/>
+	  <br/>
+	  
+	  <div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-6">
+	<div class="table-scrollable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr>
+							<th style="width:1%">Action</th>
+						<th style="width:1%">From Code</th>
+						  <th style="width:2%">To Code</th>
+							<th style="width:1%">Exchange Rate</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="Currencydata in CurrencyFormData">
+						<td> <input type="hidden" ng-model="Currencydata.id"  name="id{{$index}}"/>							<button type="button" class="btn btn-primary" id="right_All_1"   ng-if="Currencydata.id==1" ng-click='addCurrencydataForm();'>
+                                  <span style="font-family: Geneva, Arial, Helvetica, sans-serif;"> </span> <i class="glyphicon glyphicon-plus-sign"></i>
+                                                  </button>
+												  <button type="button" id="right_All_1" class="btn btn-danger" ng-if="Currencydata.id!=1"  ng-click='removeFormRow(Currencydata.id);'>
+                                                   	<span style="font-family: Geneva, Arial, Helvetica, sans-serif;"></span><i class="glyphicon glyphicon-trash" ></i>
+                                                    </button>	</td>
+													<td> <select class="form-control" data-ng-model="probabilitydata.Fromcode"  name="Fromcode{{$index}}">
+													<option value="">---SELECT----</option>
+													<option value="">JPY</option>
+													<option value="">USD</option>
+													
+													<option value="">SGD</option>
+													
+													
+													
+													</select></td>
+													<td> <select class="form-control" data-ng-model="probabilitydata.Tocode"  name="Tocode{{$index}}">
+													<option value="">---SELECT----</option>
+													<option value="">EUR</option>
+													<option value="">THB</option>
+													
+													<option value="">SGD</option>
+													
+													
+													</select></td>
+							<td style="width:1%"> <input type="text"   class="form-control" ng-model="probabilitydata.probability"  name="probability{{$index}}"/></td>
+						
+													
+				</tr>		
+					</tbody>
+				</table>
+			</div></div><br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+       <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="saveprobability(probability);" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						
+						<button type="reset" class="btn btn-danger" ng-click="resettestreport()"><i class="glyphicon glyphicon-trash" ></i>Delete</button>
+						
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>                                             
+	</div>
+		
+      
+  
+	
+											
+	
+
+
+
+	</div>		
+									
+
+</div>

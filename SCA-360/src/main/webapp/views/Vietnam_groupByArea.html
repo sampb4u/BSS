@@ -1,0 +1,539 @@
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top: 960%;
+	right: 12%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+$(document).ready(function(){
+	function renderTable(chart, containerId,percent)
+		{
+		
+            // After the chart is rendered we export the data as CSV, parse it and then create a markup
+            // equivalent to a table by parsing the exported CSV.
+            var data = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowSum
+                i,
+                length,                
+                tableHeader = '';
+				tableData = '';
+				rowHeading = "";
+				yearHeadigs = "";
+				tableBody3 = '';
+				
+            // Get all the rows by splitting data with '\n' seperator
+			//alert(JSON.stringify(data));
+            rows = data.replace(/"/g, '').split('\n');
+			//alert(rows);
+            // Retrieve the data from the rows and compute body string from the data rows
+			//.toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' )
+			var percentVal = percent;
+			//alert(percentVal);
+			rowHeading = rows[0].split(',');
+			var arrayObj = [];
+			var arrayObj1 = [];
+			var sumofTotalBooking = 0;
+			var convertBooking = [];
+			var finalTableData = [];
+			var finalTableData2 = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+				//alert(rows[i]);
+                row = rows[i].split(',');
+			  //alert(row);
+				var sumofRow = 0;	
+				var sumofBooking = 0;
+				var tableBody1 = '';
+				var sumPercent = "";
+				var tableData = [];
+				var tableData2 = [];
+				for(var j=0;j<row.length;j++)
+				{
+				     //alert(row[j]);
+					if(j>=1)
+					{
+					    if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+						if(row[j]==null) { var productValue = 0; } else { var productValue = row[j]; }
+						if(convertMillions(productValue)==null) { var convertproductValue="0K"; } else { var convertproductValue=convertMillions(productValue); }						 						//sumPercent +=parseInt(convertproductValue);
+						tableData.push("<td>"+convertproductValue+"</td>");
+						tableData2.push(productValue);
+					}				   					
+					tableBody1 += "<tr id='tableRow"+ j + "'><th>"+ rowHeading[j] +"</th></tr>";	
+										
+					
+				}
+			 // alert(convertproductValue);
+				yearHeadigs += "<td>"+ row[0] +"</td>";
+				if(convertMillions(sumofBooking)==null) { var totalValue="0K"; } else { var totalValue=convertMillions(sumofBooking); }
+				convertBooking.push("<th>"+totalValue+"</th>");
+				//arrayObj1.push(sumPercent);
+				//alert(totalValue);
+				var sumPercent = 0;			
+			
+				finalTableData.push(tableData);
+				finalTableData2.push(tableData2);
+				sumofTotalBooking +=parseInt(sumofBooking);
+				//alert(sumofTotalBooking);
+            }   			
+			tableData =tableBody1;
+			
+			document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody>'+ tableData +'<tr id="total"><th>Total</th></tr></tbody></table>';			
+			$('#tableRow0').append(yearHeadigs);
+			$('#tableRow0').append("<td>%</td>");
+			$('#tableRow0').css("font-weight","bold");
+			
+			
+			
+			for(var k=0;k<finalTableData.length;k++)
+			{
+			  	var rowVal =[];
+				for(var l=0;l<finalTableData[k].length;l++)
+				{
+				    //alert(finalTableData[k][k]);
+					var count = Number(l)+1;
+					$('#tableRow'+ count).append(finalTableData[k][l]);
+					var TotalValue = 0;
+					for(var m=0;m<finalTableData.length;m++)
+					{
+						
+						TotalValue +=parseInt(finalTableData2[m][l]);
+						
+					}
+					rowVal.push(TotalValue);
+					
+				}
+				var count1=Number(k)+1;
+				$('#total').append(convertBooking[k]);
+				//$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+			}
+			var totalPercentage = 0;
+			for(var t=1;t<=rowVal.length;t++)
+			{
+			   
+				var next = Number(t)-1;
+				
+				if(percentVal==null|| percentVal== "Infinity"){var percentage = 0;}else{var percentage = percentVal;}
+				//var percentCol = percentage.toFixed(2);
+				
+				//alert(percentage.toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ));
+				$('#tableRow'+t).append("<td>"+ percentage[next].toFixed(2).replace ( /[^\+|\-0-9.]/ig, '' ) +" %</td>");
+				//alert('#tableRow'+t);
+				//var percentcol = "<td>"+ calculatePercentage(rowVal[t],sumofTotalBooking)  +" %</td>"
+				//$('#tableRow'+ next).append(percentcol);				
+				//totalPercentage +=parseFloat(calculatePercentage(rowVal[t],sumofTotalBooking));
+			}			
+			$('#total').append("<td></td>");
+			 //alert(percentcol); 
+        };
+		
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		/*function convertMillions(sumofBudget)
+			{
+				 if (Math.abs(sumofBudget) >= 1000000000) 
+				 {
+					return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000000) 
+				 {
+					  return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+				 }
+				 else if (Math.abs(sumofBudget) >= 1000) 
+				 {
+					   return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+				 }				
+			
+			}*/
+		function calculatePercentage(rowTotalVal,totalValue)
+		{
+		   //alert(totalValue);
+			var percent =  (rowTotalVal/totalValue)*100;
+			 //alert(percent);
+			return percent.toFixed(1);
+			//sumoftotalPercent = sumoftotalPercent+percent;
+			//alert(sumoftotalPercent);
+			
+		}
+ var countryCode = sessionStorage.getItem("countryCode");
+ var yAxisName = "VND (\u20ab)";
+ var url = "ytdCodeAreaCountryWise.do?countryCode="+countryCode+"&id=local";
+ loadChart(url,yAxisName);
+	$(document).ready(function()
+		{
+			$("#VND").click(function()
+			{
+				//alert("SCA");
+				yAxisName = "VND (\u20ab)";
+				url = "ytdCodeAreaCountryWise.do?countryCode="+countryCode+"&id=local";
+				loadChart(url,yAxisName);
+				$('#VND').addClass("dropBackColor");
+				$('#USD').removeClass("dropBackColor");
+			});
+			$("#USD").click(function()
+			{
+				
+				yAxisName = "USD (\u0024)";
+				url = "ytdCodeAreaCountryWise.do?countryCode="+countryCode+"&id=dollar";
+				loadChart(url,yAxisName);
+				$('#VND').removeClass("dropBackColor");
+				$('#USD').addClass("dropBackColor");
+			});	
+		});
+		function drillDownForSalesmanCountry(year,region,status)
+	{
+	      var countryCode = sessionStorage.getItem("countryCode");
+		 // alert(region);
+  //alert(status);
+		  
+		  $.getJSON("ytdCodeAreaCountryWiseDrilldownLevelOne.do?regionCode="+region+"&year="+year+"&countryCode="+status+"&id=dollar",function(json)
+		  {
+		  
+		      
+			   FusionCharts.ready(function () {
+		 
+					var chart2 = {
+								 "chart": {
+                        "caption":"" ,
+                        "xAxisname": "Salesman",
+                        "yaxisname": "",
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "18",
+                        "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "16",
+                        "yAxisNameFont": "Helvetica",
+                        "decimals": '1',
+						"xAxisNamePadding":"20",
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "14",
+                        "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "14",
+                        "yAxisNameFont": "Helvetica",
+                        "yFormatNumberScale": "1",
+                        "numberScaleValue": "1000,1000,1000",
+                        "numberScaleUnit": "K,M,B",
+                        "reverseLegend": "0",
+                        "numberPrefix": "",
+                        "numbersuffix": "",
+                        "exportenabled": "1",
+                        "exportatclient": "0",
+                        "exporthandler": "http://export.api3.fusioncharts.com",
+                        "html5exporthandler": "http://export.api3.fusioncharts.com",
+                        "paletteColors": "#0075c2,#1aaf5d",
+                        "bgColor": "#808080",
+                        "baseFont": "Helvetica",
+                        "baseFontSize": "15",
+                        "captionFontSize": "18",
+                        "showsum": "1",
+                        "showvalues": "0",
+                        "valueFontColor": "#000000",
+                        "baseFontColor": "#000000",
+                        "borderAlpha": "20",
+                        "useroundedges": "1",
+                        "showCanvasBorder": "0",
+                        "usePlotGradientColor": "0",
+                        "plotBorderAlpha": "10",
+                        "placeValuesInside": "0",
+                        "legendBgColor": "#ffffff",
+                        "legendBorderColor": "#000000",
+                        "legendBorder": "1",
+                        "legendBorderAlpha": "1",
+                        "legendShadow": "1",
+                        "legendPosition": "right",
+                        "xAxisLineColor": "#999999",
+                        "divlineColor": "#999999",
+                        "rotatelabels": "0",
+                        "rotatevalues": "0",
+                        "subcaptionFontBold": "0",
+                        "subcaptionFontSize": "14",
+                        "showLegend": '1',
+                        "formatnumberscale": "1",
+						"canvasBgColor": "#00FFFF",
+						"showCanvasBorder": "1",
+					"canvasBorderColor": "#666666",
+					"canvasBorderThickness": "4",
+					"canvasBorderAlpha": "80",
+					"legendBgColor":"#808080"
+                    },
+								"data":json['data']
+							
+								
+										
+								
+							};
+				   
+				 var revenueChart = new FusionCharts({
+				
+				type: 'column2d',
+				renderAt: 'container',
+				width: '100%',
+				height: '500',
+					dataFormat: 'json',
+					dataSource: chart2,
+					events: {
+										  dataPlotClick: function (event,dataObj) 
+										  {	
+											//alert(JSON.stringify(dataObj));
+											//sessionStorage.setItem("firstDataObject",JSON.stringify(json['dataset']));
+											//sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+											//alert(JSON.stringify(json['dataset']));
+											//alert(JSON.stringify(json['category']));
+											//sessionStorage.setItem("drillStatus",'true');
+											//sessionStorage.setItem("countryCode",dataObj.datasetName);
+											//var countrycoode = sessionStorage.getItem("countryCode");
+										
+											//sessionStorage.getItem('countryCode');
+											//var currencyType = sessionStorage.getItem("currencyType");
+											//drillDownForSalesman(dataObj.categoryLabel);
+										  },	
+										  dataPlotRollOver:function(event,dataObj)
+										  {
+											$(this).css('cursor', 'pointer');
+										  }
+									  }
+				});revenueChart.render();
+				
+		 })
+		  });
+	}
+function loadChart(url,yAxisName)
+{
+ $.getJSON(url, function(json)
+ {
+	 //alert(JSON.stringify(json));
+ FusionCharts.ready(function () {
+        
+		var chartData = {
+						"chart": {
+							"caption": "Annual Booking",
+							//"subCaption": "Harry's SuperMart",
+							"xAxisname": "Regions",
+							"decimals":'1',
+							"reverseLegend":"1",
+							"yaxisname": yAxisName,
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",
+							"paletteColors": "#0075c2,#1aaf5d",
+							"bgColor": "#808080",
+							"baseFont":"Helvetica",		
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							"showsum": "1",
+							"showvalues": "0",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							 "xAxisNameFont": "Helvetica",
+							 "xAxisNameFontSize": "14",
+							 "xAxisNameFontBold":"1",
+							"yAxisNameFontBold":"1",
+							"yAxisNameFontSize": "14",
+							"yAxisNameFont": "Helvetica",
+							"yFormatNumberScale":"1",
+							 "numberScaleValue": "1000,1000,1000",
+       						 "numberScaleUnit": "K,M,B",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999",
+							"rotatelabels": "0",		
+							"rotatevalues": "0",
+							"subcaptionFontBold": "0",
+							"subcaptionFontSize": "14",
+							"showLegend":'1',
+							 "formatnumberscale": "1",
+						"canvasBgColor": "#00FFFF",
+						"showCanvasBorder": "1",
+					"canvasBorderColor": "#666666",
+					"canvasBorderThickness": "4",
+					"canvasBorderAlpha": "80",
+					"legendBgColor":"#808080"
+						},
+						"categories": [{"category":json['category']}],
+						"dataset": json['dataset']
+					};
+           
+ 		 var revenueChart = new FusionCharts({
+		
+        type: 'stackedcolumn2d',
+	    renderAt: 'container',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	       dataSource: chartData,
+events: {
+								  dataPlotClick: function (event,dataObj) 
+								  {	
+								
+									//sessionStorage.setItem("firstDataObject",JSON.stringify(json['dataset']));
+									//sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+									//alert(JSON.stringify(json['dataset']));
+									//alert(JSON.stringify(json['category']));
+									//sessionStorage.setItem("drillStatus",'true');
+									//sessionStorage.setItem("countryCode",dataObj.datasetName);
+									//var countrycoode = sessionStorage.getItem("countryCode");
+								
+									var countrycode=sessionStorage.getItem('countryCode');
+									//var currencyType = sessionStorage.getItem("currencyType");
+								drillDownForSalesmanCountry(dataObj.categoryLabel,dataObj.datasetName,countrycode)
+								  },	
+								  dataPlotRollOver:function(event,dataObj)
+								  {
+									$(this).css('cursor', 'pointer');
+								  }
+							  }
+
+	    });
+		revenueChart.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(revenueChart, 'table-container',json['per']);
+        });
+		
+		revenueChart.render();
+
+ })
+ });
+}
+ });
+</script>
+<div class="row">
+	<div class="col-sm-12">
+		<span class="dropdown" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/Vietnam_groupByArea" id="VND"><span>VND &#x20ab;</span></a>
+				<a href="#/app/Vietnam_groupByArea" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+</div>
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>
+		 </div>
+		<div id="table-container" style="padding-left:2%; padding-right:2%;"></div>
+	</div>
+</div>
+
+

@@ -1,0 +1,30 @@
+﻿{ "aaData": [
+    {
+      "DT_RowId": "row_1",
+      "users": {
+        "first_name": "Quynn",
+        "last_name": "Contreras",
+        "phone": "1-971-977-4681",
+		"extent": "1-971-977-4681",
+		"phno": "324",
+        "site": "1"
+      },
+      "sites": {
+        "name": "Edinburgh"
+      }
+    },
+    {
+      "DT_RowId": "row_2",
+      "users": {
+        "first_name": "Kaitlin",
+        "last_name": "Smith",
+        "phone": "1-436-523-6103",
+		"extent": "1-971-977-4681",
+		"phno": "123",
+        "site": "2"
+      },
+      "sites": {
+        "name": "London"
+      }
+    }
+] }

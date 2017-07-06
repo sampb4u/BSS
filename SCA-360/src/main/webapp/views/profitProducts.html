@@ -1,0 +1,453 @@
+<style type="text/css">
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+
+</style>
+
+<script>
+$(document).ready(function(){
+	sessionStorage.setItem('drilldownStatus',"");
+	sessionStorage.setItem('drilldownStatus1',"");
+	$('#btn1').addClass("switchButton");
+	$('#btn2').addClass("switchButton2");
+	
+    $("#btn1").click(function(){
+		 $('#status').val('1');
+    $("#container").show();
+	$("#container1").hide();
+	$(this).addClass("switchButton");
+	$('#btn2').removeClass("switchButton");
+	$('#btn2').addClass("switchButton2");
+	//$(this).css({"background": "#000000", "color": "#ffffff"});
+	//alert(sessionStorage.getItem('drilldownStatus'));
+	if(sessionStorage.getItem('drilldownStatus')=="true")
+	{
+		$('#goback0').show();		
+		$('#goback1').hide();
+		$('#firstDiv').show();		
+		$('#secondDiv').hide();
+	}
+	else
+	{
+		$('#goback0').hide();		
+		$('#goback1').hide();
+		$('#firstDiv').show();		
+	}
+	
+  });
+  $("#btn2").click(function(){
+	  $('#status').val('2');
+	$("#container1").show();
+	 $("#container").hide();
+	 $('#btn1').addClass("switchButton2");
+	 $('#btn1').removeClass("switchButton");
+	 $(this).addClass("switchButton");
+	// alert(sessionStorage.getItem('drilldownStatus1'));
+	if(sessionStorage.getItem('drilldownStatus1')=="true")
+	{
+		$('#goback1').show();		
+		$('#goback0').hide();
+		$('#secondDiv').show();
+		$('#firstDiv').hide();	
+		//$('#firstDiv').hide();		
+	}
+	else
+	{
+		$('#goback1').hide();		
+		$('#goback0').hide();	
+		//$('#firstDiv').hide();		
+	}
+	
+	
+	 
+  });
+
+});
+</script>
+<script>
+$(document).ready(function(){
+	$('#status').val('1');
+	$.getJSON("profitProducts.do", function(json) {	 
+		
+
+ FusionCharts.ready(function () {
+           
+ 		 var revenueChart = new FusionCharts({
+		
+        type: 'stackedcolumn2d',
+	    renderAt: 'container',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+						"chart": {
+							//"caption": "Forecast",
+							//"subCaption": "Harry's SuperMart",
+							"xAxisname": "Country",
+							"yAxisName": "Profit (%)",
+							//"numberPrefix": "$ ",
+							//"numbersuffix": " USD",
+							"paletteColors": "#0075c2,#1aaf5d",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",
+							"bgColor": "#ffffff",
+							"baseFont":"Helvetica",	
+							"stack100Percent":"1",	
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							"showsum": "0",
+							"decimals":"1",
+							"showvalues": "0",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"valuePadding":"50",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"formatnumberscale": "1",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999"
+							//"subcaptionFontBold": "0",
+							//"subcaptionFontSize": "14",
+							//"rotatelabels": "1",		
+							//"rotatevalues": "1",
+						},
+						"categories":json["countries"],
+						"dataset":json["data"]						
+					},
+					events: {
+				           dataPlotClick: function (event,dataObj) 
+					 	  {	
+						  		sessionStorage.setItem("count","0");
+								sessionStorage.setItem("firstCategory0",JSON.stringify(json['countries']));
+								sessionStorage.setItem("firstData0",JSON.stringify(json['data']));
+								//alert(JSON.stringify(json['countries']));
+								
+								drillDown(dataObj.categoryLabel,dataObj.datasetName);
+				          }
+				        }
+	    }).render();
+		var revenueChart = new FusionCharts({
+		
+        type: 'stackedcolumn2d',
+	    renderAt: 'container1',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+						"chart": {
+							//"caption": "Forecast",
+							//"subCaption": "Harry's SuperMart",
+							"xAxisname": "Country",
+							"yAxisName": "Profit USD (M)",
+							//"numberPrefix": "$ ",
+							//"numbersuffix": " USD",
+							"paletteColors": "#0075c2,#1aaf5d",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",
+							"bgColor": "#ffffff",
+							"baseFont":"Helvetica",	
+							"stack100Percent":"0",	
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							"showsum": "0",
+							"decimals":"1",
+							"showvalues": "0",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"valuePadding":"50",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"formatnumberscale": "1",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999"
+							//"rotatelabels": "1",		
+							//"rotatevalues": "1",
+						},
+						"categories":json["countries"],
+						"dataset":json["data"]						
+					},
+				   events: {
+	           				dataPlotClick: function (event,dataObj) 
+		 	  				{	
+				  				sessionStorage.setItem("count","1");
+								sessionStorage.setItem("firstCategory1",JSON.stringify(json['countries']));
+								sessionStorage.setItem("firstData1",JSON.stringify(json['data']));
+								//alert(JSON.stringify(json['countries']));
+								drillDown(dataObj.categoryLabel,dataObj.datasetName);
+	          				}
+	        		}
+	    }).render();
+		
+ })
+ 
+ 
+	});
+ 
+ });
+ 
+ 
+function drillDown(ca,c)
+{	
+     // alert(ca);
+	var chartContainer = "";
+		if(sessionStorage.getItem("count")=='0')
+		{
+			chartContainer = "container";
+			$('#goback'+ sessionStorage.getItem("count")).show();
+		   percent="1";
+		   percentValue="1";
+		   totalValue="0";
+		   sessionStorage.setItem('drilldownStatus',"true");
+		   //sessionStorage.setItem('drilldownStatus1',"false");	
+		}
+	   else
+	    {
+			chartContainer = "container"+sessionStorage.getItem("count");
+			$('#secondDiv').show();
+			$('#firstDiv').hide();
+			 $('#goback'+ sessionStorage.getItem("count")).show();
+			percent="0";
+			percentValue="0";
+			totalValue="1";
+			sessionStorage.setItem('drilldownStatus1',"true");
+			//sessionStorage.setItem('drilldownStatus',"false");
+		}
+	
+	var countryNameSplit = ca.split(" ");
+	$.getJSON("profitProductsDrilldown.do",{catageorey:c,country:ca},function(json) 
+	{	
+		var DrillDown_revenueChart = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: chartContainer,
+				    width: '100%',
+				    height: '500',
+				    dataFormat: 'json',
+				    dataSource: {
+								    "chart": {
+											"caption": countryNameSplit,
+											//"subCaption": "Harry's SuperMart",
+											/* "xAxisname": "Country", */
+											"yAxisName": "Profit",
+											//"numberPrefix": "$ ",
+											//"numbersuffix": " USD",
+											"paletteColors": "#0075c2,#1aaf5d",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											"bgColor": "#ffffff",
+											"baseFont":"Helvetica",	
+											"stack100Percent": percent,	
+											"baseFontSize":"12",
+											"captionFontSize":"18",
+											//"showsum": "1",
+											"showPercentValues":percentValue,
+											"showPercentInToolTip":"1",
+											"decimals":"1",
+											 "showvalues": "1",
+											 "valueFontColor": "#000000",
+											 "baseFontColor":"#000000",
+											"borderAlpha": "20",
+											"useroundedges": "1",
+											"valuePadding":"50",
+											"showCanvasBorder": "0",
+											"usePlotGradientColor": "0",
+											"plotBorderAlpha": "10",
+											//"placeValuesInside": "1",
+											"formatnumberscale": "1",
+											"showLegend": "1",
+											"legendBgColor": "#ffffff",
+											"legendBorderColor":"#000000",
+											"legendBorder":"1",
+											"legendBorderAlpha": "1",
+											"legendShadow": "1",
+											"legendPosition":"right",
+											"xAxisLineColor": "#999999",
+											"divlineColor": "#999999"
+										},
+										  "categories": [
+														{
+															"category":json["xaxis"]
+														}
+													],
+													"dataset": [
+														{
+															//"seriesname": "Q1",
+															"data":json["data"]
+														},
+														
+													]
+										},
+										events: {
+										           dataPlotClick: function (event,dataObj) 
+													{	
+														//product(dataObj.categoryLabel,dataObj.datasetName,m);
+										            }
+										        }
+							}
+									);
+								    DrillDown_revenueChart.render();    
+							});
+						}
+				$(document).ready(function(){
+				    $('.goback').click(function()
+					{
+						var curId = $(this).attr('id');
+						
+						var curIdSplit= curId.split("goback");
+						//alert(curIdSplit[1]);
+						var chartContainerBack = "";
+						if(curIdSplit[1]=='0')
+						{
+							chartContainerBack = "container";
+							sessionStorage.setItem('drilldownStatus',"");
+							percent="1";
+							//alert(chartContainerBack);
+						}
+					   else
+						{
+							chartContainerBack = "container"+curIdSplit[1];
+							sessionStorage.setItem('drilldownStatus1',"");
+							percent="0";
+						}
+						$('#goback'+ curIdSplit[1]).hide();
+						var sessionObjName = "firstData"+ curIdSplit[1];
+						var sessionCatName = "firstCategory"+ curIdSplit[1];
+						var json = new Object();
+						 json.data = $.parseJSON(sessionStorage.getItem(sessionObjName));
+						 json.category = $.parseJSON(sessionStorage.getItem(sessionCatName));	
+						// alert(JSON.stringify(json['category']));
+						// alert(JSON.stringify(json['data']));
+						 FusionCharts.ready(function () {
+						     
+							  var revenueChart = new FusionCharts({
+							  		type: 'stackedcolumn2d',
+									renderAt: chartContainerBack,
+									width: '100%',
+									height: '500',
+										dataFormat: 'json',
+										dataSource: {
+													"chart": {
+														//"caption": "Forecast",
+														//"subCaption": "Harry's SuperMart",
+														"xAxisname": "Country",
+														"yAxisName": "Profit",
+														//"numberPrefix": "$ ",
+														//"numbersuffix": " USD",
+														"paletteColors": "#0075c2,#1aaf5d",
+														"exportenabled": "1",
+														"exportatclient": "0",
+														"exporthandler": "http://export.api3.fusioncharts.com",
+														"html5exporthandler": "http://export.api3.fusioncharts.com",
+														"bgColor": "#ffffff",
+														"baseFont":"Helvetica",		
+														"baseFontSize":"12",
+														"captionFontSize":"18",
+														"stack100Percent": percent,
+														"showsum": "1",
+														"showvalues": "0",
+														"showPercentValues":"1",
+														"decimals":"1",
+														 "valueFontColor": "#000000",
+														 "baseFontColor":"#000000",
+														"borderAlpha": "20",
+														"useroundedges": "1",
+														"showCanvasBorder": "0",
+														"usePlotGradientColor": "0",
+														"plotBorderAlpha": "10",
+														"placeValuesInside": "0",
+														"legendBgColor": "#ffffff",
+														"legendBorderColor":"#000000",
+														"legendBorder":"1",
+														"legendBorderAlpha": "1",
+														"legendShadow": "1",
+														"legendPosition":"right",
+														"xAxisLineColor": "#999999",
+														"divlineColor": "#999999",
+														"subcaptionFontBold": "0",
+														"subcaptionFontSize": "14"
+														//"rotatelabels": "1",		
+														//"rotatevalues": "1",
+													},
+													"categories":json["category"],
+													"dataset":json['data']
+											},
+											events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+														sessionStorage.setItem("count",curIdSplit[1]);
+														sessionStorage.setItem(sessionObjName,JSON.stringify(json['data']));
+														sessionStorage.setItem(sessionCatName,JSON.stringify(json['category']));
+														drillDown(dataObj.categoryLabel,dataObj.datasetName);
+									            }
+									        }		
+							  });revenueChart.render();
+							 
+						 });
+						
+					});
+				});		
+ 
+</script>
+
+	<div class="col-sm-4"></div>
+	<div class="col-sm-3">
+		<button type="button" id="btn1" style="float:left; cursor:pointer;">Percent</button>
+		<button type="button" id="btn2" style="float:left; cursor:pointer;">Amount</button>
+	</div>
+<div class="col-sm-5"></div>
+<input type="hidden" id="status">
+	  <br/>
+<div style="float: right; margin-right:20px; margin-top:10px;height:30px;" id="firstDiv"><p><input type="button"   value="< Go Back" style=" border:none;display:none;" id="goback0" class="goback"/></p></div>
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 		 
+		 </div>
+<div style="float: right; margin-right:20px; margin-top:10px;height:30px; display:none;" id="secondDiv"><p><input type="button"   value="< Go Back" style=" border:none;display:none; " id="goback1" class="goback"/></p></div>
+    	 <div id='container1' style="display:none">
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 		 
+		 </div>
+
+
+
+
+
+

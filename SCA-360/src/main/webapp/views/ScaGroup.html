@@ -1,0 +1,75 @@
+﻿<script>
+$(document).ready(function()
+{
+    $.getJSON("bookingVsSales.do", function(json) 
+	{
+	 FusionCharts.ready(function () 
+	 {           
+ 		 var revenueChart = new FusionCharts({		
+		        type: 'msline',
+			    renderAt: 'container',
+		        width: '100%',
+		        height: '500',
+			    dataFormat: 'json',
+	    		dataSource: {
+								"chart": {
+										   "caption": "SCA GROUP BOOKING/SALES TREND YTD",
+										   "showborder": "0",
+										   "bgColor": "#ffffff",
+										   "baseFont":"Helvetica",		
+										   "baseFontSize":"12",
+										   "captionFontSize":"18",
+										   "decimals":'1',
+											"yAxisName": "USD (M)",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											"showlabels": "1",
+											"showlegend": "1",
+											//"legendBgColor": "#ffffff",
+											"legendBorderColor":"#000000",
+											"legendBorder":"1",
+											"legendBorderAlpha": "1",
+											"legendShadow": "1",
+											"legendPosition":"right",
+											"drawCustomLegendIcon": "1",
+											"legendIconSides": "1",
+											"legendIconStartAngle": "60",
+											"showCanvasBorder": "0",
+											"showpercentvalues": "1",
+											"showpercentintooltip": "1",
+											"showvalues":"0",
+										    "showalternatehgridcolor": "0",
+										    "divlinecolor": "CCCCCC",
+										    "showcanvasborder": "0",
+										    "canvasborderalpha": "0",
+										    "canvasbordercolor": "CCCCCC",
+										    "canvasborderthickness": "1",
+										    "captionpadding": "30",
+										    "linethickness": "3",
+											
+										    "yaxisvaluespadding": "15",
+										    //"palettecolors": "#f8bd19,#008ee4,#33bdda,#e44a00,#6baa01,#583e78",
+										    //"plottooltext": "$label Bookings :  $value",
+										},
+										"categories": [{"category":json['category']}],
+										"dataset": json['dataset']
+									}
+	   							}).render();		
+							})	 
+						});
+					});
+</script>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 
+		 </div>
+	</div>
+</div>
+
+

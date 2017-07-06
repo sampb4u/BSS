@@ -1,0 +1,227 @@
+<style>
+div
+{
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.switchButton
+	{
+		border:none;
+		padding:3px 18px 3px 18px;	
+		background-color:#015AAC;
+		color:#FFFFFF;
+		
+	}
+	.icn {
+        width: 50px;
+		height: 50px;
+    }
+    
+    .flg {
+        font-size: 44px;
+		color: rgb(102, 153, 255);
+		position: relative;
+		top: 16px;
+    }
+    
+    /*.allcon {
+        font-size: 35px;
+        color: rgb(102, 153, 255);
+        position: relative;
+        top: 14px;
+    }*/
+    /*.btn-circle {
+	  width: 30px;
+	  height: 30px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 12px;
+	  line-height: 1.428571429;
+	  border-radius: 15px;
+	}*/
+	.btn.btn-circle {
+		border-radius: 50%;
+		background-clip: padding-box;
+		width: 45px;
+		height: 45px;
+		padding: 11px 4px;
+		color: #ffffff;
+		font-weight: bold;
+	}
+    .hb-country,
+    .hb-country:before,
+    .hb-country:after {
+        background: #3B5998;
+        border-color: #3B5998;
+        color: #ffffff;
+    }
+    
+    .hb-country:hover,
+    .hb-country:hover:before,
+    .hb-country:hover:after {
+        background: transparent;
+        border-color: #3B5998;
+        color: #3B5998;
+    }
+    
+    .hb-refresh,
+    .hb-refresh:before,
+    .hb-refresh:after {
+        background: #fff;
+        border-color: #3B5998;
+        color: #ffffff;
+    }
+    
+    .hb-refresh:hover,
+    .hb-refresh:hover:before,
+    .hb-refresh:hover:after {
+        background: transparent;
+        border-color: #3B5998;
+        color: #3B5998;
+    }
+    
+    .dropdown {
+        position: absolute;
+        display: inline-block;
+        z-index: 20;
+        top: 1905%;
+        right: 20%;
+    }
+    
+    .dropbtn {
+        background-color: #015AAC;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        /*background-color: #f9f9f9;*/
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dropdown-content a {
+        color: black;
+        padding: 10px;
+        text-decoration: none;
+        display: block;
+        width: 70px;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #f9f9f9;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+        background-color: #015AAC;
+    }
+    
+    .dropBackColor {
+        background-color: #f1f1f1;
+    }
+</style>
+<div ng-controller="MonthlyCurrentController" ng-init="loadChartForAllCountrys();">
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Monthly Current</div>
+      		<div class="row">
+                    <div class="col-sm-9">
+                        <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="all"><span class="allcon btn btn-primary btn-circle" style="width:45px; height:45px; padding:11px 4px;">SCA<!--<i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i>--></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="TH"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="MY"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="ID"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="SG"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="PH"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="IN"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="VN"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="EMA"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="emarket"></i></span></a>
+                            <a href="#/app/SCA_groupByArea_angularFC" class="renderchart" id="AU"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="dropdown" id="curDropdown">
+                             <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;"><i class="fa fa-usd circular" aria-hidden="true"></i></span></button>
+                        <span class="dropdown-content">
+                                <a href="#/app/SCA_groupByArea_angularFC" id="USD"><span>USD &#x24;</span></a>
+                        		<a href="#/app/SCA_groupByArea_angularFC" id="SCA"><span id="scaSpan">USD &#x24;</span></a>
+                    <!--	  /*<a href="#/app/SCA_groupByArea" id="SCA1"><span id="scaSpan">USD &#x24;</span></a>
+                           <a href="#/app/SCA_groupByArea" id="USD1"><span>USD &#x24;</span></a>*/-->
+                        
+                        </span>
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <!--<span class="dropdown" id="curDropdown1">
+                             <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;"><i class="fa fa-usd circular" aria-hidden="true"></i></span></button>
+                        <span class="dropdown-content">
+                               
+                          <a href="#/app/SCA_groupByArea" id="SCA1"><span id="scaSpan2">USD &#x24;</span></a>
+                           <a href="#/app/SCA_groupByArea" id="USD1"><span>USD &#x24;</span></a>
+                        
+                        </span>
+                        </span>-->
+                    </div>
+                </div>
+         <div class="row">
+      		<div class="col-sm-12" align="right">
+            	<p><input type="button" id="goback" value="< Go Back" class="switchButton" ng-click="gotoPreviousChart();" style=" border:none; float: right; margin-right:20px; display:none;"/></p>
+            </div>
+         </div>
+      	<div class="row" id="countryBySalesman" style="display:;">
+    	<div class="col-sm-12">
+       		 <fusioncharts 
+            width="1100" 
+            height="400"
+            type="msstackedcolumn2d"
+            datasource="{{myDataSource}}"
+            events="events"
+        ></fusioncharts>
+        </div>
+    </div>
+    <div class="row" id="countryBySalesmanMonth" style="display:none;">
+    	<div class="col-sm-12">
+       		 <fusioncharts 
+            width="1100" 
+            height="400"
+            type="msstackedcolumn2d"
+            datasource="{{myDataSource}}"
+            events="eventsMonth"
+        ></fusioncharts>
+        </div>
+    </div>
+    <div class="row" id="countryBySalesmanMonthYTD" style="display:none;">
+    	<div class="col-sm-12">
+       		 <fusioncharts 
+            width="1100" 
+            height="400"
+            type="mscolumn2d"
+            datasource="{{myDataSource}}"
+           
+        ></fusioncharts>
+        </div>
+    </div>
+    	
+ </div>
+    <!--<div fusioncharts width="600" height="400" type="column2d" dataSource="">
+    </div>-->
+    
+	
+        
+</div>

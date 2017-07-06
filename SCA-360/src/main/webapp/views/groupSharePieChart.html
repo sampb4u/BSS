@@ -1,0 +1,171 @@
+
+<html>
+<head>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+<!--<script src="https://code.highcharts.com/highcharts.js"></script>-->
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<script>
+
+$(function () {
+
+    
+
+    // Build the chart
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+         credits: {
+        enabled: false
+      },
+        title: {
+            text: 'Group % Share YTD'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>',
+            enabled:true
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                 showInLegend: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+          legend: {
+        enabled: true,
+        
+       
+        },
+        series: [{
+            name: 'Bookings',
+              data: [
+                { name: 'Australia', y: 3078865 ,color:'#ADFF2F'},
+                {
+                    name: 'Thailand',
+                    y: 6064034,
+                    sliced: true,
+                    selected: true,
+                    color:'#0000FF'
+                },
+                { name: 'Malaysia', y:4169527,color:'#8B0000'},
+                { name: 'Indonesia', y:2810065,color:'#008000'}, 
+                { name: 'Singapore', y:1925621,color:'#6A5ACD'},
+                { name: 'Philippines', y:2426549,color:'#ADD8E6'},
+                {name:'India',y:732235,color:'#CD853F'},
+                {name:'Vietnam',y:2220255,color:'#5F9EA0'},
+                {name:'Other',y:641965,color:'#DB7093'}
+            ]
+        }]
+    });
+});
+
+</script>
+ <script>
+ $(document).ready(function(){
+
+ 
+ FusionCharts.ready(function () {
+	  
+	    var revenueChart = new FusionCharts({
+	        type: 'doughnut2d',
+	        renderAt: 'chart-container',
+	        width: '1100',
+	        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+	            "chart": {
+	                "caption": "Group % share YTD",
+	                 
+	                "numberPrefix": "",
+	                "paletteColors": "#ADFF2F,#0000FF,#8B0000,#008000,#6A5ACD,#ADD8E6,#CD853F,#5F9EA0,#DB7093",
+	                "bgColor": "#ffffff",
+	                "showBorder": "0",
+	                "use3DLighting": "0",
+	                "showShadow": "0",
+	                "enableSmartLabels": "0",
+	                "startingAngle": "310",
+	                "showLabels": "1",
+	                "showPercentValues": "1",
+	                "showLegend": "1",
+	                "legendShadow": "1",
+	                "legendBorderAlpha": "1",
+	                "defaultCenterLabel": "Total Bookings 24.7 M",
+	                "centerLabel": "Bookings from $label: $value",
+	                "centerLabelBold": "1",
+	                "showTooltip": "1",
+	                "decimals": "1",
+	                "captionFontSize": "14",
+	                "subcaptionFontSize": "14",
+	                "subcaptionFontBold": "0"
+	            },
+	            "data": [
+	                {
+	                    "label": "Australia",
+	                    "value": "3078865"
+	                }, 
+	                {
+	                    "label": "Thailand",
+	                    "value": "6064034"
+	                }, 
+	                {
+	                    "label": "Malaysia",
+	                    "value": "4169527"
+	                }, 
+	                {
+	                    "label": "Indonesia",
+	                    "value": "2810065"
+	                },
+	                {
+	                    "label": "Singapore",
+	                    "value": "1925621"
+	                },
+	                {
+	                	"label": "Philippines",
+	                    "value": "2426549"
+	                	
+	                },
+	                {
+	                	"label": "India",
+	                    "value": "732235"
+	                	
+	                },
+	                {
+	                	
+	                	"label":"Vietnam",
+	                	"value":"2220255"
+	                },
+	                {
+	                	"label":"Other",
+	                	"value":"641965"
+	                	
+	                }
+	            ]
+	        }
+	    }).render();
+	});
+ 
+ })
+ </script>
+</head>
+
+<body>
+<div id="container" style="width: 100%; height: 400px; margin: 0 "></div>
+<br>
+<div id='chart-container'></div>
+</body>
+</html>
+ 
+
+ 

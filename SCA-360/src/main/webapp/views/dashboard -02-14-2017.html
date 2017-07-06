@@ -1,0 +1,714 @@
+<style>
+#pageheading
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.icns
+{
+	font-size: 30px;
+}
+/*.icn-orders
+{
+	font-size: 30px;
+}
+.icnBtn
+{
+	width: 15%;
+}
+.icnBtn2
+{
+	width: 25%;
+	
+}*/
+.menu {
+    width: 100%;
+}
+
+/*.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+     
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #33b5e5;
+    color: #ffffff;
+    width: 20%;
+    display: inline-block; 
+    text-align: center;
+   
+}
+.menu li a{
+	text-decoration:none;
+}
+.menu li.db-btn:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+	
+}
+.menu li.ch-btn:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu li.bg_ls:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu li.bg_lr:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu li.bg_lo:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu li.bg_ly:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu li a {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    font-weight: lighter;
+}
+.menu li.db-btn{
+	background-color: #27a9e3;
+	width: 25%;
+}
+.menu li.ch-btn{
+	background-color: #28b779;
+	width: 30%;
+}
+.menu li.bg_ly {
+    background: #ffb848;
+	width: 15%;
+}
+.menu li.bg_lo {
+    background: #da542e;
+	width: 15%;
+}
+.menu li.bg_ls {
+    background: #2255a4;
+	width: 15%;
+}
+.menu li.bg_lr {
+    background: #f74d4d;
+	width: 15%;
+}*/
+/*.menu-actions
+{
+	 width: 100%;
+}*/
+/*.menu-actions li {
+    padding: 5px 5px 5px 5px;
+	background-color: #b6b3b3;
+	color: #666;
+	width: 35%;
+	display: inline-block;
+	text-align: center;
+	height: 100px;
+	margin: 0px 0px 8px 5px;
+   
+}
+.menu-actions li.bg_lh:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+	
+}
+.orders
+{
+	font-size: 10px;
+    margin: 0px auto;
+}
+*/
+
+/*.block {
+    width: 45%;
+    text-align: center;
+    background: #b6b3b3;
+    margin: 5px;
+    display: inline-block;
+    height: 100px;
+    padding: 5px 0px 0px 0px;
+}*/
+.block-mini {
+    width: 45%;
+    text-align: center;
+    background: #b6b3b3;
+    margin: 5px;
+    display: inline-block;
+    height: 100px;
+	padding: 5px 0px 0px 0px;
+}
+.menu .block-mini.db-btn{
+	background-color: #27a9e3;
+	color:#ffffff;
+}
+.menu .block-mini.db-btn:hover{
+	background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu .block-mini.bg_ly{
+	background: #ffb848;
+	color:#ffffff;
+}
+.menu .block-mini.bg_ly:hover{
+	background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu .block-mini.bg_lr{
+	background: #f74d4d;
+	color:#ffffff;
+}
+.menu .block-mini.bg_lr:hover{
+	background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu .block-mini.bg_lo{
+	background: #da542e;
+	color:#ffffff;
+}
+.menu .block-mini.bg_lo:hover{
+	background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+.menu .block-mini.bg_ls{
+	background: #2255a4;
+	color:#ffffff;
+}
+.menu .block-mini.bg_ls:hover{
+	background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+}
+/*.block-mini:hover {
+    background-color: #000;
+    cursor:pointer;
+	color:#ffffff;
+	
+}*/
+.dbBtns
+{
+	font-size: 15px;
+    margin: 10px 10px 10px 10px;
+}
+.orders-num
+{
+	font-size: 15px;
+    margin: 0px auto;
+}
+.orders
+{
+	font-size: 10px;
+    margin: 0px auto;
+}
+div.polaroid {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 5px 0px 0px 0px;
+  padding: 4px;
+  border: 0px solid #000;
+}
+
+div.container3 {
+  text-align: center;
+  padding: 10px 20px;
+}
+</style>
+
+ <!--<div ng-controller="dashboardController">									
+	<div class="well with-header with-footer">
+            
+           <div class="row">
+                <div class="col-sm-4">
+                     col-sm-4
+                </div>
+                <div class="col-sm-4">
+                     col-sm-4
+                </div>
+                <div class="col-sm-4">
+                     col-sm-4
+                </div>
+           </div>
+    </div>
+ </div>-->
+<div ng-controller="dashboardController" style="display:"> 					
+	<div class="row">
+   			<div class="col-xs-12 col-md-12">
+       			 <div class="well with-header with-footer">
+          			  <div class="header bordered-blue" id="pageheading">
+                         Customer DashBoard
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                             <div class="form-group">
+                                            <span class="input-icon icon-right">
+                                                <input type="text" class="form-control input-sm">
+                                                <i class="glyphicon glyphicon-search blue"></i>
+                                            </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                             <div class="form-group">
+                                            <a href="#/app/customermaster"><span class="btn btn-success">
+                                                <i class="fa fa-pencil"></i>Edit Customer
+                                            </span></a>
+                             </div>
+                       </div>
+                        <div class="col-sm-2">
+                             <div class="form-group">
+                                            <a href="#/app/customermaster"><span class="btn btn-success">
+                                                <i class="fa fa-user-plus"></i>Add Customer
+                                            </span></a>
+                                        </div>
+                        </div>
+                      </div>
+                      <div style="border:0px solid #000;">
+                     	  <div class="row">
+                           <div class="col-sm-3">
+                                    <div class="polaroid">
+                                      <img src="image/rock.jpg" alt="" style="width:100%; height:215px;">
+                                      <!--<div class="container3">
+                                        <p>The Troll's tongue in Hardanger, Norway</p>
+                                      </div>-->
+                                 </div>
+                                <!--<div class="form-group">
+                                     <img src="image/Flag_of_Sg.png" style="width:100%;height: 170px;"/>
+                                </div>-->
+                           </div>
+                           <div class="col-sm-6">
+                                <div class="menu">
+                                    <!--<ul>
+                                      
+                                      <li class="bg_ly"><a href="#/app/dashboard"><span><i class="fa fa-inbox icns" id="icn"></i><p class="orders">Open Quotes</p></span></a></li>
+                                      <li class="bg_lo"><a href="#/app/dashboard"><span><i class="fa fa-th icns" id="icn"></i><p class="orders">Open Orders</p></span></a></li>
+                                      <li class="bg_ls"><a href="#Cases"><span><i class="fa fa-list icns" id="icn"></i><p class="orders">Open Cases</p></span></a></li>
+                                      <li class="bg_ly"><a href="#/app/dashboard"><span><i class="fa fa-tint icns" id="icn"></i><p class="orders">Open History</p></span></a></li>
+                                      
+                                    </ul>-->
+                                    <div class="block-mini db-btn"><span><i class="fa fa-inbox icns"></i><p class="dbBtns">Open Quotes</p></span></div>
+                                    <div class="block-mini bg_ly"><span><i class="fa fa-th icns"></i><p class="dbBtns">Open Orders</p></span></div>
+                                    <div class="block-mini bg_lr"><span><a href="#Cases"><i class="fa fa-list icns"></i><p class="dbBtns">Open Cases</p></a></span></div>
+                                    <div class="block-mini bg_lo"><span><i class="fa fa-tint icns"></i><p class="dbBtns">Open History</p></span></div>
+                                  </div>
+                           </div>
+                           <div class="col-sm-3">
+                                <div class="menu">
+                                    <!--<ul>
+                                      <li class="bg_lh"><span><i class="fa fa-user icn-orders"></i><p class="orders">2540</p><p class="orders-num">Order value YTD</p></span></li>
+                                      <li class="bg_lh"><span><i class="fa fa-repeat icn-orders"></i><p class="orders">10</p><p class="orders-num">Pending Orders</p></span></li>
+                                      <li class="bg_lh"><span><i class="fa fa-plus icn-orders"></i><p class="orders">120</p> <p class="orders-num">Open Quotes Value </p></span></li>
+                                      
+                                      <li class="bg_lh"><span><i class="fa fa-tag icn-orders"></i><p class="orders">9540</p><p class="orders-num">Total Orders</p></span></li>
+                                      
+                                      
+                                      
+                                    </ul>-->
+                                    <div class="block-mini bg_ls"><span><i class="fa fa-user icns"></i><p class="orders-num">2540</p><p class="orders">Order value YTD</p></span></div>
+                                    <div class="block-mini bg_lr"><span><i class="fa fa-repeat icns"></i><p class="orders-num">10</p><p class="orders">Pending Orders</p></span></div>
+                                    <div class="block-mini bg_ly"><span><i class="fa fa-plus icns"></i><p class="orders-num">120</p><p class="orders">Open Quotes Value</p></span></div>
+                                    <div class="block-mini db-btn"><span><i class="fa fa-tag icns"></i><p class="orders-num">9540</p><p class="orders">Total Orders</p></span></div>
+                                     
+                                </div>
+                           </div>
+                      </div>
+                      </div>
+                      <br />
+                      <div style="border:0px solid #000;">
+                          <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="widget">
+                                        <div class="widget-header  with-footer">
+                                            <span class="widget-caption">Customer Details</span>
+                                            <div class="widget-buttons">
+                                                <a href="" widget-maximize></a>
+                                                <a href="" widget-collapse></a>
+                                                <a href="" widget-dispose></a>
+                                            </div>
+                                        </div>
+                                        <div class="widget-body">
+                                            <!--<div class="alert alert-info fade in alert-radius-bordered alert-shadowed">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-info"></i>
+                            
+                                                <strong>Flip Scroll Table:</strong> Flips between horizontal and vertical scrolls according to page width
+                                            </div>-->
+                                            <div class="flip-scroll">
+                                                <table class="table table-hover flip-content">
+                                                    <!--<thead class="flip-content bordered-palegreen">
+                                                        <tr>
+                                                            <th>
+                                                                
+                                                            </th>
+                                                            <th>
+                                                                
+                                                            </th>
+                                                            <th>
+                                                               
+                                                            </th>
+                                                            
+                                                            <th>
+                                                                
+                                                            </th>
+                                                        </tr>
+                                                    </thead>-->
+                                                    <tbody>
+                                                <tr>
+                                                    
+                                                    <td> Account Id</td>
+                                                    <td></td>
+                                                    <td> Phone</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td> Responsible/ main Contact Name </td>
+                                                    <td></td>
+                                                    <td> Email</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td>Customer Group </td>
+                                                    <td></td>
+                                                    <td> Mobile</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Country</td>
+                                                    <td></td>
+                                                    <td> Other Phone</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Application or Indusry </td>
+                                                    <td></td>
+                                                    <td> Fax</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td> Salesman</td>
+                                                    <td></td>
+                                                    <td> Salesman Code</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td> Client Website address</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <!--<tr>
+                                                    
+                                                    <td> Lead Source</td>
+                                                    <td></td>
+                                                    <td> Served by Salesman</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Departmenmt </td>
+                                                    <td></td>
+                                                    <td> Fax</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Mailing Address </td>
+                                                    <td></td>
+                                                    <td> Salesman Code</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td> </td>
+                                                    <td></td>
+                                                    <td> Discount Multiplier</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Languages</td>
+                                                    <td></td>
+                                                    <td> Payment terms</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> Mailing Address </td>
+                                                    <td></td>
+                                                    <td> Salesman Code</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td> </td>
+                                                    <td></td>
+                                                    <td> Last Modified By</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                    <td> </td>
+                                                    <td></td>
+                                                    <td> Created by</td>
+                                                    <td></td>
+                                                </tr>-->
+                                            </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                                <div class="widget">
+                                    <div class="widget-header ">
+                                        <span class="widget-caption">Contact Details</span>
+                                        <div class="widget-buttons">
+                                            <a href="" widget-maximize></a>
+                                            <a href="" widget-collapse></a>
+                                            <a href="" widget-dispose></a>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <table class="table table-bordered table-striped table-hover">
+                                            <thead class="bordered-blue">
+                                                <tr>
+                                                    <th style="width: 20%">Contact Name</th>
+                                                    <th style="width: 25%">Telephone</th>
+                                                    <th style="width: 25%">Mobile</th>
+                                                    <th style="width: 20%">Email</th>
+                                                    <th style="width: 10%">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td>Active</td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td>Active</td>
+                                                </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                                <div class="widget">
+                                    <div class="widget-header">
+                                        <span class="widget-caption">Open Quotations</span>
+                                        <div class="widget-buttons">
+                                            <a href="" widget-maximize></a>
+                                            <a href="" widget-collapse></a>
+                                            <a href="" widget-dispose></a>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <table class="table table-bordered table-striped table-hover">
+                                            <thead class="bordered-blue">
+                                                <tr>
+                                                    <th style="width: 20%">First Name</th>
+                                                    <th style="width: 25%">Last Name</th>
+                                                    <th style="width: 25%">Phone #</th>
+                                                    <th style="width: 20%">Site Name</th>
+                                                    <th style="width: 10%">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td>Active</td>
+                                                </tr>
+                                                <tr>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                   <td>Active</td>
+                                                </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="widget">
+                                        <div class="widget-header ">
+                                            <span class="widget-caption">Open Orders</span>
+                                            <div class="widget-buttons">
+                                                <a href="" widget-maximize></a>
+                                                <a href="" widget-collapse></a>
+                                                <a href="" widget-dispose></a>
+                                            </div>
+                                        </div>
+                                        <div class="widget-body">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead class="bordered-blue">
+                                                    <tr>
+                                                        <th style="width: 20%">First Name</th>
+                                                        <th style="width: 25%">Last Name</th>
+                                                        <th style="width: 25%">Phone #</th>
+                                                        <th style="width: 30%">Site Name</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <tr>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="row" id="Cases">
+                                <div class="col-sm-12">
+                                    <div class="widget">
+                                        <div class="widget-header ">
+                                            <span class="widget-caption">Open Cases</span>
+                                            <div class="widget-buttons">
+                                                <a href="" widget-maximize></a>
+                                                <a href="" widget-collapse></a>
+                                                <a href="" widget-dispose></a>
+                                            </div>
+                                        </div>
+                                        <div class="widget-body">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead class="bordered-blue">
+                                                    <tr>
+                                                        <th style="width: 15%">Case</th>
+                                                        <th style="width: 35%">Subject</th>
+                                                        <th style="width: 10%">Priority</th>
+                                                        <th style="width: 20%">Date/Time Opened</th>
+                                                        <th style="width: 10%">Owner</th>
+                                                        <th style="width: 10%">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <tr>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td>Active</td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td>Active</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="widget">
+                                        <div class="widget-header ">
+                                            <span class="widget-caption">Order History</span>
+                                            <div class="widget-buttons">
+                                                <a href="" widget-maximize></a>
+                                                <a href="" widget-collapse></a>
+                                                <a href="" widget-dispose></a>
+                                            </div>
+                                        </div>
+                                        <div class="widget-body">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead class="bordered-blue">
+                                                    <tr>
+                                                        <th style="width: 25%">Subject</th>
+                                                        <th style="width: 10%">Related To</th>
+                                                        <th style="width: 10%">Task</th>
+                                                        <th style="width: 10%">Due Date</th>
+                                                        <th style="width: 15%">Assigned To</th>
+                                                        <th style="width: 25%">Last Modified Date/Time</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="row">
+                               <div class="col-sm-9">
+                                    <div class="form-group">
+                                         <textarea class="form-control" id="textareaanimated" name="dnaRemarks" ng-model="dnaRemarks" placeholder="Write Something" ui-jq="autosize" ui-options="{ append: '\n' }"></textarea>
+                                    </div>
+                               </div>
+                               <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary" ng-click="getAddedRemarks(dnaRemarks);">Update</button>
+                               </div>
+                          </div>
+                      </div>
+        		</div>
+    		</div>
+	</div>
+</div>

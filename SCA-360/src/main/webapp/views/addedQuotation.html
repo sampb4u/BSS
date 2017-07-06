@@ -1,0 +1,1229 @@
+<style>
+div
+{
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 0px solid #ddd;
+} 
+/*.datePic > span:hover{cursor: pointer;}
+.pointer {
+    cursor: pointer;
+}
+.ui-datepicker-calendar {
+    display: none;
+    }*/
+ 
+.sucessstyle {
+	background-color: #53a93f !important;
+	/*border-color: #53a93f !important;*/
+	color: #fff;}
+.draftstyle{
+	background-color: #57b5e3 !important;
+	/*border-color: #57b5e3;*/
+	color: #fff;} 
+.dangerstyle {
+	background-color: #d73d32 !important;
+	/*border-color: #d73d32;*/
+	color: #fff;}
+	
+.active2 {
+       pointer-events: none;
+       cursor: pointer;
+	   
+	  
+    }
+	
+	
+	 md-toolbar:not(.md-menu-toolbar) {
+		/*background-color: rgb(63,81,181);*/
+		color: rgba(255,255,255,0.87);
+	}
+.dataNotFound
+{
+	color:#a94442;
+}
+.ui-datepicker {
+    width: 275px;
+    padding: .2em .2em 0;
+   /* display: none;*/
+}
+</style>
+<script>
+$(document).ready(function() {
+    $( "#dateFrom" ).datepicker({
+        dateFormat:"dd-mm-yy",
+		changeMonth: true,
+        changeYear: true,
+       // showButtonPanel: true,
+	   onClose: function(dateText, inst) {
+		  $("#dateTo").focus();
+	   },
+        // before datepicker opens run this function
+        beforeShow: function(){
+            // this gets today's date       
+            var theDate = new Date();
+            
+            // sets "theDate" 2 days ahead of today
+            theDate.setDate(theDate.getDate());
+			//theDate.setDate(<?php echo $checkin ?>);
+            // set min date as 2 days from today
+            $(this).datepicker('option',theDate);         
+        }
+       
+    });
+	$( "#dateTo" ).datepicker({
+        dateFormat:"dd-mm-yy",
+		changeMonth: true,
+        changeYear: true,
+       // showButtonPanel: true,
+	   onClose: function(dateText, inst) {
+		  $("#ModelNum").focus();
+	   },
+        // before datepicker opens run this function
+        beforeShow: function(){
+            // this gets today's date       
+            var theDate = new Date();
+            
+            // sets "theDate" 2 days ahead of today
+            theDate.setDate(theDate.getDate());
+			//theDate.setDate(<?php echo $checkin ?>);
+            // set min date as 2 days from today
+            $(this).datepicker('option',theDate);         
+        }
+       
+    });
+});
+/*$('.datepicker').datepicker(
+                    {
+                        dateFormat: "mm-yy",
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                        onClose: function(dateText, inst) {
+
+
+                            function isDonePressed(){
+                                return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                            }
+
+                            if (isDonePressed()){
+                                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+                                
+                                 $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                            }
+                        },
+                        beforeShow : function(input, inst) {
+
+                            inst.dpDiv.addClass('month_year_datepicker')
+
+                            if ((datestr = $(this).val()).length > 0) {
+                                year = datestr.substring(datestr.length-4, datestr.length);
+                                month = datestr.substring(0, 2);
+                                $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                                $(this).datepicker('setDate', new Date(year, month-1, 1));
+                                $(".ui-datepicker-calendar").hide();
+                            }
+                        }
+                    })*/					
+					
+</script>
+
+<div ng-controller="addNewQuoteCtrl" ng-init="getAddNewCaseFormData();loadAddQtnCountrys();getAddQtnSalesmanCode();loadAddQtnSalesMan(); loadAllQtnTypes();loadCustomerQtnName(); loadservicePrintData();loadDespDta();loadQuoteStatus();loadquotaionDetails(addedQtns.custName,addedQuotationForm);loadCustomerName();loadAddedQuotationDepartments();">
+
+
+									
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Quote Search</div>
+	<form name="addedQuotationForm" ng-keyup="$event.keyCode == 13 ? getQtnCustomerName(addedQtns,addedQuotationForm) : null" class="form" novalidate>
+        <div class="row">
+            <div class="col-sm-3">
+                
+            </div>
+            <div class="col-sm-3">
+                                                              
+            </div>
+           <div class="col-sm-3">
+                                                         
+           </div>
+           <div class="col-sm-3" align="right">
+                  <div class="form-group">
+                       <span class="btn btn-blue"><a href="#/app/quotation" ng-click="loadNewQuotation();">New Quotation</a></span>
+                  </div>
+                  
+                  
+           </div>                                            
+	 </div>
+     
+       <div class="row">
+       		<div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="Country">Country</label>
+                                               			<select class="form-control" placeholder="" name="country" ng-model="addedQtns.country" id="Country" ng-options = "country.country as country.country for country in countryData">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                                
+                                            </div>
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="Manufacturing">Manufacturing No.</label>
+                                                <span class="input-icon icon-right">	
+                                                     																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="manufacturing" ng-model="addedQtns.manufacturing" id="Manufacturing"/>
+                                                    <i class="glyphicon glyphicon-pencil circular"></i>
+                                                    </span>
+                                                                   
+                                                
+                                            </div>
+            </div>
+            <div class="col-sm-2">
+            		<div class="form-group">
+                                  <label for="dateFrom">From</label>
+                                         <span class="input-icon icon-right">
+													
+<input type="text" class="form-control datepicker " placeholder="" maxlength="10" name="monthYear" ng-model="addedQtns.monthYear" id="dateFrom"   />
+														<i class="glyphicon glyphicon-calendar circular"></i>
+                                                                    </span>
+                                                   
+                                                </div>
+            </div>
+            <div class="col-sm-2">
+            		<div class="form-group">
+                                  <label for="dateTo">To</label>
+                                         <span class="input-icon icon-right">
+													
+<input type="text" class="form-control datepicker " placeholder="" maxlength="10" name="dateto" ng-model="addedQtns.dateto" id="dateTo"/>
+														<i class="glyphicon glyphicon-calendar circular"></i>
+                                                                    </span>
+                                                    
+                                                </div>
+            </div>
+       </div>
+       <div class="row">
+       		<div class="col-sm-4">
+            	<div class="form-group">
+                                                <label for="SalesmanCode">Salesman Code</label>
+                                               			<select class="form-control" placeholder="" name="salesManCode" ng-model="addedQtns.salesManCode" id="SalesmanCode" ng-options = "salesManCode.salesManCode as salesManCode.salesManCode for salesManCode in salesManCodeArray">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                               
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                                <label for="ModelNum">Model No.</label>
+                                                <span class="input-icon icon-right">	
+                                                     																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="modelNumber" ng-model="addedQtns.modelNumber" id="ModelNum"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                    </span>
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                                 <label for="QtnRef">Quotation Number</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																										
+                                                    <input type="text" class="form-control" placeholder="" name="qtnRef" ng-model="addedQtns.qtnRef" id="QtnRef"/>
+                                                   <i class="glyphicon glyphicon-tag circular"></i>
+                                                                    </span>
+                                                                   
+                                               
+                                            </div>	
+            </div>
+            
+       </div>
+       <div class="row">
+       		<div class="col-sm-4">
+            	<div class="form-group">
+                                                <label for="SalesmanName">Salesman Name</label>
+                                               			<select class="form-control" placeholder="" name="salesMan" ng-model="addedQtns.salesMan" id="SalesmanName" ng-options = "salesMan.salesPerson as salesMan.salesPerson for salesMan in salesmanArray">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                                 <label for="Serial">Motor Serial No.</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="serialNo" ng-model="addedQtns.serialNo" id="Serial"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                                    </span>
+                                                                   
+                                               
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                                <label for="GearHead">GearHead Serial No.</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="gearhead" ng-model="addedQtns.gearhead" id="GearHead"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                                    </span>
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            
+       </div>
+       <div class="row">
+       		<div class="col-sm-4">
+            	<div class="form-group">
+                          								<label for="CustomerName">Prospect Name / Customer Name</label>
+                                                      <span class="input-icon icon-right">
+                                                          
+                                                        <input type="text" name="custName" id="CustomerName" ng-model="addedQtns.custName" placeholder="" typeahead="custName.name as custName.name for custName in customerNamesQtnData | filter:{name:$viewValue}:startsWith" typeahead-on-select='selectCustomerQtn($label)' typeahead-min-length='3' typeahead-no-results="noResults" autocomplete="off" class="form-control">
+                                                       
+                            <i class="glyphicon glyphicon-search blue circular"></i>
+                        </span>
+                          <div ng-if="noResults" class="dataNotFound">No Results Found!</div>
+                </div>	
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                                <label for="QtnType">Quotation Type</label>
+                                               			<select class="form-control" placeholder="" name="qtnType" ng-model="addedQtns.qtnType" id="QtnType" ng-options = "qtnType.id as qtnType.qtnType for qtnType in qtnTypeData">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                                
+                                            </div>	
+            </div>
+			<div class="col-sm-4">
+				<div class="form-group">
+                                        <label for="DepartmentName">Assigned To</label>
+                                        
+                                       
+                                         <select class="form-control" ng-model = "addedQtns.department" name = "department" id="DepartmentName" placeholder="" ng-options = "department.departmentnameshortcut as department.departmentname for department in departmentData">
+                                                       <!-- <option value="">Select Department</option>-->
+                                                   </select>
+                                       
+                                                    
+										
+										</div>
+			</div>
+            <!--<div class="col-sm-4">
+            	<md-toolbar class="md-padding" style="background-color: #fff;color: rgba(255,255,255,0.87);">
+            <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in getMatches(searchText)" md-item-text="item.name" placeholder="Search" md-no-cache="true">
+                <md-item-template>
+                    <span>{{item.abbreviation}} - </span>
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+                </md-item-template>
+                <md-not-found>
+                    No matches found.
+                </md-not-found>
+            </md-autocomplete>
+        </md-toolbar>	
+            </div>-->
+            
+       </div>
+       <div class="row">
+       		<div class="col-sm-4"><!-----  ng-submit="getQtnCustomerName(addedQtns,addedQuotationForm);" --->
+            		
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                <button type="button" class="btn btn-info" ng-click="getQtnCustomerName(addedQtns,addedQuotationForm);">
+                                  <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                   </div>
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                
+                                  <span class="btn btn-info btn-xs btn-circle active2"><i class="fa fa-floppy-o" aria-hidden="true"></i></span> Draft
+                                  <span class="btn btn-success btn-xs btn-circle active2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> Current Version
+                                   <span class="btn btn-danger btn-xs btn-circle active2"><i class="fa fa-eye" aria-hidden="true"></i></span> Old Version
+                               
+                   </div>
+            </div>
+       </div>
+    
+           
+	     
+   </form>
+   			<div class="row">
+   			 <div class="col-sm-12">
+                    <div class="table-scrollable">
+                        <table class="table table-hover table-striped table-bordered">
+                            <thead class="bordered-blue">
+                                <tr>
+                                	<th>Date</th>
+                                    <th>Quote Ref No.</th>
+                                    <th>Customer</th>
+                                    <th>Country</th>
+                                    <th>Quote Type</th>
+                                    <th>Model No.</th>
+                                    <th>Mfg No.</th>
+                                    <th>Motor Serial No.</th>
+                                    <th>Gearhead Serial No.</th>
+									<th>Assigned To</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <!--<th>Progress</th>-->
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="addNewQuote in addNewQuoteData">
+                                   	<td align="center" ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.dateQuote}}</td>
+                                    <td align="center" ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.qtnNo}}</td>
+                                    <td align="center" ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.custName}}</td>
+                                    <td align="center" ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.country}}</td>
+                                    <td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.type}}<span style="display:none;">{{addNewQuote.qtnType}}</span></td>
+                                    <td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.selectModel}}</td>
+                                    <td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.shiMfg}}</td>
+                                    <td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.motorSerial}}</td>
+                                    <td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.gearhead}}</td>
+									<td ng-class="{dangerstyle: addNewQuote.action==0,sucessstyle: addNewQuote.action==1,draftstyle: addNewQuote.action==100}">{{addNewQuote.assigned}}</td>
+                                    <td><div class="form-group">
+                                                    <div class="floating-label-wrapper">
+                                                 <textarea class="form-control" id="NOTES" name="remarks" rows="1" cols="3" ng-model="remarks" placeholder="" ui-jq="autosize" ui-options="{ append: '\n' }" with-floating-label></textarea>
+                                                 </div>
+                                                 </div>
+                                    </td>
+                                    <td><div class="form-group">
+                                                        <div class="floating-label-wrapper">
+                                                                <select class="form-control" placeholder="" name="qtnStatus" ng-model="qtnStatus" id="QtnSts" ng-options = "qtnStatus.id as qtnStatus.qtnStatus for qtnStatus in qtnStsData" with-floating-label>
+                                                                     <option value="">-----Select-----</option>
+                                                                </select>																																																					
+                                                            
+                                                                           
+                                                        </div>
+                                                    </div>
+                                   </td>
+                                   <!--<td><span ng-if="addNewQuote.action==1 || addNewQuote.action==100"><a  ng-click="showPopup(addNewQuote.custName);loaddeliveryvalues(addNewQuote.custName,addNewQuote.salesMan,addedQtns.custName);"><img src="image/chi123.png" data-toggle="tooltip" title="DeliveryUpdate"  class="pointer" style="width:50px;height:30px;" alt=""></a>&nbsp;&nbsp;<a ng-click="showPopupprogress(addNewQuote.custName);loadupdateprogressvalues(addNewQuote.custName,addNewQuote.salesMan,addedQtns.custName);"><img src="image/118520.png"  class="pointer"  data-toggle="tooltip" title="ProgressUpdate"  style="width:50px;height:30px;" alt=""></a></span>
+                                    </td>-->
+                                   <td align="center"><!--<span ng-if="addNewQuote.action!=1" class="tooltip-blue" tooltip-placement="bottom" tooltip="Checked"><i class="glyphicon glyphicon-check"></i></span>&nbsp; --><span ng-if="addNewQuote.action==1 || addNewQuote.action==100" ng-click="loadQtnDetails(addNewQuote.qtnNo,addNewQuote.action,addNewQuote.qtnType);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Edit" style="color: #23527c; cursor:pointer;"><i class="glyphicon glyphicon-pencil"></i></span>&nbsp;<span ng-click="loadQtnDetails(addNewQuote.qtnNo,addNewQuote.action,addNewQuote.qtnType);" class="tooltip-blue" tooltip-placement="bottom" tooltip="View" ng-if="addNewQuote.action!=1 && addNewQuote.action!=100" style="color: #23527c; cursor:pointer;"><i class="fa fa-eye" aria-hidden="true"></i></span>&nbsp;&nbsp;<span ng-click="loadQtnCopyDetails(addNewQuote.qtnNo,addNewQuote.action,addNewQuote.qtnType);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Copy" style="color: #23527c; cursor:pointer;"><i class="glyphicon glyphicon-copy"></i></span>&nbsp;&nbsp;&nbsp;<span class="tooltip-blue" tooltip-placement="bottom" tooltip="Print" ng-click="printGenerateQuotation(addNewQuote.qtnNo,quotationType,addNewQuote.action);" style="cursor:pointer;color: #23527c;"><i class="fa fa-print" aria-hidden="true"></i></span>&nbsp;&nbsp;&nbsp;<span class="tooltip-blue" tooltip-placement="bottom" tooltip="Remove" ng-click="removeQtnFromGrid(addNewQuote.qtnNo);" style="cursor:pointer;color: #23527c;"><i class="glyphicon glyphicon-trash"></i></span>
+                                   </td>
+                                  
+                                </tr> {{temovetablerow}}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+		   </div>
+   <!--------Print Outs------------->
+            
+                <div id="qtnPrint" class="qtnPrint" style="display:none; height:80%; width:80%; font-family: calibri; font-size:14px;" ng-if="printType==0">
+                
+				<div class="row">
+	        		    <div class="col-sm-12">
+			<div style=" border: solid 0px #000000;">
+				<table width="100%">
+                         <tr align="right"><td><span><img src="image/print_logo.png" style="width:43%;"/></span></td></tr>
+				</table>
+                </div>
+                	<div align="center" ng-repeat="funititem in qtnTableFormData">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:14px;font-family: calibri;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;font-family: calibri;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;">{{funititem.custName}}</td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.qtnNo}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;">{{funititem.attention}}</td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.dateQuote}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;">{{funititem.telephone}}</td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.salesMan}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.custRef}}</td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:14px;font-family: calibri;"><p>Dear Sir/Madam,</p></span>
+                     <span style="font-weight:bold ;font-size:14px;font-family: calibri;">RE :&nbsp;{{subject}}</span>
+                     <span style="font-weight:normal ;font-size:14px;font-family: calibri;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>
+                   <div>
+                         <table width="100%" border="0" style="border-collapse:collapse;font-size:14px;font-family: calibri;">
+						    <thead style="font-weight:bold;font-size:14px;font-family: calibri;">
+							     <tr>
+									<th style="width:5%; text-decoration:underline;text-align:left;">S/N</th>
+									<th style="width:60%;text-decoration:underline;"><p align="center">Description</p></th>
+									<th style="width:5%;text-decoration:underline;text-align:center;">Qty</th>
+									<th style="width:15%;text-decoration:underline;text-align:center;">Unit Price</th>		
+									<th style="width:15%;text-align:right;text-decoration:underline;">Total Price</th>			
+                                 </tr>
+								 
+							</thead>
+				            <tbody style="font-weight:bold;font-size:14px;font-family: calibri;" ng-repeat="funititemGrid in qtnFormGridData">
+                            <!--<tr>
+                                 
+                                <td style="width:5%;"></td> 
+                                <td style="width:60%;">accessories</td>
+                                <td style="width:5%;text-align:center;"></td>
+                                <td style="width:5%;text-align:center;"></td>
+                                <td style="width:15%;text-align:right;"></td>				
+                            </tr>-->
+                            <tr>
+                                 
+                                <td style="width:5%;padding: 0px 0px 40px 0px;">{{$index+1}}</td> 
+                                <td style="width:60%;"><span>{{funititemGrid.accessories}}</span><br><span>Model:&nbsp;{{funititemGrid.model}}</span><br><span>Motor Details:&nbsp;{{funititemGrid.motorPower+"kW,"}}&nbsp;{{funititemGrid.pole+"P,"}}&nbsp;{{funititemGrid.phase+"Ph,"}}&nbsp;{{funititemGrid.voltage+"V,"}}&nbsp;{{funititemGrid.freq+"Hz,"}}&nbsp;{{funititemGrid.outPutRPM+"rpm"}}</span><br><span>Special Features:&nbsp;{{funititemGrid.specialFeaturs}}</span><br><span>S/N:&nbsp;{{funititemGrid.perSN}}</span></td>
+                                <td style="width:5%;text-align:center;padding: 0px 0px 40px 0px;"><span>{{funititemGrid.qnty}}</span></td>
+                                <td style="width:5%;text-align:center;padding: 0px 0px 40px 0px;"><span><b>$</b>&nbsp;&nbsp;{{funititemGrid.unitPrice}}</span></td>
+                                <td style="width:15%;text-align:right;padding: 0px 0px 40px 0px;"><span><b>$</b>&nbsp;&nbsp;{{funititemGrid.totalPrice}}</span></td>				
+                            </tr>
+							</tbody>
+                            <tfoot style="font-weight:bold;font-size:14px;font-family: calibri;">
+                               <tr>
+                                 <td style="width:5%;"></td>
+                                 <td style="width:60%;">Sub-Total</td>
+                                 <td style="width:5%;"></td>
+                                 <td style="width:15%;"></td>
+                                 <td style="width:15%; text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{subTotal}}</span></td>
+                               </tr>
+                               <tr>
+                                <td style="width:5%;"></td> 
+                                <td style="width:60%;"><span>{{tax}}&nbsp;&nbsp;{{taxPercent}}%</span></td>
+                                <td style="width:5%;"></td>
+                                <td style="width:15%;"></td>
+                                <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{addedTax}}</span></td>				
+                            </tr>
+                            <tr style="border: 1px solid #000; border-left:none; border-right:none;">
+                                <td style="width:5%;"></td> 
+                                <td style="width:60%;">Total</td>
+                                <td style="width:5%;"></td>
+                                <td style="width:15%;"></td>
+                                <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{grandTotal}}</span></td>				
+                            </tr>
+                            </tfoot>
+				         </table>
+                    </div>
+                    <br>
+					<span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Note</span>
+                    <div>
+                                       <textarea class="form-control" cols="100" rows="6" name="remarks" ng-bind="remarks"  style="font-weight:normal;color:#000000; border:0px solid #ffffff;font-size:14px; font-family:Calibri"></textarea>
+                                </div>
+                    <br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Terms and Conditions:</span>
+                     <div>
+                                   <table width="100%" style="font-weight:normal;font-size:14px;font-family: calibri;">
+                                      <tr ng-repeat="term in qtnFormTermData">
+                                          <td>{{term.modelTerm}}</td>
+                                          <td>:&nbsp;{{term.modelCon}}</td>
+                                      </tr>
+                                        
+                                       
+                                 </table>      
+                                </div>
+                    <br>
+                    <sapn style="font-weight:normal; font-size:14px; font-family: calibri;">Please do not hesitate to contact us if you need further assistance.</span><br><br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px; font-family: calibri;">Best Regards</span><br><br>
+                    <div>
+                          <table width="100%" style="font-weight:bold; font-size:14px;font-family: calibri;">
+                           <tbody>
+                                <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{salesManName}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{createdBy}}</td>
+                               </tr>
+                                 <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;"></td>
+                               </tr>
+                           </tbody>
+				     </table>
+                    </div>
+				</div>
+			</div>	
+				
+				</div> 
+                <div id="qtnPrint" class="qtnPrint" style="display:none; height:80%; width:80%; font-family: calibri; font-size:14px;" ng-if="printType==1">
+               
+				<div class="row">
+	        		    <div class="col-sm-12">
+			<div style=" border: solid 0px #000000;">
+				<table width="100%">
+                         <tr align="right"><td><span><img src="image/print_logo.png" style="width:43%;"/></span></td></tr>
+				</table>
+                </div>
+                	<div align="center" ng-repeat="projectItem in qtnTableFormData">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:14px;font-family: calibri;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;font-family: calibri;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;">{{projectItem.custName}}</td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;">{{projectItem.qtnNo}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;">{{projectItem.attention}}</td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;">{{projectItem.dateQuote}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;">{{projectItem.telephone}}</td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;">{{projectItem.salesMan}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;">{{projectItem.custRef}}</td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:14px;font-family: calibri;"><p>Dear Sir/Madam,</p></span>
+                     <span style="font-weight:bold ;font-size:14px;font-family: calibri;">RE :&nbsp;{{subject}}</span>
+                     <span style="font-weight:normal ;font-size:14px;font-family: calibri;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>
+                   <div>
+                         <table width="100%" border="1" style="border-collapse:collapse;font-size:14px;font-family: calibri;">
+						    <thead style="font-weight:bold;font-size:14px; border: 1px solid #000;font-family: calibri;">
+							     <tr>
+									<th style="width:5%; text-decoration:underline;text-align:left;padding: 0px 0px 10px 0px;">S/N</th>
+									<th style="width:30%;text-decoration:underline;"><p align="">Description</p></th>
+                                    <th style="width:10%;text-decoration:underline;"><p align="">Sumitomo<br>model</p></th>
+                                    <th style="width:5%;text-decoration:underline;text-align:center;">Motor<br>(kW)</th>
+                                    <th style="width:5%;text-decoration:underline;text-align:center;">Ratio</th>
+                                    <th style="width:7%;text-decoration:underline;text-align:center;">O/P speed<br>rpm</th>
+                                    <th style="width:5%;text-decoration:underline;text-align:center;">Cyclo<br>SFG</th>
+									<th style="width:3%;text-decoration:underline;text-align:center;">Qty</th>
+									<th style="width:15%;text-decoration:underline;text-align:right;">Unit Price<br>(IDR)</th>		
+									<th style="width:15%;text-align:right;text-decoration:underline;">Total Price<br>(IDR)</th>			
+                                 </tr>
+								 
+							</thead>
+				            <tbody style="font-weight:normal;font-size:14px;border: 1px solid #000;font-family: calibri;">
+                            <!--<tr ng-repeat="projectItemGrid in qtnFormGridData">
+                                <td style="width:5%;padding: 0px 0px 105px 0px;">{{$index+1}}</td> 
+                               
+                                <td style="width:60%;padding: 0px 0px 45px 0px;font-family: calibri;"><span>{{funititemGrid.accessories}}</span><br><span>Model:&nbsp;{{funititemGrid.model}}</span><br><span>Motor Details:&nbsp;{{funititemGrid.motorPower+","}}&nbsp;{{funititemGrid.pole+","}}&nbsp;{{funititemGrid.phase+","}}&nbsp;{{funititemGrid.voltage+","}}&nbsp;{{funititemGrid.freq+","}}&nbsp;{{funititemGrid.outPutRPM}}</span><br><span>Special Features:&nbsp;{{funititemGrid.specialFeaturs}}</span><br><span>S/N:&nbsp;{{funititemGrid.perSN}}</span></td>
+                                <td style="width:5%;padding: 0px 0px 105px 0px;text-align:center;"><span>{{funititemGrid.qnty}}</span></td>
+                                <td style="width:5%;padding: 0px 0px 105px 0px;text-align:center;"><span><b>$</b>{{funititemGrid.unitPrice}}</span></td>
+                                <td style="width:15%;text-align:right;padding: 0px 0px 105px 0px;"><span>{{funititemGrid.totalPrice}}</span></td>				
+                            </tr>-->
+                                <tr ng-repeat="projectItemGrid in qtnFormProjectGridData">
+                                    <td style="width:5%;padding: 0px 0px 30px 0px;">{{$index+1}}</td>
+                                    <td style="width:30%;padding: 0px 0px 13px 0px;">{{projectItemGrid.accessories}}</td>
+                                    <td style="width:5%;padding: 0px 0px 30px 0px;">{{projectItemGrid.model}}</td>
+                                    <td style="width:5%;padding: 0px 0px 30px 0px;text-align:center;">{{projectItemGrid.motorPower}}</td>
+                                    <td style="width:5%;padding: 0px 0px 30px 0px;text-align:center;">{{projectItemGrid.ratio}}</td>
+                                    <td style="width:7%;padding: 0px 0px 30px 0px;text-align:center;">{{projectItemGrid.inputRPM}}</td>
+                                    <td style="width:5%;padding: 0px 0px 30px 0px;text-align:center;">{{projectItemGrid.sfactor}}</td>
+                                    <td style="width:3%;text-align:center;padding: 0px 0px 30px 0px;">{{projectItemGrid.qnty}}</td>
+                                    <td style="width:5%;text-align:right;padding: 0px 0px 30px 0px;"><b>Rp</b>&nbsp;&nbsp;{{projectItemGrid.unitPrice}}</td>
+                                    <td style="width:5%;text-align:right;padding: 0px 0px 30px 0px;"><b>Rp</b>&nbsp;&nbsp;{{projectItemGrid.totalPrice}}</td>
+                                </tr>
+                                <!--<tr>
+                                    <td style="width:5%;">2</td>
+                                    <td style="width:30%;">EFB Feeding Conveyor Line A and Line B</td>
+                                    <td style="width:5%;">CHHM10-6175-43</td>
+                                    <td style="width:5%;text-align:right;">7.5</td>
+                                    <td style="width:5%;text-align:right;">43</td>
+                                    <td style="width:5%;text-align:right;">33.7</td>
+                                    <td style="width:5%;text-align:right;">1.51</td>
+                                    <td style="width:5%;text-align:right;">1</td>
+                                    <td style="width:5%;text-align:right;">Rp25,900,000</td>
+                                    <td style="width:5%;text-align:right;">Rp25,900,000</td>
+                                </tr>-->
+							</tbody>
+                            <tfoot style="font-family: calibri;font-size:14px;">
+                               <tr>
+                                 <td style="width:5%;"></td>
+                                 <td style="width:80%;" colspan="8">Sub-Total</td>
+                                 <!--<td style="width:5%;"></td>
+                                 <td style="width:15%;"></td>-->
+                                 <td style="width:15%; text-align:right; font-weight:normal;"><span><b>Rp</b>&nbsp;&nbsp;{{subTotal}}</span></td>
+                               </tr>
+                               <tr>
+                                <td style="width:5%;"></td> 
+                                <td style="width:80%;" colspan="8"><span>{{tax}}&nbsp;&nbsp;{{taxPercent}}%</span></td>
+                                <!--<td style="width:5%;"></td>
+                                <td style="width:15%;"></td>-->
+                                <td style="width:15%;text-align:right; font-weight:normal;"><span><b>Rp</b>&nbsp;&nbsp;{{addedTax}}</span></td>				
+                            </tr>
+                            <tr style="border: 1px solid #000; border-left:none; border-right:none;">
+                                <td style="width:5%;"></td> 
+                                <td style="width:80%;" colspan="8">Total</td>
+                                <!--<td style="width:5%;"></td>
+                                <td style="width:15%;"></td>-->
+                                <td style="width:15%;text-align:right;"><span><b>Rp</b>&nbsp;&nbsp;{{grandTotal}}</span></td>				
+                            </tr>
+                            </tfoot>
+				         </table>
+                    </div>
+                    <br>
+					<span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Note</span>
+                    <div>
+                                       <textarea class="form-control" name="remarks" ng-bind="remarks"  style="font-weight:normal;color:#000000;border:0px solid #ffffff;font-size:14px;font-family: calibri;width: 100%;height: 140px;"></textarea>
+                                </div>
+                    <br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Terms and Conditions:</span>
+                     <div>
+                                   <table width="100%" style="font-weight:normal;font-size:14px;font-family: calibri;">
+                                      <tr ng-repeat="term in qtnFormTermData">
+                                          <td>{{term.modelTerm}}</td>
+                                          <td>:&nbsp;{{term.modelCon}}</td>
+                                      </tr>
+                                        
+                                       
+                                 </table>      
+                                </div>
+                    
+                    <sapn style="font-weight:normal; font-size:14px;font-family: calibri;">Please do not hesitate to contact us if you need further assistance.</span><br><br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Best Regards</span><br>
+                    <div>
+                          <table width="100%" style="font-weight:bold; font-size:14px;font-family: calibri;">
+				            <!--<tr>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;">{{salesManName}}</td>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;">{{createdBy}}</td>
+                           </tr>
+                             <tr>
+                                <td style="width:100%;font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                
+                           </tr>-->
+                           <tbody>
+                                <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{salesManName}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{createdBy}}</td>
+                               </tr>
+                                 <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;"></td>
+                               </tr>
+                           </tbody>
+                           
+				     </table>
+                    </div>
+				</div>
+			</div>	
+				
+				</div>
+               
+               
+               <div id="qtnPrint" class="qtnPrint" style="display:none; height:80%; width:80%; font-family: calibri; font-size:14px;" ng-if="printType==2">
+               
+				   <div class="row">
+	        		    <div class="col-sm-12">
+			<div style=" border: solid 0px #000000;">
+				<table width="100%">
+                         <tr align="right"><td><span><img src="image/print_logo.png" style="width:43%;"/></span></td></tr>
+				</table>
+                </div>
+                	<div align="center" ng-repeat="funititem in qtnTableSparePartData">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:14px;font-family: calibri;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;font-family: calibri;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;">{{funititem.custName}}</td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.qtnNo}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;">{{funititem.attention}}</td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.dateQuote}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;">{{funititem.telephone}}</td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.salesMan}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;">{{funititem.custRef}}</td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:14px;font-family: calibri;"><p>Dear Sir/Madam,</p></span>
+                     <span style="font-weight:bold ;font-size:14px;font-family: calibri;">RE :&nbsp;{{subject}}</span>
+                     <span style="font-weight:normal ;font-size:14px;font-family: calibri;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>
+                     <div>
+                            <table width="100%" border="0" style="font-size:14px;font-weight:bold; border-collapse:collapse;font-family: calibri;">
+                                   <tbody ng-repeat="sparepartItem in qtnFormGridSparePartData" style="font-weight:bold;font-size:14px;font-family: calibri;">
+                                        <tr>
+                                            <td style="width:10%;"></td>
+                                            <td style="width:90%;" colspan="4"><span style="text-decoration:underline;">Equip:&nbsp;{{sparepartItem.equipNo}},&nbsp;Model:&nbsp;{{sparepartItem.motor}},&nbsp;&nbsp;(S/N:&nbsp;{{sparepartItem.snum}})</span></td>
+                                            
+                                         </tr>
+                                        <tr>
+                                            <td style="width:5%;text-decoration:underline;text-align:left;">S/N</td>
+                                            <td style="width:10%;text-decoration:underline;"><p align="left">Part No</p></td>
+                                            <td style="width:50%;text-decoration:underline;"><p align="left">Description</p></td>
+                                            <td style="width:5%;text-decoration:underline;text-align:center;">Qty</td>
+                                            <td style="width:15%;text-decoration:underline;text-align:center;">Unit Price</td>		
+                                            <td style="width:15%;text-decoration:underline;text-align:right;">Total Price</td>			
+                                         </tr>
+                                         <tr ng-repeat="PartItems in sparepartItem.data" style="font-weight:bold;font-size:14px;">
+                                            <td style="width:5%;text-align:left; font-weight:normal;">{{PartItems.id}}</td> 
+                                            <td style="width:10%;text-align:left; font-weight:normal;">{{PartItems.partNumber}}</td>
+                                            <td style="width:50%;text-align:left; font-weight:normal;">:&nbsp;{{PartItems.partDesp}}</td>
+                                            <td style="width:5%;text-align:center; font-weight:normal;">{{PartItems.qnty}}</td>
+                                            <td style="width:15%;text-align:center; font-weight:normal;"><span><b>$</b>&nbsp;&nbsp;{{PartItems.unitPrice}}</span></td>
+                                            <td style="width:15%;text-align:right; font-weight:normal;"><span><b>$</b>&nbsp;&nbsp;{{PartItems.totalPrice}}</span></td>
+                                        </tr>
+                                   </tbody>
+                                   <tfoot style="font-family: calibri;font-size:14px;">
+                                       <tr>
+                                         <td style="width:5%;"></td>
+                                         <td style="width:80%;" colspan="4">Sub-Total</td>
+                                         <!--<td style="width:5%;"></td>
+                                         <td style="width:15%;"></td>-->
+                                         <td style="width:15%; text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{subTotal}}</span></td>
+                                       </tr>
+                                       <tr>
+                                        <td style="width:5%;"></td> 
+                                        <td style="width:80%;" colspan="4"><span>{{tax}}&nbsp;&nbsp;{{taxPercent}}%</span></td>
+                                        <!--<td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>-->
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{addedTax}}</span></td>				
+                                    </tr>
+                                    <tr style="border: 1px solid #000; border-left:none; border-right:none;">
+                                        <td style="width:5%;"></td> 
+                                        <td style="width:80%;" colspan="4">Total</td>
+                                        <!--<td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>-->
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{grandTotal}}</span></td>				
+                                    </tr>
+                                    </tfoot>
+                            </table>
+                     </div>
+                 
+                    <br>
+					<span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Note</span>
+                    <div>
+                                       <textarea class="form-control" cols="100" rows="6" name="remarks" ng-bind="sparePartremarks"  style="font-weight:normal;color:#000000; border:0px solid #ffffff;font-size:14px; font-family: calibri;"></textarea>
+                                </div>
+                    <br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;">Terms and Conditions:</span>
+                     <div>
+                                   <table width="100%" style="font-weight:normal;font-size:14px;font-family: calibri;">
+                                      <tr ng-repeat="spareTerm in qtnFormTermSparePartData">
+                                          <td>{{spareTerm.modelTerm}}</td>
+                                          <td>:&nbsp;{{spareTerm.modelCon}}</td>
+                                      </tr>
+                                        
+                                       
+                                 </table>      
+                                </div>
+                    <br>
+                    <sapn style="font-weight:normal; font-size:14px;font-family: calibri;">Please do not hesitate to contact us if you need further assistance.</span><br><br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Best Regards</span><br><br>
+                    <div>
+                          <table width="100%" style="font-weight:bold; font-size:14px; font-family: calibri;">
+				           <!-- <tr>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;">{{salesManName}}</td>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;">{{createdBy}}</td>
+                           </tr>
+                             <tr>
+                                <td style="width:100%;font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                
+                           </tr>-->
+                           <tbody>
+                                <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{salesManName}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{createdBy}}</td>
+                               </tr>
+                                 <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;"></td>
+                               </tr>
+                           </tbody>
+                           
+				     </table>
+                    </div>
+				</div>
+			</div>
+				
+				</div>
+               <!--<div id="qtnPrint" class="qtnPrint" style="display:; height:80%; width:80%; font-family: Arial,sans-serif; font-size:10px;" >
+                Service part
+					<div class="row">
+	        		    <div class="col-sm-12">
+			<div style=" border: solid 0px #000000;">
+				<table width="100%">
+                         <tr align="right"><td><span><img src="image/print_logo.png" style="width:43%;"/></span></td></tr>
+				</table>
+                </div>
+                	<div align="center" ng-repeat="serviceItem in qtnTableServiceData">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:11px;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;"><span>{{serviceItem.custName}}</span></td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;"><span>{{serviceItem.qtnNo}}</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;font-weight:lighter;"><span>{{serviceItem.attention}}</span></td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;"><span>{{serviceItem.dateQuote}}</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;font-weight:lighter;"><span>{{serviceItem.telephone}}</span></td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;"><span>{{serviceItem.salesMan}}</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;font-weight:lighter;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;"><span>{{serviceItem.custRef}}</span></td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:11px;"><p>Dear Sir,</p></span>
+                     <span style="font-weight:bold ;font-size:11px;">RE :&nbsp;{{subject}}</span>
+                     <span style="font-weight:normal ;font-size:11px;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>
+                     <div>
+                            <table width="100%" border="0" style="font-size:14px;font-weight:bold; border-collapse:collapse;">
+                                   <tbody ng-repeat="servicetItem in qtnFormGridServiceData" style="font-weight:bold;font-size:14px;">
+                                        <tr>
+                                            <td style="width:10%;"></td>
+                                            <td style="width:90%;" colspan="4"><span style="text-decoration:underline;">Equip:&nbsp;,&nbsp;Model&nbsp;{{servicetItem.motor}},&nbsp;&nbsp;{{servicetItem.snum}}</span></td>
+                                            
+                                         </tr>
+                                        <tr>
+                                            <td style="width:5%;text-decoration:underline;text-align:left;">S/N</td>
+                                            <td style="width:10%;text-decoration:underline;"><p align="left">Part No</p></td>
+                                            <td style="width:50%;text-decoration:underline;"><p align="left">Description</p></td>
+                                            <td style="width:5%;text-decoration:underline;text-align:center;">Qty</td>
+                                            <td style="width:15%;text-decoration:underline;text-align:center;">Unit Price</td>		
+                                            <td style="width:15%;text-decoration:underline;text-align:right;">Total Price</td>			
+                                         </tr>
+                                         <tr ng-repeat="servicePart in servicetItem.data" style="font-weight:bold;font-size:14px;">
+                                            <td style="width:5%;text-align:left;">{{servicePart.id}}</td> 
+                                            <td style="width:10%;text-align:left;">{{servicePart.partNumber}}</td>
+                                            <td style="width:50%;text-align:left;">:&nbsp;{{servicePart.partDesp}}</td>
+                                            <td style="width:5%;text-align:center;">{{servicePart.qnty}}</td>
+                                            <td style="width:15%;text-align:center;">{{servicePart.unitPrice}}</td>
+                                            <td style="width:15%;text-align:right;"><b>$</b>{{servicePart.totalPrice}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:5%;text-align:left;">1</td> 
+                                            <td style="width:10%;text-align:left;">2</td>
+                                            <td style="width:50%;text-align:left;">3</td>
+                                            <td style="width:5%;text-align:center;">4</td>
+                                            <td style="width:15%;text-align:center;">5</td>
+                                            <td style="width:15%;text-align:right;"><b>$</b>6</td>
+                                        </tr>
+                                   </tbody>
+                                   <tfoot>
+                                       <tr>
+                                         <td style="width:5%;"></td>
+                                         <td style="width:10%;"></td>
+                                         <td style="width:50%;">Sub-Total</td>
+                                         <td style="width:5%;"></td>
+                                         <td style="width:15%;"></td>
+                                         <td style="width:15%; text-align:right;"><span><b>$</b>{{subTotal}}</span></td>
+                                       </tr>
+                                       <tr>
+                                        <td style="width:5%;"></td>
+                                        <td style="width:10%;"></td> 
+                                        <td style="width:50%;"><span>{{tax}}&nbsp;&nbsp;{{taxPercent}}%</span></td>
+                                        <td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>{{addedTax}}</span></td>				
+                                    </tr>
+                                    <tr style="border: 1px solid #000; border-left:none; border-right:none;">
+                                        <td style="width:5%;"></td>
+                                        <td style="width:10%;"></td>  
+                                        <td style="width:50%;">Total</td>
+                                        <td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>{{grandTotal}}</span></td>				
+                                    </tr>
+                                    </tfoot>
+                            </table>
+                     </div>
+                 
+                    <br>
+					<span style="font-weight:bold; color:#000000;font-size:11px;">Note</span>
+                    <div>
+                                       <textarea class="form-control" cols="100" rows="4" name="remarks" ng-bind="serviceremarks"  style="font-weight:normal;color:#000000; border:0px solid #ffffff;font-size:14px; font-family:Calibri"></textarea>
+                                </div>
+                    <br>
+                    <span style="font-weight:bold; color:#000000;font-size:11px;">Terms and Conditions:</span>
+                     <div>
+                                   <table width="100%" style="font-weight:normal;font-size:14px;">
+                                      <tr ng-repeat="serviceTerm in qtnFormTermServiceData">
+                                          <td>{{serviceTerm.modelTerm}}</td>
+                                          <td>:&nbsp;{{serviceTerm.modelCon}}</td>
+                                      </tr>
+                                        
+                                       
+                                 </table>      
+                                </div>
+                    <br>
+                    <sapn style="font-weight:normal; font-size:11px;">Please do not hesitate to contact us if you need further assistance.</span><br><br>
+                    <span style="font-weight:bold; color:#000000;font-size:11px;">Best Regards</span><br><br>
+                    <div align="center">
+                          <table width="100%" style="font-weight:bold; font-size:11px;">
+				            <tr>
+                                <td style="width:20%;font-weight:bold; color:#000000;font-size:11px;"><span>{{salesManName}}</span></td>
+                                <td style="width:80%;font-weight:bold; color:#000000;font-size:11px;"><span>{{createdBy}}</span></td>
+                           </tr>
+                             <tr>
+                                <td style="width:20%;font-weight:bold; color:#000000;font-size:11px;">Mobile: {{salesmanPhNo}}</td>
+                                
+                           </tr>
+                           
+				     </table>
+                    </div>
+				</div>
+			</div>
+				
+				</div>-->
+                <div id="qtnPrint" class="qtnPrint" style="display:none; height:80%; width:80%; font-family: calibri; font-size:14px;" ng-if="printType==3">
+                
+					<div class="row">
+	        		    <div class="col-sm-12">
+			<div style=" border: solid 0px #000000;">
+				<table width="100%">
+                         <tr align="right"><td><span><img src="image/print_logo.png" style="width:43%;"/></span></td></tr>
+				</table>
+                </div>
+                    <div align="center" ng-repeat="serviceItem in qtnTableServiceData">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:14px;font-family: calibri;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;font-family: calibri;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;">{{serviceItem.custName}}</td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;">{{serviceItem.qtnNo}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;">{{serviceItem.attention}}</td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;">{{serviceItem.dateQuote}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;">{{serviceItem.telephone}}</td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;">{{serviceItem.salesMan}}</td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;">{{serviceItem.custRef}}</td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:14px;font-family: calibri;"><p>Dear Sir/Madam,</p></span>
+                     <span style="font-weight:bold ;font-size:14px;font-family: calibri;">RE :&nbsp;{{subject}}</span>
+                     <span style="font-weight:normal ;font-size:14px;font-family: calibri;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>
+                	<!--<div align="center">
+                    <table style="width:100%; border-collapse:collapse; border: 1px solid #000; font-size:11px;">
+                       <tbody style="border: 1px solid #000;border-left: none;border-right: none;">
+                         <tr style="border-top: none;border-bottom: 1px solid;">
+                        	<td style="width:10%;">To:</td>
+                            <td style="width:40%;"><span>SONY ELECTRONICS SINGAPORE</span></td>
+                            <td style="width:10%;">Ref. No:</td>
+                            <td style="width:40%;text-align:right;"><span>QSSN-160202-Rev1</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Attn:</td>
+                            <td style="width:40%;font-weight:lighter;"><span>Mr/s Chan Lee Ai</span></td>
+                            <td style="width:10%;">Date:</td>
+                            <td style="width:40%;text-align:right;"><span>06/30/2016</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;">Tel :</td>
+                            <td style="width:40%;font-weight:lighter;"><span>6864 6732</span></td>
+                            <td style="width:10%;">From:</td>
+                            <td style="width:40%;text-align:right;"><span>Nick Low</span></td>                            
+                        </tr>
+                    	<tr>
+                        	<td style="width:10%;"></td>
+                            <td style="width:40%;font-weight:lighter;"></td>
+                            <td style="width:10%;">Your Ref:</td>
+                            <td style="width:40%;text-align:right;"><span>3Np-008</span></td>                            
+                        </tr>
+                       </tbody>
+                    </table>
+                    </div>
+                     <span style="font-weight:normal; font-size:11px;"><p>Dear Sir,</p></span>
+                     <span style="font-weight:bold ;font-size:11px;">RE :&nbsp;Sumitomo Service Job for Hyponic Gearhead Only RNYX-1420-5P-7 (S/N: N0FBM447)</span>
+                     <span style="font-weight:normal ;font-size:11px;"><p>Thank you for your valued inquiry. We are pleased to make the following offer.</p></span>-->
+                     <div>
+                            <table width="100%" border="0" style="font-size:14px;font-weight:bold; border-collapse:collapse;font-family: calibri;">
+                                   <tbody ng-repeat="servicetItem in qtnFormGridServiceData" style="font-weight:bold;font-size:14px;font-family: calibri;">
+                                        <tr>
+                                            <td style="width:10%;"></td>
+                                            <td style="width:90%;" colspan="4"><span style="text-decoration:underline;">Equip:&nbsp;{{servicetItem.equipNo}},&nbsp;Model:&nbsp;{{servicetItem.motor}},&nbsp;&nbsp;(S/N:&nbsp;{{servicetItem.snum}})</span></td>
+                                            
+                                         </tr>
+                                        <tr>
+                                            <td style="width:5%;text-decoration:underline;text-align:left;">S/N</td>
+                                            <td style="width:20%;text-decoration:underline;"><p align="left">Part No</p></td>
+                                            <td style="width:30%;text-decoration:underline;"><p align="left">Description</p></td>
+                                            <td style="width:5%;text-decoration:underline;text-align:center;">Qty</td>
+                                            <td style="width:15%;text-decoration:underline;text-align:center;">Unit Price</td>		
+                                            <td style="width:15%;text-decoration:underline;text-align:right;">Total Price</td>			
+                                         </tr>
+                                         <tr ng-repeat="servicePart in servicetItem.data" style="font-weight:bold;font-size:14px;">
+                                            <td style="width:5%;text-align:left;">{{servicePart.id}}</td> 
+                                            <td style="width:20%;text-align:left;">{{servicePart.partNumber}}</td>
+                                            <td style="width:30%;text-align:left;">:&nbsp;{{servicePart.partDesp}}</td>
+                                            <td style="width:5%;text-align:center;">{{servicePart.qnty}}</td>
+                                            <td style="width:15%;text-align:center;"><b>$</b>&nbsp;&nbsp;{{servicePart.unitPrice}}</td>
+                                            <td style="width:15%;text-align:right;"><b>$</b>&nbsp;&nbsp;{{servicePart.totalPrice}}</td>
+                                        </tr>
+                                        
+                                   </tbody>
+                                   <tbody ng-repeat="despt in qtnGridServiceDesp" style="font-weight:bold;font-size:14px;font-family: calibri;">
+                                       <tr>
+                                            <td style="width:5%;text-align:left;text-decoration:underline;text-align:left;">S/N</td> 
+                                            <td style="width:60%;text-align:left;text-decoration:underline;" colspan="2">Description</td>
+                                            <td style="width:5%;text-align:center;text-decoration:underline;text-align:center;">Qty</td>
+                                            <td style="width:15%;text-align:center;text-decoration:underline;text-align:center;">Unit Price</td>
+                                            <td style="width:15%;text-align:right;text-decoration:underline;text-align:right;">Total Price</td>
+                                             
+                                       </tr>
+                                       <tr>
+                                            <td style="width:10%;"></td>
+                                            <td style="width:90%;" colspan="4"><span style="text-decoration:none;">Equip:&nbsp;{{despt.equipNo}},&nbsp;Model:&nbsp;{{despt.model}}&nbsp;&nbsp;(S/N:&nbsp;{{despt.serialNumber}})</span></td>
+                                         </tr>
+                                       <tr>
+                                            <td style="width:5%;text-align:left;">{{despt.id}}</td> 
+                                            <td style="width:60%;text-align:left;" colspan="2">{{despt.productDesp}}</td>
+                                            <!--<td style="width:50%;text-align:left;">:&nbsp;{{servicePart.partdesp}}</td>-->
+                                            <td style="width:5%;text-align:center;">{{despt.qnty}}</td>
+                                            <td style="width:15%;text-align:center;"><b>$</b>&nbsp;&nbsp;{{despt.unitPrice}}</td>
+                                            <td style="width:15%;text-align:right;"><b>$</b>&nbsp;&nbsp;{{despt.totalPrice}}</td>
+                                             <!--<td style="width:5%;"></td>
+                                             <td style="width:10%;"></td>
+                                             <td style="width:50%;">Transportation per way</td>
+                                             <td style="width:5%;">2</td>
+                                             <td style="width:15%;">50</td>
+                                             <td style="width:15%; text-align:right;"><span><b>$</b>100</span></td>-->
+                                       </tr>
+                                   </tbody>
+                                   <tfoot style="font-family: calibri;font-size:14px;">
+                                       <tr>
+                                         <td style="width:5%;"></td>
+                                         <td style="width:60%;" colspan="2">Sub-Total</td>
+                                         <!--<td style="width:50%;"></td>-->
+                                         <td style="width:5%;"></td>
+                                         <td style="width:15%;"></td>
+                                         <td style="width:15%; text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{subTotal}}</span></td>
+                                       </tr>
+                                       <tr>
+                                        <td style="width:5%;"></td>
+                                        <td style="width:60%;" colspan="2"><span>{{tax}}&nbsp;&nbsp;{{taxPercent}}%</span></td> 
+                                        <!--<td style="width:50%;"></td>-->
+                                        <td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{addedTax}}</span></td>				
+                                    </tr>
+                                    <tr style="border: 1px solid #000; border-left:none; border-right:none;">
+                                        <td style="width:5%;"></td>
+                                        <td style="width:60%;" colspan="2">Total</td>  
+                                       <!-- <td style="width:50%;"></td>-->
+                                        <td style="width:5%;"></td>
+                                        <td style="width:15%;"></td>
+                                        <td style="width:15%;text-align:right;"><span><b>$</b>&nbsp;&nbsp;{{grandTotal}}</span></td>				
+                                    </tr>
+                                    </tfoot>
+                            </table>
+                     </div>
+                 
+                    <br>
+					<span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Note</span>
+                    <div>
+                                      <textarea class="form-control" cols="100" rows="6" name="remarks" ng-bind="serviceremarks"  style="font-weight:normal;color:#000000; border:0px solid #ffffff;font-size:14px; font-family: calibri;"></textarea>
+                                </div>
+                    <br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Terms and Conditions:</span>
+                     <div>
+                                   <table width="100%" style="font-weight:normal;font-size:14px;font-family: calibri;">
+                                      <tr ng-repeat="serviceTerm in qtnFormTermServiceData">
+                                          <td>{{serviceTerm.modelTerm}}</td>
+                                          <td>:&nbsp;{{serviceTerm.modelCon}}</td>
+                                      </tr>
+                                        
+                                       
+                                 </table>      
+                                </div>
+                    <br>
+                    <sapn style="font-weight:normal; font-size:14px;font-family: calibri;">Please do not hesitate to contact us if you need further assistance.</span><br><br>
+                    <span style="font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Best Regards</span><br><br>
+                    <div>
+                          <table width="100%" style="font-weight:bold; font-size:14px;font-family: calibri;">
+				            <!--<tr>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">{{salesManName}}</td>
+                                <td style="width:50%;font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">{{createdBy}}</td>
+                           </tr>
+                             <tr>
+                                <td style="width:100%;font-weight:bold; color:#000000;font-size:14px;font-family: calibri;">Mobile: {{salesmanPhNo}}</td>
+                                
+                           </tr>-->
+                           <tbody>
+                                <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{salesManName}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;width: 50%;">{{createdBy}}</td>
+                               </tr>
+                                 <tr>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;">Mobile: {{salesmanPhNo}}</td>
+                                    <td style="font-weight:bold; color:#000000;font-size:14px;"></td>
+                               </tr>
+                           </tbody>
+                           
+				     </table>
+                    </div>
+				</div>
+			</div>
+				
+				</div>
+
+	</div>		
+									
+
+</div>
+

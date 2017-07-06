@@ -1,0 +1,51 @@
+﻿<style>
+td { height:50px;}
+</style>					
+						
+<div class="horizontal-space"></div>
+<div class="row">
+    
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue">
+               Sales Progress Weightage
+            </div>
+			<div class="row">
+			     <div class="col-sm-6">
+				      <div class="form-group">                                
+                 	<select class="form-control"> 
+					    <option value="">Customer Group</option>
+ 					</select>
+			    </div>
+				 </div>
+				 
+			</div>
+		     <br/>
+			<div ng-controller="ModalDemoCtrl">
+			<div class="table-scrollable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr> 
+						     <th align="center"><a href="" style="text-align:center;"><img  ng-click="addRow(); " class="imagewidth" src="image/Medical__Health_care-100-20-128.png" style="width:30px; height:30px; text-align:center;"/></a></th>
+ 							<th>Progress Indicator</th>
+							<th>Weight &nbsp;%</th>
+  						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="rowContent in rows">
+							<td></td>
+							<td></td>
+							<td></td>
+ 						</tr>
+ 					</tbody>
+				</table>
+			</div>
+          
+        </div>
+		<br /><br />
+				<div align="center">
+				<button class="btn btn-blue"  >Save</button>
+				<button class="btn btn-blue"  >Cancel</button>
+			</div>
+    </div>
+</div>

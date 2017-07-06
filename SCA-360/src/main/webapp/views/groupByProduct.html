@@ -1,0 +1,262 @@
+
+<script type="text/javascript">
+
+  var i=0;
+  //var product = "product";
+  $.getJSON("groupByProduct.do", function(json)
+  {
+  		var ok = "Group By Product YTD";
+	  FusionCharts.ready(function()
+	  {
+		   var fusioncharts = new FusionCharts({
+				    type: 'msstackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '500px',
+				    dataFormat: 'json',
+				    dataSource: {
+								    "chart": {
+												"palette": "2",
+										        "caption": ok,
+												//"formatNumber":'0',
+												//"formatNumberScale":'0',					
+												"decimals":'0',
+
+										        //"subcaption": "Harry's SuperMart",
+										        //"xaxisname": "Quarter",
+										        "yaxisname": "USD (M)",
+												"exportatclient": "1",
+												"exportenabled": "1",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",																								
+												"showsum": "1",
+												"showvalues": "0",
+											     //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										        //"numberPrefix": " $",
+										        //"numbersuffix": " USD",
+										        "bgColor": "#ffffff",
+												"useroundedges": "1",
+												"borderAlpha": "20",
+										        "showCanvasBorder": "0",
+										        "usePlotGradientColor": "0",
+										        "plotBorderAlpha": "10",
+										        "legendBorderAlpha": "0",
+												"legendPosition":"right",
+										        "legendShadow": "1",
+										        "valueFontColor": "#000000",
+										        "showXAxisLine": "1",
+												"xAxisLineColor": "#999999",
+										        "divlineColor": "#999999",
+										        "divLineDashed": "1",
+										        "showAlternateHGridColor": "0",
+										        "subcaptionFontBold": "0",
+										        "subcaptionFontSize": "14",
+												"baseFont":"Helvetica",		
+												"baseFontSize":"14",
+												"rotatelabels": "0",		
+												"rotatevalues": "0",
+												"baseFontColor":"#000000"
+												//"theme":"fint"   		
+										    },
+										    "categories": [{"category":json['category']}],
+										    "dataset": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(JSON.stringify(dataObj));
+													var dataName = dataObj.datasetName;
+													//alert(dataName);
+													var codeName = dataName.split(" ");
+													//alert(dataName.search("Budget"));
+													if(dataName.search("Budget")=='-1')
+													{
+														var codeNameTrim = codeName[1].trim();
+														sessionStorage.setItem("firstData",JSON.stringify(json['data']));
+														sessionStorage.setItem("secondData",JSON.stringify(json['category']));
+														json['category']														
+														asd(dataObj.categoryLabel,codeNameTrim);
+														//$('#goback').show();
+													}
+													
+									            },	
+												dataPlotRollOver:function(event,dataObj)
+												{
+													$(this).css('cursor', 'pointer');
+												}
+									         }
+									}
+							);
+				    fusioncharts.render();
+				});
+		});
+
+		$(document).ready(function()
+		{
+			$('#goback').click(function()
+			{	
+				$('#goback').hide();
+				var json = new Object();
+				json.data = $.parseJSON(sessionStorage.getItem("firstData"));			
+				json.category = $.parseJSON(sessionStorage.getItem("secondData"));			
+				
+					//alert(JSON.stringify(json['data']));
+					var fusioncharts = new FusionCharts({
+				    type: 'msstackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '500px',
+				    dataFormat: 'json',
+				    dataSource: {
+								    "chart": {
+												"palette": "2",
+										        "caption": "Group By Product YTD",
+										        //"subcaption": "Harry's SuperMart",
+										        //"xaxisname": "Quarter",
+												"decimals":'0',
+										        "yaxisname": "USD (M)",
+												"exportatclient": "1",
+												"exportenabled": "1",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",																								
+												"showsum": "1",
+												"showvalues": "0",
+											     //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										       // "numberPrefix": " $",
+										        //"numbersuffix": " USD",
+										        "bgColor": "#ffffff",
+												"useroundedges": "1",
+												"borderAlpha": "20",
+										        "showCanvasBorder": "0",
+										        "usePlotGradientColor": "0",
+										        "plotBorderAlpha": "10",
+										        "legendBorderAlpha": "0",
+												"legendPosition":"right",
+										        "legendShadow": "1",
+										        "valueFontColor": "#000000",
+										        "showXAxisLine": "1",
+												"xAxisLineColor": "#999999",
+										        "divlineColor": "#999999",
+										        "divLineDashed": "1",
+										        "showAlternateHGridColor": "0",
+										        "subcaptionFontBold": "0",
+										        "subcaptionFontSize": "14",
+												"baseFont":"Helvetica",		
+												"baseFontSize":"14",
+												"rotatelabels": "0",		
+												"rotatevalues": "0",
+												"baseFontColor":"#000000"
+												//"theme":"fint"   		
+										    },
+										    "categories": [{"category":json['category']}],
+										    "dataset": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													
+													var dataName = dataObj.datasetName;
+													var codeName = dataName.split(" ");
+
+													if(dataName.search("Budget")=='-1')
+													{
+														var codeNameTrim = codeName[1].trim();
+														sessionStorage.setItem("firstData",JSON.stringify(json['data']));														
+														asd(dataObj.categoryLabel,codeNameTrim);														
+													}
+													
+									            }
+									         }
+									}
+							);
+				    fusioncharts.render();				
+				
+			});
+		});
+		
+		function asd(category,code)
+		{
+		  $.getJSON("groupByProductInner.do?countryname="+category+"&categorycode="+code, function(json)
+		  {
+		  	var titleName = category +"  Booking By Product YTD";
+			$('#goback').show();		  	
+			var fusioncharts = new FusionCharts({
+				    type: 'column2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '80%',
+				    dataFormat: 'json',
+				    dataSource: {
+								    "chart": {
+												"palette": "2",
+										        "caption": titleName,
+												"decimals":'0',
+										        //"subcaption": "Harry's SuperMart",
+										        //"xaxisname": "Quarter",
+										        "yaxisname": "USD (M)",
+												"exportatclient": "1",
+												"exportenabled": "1",
+												"exporthandler": "http://export.api3.fusioncharts.com",
+												"html5exporthandler": "http://export.api3.fusioncharts.com",												
+												"showsum": "1",
+												"showvalues": "0",
+										        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+											   // "numberPrefix": "",
+										        //"numbersuffix": "",
+												"bgColor": "#ffffff",
+												"useroundedges": "1",
+										        "borderAlpha": "20",
+										        "showCanvasBorder": "0",
+										        "usePlotGradientColor": "0",
+										        "plotBorderAlpha": "10",
+										        "legendBorderAlpha": "0",
+												"legendPosition":"right",
+										        "legendShadow": "1",
+										        "valueFontColor": "#000000",
+										        "showXAxisLine": "1",
+										        "xAxisLineColor": "#999999",
+										        "divlineColor": "#999999",
+										        "divLineDashed": "1",
+										        "showAlternateHGridColor": "0",
+										        "subcaptionFontBold": "0",
+										        "subcaptionFontSize": "14",
+												"baseFont":"Helvetica",		
+												"baseFontSize":"14",
+												"rotatelabels": "0",		
+												"rotatevalues": "0",
+												"baseFontColor":"#000000",
+												"showLegend":'1'
+												//"theme":"fint"   		
+										    },
+										    //"categories": [{"category":json['category']}],
+										    "data": json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);		
+													//alert(dataObj.datasetName);		
+													//asd();
+									            }
+									        }
+									}
+							);
+						    fusioncharts.render();
+						});
+					}
+
+</script>
+
+<div class="row">
+	<div class="col-sm-12">
+	<div style="float: right; margin-right:20px; margin-top:10px;"><p><input type="button" id="goback" value="< Go Back" style=" border:none; display:none;"/></p></div>
+		<div id="chart-container" style="width:100%; height: 500px; margin: 0 ">
+      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  </div>
+		</div>
+	</div>
+</div> 
+ 
+
+

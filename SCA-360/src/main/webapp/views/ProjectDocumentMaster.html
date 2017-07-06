@@ -1,0 +1,147 @@
+﻿  
+	<div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+								 	 <div class="row">
+     								 <div class="col-lg-12 col-sm-12 col-xs-12">
+                						<div class="row">
+                    						<div class="col-lg-12 col-sm-12 col-xs-12">
+                        						<div class="widget flat radius-bordered">
+                             					<h3 style="font-weight:bold;">Project Document</h3>
+												<hr>
+                            					<div class="widget-body">
+                                					<div id="registration-form"> 
+                                    					<form role="form">
+                                        					<div class="row">
+                                            					<div class="col-sm-6">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group">
+                                                       <span class="input-icon icon-right"><input type="text" class="form-control" placeholder="Document Sl.No." /><i class="glyphicon glyphicon-user circular"></i></span>
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Description" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+										</div>
+																<div class="col-sm-6">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group">
+                                                       <span class="input-icon icon-right"><input type="text" class="form-control" placeholder="Document Title"  /><i class="glyphicon glyphicon-user circular"></i></span>
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												<div class="row">
+											       <div class="col-sm-12">
+                                                         <div class="control-group">
+                                                             <div class="radio"> 
+                                                                <label>
+                                                     Status <input name="form-field-radio" type="radio" class="colored-blue" checked="checked">
+                                                          <span class="text"> Active</span>
+                                                               </label>
+                                                               <label>
+                                                                     <input name="form-field-radio" type="radio" class="colored-blue">
+                                                       <span class="text"> Inactive</span>
+                                                             </label>
+                                                          </div>
+                        	                           </div>
+							                         </div>
+                                                  </div>	
+									           </div>
+											</div>
+										</form>
+                                	</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                    </div>
+            	</div>
+  			</div>
+  		</div>
+		
+                              	<div style="text-align:center;">
+                                    <button class="btn btn-blue" ng-click="ok()">Save</button>
+                                    <button class="btn btn-blue" ng-click="cancel()">Cancel</button>
+                               </div>
+							   <br />
+                          
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Add Project Document</button>
+						   </p>
+                         
+                        </div>
+									
+<div class="horizontal-space"></div>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue">
+               Added Project Documents
+			   
+            </div>
+<div class="table-scrollable">
+		<table class="table table-hover table-striped table-bordered">
+		<thead class="bordered-blue">
+		<tr>
+		<th>#</th>
+		<th>Document</th>
+		<th>Description</th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td>1</td>
+		<td>Production</td>
+		<td>Description</td>
+		
+		</tr>
+		<tr>
+		<td>2</td>
+		<td>IT</td>
+		<td>Description</td>
+		
+		</tr><tr>
+		<td>3</td>
+		<td>Engineering</td>
+		
+		
+		<td>Description</td>
+		</tr><tr>
+		<td>4</td>
+		<td>Finance</td>
+		<td>Description</td>
+		
+		
+		</tr><tr>
+		<td>5</td>
+		<td>Order Process</td>
+		<td>Description</td>
+		
+		
+		</tr>
+		</tbody>
+		</table>
+		</div>
+		
+					<!--<div class="footer">
+						<code>class="table table-striped"</code>
+					</div>-->
+		</div>
+	</div>
+</div>
+		
+

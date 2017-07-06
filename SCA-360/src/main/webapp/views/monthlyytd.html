@@ -1,0 +1,88 @@
+<script type="text/javascript">
+	var product = "area";
+	$.getJSON("monthleyytdtoarea.do?link="+product, function(json) 
+	{
+		//alert(JSON.stringify(json['data']));
+		
+		var i=0;
+		FusionCharts.ready(function()
+		{
+		   var fusioncharts = new FusionCharts({
+			    type: 'msstackedcolumn2d',
+			    renderAt: 'chart-container',
+			    width: '100%',
+			    height: '500',
+			    dataFormat: 'json',
+			    dataSource: {
+							    "chart": {
+											"palette": "2",
+									        "caption": "Monthly Booking YTD",
+									        //"subcaption": "Harry's SuperMart",
+									        //"xaxisname": "Quarter",
+									        "decimals":'0',
+											"yaxisname": "USD (M)",
+											"showsum": "1",
+											"showvalues": "0",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											
+									        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										    "numberPrefix": "",
+									        "numbersuffix": "",
+									        "bgColor": "#ffffff",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"14",
+											"rotatelabels": "0",		
+											"rotatevalues": "0",
+											"baseFontColor":"#000000"
+											//"theme":"fint"   			
+										},
+									    "categories":json['xaxis'],
+									    "dataset":json['data']
+									},
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);
+													//alert(dataObj.datasetName);
+													/*i++;
+													var label = "label"+i;
+													var name = "name"+i;
+													alert(dataObj.categoryLabel);	
+													sessionStorage.setItem(label,dataObj.categoryLabel);
+													sessionStorage.setItem(name,dataObj.datasetName);
+													sessionStorage.setItem('count',i);
+													alert(dataObj.datasetName);	*/	
+													asd();
+									            }
+										      }
+									  }
+								);
+							    fusioncharts.render();
+					});
+				});     
+</script>
+  <div style="float:right;"><!--<input type="button" value="< Go Back" id="goback">--></div>
+  <div id="chart-container">
+      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  </div>
+  </div>

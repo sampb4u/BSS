@@ -1,0 +1,297 @@
+﻿ <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+      .container
+		{
+			margin-left:30px;
+			width:100%;
+		}
+
+      .asdok 
+		{
+			  position: relative;
+			  padding-top: 31px;
+			  background-color:#ffffff;
+			  color:#333333;
+		}
+		.asdok.positioned 
+		{
+			  position: absolute;
+			  width:100%;
+			  box-shadow: 0 0 15px #333;
+		}
+		.container1 
+		{
+			  overflow-y: auto;
+			  height: 350px;
+		}
+		.table 
+		{
+			 border-spacing: 0; border-width: 0; padding: 0; border-width: 0;
+		}
+		.table td + .table td 
+		{
+			  border-left:1px solid #eee;
+			  text-align:left;
+		}
+		.table td, .table th 
+		{
+			  border-bottom:1px solid #eee;
+			  color: #000;
+			  width:0%;
+		}
+		.table th span
+		{
+			  position: absolute;
+			  background: transparent;
+			  color: #333333;
+			  top: 0;
+		}
+		.table th:first-child div
+		{
+			  border: none;
+		}
+		.polaroid 
+		{
+		  width: 25%;
+		  height: 50%;
+		  background-color: white;
+		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		  padding:10px 10px;
+		  float:left;
+		  margin:5px;
+		}
+		
+		.contentDelete {
+		  text-align: center;
+		  padding: 10px 20px;
+		  cursor:pointer;
+		}
+		.popover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+			display: none;
+			max-width: 276px;
+			padding: 1px;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			font-style: normal;
+			font-weight: normal;
+			line-height: 1.42857143;
+			text-align: left;
+			text-align: start;
+			text-decoration: none;
+			text-shadow: none;
+			text-transform: none;
+			letter-spacing: normal;
+			word-break: normal;
+			word-spacing: normal;
+			word-wrap: normal;
+			white-space: normal;
+			background-color: #fff;
+			-webkit-background-clip: padding-box;
+			background-clip: padding-box;
+			border: 1px solid #ccc;
+			border: 1px solid rgba(0, 0, 0, .2);
+			border-radius: 6px;
+			-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+			box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+			line-break: auto;
+		}
+        </style>
+<script>
+
+$(function() {
+   
+$(document).on('click', '#close-preview', function(){ 
+    
+    $('.image-preview').popover('hide');
+    // Hover before close the preview
+    $('.image-preview').hover(		
+        function () {
+           $('#'+ $(this).attr('id')).popover('show');
+		   
+        }, 
+         function () {
+		   $('#'+ $(this).attr('id')).popover('hide');
+        }
+    );    
+});
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+	
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+		
+		var getClearId = $(this).attr('id').split("2");
+		 
+		$('#hide-lgbtn').attr('disabled',false);
+        
+		//if(getClearId[1]=="siginput")
+		//{
+		//	var previewID = "signature";
+		//	var buttonText = "Upload Signature";
+		//}
+	  // else
+	//	{
+			var previewID2 = "photo";
+			var buttonText = "Upload Logo";
+		//}
+		//alert("clear");
+		//alert($(this).attr('id'));
+		var textChange = "1"+ getClearId[1];
+		var clearButton = "2"+ getClearId[1];
+		var dispFileName = "3"+ getClearId[1];
+//		 //alert(JSON.stringify($('#'+ getClearId[1]).val("")));		
+        $('#'+ previewID2).attr("data-content","").popover('hide');
+        $('#'+ dispFileName).val("");
+        $('#'+ clearButton).hide();
+//		$('#'+ getClearId[1]).val("");
+		$("#"+ textChange).text(buttonText);
+    });
+	
+	
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){  
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:200,
+            height:150
+        }); 
+		
+		//alert($(this).attr('id'));
+		//if($(this).attr('id')=="siginput")
+		//{
+		//	var previewID = "signature";
+		//}
+	  // else
+		//{
+			var previewID3 = "photo";
+		//}
+		var textChange = "1"+ $(this).attr('id');
+		var clearButton = "2"+ $(this).attr('id');
+		var dispFileName = "3"+ $(this).attr('id');
+		
+        var file = this.files[0]; 
+		
+        var reader = new FileReader();		
+        // Set preview image into the popover data-content		
+        reader.onload = function (e) {
+			
+            $("#"+ textChange).text("Change");
+            $("#"+ clearButton).show();
+            $("#"+ dispFileName).val(file.name);   			
+            img.attr('src', e.target.result);
+			
+            $("#"+ previewID3).attr("data-content",$(img)[0].outerHTML).popover("show");
+			
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+
+
+
+
+ 
+	</script>
+<div ng-controller="countryLogoMaster" ng-init="loadAllCountries();">									
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Country Master Logo</div>
+      
+        <form name="countrylogomasterForm" novalidate ng-submit="saveCountrylogo(addedCountry,countrylogomasterForm);" enctype="multipart/form-data">
+	           <div class="row">
+                    <div class="col-sm-4"> 
+                         <div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : countrylogomasterForm.country.$invalid && (countrylogomasterForm.country.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                        <select class="form-control" id="CountryName" name="country" ng-model="addedCountry.country" ng-options = "country.billingCountries as country.billingCountries for country in countryNameArray" placeholder="Country Name" ng-required="true"  ng-change="getCountryLogo(addedCountry.country);" with-floating-label>
+                                                        <option value="">Select Country</option>
+                                                            
+														</select>
+                                                        
+                                                    </span>
+                                                    <p ng-show="countrylogomasterForm.country.$error.required && (countrylogomasterForm.country.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                                        <div ng-class="{ 'has-error' : countrylogomasterForm.dummyPhoto.$invalid && (countrylogomasterForm.dummyPhoto.$dirty || submitted)}">
+                                           <!--<label for="3photoinput">User Logo (optional)</label>-->
+													            <div class="input-group image-preview photo" id="photo">
+                                                                
+													                <input type="text" class="form-control image-preview-filename" disabled="disabled"  name="photoPath1" placeholder="User Logo" ng-model="addCountryLogo.photoPath1" id="3photoinput">
+													                <span class="input-group-btn">
+												        	            <button type="button" class="btn btn-default image-preview-clear" style="display:none;"  id="2photoinput" ng-click="rmvFilePath(addCountryLogo.imagename);">
+													        	            <span class="glyphicon glyphicon-remove"></span> Clear
+												                	    </button>
+                                                                       
+													                    <div class="btn btn-default image-preview-input">
+													                        <span class="glyphicon glyphicon-folder-open"></span>
+													                        <span class="image-preview-input-title"  id="1photoinput">Upload Logo</span>
+																			<input type="file"  name="photoPath" id="photoinput" class="photoinput" accept="image/png, image/jpeg, image/gif" ng-model="addedCountry.photoPath" onchange="angular.element(this).scope().uploadCountryLogo(this.files)" data-max-size="100000"/>
+													                    </div>
+													                </span>
+													            </div>
+																
+																	<input type="hidden" name="dummyPhoto"  ng-model="dummyPhoto" id="dummyPhoto"/>
+																	<p ng-show="countrylogomasterForm.dummyPhoto.$error.required && (countrylogomasterForm.dummyPhoto.$dirty || submitted)" class="help-block"> User Logo is required</p>
+                                                                    <!--<p id="logoSize" style="color:#a94442; display:none;" ng-if="customerMaster.photoPath!=null">File Size Too Large</p>-->
+                                                                    <input type="hidden" name="imagename"  ng-model="addedCountry.imagename" id="GetImage"/>
+																	
+                                                                 
+																</div>
+                                                               </div> 
+                    </div>
+                    
+               </div>
+		
+			  <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+                  <div class="row">
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue hide-lgbtn" id="hide-lgbtn">Save</button>
+						<button type="reset" class="btn btn-blue" ng-click="resetCountry(countrylogomasterForm)">Reset</button>
+						
+					</div>
+					
+				</div>  
+      </form>                                           
+	</div>
+
+	</div>		
+									
+

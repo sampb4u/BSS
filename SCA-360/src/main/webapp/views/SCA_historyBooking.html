@@ -1,0 +1,601 @@
+<!--<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #d3d3d3 ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #67E6EC;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script>
+
+$(document).ready(function()
+{
+
+	$(".all").addClass("active");				
+	var ajaxLink = "BookingVsBudetYear.do";
+	var yAxisName = "USD (M)";
+	var status = "all";
+	loadChartforAll(ajaxLink,yAxisName,status);	
+	
+	var ifCond = "0";
+	buttonActive(ifCond);	
+	var array = [{"TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","OT":"USD (\u0024)"}];
+	var countryNameArray = [{"TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","OT":"Other"}];
+	$('.renderchart').click(function()
+	{
+		
+		var status = $(this).attr('id');
+		buttonActive("1");
+		jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+		
+		sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+		
+		if(status=="all")//BookingVsBudetYear.do
+		{
+		
+			var ajaxLink = "BookingVsBudetYear.do";
+			var yAxisName = "USD (M)";
+			//var countryCaption = status;
+			//loadChartforAll(ajaxLink,yAxisName,status);
+			$('#curDropdown').hide();
+			var getId = status.toUpperCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");	
+			//sessionStorage.setItem("currencyType","USD (M)");		
+			
+		}
+		else
+		{
+			var ajaxLink = "bookingVsBudetYearCountryWise.do?countryCode="+status+"&id=local";
+			//sessionStorage.setItem("currencyType",array[0][status]);
+			$('#curDropdown').show();
+			$('#scaSpan').text(array[0][status]);
+			//var countryCaption = status;
+			var yAxisName = array[0][status];
+			//loadChartforAll(ajaxLink,yAxisName,status);
+			var getId = status.toLowerCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+			
+		}
+		loadChartforAll(ajaxLink,yAxisName,status);
+		$(".hb").removeClass("active");				
+		$("."+ status).addClass("active");				
+	});
+
+		$(document).ready(function()
+			{
+				$("#SCA").click(function()
+				{
+				//	alert("THB");
+					yAxisName = array[0][sessionStorage.getItem("selectedCountry")];
+					//loadChartforAll(ajaxLink,'all',yAxisName,status);
+					//currencyType = array[0][sessionStorage.getItem("selectedCountry")];
+					ajaxLink = "bookingVsBudetYearCountryWise.do?countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+					loadChartforAll(ajaxLink,yAxisName,sessionStorage.getItem("selectedCountry"));
+					//asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+					$('#SCA').addClass("dropBackColor");
+					$('#USD').removeClass("dropBackColor");
+					
+				});
+				$("#USD").click(function()
+				{
+						//alert("USD");
+							yAxisName = "USD (\u0024)";
+							//loadChartforAll(ajaxLink,yAxisName,"all");
+					//currencyType = "USD (M)";
+					ajaxLink = "bookingVsBudetYearCountryWise.do?countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+					loadChartforAll(ajaxLink,yAxisName,sessionStorage.getItem("selectedCountry"));
+					//asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+					$('#SCA').removeClass("dropBackColor");
+					$('#USD').addClass("dropBackColor");
+					
+				});	
+			});
+	function buttonActive(ifCond)
+	{
+		jQuery( ".hb .countFlag").parent().addClass("hb-country");
+		jQuery( ".hb #ALL").parent().addClass("hb-refresh");	
+		
+	}
+
+
+	function loadChartforAll(ajaxLink,yAxisName,status)
+	{
+	
+	//alert(status);
+		if(status!="all")
+		{
+			var caption = countryNameArray[0][status]+" - Booking Vs Budget";
+		}
+		else
+		{
+			var caption = "Booking Vs Budget";
+		}
+    $.getJSON(ajaxLink, function(json) 
+	{
+		
+		var chartData = {
+ 							"chart": {
+										"palette": "1",
+									    "caption": caption,
+										"xaxisname": "Years",
+										"decimals":'1',
+										"yaxisname": yAxisName,
+										"yFormatNumberScale":"1",
+										"numberScaleValue": "1000,1000,1000",
+										"numberScaleUnit": "K,M,B",
+										"showsum": "1",
+										"showvalues": "0",
+										"exportenabled": "1",
+										"exportatclient": "0",
+										"exporthandler": "http://export.api3.fusioncharts.com",
+										"html5exporthandler": "http://export.api3.fusioncharts.com",
+										"numberPrefix": "",
+									    "numbersuffix": "",
+										"bgColor": "#ffffff",
+										"useroundedges": "1",
+										"borderAlpha": "20",
+										"showCanvasBorder": "0",
+										"usePlotGradientColor": "0",
+										"plotBorderAlpha": "10",
+										"legendBorderAlpha": "0",
+										"legendPosition":"right",
+										"legendShadow": "1",
+										"valueFontColor": "#000000",
+										"showXAxisLine": "1",
+										"xAxisLineColor": "#999999",
+										"divlineColor": "#999999",
+										"divLineDashed": "1",
+										"showAlternateHGridColor": "0",
+										"subcaptionFontBold": "0",
+										"subcaptionFontSize": "14",
+										"baseFont":"Helvetica",		
+										"baseFontSize":"14",
+										"rotatelabels": "0",		
+										"rotatevalues": "1",
+										"baseFontColor":"#000000"
+									 },
+									"categories": [
+											        {
+											            "category": json['category']
+												    }
+											       ],
+									"dataset": json['dataset']
+								};
+										
+		FusionCharts.ready(function () 
+		{           
+	 		 var fusioncharts = new FusionCharts({		
+				        type: 'mscombi2d',
+						renderAt: 'container',
+						width: '100%',
+						height: '500',
+				        dataFormat: 'json',
+	        			dataSource:chartData	
+					    });	
+						var renderTable = function (chart, containerId) 
+			  			{
+								var chartData = chart.getDataAsCSV(),
+					        				      rows,
+												  row,
+												  i,
+												  length,
+												  tableBody = '',
+												  tableBody1 = '',
+												  tableBody2 = '',
+												  tableBody3 = '',
+												  tableBody4 = '',
+												  tableBody5 = '',
+												  //tableBody6 = '',
+												  tableHeader = '';
+												  tableHeader1 = '';     
+												  tableHeader2 = '';     
+												  tableHeader3 = '';     
+												  tableHeader4 = '';     
+												  tableHeader5 = ''; 
+												  //tableHeader6 = ''; 	
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');     
+            // Retrieve the data from the rows and compute body string from the data rows
+			var accuBudget = 0;
+			var accuBooking = 0;
+			var arryBudget = [];
+			var arryBookings = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{	
+				//alert(JSON.stringify(rows[i]));		
+                row = rows[i].split(',');
+				var sumofBudget = 0;
+				var sumofBooking = 0;
+				for(var j=1;j<=2;j++)
+				{
+					//alert(row[j]);
+					if(j<=1)
+					{
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBudget += parseInt(value);						
+					}
+				   else
+				    {
+						//alert(row[j]);
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+					}
+				}
+				
+				if(sumofBudget==null){var convertBudget = 0; }else{var convertBudget = convertMillions(sumofBudget);}
+				if(sumofBooking==null){var convertBooking = 0; }else{var convertBooking = convertMillions(sumofBooking);}
+				//var convertBudget = convertMillions(sumofBudget);
+				//if(convertBudget==null) { convertBudget = "0M"; }
+				//var convertBooking = convertMillions(sumofBooking);
+				var totalBudget = 0;
+				
+				//if(convertBooking==null) { convertBooking = "0M"; }
+				var budgetPercent = convertBudget.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent = convertBooking.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentSuccess = bookingPercent/budgetPercent*100;
+				
+				//if(isFinite(percentSuccess)) { percentSuccess = percentSuccess; } else { percentSuccess = 0; }
+				if(isNaN(percentSuccess)|| percentSuccess == "Infinity") {var percentSuccessFixed = "0 "; }else{var percentSuccessFixed = percentSuccess.toFixed(2);}
+				
+				var percentSuccessFix = percentSuccessFixed+ "%";
+				//alert(percentSuccessFix);
+				//if(isNaN(percentSuccess)) { percentSuccessFixed = "0 %"; }
+				arryBudget.push(budgetPercent);
+				arryBookings.push(bookingPercent);
+				
+				accuBudget = Number(accuBudget)+Number(sumofBudget);
+				var convertAccuBudget = convertMillions(accuBudget);
+				if(convertAccuBudget==null) { convertAccuBudget = "0M"; }
+				//alert(sumofBooking);
+				if(isNaN(sumofBooking)) { sumofBooking = "0"; }
+				
+				accuBooking = Number(accuBooking)+Number(sumofBooking);
+				var convertAccuBooking = convertMillions(accuBooking);
+				//alert(convertAccuBooking);
+				if(convertAccuBooking==null) { convertAccuBooking = "0M"; }
+				
+				//var percentAccuSuccess = accuBooking/accuBudget*100;
+				//var percentAccuSuccessFixed = percentAccuSuccess.toFixed(2)+ " %";
+				//if(isNaN(percentAccuSuccess)) { percentAccuSuccessFixed = "0 %"; }
+				
+				if(i>1)
+				{
+					
+				}
+				
+                tableBody += '<th>' + row[0] + '</th>' ;
+				tableBody1 += '<td>' + convertBudget + '</td>' ;
+				tableBody2 += '<td>' + convertBooking + '</td>' ;
+				tableBody3 += '<td>' + percentSuccessFix + '</td>' ;
+				//tableBody4 += '<td>' + convertAccuBudget + '</td>' ;
+				//tableBody5 += '<td>' + convertAccuBooking + '</td>' ;
+				//tableBody4 += '<td></td>' ;
+				//tableBody5 += '<td></td>' ;
+				
+				//tableBody6 += '<td>' + percentAccuSuccessFixed + '</td>' ;
+            }
+			for(var k=0;k<arryBudget.length;k++)
+			{
+				if(k>0)
+				{
+					var growthBudget = (arryBudget[k]-arryBudget[k-1])/arryBudget[k-1]*100;
+					if(isNaN(growthBudget) || growthBudget=="Infinity") { growthBudget = "0%"; } else { growthBudget = growthBudget.toFixed(2) +"%"; }
+					tableBody4 += '<td>' + growthBudget + '</td>' ;
+
+					var growthBooking = (arryBookings[k]-arryBookings[k-1])/arryBookings[k-1]*100;
+					if(isNaN(growthBooking)) { growthBooking = "0%"; } else { growthBooking = growthBooking.toFixed(2) +"%"; }
+					tableBody5 += '<td>' + growthBooking + '</td>' ;
+					
+					
+				}
+			}
+	 
+            // Compute header string from first row
+            row = rows[0].split(',');
+            tableHeader = '<th></th>';
+			tableHeader1 = '<th>Budget</th>';
+			tableHeader2 = '<th>Bookings</th>';
+			tableHeader3 = '<th>% Success</th>';
+			tableHeader4 = '<th>Growth - Budget</th>';
+			tableHeader5 = '<th>Growth - Bookings</th>';
+     
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr>'+tableHeader+tableBody+'</tr><tr>'+tableHeader1+tableBody1+'</tr><tr>'+tableHeader2+tableBody2+'</tr><tr>'+tableHeader3+tableBody3+'</tr><tr><td colspan="15" height="20px;"></td></tr><tr>'+tableHeader4+'<td></td>'+tableBody4+'</tr><tr>'+tableHeader5+'<td></td>'+tableBody5+'</tr></tbody</table>';							
+						};
+						fusioncharts.render();
+				        fusioncharts.addEventListener('renderComplete', function () 
+						{
+			        	    renderTable(fusioncharts, 'table-container');
+				        });																			
+						
+				}); 
+		});
+		   }
+	});
+
+	           function convertMillions(sumofBudget) 
+				{
+					//alert(sumofBooking);
+					var thousand = 1000;
+					var million = 1000000;
+					var billion = 1000000000;
+					var trillion = 1000000000000;
+					if (sumofBudget < thousand) {
+						return (sumofBudget/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K';   
+					}
+					
+					else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+						 return  (sumofBudget/thousand).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'K'; 
+					}
+					
+					else if (sumofBudget >= million && sumofBudget <= billion) {
+						return (sumofBudget/million).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'M';   
+					}
+					
+					else if (sumofBudget >= billion && sumofBudget <= trillion) {
+						return (sumofBudget/billion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'B';   
+					}
+					
+					else {
+						return (sumofBudget/trillion).toFixed(1).replace ( /[^\+|\-0-9.]/ig, '' ) + 'T';   
+				   }
+			   }
+	/*function convertMillions(sumofBudget)
+	{
+		 if (Math.abs(sumofBudget) >= 1000000000) 
+		 {
+	        return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000000) 
+		 {
+		      return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 else if (Math.abs(sumofBudget) <1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 
+	
+	}*/	
+</script>
+<div class="row">
+  <div class="col-sm-9">
+   <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+		<!--/*<a href="#/app/SCA_historyBooking" class="renderchart active tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="hb hb-xs spin-icon" style="color:#000000; font-size:14px;"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>  
+		<a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-th countFlag" id="th"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-my countFlag" id="my"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-id countFlag" id="id"></i></span></a>  
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-sg countFlag" id="sg"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-ph countFlag" id="ph"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-in countFlag" id="in"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-vn countFlag" id="vn"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="hb hb-xs spin-icon" style="color: #6699FF;font-size:14px;"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+		<a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-au countFlag" id="au"></i></span></a>*/
+		-->
+		
+		
+		  <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+             <a href="#/app/SCA_historyBooking"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+             <a href="#/app/SCA_historyBooking" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		
+	</div>
+	</div>
+	<div class="col-sm-3">
+		<span class="dropdown" style="display:none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_historyBooking" id="SCA"><span id="scaSpan">USD &#x24;</span></a>
+				<a href="#/app/SCA_historyBooking" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div> 
+</div>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 		 
+		 </div>
+	</div>
+</div>
+  <div class="row">
+  	<div class="col-sm-12">
+		<div id="table-container"  style="padding-left:1%;"></div>
+	</div>
+  </div>  
+<br />
+

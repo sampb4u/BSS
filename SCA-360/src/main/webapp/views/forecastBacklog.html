@@ -1,0 +1,298 @@
+
+
+<script>
+$(document).ready(function(){
+	
+	$.getJSON("forecastbacklog.do", function(json) {	 
+		
+		//alert(JSON.stringify(json));
+			// var i=0;
+ FusionCharts.ready(function () {
+           
+ 		 var revenueChart = new FusionCharts({
+		
+        type: 'mscolumn2d',
+	    renderAt: 'container',
+        width: '100%',
+        height: '500',
+	        dataFormat: 'json',
+	        dataSource: {
+						"chart": {
+							"caption": "Forecast And Backlog",
+							"bgcolor": "FFFFFF",
+							"canvasborderalpha": "0",
+							"canvasPadding":"0",
+							"decimals":'0',
+							"yaxisname": "USD (M)",
+							"xAxisname": "Months",
+							//"numberPrefix": "$ ",
+							//"numbersuffix": " USD",
+							"paletteColors": "#0075c2,#1aaf5d",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",
+							"bgColor": "#ffffff",
+							"baseFont":"Helvetica",	
+							"stack100Percent":"1",	
+							"baseFontSize":"12",
+							"captionFontSize":"18",
+							"showsum": "1",
+							"showvalues": "0",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"valuePadding":"50",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"formatnumberscale": "1",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999"
+						},
+						"categories": json['xaxis'],
+						"dataset":json['data']
+						
+						
+					},					
+					events: {
+				           dataPlotClick: function (event,dataObj) 
+					 	  {	
+						      if(dataObj['datasetName']=='Total Accumulate Backlog')
+							  {
+						  		//alert(JSON.stringify(dataObj));
+								
+								//sessionStorage.setItem("count","0");
+								sessionStorage.setItem("firstCategory",JSON.stringify(json['xaxis']));
+								//alert(JSON.stringify(json['data']));
+								sessionStorage.setItem("firstData",JSON.stringify(json['data']));
+								$('#count').val(1);
+														var loadingDiv = '<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading"><img src="image/PreLoader.gif"/> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span></div>';
+														$('#chart-container').html(loadingDiv);
+														if($('#count').val()!=0)
+														{
+															$('#goback').show();
+														}
+														else
+														{
+															$('#goback').hide();
+														}
+								
+													
+								drillDown(dataObj.categoryLabel,dataObj.datasetName);
+								
+							 }	
+				           }
+				        }
+	    }).render();
+		
+ })
+ 
+ 
+	});
+ });
+ 
+ function drillDown(ca,c)
+ {
+ //alert(c);
+   
+	
+	 $.getJSON("forecastbacklogdrilldown.do", function(json) {	 
+      
+		 FusionCharts.ready(function () {
+			 
+			 
+		         var titleName = c;
+				 
+				// alert(titleName);   
+		 		 var revenueChart = new FusionCharts({
+				
+		        type: 'mscolumn2d',
+			    renderAt: 'container',
+		        width: '100%',
+		        height: '500',
+			        dataFormat: 'json',
+			        dataSource: {
+								"chart": {
+									"caption": titleName,
+									"bgcolor": "FFFFFF",
+									"canvasborderalpha": "0",
+									"canvasPadding":"0",
+									"decimals":'0',
+									"yaxisname": "USD (M)",
+									"xAxisname": "Months",
+									//"numberPrefix": "$ ",
+									//"numbersuffix": " USD",
+									"paletteColors": "#0075c2,#1aaf5d",
+									"exportenabled": "1",
+									"exportatclient": "0",
+									"exporthandler": "http://export.api3.fusioncharts.com",
+									"html5exporthandler": "http://export.api3.fusioncharts.com",
+									"bgColor": "#ffffff",
+									"baseFont":"Helvetica",	
+									"stack100Percent":"1",	
+									"baseFontSize":"12",
+									"captionFontSize":"18",
+									"showsum": "1",
+									"showvalues": "0",
+									 "valueFontColor": "#000000",
+									 "baseFontColor":"#000000",
+									"borderAlpha": "20",
+									"useroundedges": "1",
+									"valuePadding":"50",
+									"showCanvasBorder": "0",
+									"usePlotGradientColor": "0",
+									"plotBorderAlpha": "10",
+									"placeValuesInside": "0",
+									"formatnumberscale": "1",
+									"legendBgColor": "#ffffff",
+									"legendBorderColor":"#000000",
+									"legendBorder":"1",
+									"legendBorderAlpha": "1",
+									"legendShadow": "1",
+									"legendPosition":"right",
+									"xAxisLineColor": "#999999",
+									"divlineColor": "#999999"
+								},
+								"categories": json['xaxis'],
+								"dataset":json['data']
+								
+								
+							},					
+							events: {
+						           dataPlotClick: function (event,dataObj) 
+							 	  {	
+								  		//alert(JSON.stringify(dataObj));
+										//drillDown();
+						          }
+						        }
+			       }).render();
+				 
+			   })
+		 	$("#goback").show();
+		 });
+		
+ }
+ 
+ $(document).ready(function(){
+        $('.goback').click(function(){
+		  $("#goback").hide();
+		    var sessionObjName = "firstData";
+			var sessionCatName = "firstCategory";
+		    var json = new Object();
+			json.data = $.parseJSON(sessionStorage.getItem(sessionObjName));
+			json.category = $.parseJSON(sessionStorage.getItem(sessionCatName));
+		  //alert(JSON.stringify(json['data']));
+		 // alert(JSON.stringify(json['category']));
+		  
+		  FusionCharts.ready(function () {
+			 
+		          
+		 		 var revenueChart = new FusionCharts({
+				
+		        type: 'mscolumn2d',
+			    renderAt: 'container',
+		        width: '100%',
+		        height: '500',
+			        dataFormat: 'json',
+			        dataSource: {
+								"chart": {
+									"caption": "Forecast And Backlog",
+									"bgcolor": "FFFFFF",
+									"canvasborderalpha": "0",
+									"canvasPadding":"0",
+									"decimals":'0',
+									"yaxisname": "USD (M)",
+									"xAxisname": "Months",
+									//"numberPrefix": "$ ",
+									//"numbersuffix": " USD",
+									"paletteColors": "#0075c2,#1aaf5d",
+									"exportenabled": "1",
+									"exportatclient": "0",
+									"exporthandler": "http://export.api3.fusioncharts.com",
+									"html5exporthandler": "http://export.api3.fusioncharts.com",
+									"bgColor": "#ffffff",
+									"baseFont":"Helvetica",	
+									"stack100Percent":"1",	
+									"baseFontSize":"12",
+									"captionFontSize":"18",
+									"showsum": "1",
+									"showvalues": "0",
+									 "valueFontColor": "#000000",
+									 "baseFontColor":"#000000",
+									"borderAlpha": "20",
+									"useroundedges": "1",
+									"valuePadding":"50",
+									"showCanvasBorder": "0",
+									"usePlotGradientColor": "0",
+									"plotBorderAlpha": "10",
+									"placeValuesInside": "0",
+									"formatnumberscale": "1",
+									"legendBgColor": "#ffffff",
+									"legendBorderColor":"#000000",
+									"legendBorder":"1",
+									"legendBorderAlpha": "1",
+									"legendShadow": "1",
+									"legendPosition":"right",
+									"xAxisLineColor": "#999999",
+									"divlineColor": "#999999"
+								},
+								"categories": json['category'],
+								"dataset":json['data']
+								
+								
+							},					
+							events: {
+						           dataPlotClick: function (event,dataObj) 
+							 	  {	
+								  		 if(dataObj['datasetName']=='Total Accumulate Backlog')
+										 {
+										sessionStorage.setItem("firstCategory",JSON.stringify(json['category']));
+										//alert(JSON.stringify(json['data']));
+										sessionStorage.setItem("firstData",JSON.stringify(json['data']));
+								$('#count').val(1);
+														var loadingDiv = '<div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading"><img src="image/PreLoader.gif"/> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span></div>';
+														$('#chart-container').html(loadingDiv);
+														if($('#count').val()!=0)
+														{
+															$('#goback').show();
+														}
+														else
+														{
+															$('#goback').hide();
+														}
+															
+										drillDown(dataObj.categoryLabel,dataObj.datasetName);
+										}
+										
+						          }
+						        }
+			    }).render();
+		 })
+		
+		});
+ 
+ });
+ 
+</script>
+
+<div style="float: right; margin-right:20px; margin-top:10px; height:30px;"><p><input type="button"   value="< Go Back" style=" border:none;display:none;" id="goback" class="goback"/></p></div>
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 		 
+		 </div>
+	</div>
+</div>
+
+

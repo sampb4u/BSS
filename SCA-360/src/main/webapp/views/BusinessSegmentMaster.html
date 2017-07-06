@@ -1,0 +1,149 @@
+<style>
+#pageheading
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.container
+		{
+			margin-left:30px;
+			width:95%;
+		}
+
+.asdok 
+		{
+			  position: relative;
+			  padding-top: 25px;
+			  background-color:#ffffff;
+			  color:#333333;
+		}
+		.asdok.positioned 
+		{
+			  position: absolute;
+			  width:95%;
+			  box-shadow: 0 0 15px #333;
+		}
+		.container1 
+		{
+			  overflow-y: auto;
+			 /* height: 300px;*/
+		}
+		.table 
+		{
+			 border-spacing: 0; border-width: 0; padding: 0; border-width: 0;
+		}
+		.table td + .table td 
+		{
+			  border-left:1px solid #eee;
+			  text-align:left;
+		}
+		.table td, .table th 
+		{
+			  border-bottom:1px solid #eee;
+			  color: #000;
+			  width:0%;
+		}
+		.table th span
+		{
+			  position: absolute;
+			  background: transparent;
+			  color: #333333;
+			  top: 0;
+		}
+		.table th:first-child div
+		{
+			  border: none;
+		}
+
+</style>
+					
+	   <div   data-ng-controller="BusinessSegmentController" ng-init="loadAllBusinessGroups();addBusinessSegmentDataForm();getData();"> 					
+
+<div class="row">
+    
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue" id="pageheading">
+   Business Segment Master
+            </div>
+			
+			 <form name="BusinessSegmentForm" novalidate ng-submit="BusinessSegmentMasterFormSubmit(BusinessSegmentForm);" enctype="multipart/form-data">
+                  
+                   <div class="row">
+                         <div class="col-sm-12">
+                             <div class="table-responsive">
+                                <section class="asdok">
+                                     <div class="container1" ng-init="currentPage = 1; itemsPerPage = 10;" >
+                                        <table class="table table-hover table-striped table-bordered">
+                                        <thead class="bordered-blue">
+                                            <tr>
+                                                <th style="width: 5%;">Item No.</th>
+                                                <th style="width: 20%;">BusinessSegment Code</th>
+                                                <th style="width: 35%;">BusinessSegment Name</th>
+												<th style="width: 45%;">Category</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr ng-repeat="BusinessSegmentArr in filteredItems = items">
+                                                 <td style="width: 5%; padding: 20px 5px 0px 5px; text-align: center;">{{BusinessSegmentArr.id}}</td>
+                                                 <td style="width: 20%; padding: 20px 5px 0px 5px;"><div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : BusinessSegmentForm.industrysectorcode{{$index}}.$invalid && (BusinessSegmentForm.industrysectorcode{{$index}}.$dirty || submitted)}">
+                                                    <label for="Businesscode"></label>
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="Businesscode" placeholder="BusinessSegment Code" name="industrysectorcode{{$index}}" ng-model="BusinessSegmentArr.industrysectorcode" ng-required="true" with-floating-label />
+                                                        
+                                                    </span>
+                                                    <p ng-show="BusinessSegmentForm.industrysectorcode{{$index}}.$error.required && (BusinessSegmentForm.industrysectorcode{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div></td>	
+                        <td style="width: 35%; padding: 20px 5px 0px 5px;"><div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : BusinessSegmentForm.industrysector{{$index}}.$invalid && (BusinessSegmentForm.industrysector{{$index}}.$dirty || submitted)}">
+                                                    <label for="Business"></label>
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="Business" placeholder="BusinessSegment Name" name="industrysector{{$index}}" ng-model="BusinessSegmentArr.industrysector" ng-required="true" with-floating-label>
+                                                        
+                                                    </span>
+                                                    <p ng-show="BusinessSegmentForm.industrysector{{$index}}.$error.required && (BusinessSegmentForm.industrysector{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div></td>
+												<td style="width: 45%; padding: 20px 5px 0px 5px;"><div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : BusinessSegmentForm.category{{$index}}.$invalid && (BusinessSegmentForm.category{{$index}}.$dirty || submitted)}">
+                                                    <label for="category"></label>
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="category" placeholder="BusinessSegment category" name="category{{$index}}" ng-model="BusinessSegmentArr.category" ng-required="true" with-floating-label>
+                                                       
+                                                    </span>
+                                                    <p ng-show="BusinessSegmentForm.category{{$index}}.$error.required && (BusinessSegmentForm.category{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div></td>
+                      						 </tr>
+                                        </tbody>
+                                  </table>
+                                     </div>
+                                 </section>
+                                 <br />
+                                 <br />
+                                 <!--	<uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ></uib-pagination>-->
+				                  <pagination total-items="totalItems" ng-model="currentPage" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+                             </div>
+                             <br />
+                			<h>Page: {{currentPage}} / {{numPages}}</h>
+		
+                         </div>
+                  </div>
+				   
+			        <br/>
+					<div class="row">
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue"><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resetBusinessSegment(BusinessSegmentForm)">Reset</button>-->
+						
+					</div>
+						
+				</div>
+               </form>
+									 
+
+          
+        </div>
+    </div>
+</div>
+</div>

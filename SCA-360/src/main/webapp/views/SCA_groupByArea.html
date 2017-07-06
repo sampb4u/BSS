@@ -1,0 +1,1812 @@
+<style>
+div
+{
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+    .tableCss tr:nth-child(2n+0) {
+        background: #d3d3d3 ;
+        color: #000000;
+    }
+    
+    .tableCss tr:nth-child(odd) {
+        background:  #FFFFFF ;
+        color: #0066CC;
+    }
+    
+    .tableCss tr:nth-child(even) {
+        background: #FFFFFF;
+        color: #0066CC;
+    }
+    .tableCss {
+        font-weight: normal;
+        font-family: "Helvetica";
+		border:thin;
+		border-color:#000000;
+		text-align:center
+    }
+    
+    .icn {
+        width: 50px;
+		height: 50px;
+    }
+    
+    .flg {
+        font-size: 44px;
+		color: rgb(102, 153, 255);
+		position: relative;
+		top: 16px;
+    }
+    
+    /*.allcon {
+        font-size: 35px;
+        color: rgb(102, 153, 255);
+        position: relative;
+        top: 14px;
+    }*/
+    /*.btn-circle {
+	  width: 30px;
+	  height: 30px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 12px;
+	  line-height: 1.428571429;
+	  border-radius: 15px;
+	}*/
+	.btn.btn-circle {
+		border-radius: 50%;
+		background-clip: padding-box;
+		width: 45px;
+		height: 45px;
+		padding: 11px 4px;
+		color: #ffffff;
+		font-weight: bold;
+	}
+    .hb-country,
+    .hb-country:before,
+    .hb-country:after {
+        background: #3B5998;
+        border-color: #3B5998;
+        color: #ffffff;
+    }
+    
+    .hb-country:hover,
+    .hb-country:hover:before,
+    .hb-country:hover:after {
+        background: transparent;
+        border-color: #3B5998;
+        color: #3B5998;
+    }
+    
+    .hb-refresh,
+    .hb-refresh:before,
+    .hb-refresh:after {
+        background: #fff;
+        border-color: #3B5998;
+        color: #ffffff;
+    }
+    
+    .hb-refresh:hover,
+    .hb-refresh:hover:before,
+    .hb-refresh:hover:after {
+        background: transparent;
+        border-color: #3B5998;
+        color: #3B5998;
+    }
+    
+    .dropdown {
+        position: absolute;
+        display: inline-block;
+        z-index: 20;
+        top: 1905%;
+        right: 20%;
+    }
+    
+    .dropbtn {
+        background-color: #015AAC;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        /*background-color: #f9f9f9;*/
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dropdown-content a {
+        color: black;
+        padding: 10px;
+        text-decoration: none;
+        display: block;
+        width: 70px;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #f9f9f9;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+        background-color: #015AAC;
+    }
+    
+    .dropBackColor {
+        background-color: #f1f1f1;
+    }
+	.switchButton
+	{
+		border:none;
+		padding:3px 18px 3px 18px;	
+		background-color:#015AAC;
+		color:#FFFFFF;
+		
+	}
+	.last-child {background:red;}
+</style>
+
+
+<script>
+	var d = new Date();
+    var currentyear = d.getFullYear();
+	
+	var status = "all";
+	var countryCode = sessionStorage.getItem('countryCode');
+	var yAxisName = "USD";
+	var cType = "dollar";
+	var drillSts = "0";
+	var url = "ytdcode.do";
+	var drillAjaxLink = "ytdcodeDrilldownLevelOne.do";
+	sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+	sessionStorage.setItem("status","all");
+	sessionStorage.setItem("cType",cType);
+	sessionStorage.setItem("currentyear",currentyear);
+	$('#SCA').addClass("dropBackColor");
+	$('#SCA_country').addClass("dropBackColor");
+	var array = [{
+        "TH": "THB (\u0E3F)",
+        "IN": "INR (\u20B9)",
+        "MY": "MYR (\u0024)",
+        "ID": "IDR (\u0052\u0070)",
+        "SG": "SGD (\u0024)",
+        "PH": "PHP (\u20b1)",
+        "AU": "AUD (\u0024)",
+        "VN": "VND (\u20ab)",
+		"EMA": "USD (\u0024)"
+    }];
+    var countryNameArray = [{
+        "TH": "Thailand",
+        "IN": "India",
+        "MY": "Malaysia",
+        "ID": "Indonesia",
+        "SG": "Singapore",
+        "PH": "Philippines",
+        "AU": "Australia",
+        "VN": "Vietnam",
+		"EMA": "EMarket"
+    }];
+	
+	loadChartForAnnualBooking(url, status, yAxisName,cType);
+	
+	$(document).ready(function() {
+
+        $('.renderchart').click(function() {
+ 			
+            var status = $(this).attr('id');
+           
+            sessionStorage.setItem("selectedCountry", $(this).attr('id'));
+            //alert(sessionStorage.getItem("selectedCountry"));	
+            if (status == "all") {
+			
+               var getId = status.toUpperCase();
+                url = "ytdcode.do";
+				sessionStorage.setItem("cType",cType);
+                yAxisName = "USD";
+				var tableCaption = "ANNUAL BOOKING";
+				$('#tabTitle').text(tableCaption);
+				
+           } else {
+				var tableCaption = countryNameArray[0][status] + " " + "Regions";
+					//alert($('#tabTitle').text(tableCaption));
+					$('#SCA_country').addClass("dropBackColor");
+					$('#USD_country').removeClass("dropBackColor");
+					$('#tabTitle').text(tableCaption);
+                var getId = status.toLowerCase();
+				$('#scaSpan_country').text(array[0][status]);
+                yAxisName = "USD";
+				sessionStorage.setItem("cType",cType);
+				drillSts = "1";
+                url = "ytdCodeAreaCountryWise.do?countryCode=" + status + "&id=dollar";
+            }
+
+            loadChartForAnnualBooking(url, status, yAxisName,cType);
+        });
+
+    });
+	
+		//============Currency Change================//
+	$(document).ready(function()
+	{
+		
+		$("#SCA").click(function()
+		{
+			//alert("dollar");
+			//alert(drillSts);
+			if(drillSts == "0")
+			{
+				
+				url = "ytdcode.do";
+				yAxisName = "USD";
+				loadChartForAnnualBooking(url, status, yAxisName,cType);
+				
+				
+			}
+			else if(drillSts == "1")
+			{
+				//alert(status);
+				
+				
+				var countryCode = sessionStorage.getItem("countryCode");
+				var Year = sessionStorage.getItem("Year");
+					//alert(countryCode);
+					//alert(Year);
+					
+					drillDownForRegion(Year,countryCode,status,cType);
+			}
+			else
+			{
+				var regionCode = sessionStorage.getItem('regionCode');
+				var countrycode = sessionStorage.getItem("countryCode");
+				
+				drillDownForSalesman(regionCode,countrycode,status,currentyear,cType);
+			}
+			$('#SCA').addClass("dropBackColor");
+			$('#USD').removeClass("dropBackColor");
+		});
+		
+		$("#USD").click(function()
+		{
+			//alert("local"); 
+			$('#SCA').removeClass("dropBackColor");
+			$('#USD').addClass("dropBackColor");
+		});
+		
+		$("#SCA_country").click(function()
+		{
+			//alert("dollar");
+			//alert(drillSts);
+			sessionStorage.setItem("cType","dollar");
+			
+			var selectconsts = sessionStorage.getItem("selectedCountry");
+			//alert(selectconsts);
+			if(drillSts == "1")
+			{
+//				/*if(cType == "dollar")
+//				{
+//					url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = "USD";
+//				
+//				}
+//				else
+//				{
+//					url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = array[0][selectconsts];
+//				}*/
+				yAxisName = "USD";
+				url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+				loadChartForAnnualBooking(url, selectconsts, yAxisName,cType);
+			}
+			else
+			{
+				var regionCode = sessionStorage.getItem('countryCodeCon');
+//				//var countrycode = sessionStorage.getItem("countryCode");
+//				//alert(regionCode);
+//				//alert(selectconsts);
+//				/*if(cType == "dollar")
+//				{
+//					//url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = "USD";
+//				
+//				}
+//				else
+//				{
+//					//url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = array[0][selectconsts];
+//				}*/
+				yAxisName = "USD";
+				drillDownForSalesman(regionCode,regionCode,selectconsts,currentyear,cType);
+			}
+//			
+//			
+			$('#SCA_country').addClass("dropBackColor");
+			$('#USD_country').removeClass("dropBackColor");
+		});
+//		
+		$("#USD_country").click(function()
+		{
+			//alert(drillSts);
+			sessionStorage.setItem("cType","local");
+			var selectconsts = sessionStorage.getItem("selectedCountry");
+			
+//			//alert(selectconsts);
+			if(drillSts == "1")
+			{
+//				/*if(cType == "dollar")
+//				{
+//					url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id="+cType;
+//				    yAxisName = "USD";
+//				
+//				}
+//				else
+//				{
+//					url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=local";
+//				    yAxisName = array[0][selectconsts];
+//				}*/
+				url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=local";
+				yAxisName = array[0][selectconsts];
+				loadChartForAnnualBooking(url, selectconsts, yAxisName,'local');
+			}
+			else
+			{
+				var regionCode = sessionStorage.getItem('countryCodeCon');
+				//var countrycode = sessionStorage.getItem("countryCode");
+//				//alert(regionCode);
+//				//alert(selectconsts);
+//				/*if(cType == "dollar")
+//				{
+//					//url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = "USD";
+//				
+//				}
+//				else
+//				{
+//					//url = "ytdCodeAreaCountryWise.do?countryCode=" + selectconsts + "&id=dollar";
+//				    yAxisName = array[0][selectconsts];
+//				}*/
+				yAxisName = array[0][selectconsts];
+				drillDownForSalesman(regionCode,regionCode,selectconsts,currentyear,'local');
+			}
+//			
+			$('#SCA_country').removeClass("dropBackColor");
+			$('#USD_country').addClass("dropBackColor");
+		});
+		
+	});
+	
+	//===============Annual Booking Chart====================================//
+	
+		 function loadChartForAnnualBooking(url, status, yAxisName,cType) {
+		 
+		//alert(cType);
+		
+		 if(status == "all")
+		 {
+			 //alert("if");
+			 $("#curDropdown").show();
+			 $('#curDropdown_country').hide();
+			 var captionTitle = "SCA GROUP ANNUAL BOOKING";
+			 yAxisName = "USD";
+			 url = "ytdcode.do";
+			 
+		 }
+		 else  if(sessionStorage.getItem("cType") == "dollar")
+		 {
+			 //alert(cType);
+			 $("#curDropdown").hide();
+			 $('#curDropdown_country').show();
+			 var captionTitle = countryNameArray[0][status] + " " + "Regions";
+			 yAxisName = "USD";
+			// alert("else if");
+			 url = "ytdCodeAreaCountryWise.do?countryCode=" + status + "&id="+cType;
+		 }
+		 else
+		 {
+			 $("#curDropdown").hide();
+			 $('#curDropdown_country').show();
+			 
+			 var captionTitle = countryNameArray[0][status] + " " + "Regions";
+			 yAxisName = array[0][status];
+			 url = "ytdCodeAreaCountryWise.do?countryCode=" + status + "&id=local";
+			 //alert("else");
+		 }
+		 $("#goback").hide();
+		 $("#gobackCon").hide(); 
+		 //alert("working");
+		 $.getJSON(url, function(json) {
+			 var chartData = {
+                    "chart": {
+                        "caption": captionTitle,
+                       "xAxisname": "Years",
+                        "yaxisname": yAxisName,
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "18",
+                        "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "16",
+                        "yAxisNameFont": "Helvetica",
+                        "decimals": '2',
+						"xAxisNamePadding":"20",
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "14",
+                        "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "14",
+                        "yAxisNameFont": "Helvetica",
+                        "yFormatNumberScale": "1",
+                        "numberScaleValue": "1000,1000,1000",
+                        "numberScaleUnit": "K,M,B",
+                        "reverseLegend": "1",
+                        "numberPrefix": "",
+                        "numbersuffix": "",
+                        "exportenabled": "1",
+                        "exportatclient": "0",
+                        "exporthandler": "http://export.api3.fusioncharts.com",
+                        "html5exporthandler": "http://export.api3.fusioncharts.com",
+                        "paletteColors": "#0075c2,#1aaf5d",
+                        "bgColor": "#808080",
+                        "baseFont": "Helvetica",
+                        "baseFontSize": "15",
+                        "captionFontSize": "18",
+                        "showsum": "1",
+                        "showvalues": "0",
+						"showexportdatamenuitem":"1",
+                        "valueFontColor": "#000000",
+                        "baseFontColor": "#000000",
+                        "borderAlpha": "20",
+                        "useroundedges": "1",
+                        "showCanvasBorder": "0",
+                        "usePlotGradientColor": "0",
+                        "plotBorderAlpha": "10",
+                        "placeValuesInside": "0",
+                        "legendBgColor": "#ffffff",
+                        "legendBorderColor": "#000000",
+                        "legendBorder": "1",
+                        "legendBorderAlpha": "1",
+                        "legendShadow": "1",
+                        "legendPosition": "right",
+                        "xAxisLineColor": "#999999",
+                        "divlineColor": "#999999",
+                        "rotatelabels": "0",
+                        "rotatevalues": "0",
+                        "subcaptionFontBold": "0",
+                        "subcaptionFontSize": "14",
+                        "showLegend": '1',
+                        "formatnumberscale": "1",
+						"canvasBgColor": "#B0E2FF	",
+						"showCanvasBorder": "1",
+						"canvasBorderColor": "#666666",
+						"canvasBorderThickness": "4",
+						"canvasBorderAlpha": "80",
+						"legendBgColor":"#808080"
+                    },
+                    "categories": [{"category": json['category']}],
+                    "dataset": json['dataset']
+                };
+				
+				FusionCharts.ready(function() {
+						var revenueChart = new FusionCharts({
+						type: 'stackedcolumn2d',
+						renderAt: 'container',
+						width: '100%',
+						height: '500',
+						dataFormat: 'json',
+						dataSource: chartData,
+						events: {
+									  dataPlotClick: function (event,dataObj) 
+									  {	
+										sessionStorage.setItem("firstDataObject",JSON.stringify(json['dataset']));
+										sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+										//alert(JSON.stringify(json['dataset']));
+										//categoryLabel 2016\n(Budget YTD)
+										//alert(JSON.stringify(dataObj.categoryLabel));
+										//alert(currentyear);
+										sessionStorage.setItem("drillStatus",'true');
+										var cType = sessionStorage.getItem("cType");
+										var currentyear = sessionStorage.getItem("currentyear");
+										//var status = sessionStorage.getItem("status");
+										//alert(status);
+										sessionStorage.setItem("countryCode",dataObj.datasetName);
+										sessionStorage.setItem("Year",dataObj.categoryLabel);
+										drillSts = "1";
+										if(dataObj.categoryLabel== currentyear + "\n(Budget YTD)" || dataObj.categoryLabel == "BUDGET OF"+" "+ currentyear){
+										//alert("enterd");
+										}else{
+											//alert("drill down");
+										//dataObj.datasetName,
+										//sessionStorage.getItem('countryCode');
+										//var currencyType = sessionStorage.getItem("currencyType");
+										drillDownForRegion(dataObj.categoryLabel,dataObj.datasetName,status,cType);
+										}
+									  }
+								  }
+	
+					});
+					 revenueChart.addEventListener('renderComplete', function() {
+						// In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//						// Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+						renderTable(revenueChart, 'table-container', json['per']);
+							$(".avg").show(); 
+					});
+                	revenueChart.render();
+				});
+			 
+		 });
+		 
+	 };
+	 
+	 //==========Drill Down For Regions===============================//
+	function drillDownForRegion(y,countrycode,status,cType)
+	 {
+		 //alert("Drill Down");
+		 //alert(y+ " " +countrycode);
+		 var countryCodeCon= sessionStorage.setItem("countryCodeCon",countrycode);
+		 if(status=="all")
+			{
+			//alert("enterd");
+				 $("#curDropdown").show();
+			 	 $('#curDropdown_country').hide();
+				 $("#goback").show();
+		 		 $("#gobackCon").hide(); 
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?year="+y+"&countryCode="+countrycode+"&id=dollar";
+			    currencyType = "USD";
+				 var titleName = y + " " + countrycode + " " + "Regions";
+				 
+				 
+				 
+				 $.getJSON(DrillAjaxLink,function(json)
+					{
+						//alert(JSON.stringify(json['data']));
+						var alertMessage=json['data'][0].label;
+						if(alertMessage == 'NA')
+						{
+							  swal('Regions are not Updated');
+						}
+						else
+						{
+						
+						}
+						
+						var chart2 = {
+								 "chart": {
+								"caption": titleName,
+								"xAxisname": "Regions",
+								"yaxisname": currencyType,
+								"xAxisNameFont": "Helvetica",
+								"xAxisNameFontSize": "18",
+								"xAxisNameFontBold": "1",
+								"yAxisNameFontBold": "1",
+								"yAxisNameFontSize": "16",
+								"yAxisNameFont": "Helvetica",
+								"decimals": '2',
+								"xAxisNamePadding":"20",
+								"xAxisNameFont": "Helvetica",
+								"xAxisNameFontSize": "14",
+								"xAxisNameFontBold": "1",
+								"yAxisNameFontBold": "1",
+								"yAxisNameFontSize": "14",
+								"yAxisNameFont": "Helvetica",
+								"yFormatNumberScale": "1",
+								"numberScaleValue": "1000,1000,1000",
+								"numberScaleUnit": "K,M,B",
+								"reverseLegend": "1",
+								"numberPrefix": "",
+								"numbersuffix": "",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",
+							   // "paletteColors": "#0075c2,#1aaf5d",
+								"bgColor": "#808080",
+								"baseFont": "Helvetica",
+								"baseFontSize": "15",
+								"captionFontSize": "18",
+								"showsum": "1",
+								"showvalues": "1",
+								"valueFontColor": "#000000",
+								"baseFontColor": "#000000",
+								"borderAlpha": "20",
+								"useroundedges": "1",
+								"showCanvasBorder": "0",
+								"usePlotGradientColor": "0",
+								"plotBorderAlpha": "10",
+								"placeValuesInside": "0",
+								"legendBgColor": "#ffffff",
+								"legendBorderColor": "#000000",
+								"legendBorder": "1",
+								"legendBorderAlpha": "1",
+								"legendShadow": "1",
+								"legendPosition": "right",
+								"xAxisLineColor": "#999999",
+								"divlineColor": "#999999",
+								"rotatelabels": "0",
+								"rotatevalues": "0",
+								"subcaptionFontBold": "0",
+								"subcaptionFontSize": "14",
+								"showLegend": '1',
+								"formatnumberscale": "1",
+								"canvasBgColor": "#B0E2FF",
+								"showCanvasBorder": "1",
+								"canvasBorderColor": "#666666",
+								"canvasBorderThickness": "4",
+								"canvasBorderAlpha": "80",
+								"legendBgColor":"#808080"
+							},
+								"data":json['data']
+							};
+							
+							 FusionCharts.ready(function () {
+									var revenueChart = new FusionCharts({
+				
+									type: 'column2d',
+									renderAt: 'container',
+									width: '100%',
+									height: '500',
+										dataFormat: 'json',
+										dataSource: chart2,
+										events: {
+															  dataPlotClick: function (event,dataObj) 
+															  {	
+																//alert("region"+JSON.stringify(dataObj));
+																//sessionStorage.setItem("firstDataObject",JSON.stringify(json['dataset']));
+																//sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+																//alert(JSON.stringify(dataObj.categoryLabel));
+																//alert(JSON.stringify(json['category']));
+																sessionStorage.setItem("countryCode",countrycode);
+																sessionStorage.setItem("regionCode",dataObj.categoryLabel);
+																//var countrycoode = sessionStorage.getItem("countryCode");
+																var cType = sessionStorage.getItem("cType");
+																var currentyear = sessionStorage.getItem("currentyear");
+																//alert(currentyear);
+																drillSts = "2";
+																//sessionStorage.getItem('countryCode');
+																//var currencyType = sessionStorage.getItem("currencyType");
+																drillDownForSalesman(dataObj.categoryLabel,countrycode,status,currentyear,cType);
+															  }
+														  }
+									});
+									 revenueChart.addEventListener('renderComplete', function() {
+											// In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//											// Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+											renderTableForRegions(revenueChart, 'table-container',json['per']);
+											
+												$(".avg").hide(); 
+										});
+										revenueChart.render();
+							 });
+					 
+					});
+				
+			}
+			else 
+			{
+				//alert(sessionStorage.getItem("cType"));
+				
+				if(sessionStorage.getItem("cType") == "dollar")
+				{
+					//alert("if");
+					//var DrillAjaxLink = "ytdCodeAreaCountryWiseDrilldownLevelOne.do?year="+y+"&countryCode="+c+"&id="+cType;
+					//currencyType = array[0][status];
+					//var titleName = y + " " + countrycode + " " + "Regions";
+					
+					var currentyear = sessionStorage.getItem("currentyear");
+					drillDownForSalesman(y,countrycode,status,currentyear,cType);
+				}
+				else
+				{
+					//alert("else");
+					//var DrillAjaxLink = "ytdCodeAreaCountryWiseDrilldownLevelOne.do?year="+y+"&countryCode="+c+"&id="+cType;
+					//currencyType = array[0][status];
+					//var titleName = y + " " + countrycode + " " + "Regions";
+					
+					var currentyear = sessionStorage.getItem("currentyear");
+					drillDownForSalesman(y,countrycode,status,currentyear,'local');
+				}
+				
+			}
+			
+	 };
+	 
+	 //===========Drill Down For Salesman================================//
+	 function drillDownForSalesman(regionCode,countrycode,status,currentyear,cType)
+	 {
+		 //alert("salesman");
+		 /*alert(regionCode);
+		 alert(countrycode);
+		 alert(status);
+		 alert(cType);*/
+		 //alert(currentyear);
+		 //alert(countrycode);
+		  //alert(sessionStorage.getItem("cType"));
+		if(status == "all")
+		 {
+			 $("#curDropdown").show();
+			 $('#curDropdown_country').hide();
+			 $("#goback").show();
+		 	 $("#gobackCon").hide(); 
+			 var captionTitle = countrycode + " - " + regionCode + " Regions" + " " + currentyear + " " + "Salesman";
+			 yAxisName = "USD";
+			 url = "ytdcodeDrilldownLevelTwo.do?regionCode="+regionCode+"&countryCode="+countrycode+"&year="+currentyear+"&id=dollar";
+			 //alert("if");
+		 }
+		 else  if(sessionStorage.getItem("cType") == "dollar")
+		 {
+			 //alert("if" + " " + cType);
+			 $("#curDropdown").hide();
+			 $('#curDropdown_country').show();
+			 $("#goback").hide();
+		 	 $("#gobackCon").show(); 
+			 var captionTitle = countryNameArray[0][status] + " - " + countrycode + " Regions" + " " + currentyear + " " + "Salesman";
+			 yAxisName = "USD";
+			// alert("else if");
+			drillSts = "2";
+			 url = "ytdCodeAreaCountryWiseDrilldownLevelOne.do?regionCode="+countrycode+"&countryCode="+status+"&year="+currentyear+"&id="+cType;
+		 }
+		 else
+		 {
+			 //alert("else" + " " + cType);
+			  $("#curDropdown").hide();
+			  $('#curDropdown_country').show();
+			  $("#goback").hide();
+		 	  $("#gobackCon").show(); 
+			 var captionTitle = countryNameArray[0][status] + " - " + countrycode + " Regions" + " " + currentyear + " " + "Salesman";
+			 yAxisName = array[0][status];
+			 drillSts = "2";
+			 url = "ytdCodeAreaCountryWiseDrilldownLevelOne.do?regionCode="+countrycode+"&countryCode="+status+"&year="+currentyear+"&id=local";
+			 //alert("else");
+		 }
+		 
+		 $.getJSON(url,function(json)
+		  {
+			  
+			  var chart2 = {
+								 "chart": {
+                        "caption":captionTitle,
+                        "xAxisname": "Salesman",
+                        "yaxisname": yAxisName,
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "18",
+                       "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "16",
+                        "yAxisNameFont": "Helvetica",
+                        "decimals": '2',
+						"xAxisNamePadding":"20",
+                        "xAxisNameFont": "Helvetica",
+                        "xAxisNameFontSize": "14",
+                        "xAxisNameFontBold": "1",
+                        "yAxisNameFontBold": "1",
+                        "yAxisNameFontSize": "14",
+                        "yAxisNameFont": "Helvetica",
+                        "yFormatNumberScale": "1",
+                        "numberScaleValue": "1000,1000,1000",
+                        "numberScaleUnit": "K,M,B",
+                        "reverseLegend": "1",
+                        "numberPrefix": "",
+                        "numbersuffix": "",
+                        "exportenabled": "1",
+                        "exportatclient": "0",
+                        "exporthandler": "http://export.api3.fusioncharts.com",
+                        "html5exporthandler": "http://export.api3.fusioncharts.com",
+						
+                      //  "paletteColors": "#0075c2,#1aaf5d",
+                        "bgColor": "#808080",
+                        "baseFont": "Helvetica",
+                        "baseFontSize": "15",
+                        "captionFontSize": "18",
+                        "showsum": "1",
+                        "showvalues": "1",
+                        "valueFontColor": "#000000",
+                        "baseFontColor": "#000000",
+                        "borderAlpha": "20",
+                        "useroundedges": "1",
+                        "showCanvasBorder": "0",
+                        "usePlotGradientColor": "0",
+                        "plotBorderAlpha": "10",
+                        "placeValuesInside": "0",
+                        "legendBgColor": "#ffffff",
+                        "legendBorderColor": "#000000",
+                        "legendBorder": "1",
+                        "legendBorderAlpha": "1",
+                        "legendShadow": "1",
+                        "legendPosition": "right",
+                        "xAxisLineColor": "#999999",
+                        "divlineColor": "#999999",
+                        "rotatelabels": "0",
+                        "rotatevalues": "0",
+                        "subcaptionFontBold": "0",
+                        "subcaptionFontSize": "14",
+                        "showLegend": '1',
+                        "formatnumberscale": "1",
+						"canvasBgColor": "#B0E2FF",
+						"showCanvasBorder": "1",
+					"canvasBorderColor": "#666666",
+					"canvasBorderThickness": "4",
+					"canvasBorderAlpha": "80",
+					"legendBgColor":"#808080"
+                    },
+								
+					"categories": json["xasisdata"],
+									
+					"dataset": json["chatdata"]
+								
+				};
+				FusionCharts.ready(function () {
+					var revenueChart = new FusionCharts({
+				
+						type: 'mscolumn2d',
+						renderAt: 'container',
+						width: '100%',
+						height: '500',
+							dataFormat: 'json',
+							dataSource: chart2,
+							events: {
+												  dataPlotClick: function (event,dataObj) 
+												  {	
+													//alert(JSON.stringify(dataObj));
+													//sessionStorage.setItem("firstDataObject",JSON.stringify(json['dataset']));
+													//sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['category']));
+													//alert(JSON.stringify(json['dataset']));
+													//alert(JSON.stringify(json['category']));
+													//sessionStorage.setItem("drillStatus",'true');
+													//sessionStorage.setItem("countryCode",dataObj.datasetName);
+													//var countrycoode = sessionStorage.getItem("countryCode");
+												
+													//sessionStorage.getItem('countryCode');
+													//var currencyType = sessionStorage.getItem("currencyType");
+													//drillDownForSalesman(dataObj.categoryLabel);
+												  }
+											  }
+						});
+						revenueChart.addEventListener('renderComplete', function() {
+							// In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+//							// Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+							renderTableForSalesman(revenueChart, 'table-container', json['bookingdata'], json['budgetdata']);
+								$(".avg").hide(); 
+						});
+						revenueChart.render();
+				});
+		  });
+		 
+	 };
+	 
+	 	$("#goback").click(function()
+		{
+			//alert(drillSts);
+			if(drillSts == "2")
+			{
+				//alert("go to level 1");
+				var countrycode = sessionStorage.getItem("countryCode");
+				var y = sessionStorage.getItem("Year");
+				
+				drillSts = "1";
+				drillDownForRegion(y,countrycode,status,cType);
+				
+			}
+			else
+			{
+				//alert("go to level 0");
+				//alert(status);
+				//alert(sessionStorage.getItem("selectedCountry"));	
+				/*status = sessionStorage.getItem("selectedCountry");
+				if(status == "all")
+				 {
+					 //alert("if");
+					 //$("#curDropdown").show();
+					 //$('#curDropdown_country').hide();
+					 //var captionTitle = "SCA GROUP ANNUAL BOOKING";
+					 yAxisName = "USD";
+					 url = "ytdcode.do";
+					 //alert("if");
+				 }
+				 else  if(cType == "dollar")
+				 {
+					 //alert("else if");
+					 //alert(cType);
+					 //$("#curDropdown").hide();
+					// $('#curDropdown_country').show();
+					 //var captionTitle = countryNameArray[0][status] + " " + "ANNUAL BOOKING";
+					 yAxisName = "USD";
+					// alert("else if");
+					 url = "ytdCodeAreaCountryWise.do?countryCode=" + status + "&id="+cType;
+				 }
+				 else
+				 {
+					// $("#curDropdown").hide();
+					// $('#curDropdown_country').show();
+					 
+					// var captionTitle = countryNameArray[0][status] + " " + "ANNUAL BOOKING";
+					 yAxisName = array[0][status];
+					 url = "ytdCodeAreaCountryWise.do?countryCode=" + status + "&id="+cType;
+					 //alert("else");
+				 }*/
+				 
+				 yAxisName = "USD";
+				 url = "ytdcode.do";
+				 drillSts = "0";
+				loadChartForAnnualBooking(url, status, yAxisName,cType);
+				
+			}
+		});
+		
+		$("#gobackCon").click(function()
+		{
+			//alert(sessionStorage.getItem("selectedCountry"));
+			//alert(sessionStorage.getItem("cType"));
+			var consts = sessionStorage.getItem("selectedCountry");
+				 if(sessionStorage.getItem("cType") == "dollar")
+				 {
+					 //alert(cType + " "+ " if" + "dollar");
+					 //alert("else if");
+					 //alert(cType);
+					 //$("#curDropdown").hide();
+					// $('#curDropdown_country').show();
+					 //var captionTitle = countryNameArray[0][status] + " " + "ANNUAL BOOKING";
+					 yAxisName = "USD";
+					// alert("else if");
+					 url = "ytdCodeAreaCountryWise.do?countryCode=" + consts + "&id="+cType;
+					  drillSts = "1";
+					 loadChartForAnnualBooking(url, consts, yAxisName,cType);
+				 }
+				 else
+				 {
+					 //alert(cType + " "+ " else" + "local");
+					// $("#curDropdown").hide();
+					// $('#curDropdown_country').show();
+					 
+					// var captionTitle = countryNameArray[0][status] + " " + "ANNUAL BOOKING";
+					 yAxisName = array[0][consts];
+					 url = "ytdCodeAreaCountryWise.do?countryCode=" + consts + "&id=local";
+					 //alert("else");
+					 drillSts = "1";
+				   loadChartForAnnualBooking(url, consts, yAxisName,'local');
+				 }
+			
+		});
+		
+				//===============Render Table For Annual Group=================================//
+		function renderTable(chart, containerId, percent) 
+		{
+	
+        //alert("table");
+		//alert(percent);
+        // After the chart is rendered we export the data as CSV, parse it and then create a markup
+        // equivalent to a table by parsing the exported CSV.
+        var data = chart.getDataAsCSV(),
+            rows,
+            row,
+            rowSum
+        i,
+        length,
+        tableHeader = '';
+        tableData = '';
+        rowHeading = "";
+        yearHeadigs = "";
+        tableBody3 = '';
+
+//        // Get all the rows by splitting data with '\n' seperator
+//		
+//       //console.log(data);
+        rows = data.replace(/"/g, '').split('\n');
+//		//alert(JSON.stringify(rows));
+//		 
+//      
+//        // Retrieve the data from the rows and compute body string from the data rows
+//        //var val1 = 0;
+//
+        var percentVal = percent;
+        rowHeading = rows[0].split(',');
+//		//alert(JSON.stringify(rowHeading));
+        var arrayObj = [];
+        var arrayObj1 = [];
+        var sumofTotalBooking = 0;
+        var convertBooking = [];
+        var finalTableData = [];
+        var finalTableData2 = [];
+		
+//        
+//        
+//       
+//		
+       for (i = 1, length = rows.length; i < length; i++) 
+		{
+		//alert(length);
+            
+            row = rows[i].split(',');
+			
+			
+            var sumofRow = 0;
+            var sumofBooking = 0;
+           var tableBody1 = '';
+			var tableBody4 = '';
+            var sumPercent = "";
+            var tableData = [];
+            var tableData2 = [];
+			//alert(JSON.stringify(rowHeading[0]));
+			tableBody1 += "<tr id='tableRow'><th style='width:15%;text-align:center'>" + rowHeading[0] + "</th></tr>";
+			
+            for (var j = 0; j < row.length; j++) 
+			{
+                //alert(row.length);
+				
+//                 
+                if (j >= 1) 
+				{
+					
+                    if (row[j].trim().length == 0) 
+					{
+                       var value = 0;
+                    } 
+					else 
+					{
+                        var value = row[j];
+						//alert(value);
+                    }
+                   sumofBooking += parseInt(value);
+                  	//alert(sumofBooking);
+                    if (row[j] == null) {
+                        var productValue = 0;
+                    } else {
+                       var productValue = row[j];
+                   }
+                    if (convertMillions(productValue) == null) {
+                        var convertproductValue = "";
+                   } else {
+                       var convertproductValue = convertMillions(productValue);
+                  } //sumPercent +=parseInt(convertproductValue);
+					
+					 tableData.push("<td style='width:15%;text-align:center'>" + convertproductValue + "</td>");
+					
+                    tableData2.push(productValue);
+					tableBody4 += "<tr id='tableRow" + [j] + "'><td style='width:15%;text-align:center'>" + rowHeading[j] + "</td></tr>";
+                }
+               
+				
+				//alert(tableBody4);
+                
+           }
+			
+//			//alert(row[0]);
+            yearHeadigs += "<th style='width:5%;text-align:center' >" + row[0] + "</th>";
+            
+//           // alert(row[0]);
+            if (convertMillions(sumofBooking) == null) {
+                var totalValue = "";
+            } else {
+                var totalValue = convertMillions(sumofBooking);
+				
+				
+            }
+            convertBooking.push("<th style='text-align:center'>" + totalValue + "</th>");
+			//alert(convertBooking);
+		
+            //arrayObj1.push(sumPercent);
+            //alert(convertBooking);
+           var sumPercent = 0;
+
+            finalTableData.push(tableData);
+            finalTableData2.push(tableData2);
+            sumofTotalBooking += parseInt(sumofBooking);
+			//alert(finalTableData2);
+            
+        }
+//           
+        tableData = tableBody4;
+//		//alert(tableData);
+        document.getElementById(containerId).innerHTML = '<table width ="70%;" align="center"  border="1px solid #000000" style="border-collapse:collapse;" class="tableCss" id="tableCss"><thead >'+ tableBody1 +'</thead><tbody>' + tableData + '</tbody><tfoot ><tr  id="total"><td style="text-align:center">Total</td></tr></tfoot></table>';
+//		
+        $('#tableRow').append(yearHeadigs);
+       $('#tableRow').append("<td  style='width:150px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+        $('#tableRow').css("font-weight", "bold");
+		
+		 $('#tableRow').css({
+    "background-color": "#d3d3d3","color": "#000000"
+});
+//
+//
+//
+//      //var asd = document.getElementById(containerId).innerHTML; 
+//			// reverse table code   
+		   $('.tableCss tbody').on('click', 'tr', function(){
+//				//alert('clicked');
+//				//alert($(this).attr('id'));
+//				
+			});
+			var tbody = $('.tableCss tbody');
+			myFunction(tbody);
+			function myFunction(tbody)
+			{
+				//alert(4555);
+				tbody.html($('tr',tbody).get().reverse());
+			}
+			$(':button').on('click',tbody,function(){
+//				//alert($(this).attr('id'));
+//				
+//				
+//				//alert(JSON.stringify(tbody));
+				tbody.html($('tr',tbody).get().reverse());
+			});
+//
+        for (var k = 0; k < finalTableData.length; k++) {
+            var rowVal = [];
+            for (var l = 0; l < finalTableData[k].length; l++) {
+                //alert(finalTableData[k][k]);
+                var count = Number(l) + 1;
+                $('#tableRow' + count).append(finalTableData[k][l]);
+              var TotalValue = 0;
+               for (var m = 0; m < finalTableData.length; m++) {
+
+                    TotalValue += parseInt(finalTableData2[m][l]);
+				
+					
+                }
+               rowVal.push(TotalValue);
+
+            }
+            var count1 = Number(k) + 1;
+//			//alert(convertBooking[k]);
+            $('#total').append(convertBooking[k]);
+//            //$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+        }
+       var totalPercentage = 0;
+        for (var t = 1; t <= rowVal.length; t++) 
+       {
+         // alert(rowVal.length);
+            var next = Number(t) - 1;
+			//alert(next);
+            if (percentVal == null || percentVal == "Infinity" || percentVal == "") {
+				//alert("if");
+                var percentage = 0;
+            } else {
+                var percentage = percentVal;
+				//alert(percentage);
+            }
+			
+			$('#tableRow' + t).append("<td>" + percentage[next].toFixed(2).replace(/[^\+|\-0-9.]/ig, '') + " %</td>");
+			
+			
+            
+            //alert(percentage[next].toFixed(2));
+            //var percentcol = "<td>"+ calculatePercentage(rowVal[t],sumofTotalBooking)  +" %</td>"
+            //var percentcol = "<td>"+ percentVal  +" %</td>"
+            //$('#tableRow'+ next).append(percentcol);
+							
+            //totalPercentage +=parseFloat(calculatePercentage(rowVal[t],sumofTotalBooking));
+			//totalPercentage += parseFloat(percentage);
+        }
+		//alert(totalPercentage);
+         $('#total').append("<td></td>");
+		 $('#total').css({"color": "#000000"});
+   };
+	
+	//===========END For Group===========================//
+	
+	//==================Render Table For Regions==============================//
+		function renderTableForRegions(chart, containerId, percent) {
+//	
+//        
+//		//alert(percent);
+//        // After the chart is rendered we export the data as CSV, parse it and then create a markup
+//        // equivalent to a table by parsing the exported CSV.
+       var data = chart.getDataAsCSV(),
+            rows,
+            row,
+            rowSum
+        i,
+        length,
+        tableHeader = '';
+        tableData = '';
+        rowHeading = "";
+        yearHeadigs = "";
+        tableBody3 = '';
+//
+//        // Get all the rows by splitting data with '\n' seperator
+//		
+//       //console.log(data);
+        rows = data.replace(/"/g, '').split('\n');
+		//alert(JSON.stringify(rows));
+//		 
+//      
+//        // Retrieve the data from the rows and compute body string from the data rows
+//        //var val1 = 0;
+//
+        var percentVal = percent;
+        rowHeading = rows[0].split(',');
+ 		//alert(JSON.stringify(rowHeading));
+        var arrayObj = [];
+        var arrayObj1 = [];
+        var sumofTotalBooking = 0;
+        var convertBooking = [];
+        var finalTableData = [];
+        var finalTableData2 = [];
+		var tableBody4 = '';
+         var sumofBooking = 0;
+		 var sumofBooking1 = 0;
+		 var sum=0;
+       var Total = 0;
+     
+	 	for (var m = 1, length = rows.length; m < length; m++) 
+			{
+				row = rows[m].split(',');
+				if(row[1].trim().length==0) { var value = 0; } else { var value=row[1];}
+				Total += parseInt(value);
+				
+			}
+		
+        for (i = 1, length = rows.length; i < length; i++) 
+		{
+			
+//            
+            row = rows[i].split(',');
+			
+			if(row[1].trim().length==0) { var value = 0; } else { var value=row[1];}
+			sum = parseInt(value);
+			var convertedSum = convertMillions(sum);
+			//Total += parseInt(value);
+			
+			var convertPercent = calculatePercentage(sum,Total);
+			if(convertPercent==null || convertPercent=="Infinity") { convertPercent = 0; } else { convertPercent = convertPercent; }
+			if(isNaN(convertPercent)){var convertPercentage = 0; } else {var convertPercentage = convertPercent; }
+			//alert(convertPercent + " " + i );
+			
+			//alert(Total);
+//           
+             
+           var sumofRow = 0;
+//           
+            var tableBody1 = '';
+//			
+            var sumPercent = "";
+           var tableData ="";
+			var tableDataper ="";
+            var tableData2 = [];
+			 var Totalval = 0;
+//			//alert(JSON.stringify(rowHeading[0]));
+//			//tableBody1 += "<tr id='tableRow'><th style='width:15%;text-align:center'>" + rowHeading[0] + "</th></tr>";
+//			
+            for (var j = 0; j < row.length; j++) 
+			{
+               
+                 tableBody1 += "<th style='width:15%;text-align:center'>" + rowHeading[j] + "</th>";
+//				 //alert(tableBody1);
+                if (j >= 1) 
+				{
+                   if (row[j].trim().length == 0) 
+					{
+                        var value1 = 0;
+						var value2 =0;
+                   } 
+				else 
+					{
+                        var value1 = row[1];
+						var value2 = row[2];
+						
+                    }
+                    sumofBooking += parseInt(value1);
+					sumofBooking1 += parseInt(value2);
+                  	sum = parseInt(value1);
+			    	//Totalval += parseInt(value1); 
+					
+					//var convertPercent = calculatePercentage(sum,Total);
+					
+                    if (row[j] == null) {
+                       var productValue = 0;
+                    } else {
+                       var productValue = row[j];
+                    }
+                    if (convertMillions(productValue) == null) {
+                       var convertproductValue = "0K";
+                    } else {
+                        var convertproductValue = convertMillions(productValue);
+                    } //sumPercent +=parseInt(convertproductValue);
+					
+					//if (percentVal == null || percentVal == "Infinity") {
+//						var percentage = 0;
+//					} else {
+//						var percentage = percentVal; //percentVal[i].toFixed(2).replace(/[^\+|\-0-9.]/ig, '')
+//						//alert(percentage); 
+//					}
+					tableDataper += "<td style='width:15%;text-align:center'>" + convertPercentage + " %</td>";
+					 tableData += "<td style='width:15%;text-align:center'>" + convertproductValue + "</td>";
+					 //alert(percentVal[i] + " " + i);
+				 
+					//alert(productValue);
+					//$('#total').append(convertBooking[k]);
+					
+					//alert(Totalval);
+                   tableData2.push(productValue);
+					
+					
+//					
+               }
+//               
+				//alert(sumofBooking);
+//				
+//                
+           }
+//			
+//			
+//			
+//			//alert(row[0]);
+				tableBody4 += "<tr id='tableRow" + [i] + "'><td style='width:15%;text-align:center'>" + row[0] + "</td>"+ tableData + tableDataper + "</tr>";
+//            //yearHeadigs += "<th style='width:5%;text-align:center' >" + row[0] + "</th>";
+//			//tableBody4 += "<tr id='tableRow" + [i] + "'><td style='width:15%;text-align:center'>" + row[0] + "</td></tr>";
+//            
+//       		 //alert(tableBody4);
+//			 
+            if (convertMillions(sumofBooking) == null) {
+                var totalValue = "0K";
+            } else {
+               var totalValue = convertMillions(sumofBooking);
+				
+				
+            }
+//			 /*if (convertMillions(sumofBooking1) == null) {
+//                var totalValue2 = "0K";
+//            } else {
+//                var totalValue2 = convertMillions(sumofBooking1);
+//				
+//				
+//            }*/
+//			//alert(totalValue + " totalValue"  );
+//			//var convertPercent = calculatePercentage(sum,sumofBooking);
+//			//alert(convertPercent);
+//			//var convertPercent = calculatePercentage(productValue,totalValue);
+//            //convertBooking +="<td style='text-align:center'>" + totalValue + "</td>";
+//			//alert(convertPercent);
+//		
+//            //arrayObj1.push(sumPercent);
+//            //alert(convertBooking);
+            var sumPercent = 0;
+//
+            finalTableData.push(tableData);
+            finalTableData2.push(tableData2);
+           sumofTotalBooking += parseInt(sumofBooking);
+			//alert(finalTableData2);
+            
+        }
+       // alert(finalTableData.length);
+        tableData = tableBody4;
+//		//alert(tableData + "tableData");
+        document.getElementById(containerId).innerHTML = '<table width ="70%;" align="center"  border="1px solid #000000" style="border-collapse:collapse;" class="tableCss" id="tableCss"><thead><tr id="tableRow">'+ tableBody1 +'</tr></thead><tbody>' + tableData + '</tbody><tfoot ><tr id="total"><td style="text-align:center">Total</td><td style="text-align:center">' + totalValue + '</td></tr></tfoot></table>';
+//		
+//        //$('#tableRow').append(yearHeadigs);
+        $('#tableRow').append("<td  style='width:50px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+        $('#tableRow').css("font-weight", "bold");
+//		
+		 $('#tableRow').css({
+    "background-color": "#d3d3d3","color": "#000000"
+});
+
+				
+//
+//
+//
+//      //var asd = document.getElementById(containerId).innerHTML; 
+//
+//		   /*$('.tableCss tbody').on('click', 'tr', function(){
+//				//alert('clicked');
+//				//alert($(this).attr('id'));
+//				
+//			});
+//			var tbody = $('.tableCss tbody');
+//			myFunction(tbody);
+//			function myFunction(tbody)
+//			{
+//				//alert(4555);
+//				tbody.html($('tr',tbody).get().reverse());
+//			}
+//			$(':button').on('click',tbody,function(){
+//				//alert($(this).attr('id'));
+//				
+//				
+//				//alert(JSON.stringify(tbody));
+//				tbody.html($('tr',tbody).get().reverse());
+//			});*/
+
+			
+
+
+//
+        for (var k = 0; k < finalTableData.length; k++) {
+            var rowVal = "";
+            for (var l = 0; l < finalTableData[k].length; l++) {
+//               //alert(finalTableData[k]);
+                var count = Number(l) + 1;
+//                //$('#tableRow' + count).append(finalTableData[k][l]);
+                var TotalValue = 0;
+                for (var m = 0; m < finalTableData.length; m++) {
+//
+                    TotalValue += parseInt(finalTableData2[m][l]);
+//				
+//					
+                }
+                rowVal = TotalValue;
+//				//alert(finalTableData2.length);
+//
+            }
+            var count1 = Number(k) + 1;
+//			//alert(convertBooking[k]);
+//           //$('#total').append(convertBooking[k]);
+//            //$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+        }
+       var totalPercentage = 0;
+        for (var t = 1; t <= finalTableData.length; t++) 
+        {
+//           //alert(percentVal[0]);
+            var next = Number(t) - 1;
+  		 
+            /*if (percentVal == null || percentVal == "Infinity") {
+                var percentage = 0;
+            } else {
+                var percentage = percentVal;
+//				//alert(percentage);
+            }*/
+//			//alert($('#tableRow' + t).append("<td>" + percentage[next].toFixed(2).replace(/[^\+|\-0-9.]/ig, '') + " %</td>"));
+//          //$('#tableRow' + t).append("<td>" + percentage[next].toFixed(2).replace(/[^\+|\-0-9.]/ig, '') + " %</td>");
+//            //alert(percentage[next].toFixed(2));
+//            //var percentcol = "<td>"+ calculatePercentage(rowVal[t],sumofTotalBooking)  +" %</td>"
+//            //var percentcol = "<td>"+ percentVal  +" %</td>"
+//            //$('#tableRow'+ next).append(percentcol);				
+//            //totalPercentage +=parseFloat(calculatePercentage(rowVal[t],sumofTotalBooking));
+        }
+         $('#total').append("<td></td>");
+		 $('#total').css({"color": "#000000"});
+    };
+	//==============END For Group Regions=====================//
+	
+		//===============Render Table For Salesman====================//
+		function renderTableForSalesman(chart, containerId, bkpercent,bgpercent) {
+//	
+//        
+//		//alert(percent);
+//        // After the chart is rendered we export the data as CSV, parse it and then create a markup
+//        // equivalent to a table by parsing the exported CSV.
+        var data = chart.getDataAsCSV(),
+            rows,
+            row,
+            rowSum
+        i,
+        length,
+        tableHeader = '';
+        tableData = '';
+        rowHeading = "";
+        yearHeadigs = "";
+        tableBody3 = '';
+//
+//        // Get all the rows by splitting data with '\n' seperator
+//		
+       //console.log(data);
+			//alert(JSON.stringify(data));
+        rows = data.replace(/"/g, '').split('\n');
+		
+	 	
+//      
+//        // Retrieve the data from the rows and compute body string from the data rows
+//        //var val1 = 0;
+//
+        var percentBk = bkpercent;
+		var percentBG = bgpercent;
+        rowHeading = rows[0].split(',');
+//		//alert(JSON.stringify(rowHeading));
+        var arrayObj = [];
+        var arrayObj1 = [];
+        var sumofTotalBooking = 0;
+        var convertBooking = [];
+        var finalTableData = [];
+        var finalTableData2 = [];
+		var tableBody4 = '';
+         var sumofBooking = 0;
+		 var sumofBooking1 = 0;
+		 
+//        
+//       
+//		
+        for (i = 1, length = rows.length; i < length; i++) 
+		{
+		//alert(percentBk);
+		//alert(percentBG);
+//            
+				
+				
+				
+				//alert(convertPercentage + " " + i);
+				
+            row = rows[i].split(',');
+         
+              
+			  
+			  if(row[1].trim().length==0) { var valueBG = 0; } else { var valueBG = row[1];}
+			  if(row[2].trim().length==0) { var valueBK = 0; } else { var valueBK = row[2];}
+			  
+			 // var convertPercent = calculatePercentage(percentBk[i],percentBG[i]);
+			 var convertPercent = calculatePercentage(valueBK,valueBG);
+			 if(isNaN(convertPercent) || convertPercent=="Infinity") { var convertPercentage = 0; } else { var convertPercentage = convertPercent; }
+			//alert(convertPercent + "" + i);
+            var sumofRow = 0;
+//           
+            var tableBody1 = '';
+			var tableDataper ="";
+            var sumPercent = "";
+            var tableData ="";
+//			
+            var tableData2 = [];
+//			//alert(JSON.stringify(rowHeading[0]));
+//			//tableBody1 += "<tr id='tableRow'><th style='width:15%;text-align:center'>" + rowHeading[0] + "</th></tr>";
+//			
+            for (var j = 0; j < row.length; j++) 
+			{
+                
+                 tableBody1 += "<th style='width:15%;text-align:center'>" + rowHeading[j] + "</th>";
+//				 //alert(tableBody1);
+               if (j >= 1) 
+				{
+                    if (row[j].trim().length == 0) 
+					{
+                       var value1 = 0;
+						var value2 =0;
+                    } 
+					else 
+					{
+                        var value1 = row[1];
+					    var value2 = row[2];
+						
+                    }
+                    sumofBooking += parseInt(value1);
+					sumofBooking1 += parseInt(value2);
+                  	
+					
+					
+                   if (row[j] == null) {
+                        var productValue = 0;
+                    } else {
+                       var productValue = row[j];
+                   }
+                   if (convertMillions(productValue) == null) {
+                        var convertproductValue = "0K";
+                    } else {
+                        var convertproductValue = convertMillions(productValue);
+                    } //sumPercent +=parseInt(convertproductValue);
+					
+					 tableData += "<td style='width:15%;text-align:center'>" + convertproductValue + "</td>";
+//					 
+//					//$('#total').append(convertBooking[k]);
+                    tableData2.push(productValue);
+//					
+                }
+//                
+//				
+//				
+//                
+           }
+				/*if (percentVal == null || percentVal == "Infinity") {
+						var percentage = 0;
+					} else {
+						var percentage = percentVal;
+						//alert(percentage); //" + percentVal[i].toFixed(2).replace(/[^\+|\-0-9.]/ig, '') + " %  
+					}*/
+					
+					tableDataper += "<td style='width:15%;text-align:center'>" + convertPercentage + " % " +"</td>";
+				//alert(tableDataper);
+//			//alert(percentage[j] + "" + j);
+					//alert(row[0]);
+			tableBody4 += "<tr id='tableRow" + [i] + "'><td style='width:15%;text-align:center'>" + row[0] + "</td>"+ tableData + tableDataper+ "</tr>";
+//            //yearHeadigs += "<th style='width:5%;text-align:center' >" + row[0] + "</th>";
+//			//tableBody4 += "<tr id='tableRow" + [i] + "'><td style='width:15%;text-align:center'>" + row[0] + "</td></tr>";
+//            
+//       		 //alert(tableBody4);
+           if (convertMillions(sumofBooking) == null) {
+                var totalValue = "0K";
+            } else {
+               var totalValue = convertMillions(sumofBooking);
+				
+				
+           }
+			 if (convertMillions(sumofBooking1) == null) {
+               var totalValue2 = "0K";
+           } else {
+               var totalValue2 = convertMillions(sumofBooking1);
+				
+				
+           }
+//            //convertBooking +="<td style='text-align:center'>" + totalValue + "</td>";
+//			//alert(convertBooking);
+//		
+//            //arrayObj1.push(sumPercent);
+//            //alert(convertBooking);
+           var sumPercent = 0;
+//
+            finalTableData.push(tableData);
+            finalTableData2.push(tableData2);
+           sumofTotalBooking += parseInt(sumofBooking);
+		//alert(finalTableData2);
+//            
+       }
+//            
+        tableData = tableBody4;
+//		//alert(tableData + "tableData");
+        document.getElementById(containerId).innerHTML = '<table width ="70%;" align="center"  border="1px solid #000000" style="border-collapse:collapse;" class="tableCss" id="tableCss"><thead><tr id="tableRow">'+ tableBody1 +'</tr></thead><tbody>' + tableData + '</tbody><tfoot ><tr id="total"><td style="text-align:center">Total</td><td style="text-align:center">' + totalValue + '</td><td>'+ totalValue2 +'</td></tr></tfoot></table>';
+//		
+//        //$('#tableRow').append(yearHeadigs);
+        $('#tableRow').append("<td  style='width:50px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+       $('#tableRow').css("font-weight", "bold");
+//		
+		 $('#tableRow').css({
+   "background-color": "#d3d3d3","color": "#000000"
+});
+//
+//
+//
+//      //var asd = document.getElementById(containerId).innerHTML; 
+//
+//		   /*$('.tableCss tbody').on('click', 'tr', function(){
+//				//alert('clicked');
+//				//alert($(this).attr('id'));
+//				
+//			});
+//			var tbody = $('.tableCss tbody');
+//			myFunction(tbody);
+//			function myFunction(tbody)
+//			{
+//				//alert(4555);
+//				tbody.html($('tr',tbody).get().reverse());
+//			}
+//			$(':button').on('click',tbody,function(){
+//				//alert($(this).attr('id'));
+//				
+//				
+//				//alert(JSON.stringify(tbody));
+//				tbody.html($('tr',tbody).get().reverse());
+//			});*/
+//
+        for (var k = 0; k < finalTableData.length; k++) {
+           var rowVal = [];
+            for (var l = 0; l < finalTableData[k].length; l++) {
+//               //alert(finalTableData[k]);
+                var count = Number(l) + 1;
+//                //$('#tableRow' + count).append(finalTableData[k][l]);
+                var TotalValue = 0;
+                for (var m = 0; m < finalTableData.length; m++) {
+
+                    TotalValue += parseInt(finalTableData2[m][l]);
+				
+//					
+               }
+               rowVal.push(TotalValue);
+//
+            }
+            var count1 = Number(k) + 1;
+//			//alert(convertBooking[k]);
+//           //$('#total').append(convertBooking[k]);
+//            //$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+        }
+       var totalPercentage = 0;
+       for (var t = 1; t <= rowVal.length; t++) //id='tableRow"
+       {
+//            //alert(percentVal[0]);
+            var next = Number(t) - 1;
+
+           /*if (percentVal == null || percentVal == "Infinity") {
+               var percentage = 0;
+           } else {
+               var percentage = percentVal;
+				//alert(percentage);
+            }*/
+//           //$('#tableRow' + t).append("<td>" + percentage[next].toFixed(2).replace(/[^\+|\-0-9.]/ig, '') + " %</td>");
+//            //alert(percentage[next].toFixed(2));
+//            //var percentcol = "<td>"+ calculatePercentage(rowVal[t],sumofTotalBooking)  +" %</td>"
+//            //var percentcol = "<td>"+ percentVal  +" %</td>"
+//            //$('#tableRow'+ next).append(percentcol);				
+//            //totalPercentage +=parseFloat(calculatePercentage(rowVal[t],sumofTotalBooking));
+        }
+         $('#total').append("<td></td>");
+	 $('#total').css({"color": "#000000"});
+   };
+	//===============END For Group Salesman===================//
+	
+	
+		//==============Convert Data Values==================//
+	function convertMillions(sumofBudget) {
+//        
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+       var trillion = 1000000000000;
+        if (sumofBudget < thousand) {
+		
+            return (sumofBudget / thousand).toFixed(2).replace(/\.0$/, '') ;
+       } else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+            return (sumofBudget / thousand).toFixed(2).replace(/\.0$/, '') + 'K';
+        } else if (sumofBudget >= million && sumofBudget <= billion) {
+           return (sumofBudget / million).toFixed(2).replace(/\.0$/, '') + 'M';
+        } else if (sumofBudget >= billion && sumofBudget <= trillion) {
+            return (sumofBudget / billion).toFixed(2).replace(/\.0$/, '') + 'B';
+        } else {
+            return (sumofBudget / trillion).toFixed(2).replace(/\.0$/, '') + 'T';
+       }
+    }
+
+    
+//    //alert(rowHeading2);
+    function calculatePercentage(rowHeading2, rowHeading1) {
+
+        var percent = (rowHeading2 / rowHeading1) * 100;
+        //alert(percent);
+        return percent.toFixed(1);
+        //sumoftotalPercent = sumoftotalPercent+percent;
+        //alert(percent);
+
+   }//	
+	//alert(888989);
+
+</script>
+
+
+      	<div class="row">
+            <div class="col-sm-9">
+                <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="SCA"><span class="allcon btn btn-primary btn-circle" style="width:45px; height:45px; padding:11px 4px;">SCA</span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="EMA" tooltip-placement="bottom" tooltip="EMarket"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="emarket"></i></span></a>
+                    <a href="#/app/SCA_groupByArea" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <span class="dropdown" id="curDropdown" style="display:none;">
+                     <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;"><i class="fa fa-usd" aria-hidden="true"></i></span></button>
+                		<span class="dropdown-content">
+                            <a href="#/app/SCA_groupByArea" id="SCA"><span>USD &#x24;</span></a>
+                            <a href="#/app/SCA_groupByArea" id="USD" style="display:none;"><span id="scaSpan">USD &#x24;</span></a>
+                       </span>
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <span class="dropdown" id="curDropdown_country" style="display:none;">
+                     <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;"><i class="fa fa-usd circular" aria-hidden="true"></i></span></button>
+                <span class="dropdown-content">
+                        
+                    <a href="#/app/SCA_groupByArea" id="SCA_country"><span>USD &#x24;</span></a>
+                    <a href="#/app/SCA_groupByArea" id="USD_country"><span id="scaSpan_country">USD &#x24;</span></a>
+                
+                </span>
+                </span>
+            </div>
+		</div>
+        <div class="row">
+            <div class="col-sm-12">
+                 <p><input type="button" id="goback" value="< Go Back" class="switchButton" style=" border:none; float: right; margin-right:20px; display:none;"/></p>
+                 <p><input type="button" id="gobackCon" value="< Go Back" class="switchButton" style=" border:none; float: right; margin-right:20px; display:none;"/></p>
+            </div>
+         </div>         
+        <div class="row">
+        	<div class="col-sm-12">
+            	<div id='container'>
+                    <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+                        <img src="image/PreLoader.gif" /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+                    </div>
+                </div>
+                <p class="avg" style="background-color: rgb(66, 134, 244); color: rgb(255, 255, 255); font-weight: bold; font-size: 120%; text-align: center; width: 756px;  margin: 0 auto; display:none;" ><b id="tabTitle">ANNUAL BOOKING</b></p>
+                <div id="table-container" style="padding-left:2%; padding-right:2%;"></div>
+            </div>
+        </div>  

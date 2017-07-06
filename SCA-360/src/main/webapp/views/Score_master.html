@@ -1,0 +1,883 @@
+﻿
+    <style>#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.container
+		{
+			margin-left:30px;
+			width:95%;
+		}
+
+.asdok 
+		{
+			  position: relative;
+			  padding-top: 28px;
+			  background-color:#ffffff;
+			  color:#333333;
+		}
+		.asdok.positioned 
+		{
+			  position: absolute;
+			  width:95%;
+			  box-shadow: 0 0 15px #333;
+		}
+		.container1 
+		{
+			  overflow-y: auto;
+			  height: 300px;
+		}
+		.table 
+		{
+			 border-spacing: 0; border-width: 0; padding: 0; border-width: 0;
+		}
+		.table td + .table td 
+		{
+			  border-left:1px solid #eee;
+			  text-align:left;
+		}
+		.table td, .table th 
+		{
+			  border-bottom:1px solid #eee;
+			  color: #000;
+			  width:0%;
+		}
+		.table th span
+		{
+			  position: absolute;
+			  background: transparent;
+			  color: #333333;
+			  top: 0;
+		}
+		.table th:first-child div
+		{
+			  border: none;
+		}
+
+</style>
+     <style>
+#popup_box1 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+   
+#popup_box2 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+  
+  #popup_box3 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+  
+  #popup_box4 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+  
+  #popup_box5 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+#popup_box6 {
+ display: none;
+    position: fixed;
+	 
+   
+    _position: absolute;
+    height: 223px;
+    width: 29%;
+     background:#ffffff;
+    left: 300px;
+    top: 200px;
+    z-index: 9002;
+    margin-left: 289px;
+    border: 2px solid #000000;
+    padding: 29px;
+    padding-top: 25px;
+
+ 
+
+    margin-top: 28px;
+	 overflow-x: hidden; 
+}
+  
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.8;
+    z-index: 900;
+}
+/*.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}*/
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    text-align: center;
+}
+</style>          
+	<div   data-ng-controller="ScoreMasterController" ng-init="LoadRadio();addScoreForm();addPrestNeoForm();addbbbscoreForm();addhbbscoreForm();addgmscoreForm();addgmreducerForm();getOnLoadHyponicData(scoremaster.productTypeCode,'0');getOnLoadGearMotorData(4,1)"> 
+      <!--<div class="horizontal-space"></div>-->
+<div class="row">
+     <div class="col-xs-12 col-md-12">
+        <div class="well with-header  ">
+            <div class="header bordered-blue" id="pageHeadding">
+           Score Master
+            </div>
+		<form name="Scoremasterform"    ng-submit="" novalidate>	
+									<div class="row">
+													<div class="col-sm-12" >
+														<div class="radio"  > 
+															
+															<label id="" >&nbsp;&nbsp;&nbsp;&nbsp;
+																<input type="radio" class="colored-blue" name="productTypeCode" ng-model="scoremaster.productTypeCode" value="0" checked="checked"  ng-click="getHyponicData(scoremaster.productTypeCode,'0')">
+																	   <span class="text">Hyponic</span>
+																	   </label>
+																	   
+																<label id=""> &nbsp;&nbsp;&nbsp;&nbsp;
+																
+						<input type="radio" class="colored-blue" name="productTypeCode" ng-model="scoremaster.productTypeCode" value="1"  ng-click="getPrestNeoData(scoremaster.productTypeCode,'0')">
+																	   <span class="text">PrestNeo  </span>
+																	</label>
+																	<label id="">&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" class="colored-blue" name="productTypeCode" ng-model="scoremaster.productTypeCode"  value="2"  ng-click="getBBBData(scoremaster.productTypeCode,'0')">
+																	 <span class="text">BBB </span>
+						 
+																
+																	   </label>
+																	   <label id="">&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" class="colored-blue" name="productTypeCode" ng-model="scoremaster.productTypeCode"  value="3"  ng-click="getHBBData(scoremaster.productTypeCode,'0')">
+																	 <span class="text">HBB  </span>
+						 
+																
+																	   </label>
+																	   <label id="">&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" class="colored-blue" name="productTypeCode" ng-model="scoremaster.productTypeCode"  value="4" ng-click="getCycloData(scoremaster.productTypeCode,1);">
+																	 <span class="text">Cyclo </span>
+						 
+																
+																	   </label>
+														</div>
+													</div>
+											 
+															
+											
+													</div><br/><br/>
+									<div class="row" ng-if="scoremaster.productTypeCode	==4">
+										<div class="col-sm-2" >
+										</div>
+									<div class="col-sm-4" >
+										<div class="radio"  > 
+											
+											<label id="" >
+												<input type="radio" class="colored-blue" name="subTypeCode" ng-model="scoremaster.subTypeCode" value="1" checked="checked" ng-click="getGearMotorData(scoremaster.productTypeCode,scoremaster.subTypeCode)">
+													   <span class="text">Gear Motor</span>
+													   </label>
+													   
+												<label id=""> &nbsp;&nbsp;&nbsp;&nbsp;
+												
+													<input type="radio" class="colored-blue" name="subTypeCode" ng-model="scoremaster.subTypeCode" value="2" 
+													ng-click="getGearReducerData(scoremaster.productTypeCode,scoremaster.subTypeCode)">
+													   <span class="text">Gear Reducer  </span>
+													</label>
+													
+										</div>
+									</div>
+							 
+											
+								
+									</div>
+									<input type="hidden" name="productType"	 ng-model="scoremaster.productType"/>
+									<input type="hidden" name="subType"	 ng-model="scoremaster.subType"/>
+		<div ng-if="scoremaster.productTypeCode==0">
+				   					<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+		                                <table ng-table="" class="table table-striped table-vmiddle"   align="center" style="width:70%;">
+                                       
+		<thead  class="bordered-blue">
+		<tr>
+        <th><span style="width:1%">Add</span></th>
+		<th><span style="width:6%">Item #</span></th>
+		<th><span style="text-align:center;margin-left:25px;">FrameSize Start</span></th>
+		<th><span style="text-align:center;margin-left:25px;">FrameSize End</span></th>
+		
+		<th><span style="text-align:center;margin-left:25px;">Score</span></th>
+		
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "Scoredata in ScoremasterField">
+		<td style="width:1%"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="Scoredata.id=='1'" ng-click='addScoreForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="Scoredata.id!='1'" ng-click='removeFormRow(Scoredata.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button></td>
+		<td style="text-align:center;padding: 15px 0px;width:6%;">{{Scoredata.guide}}<input type="hidden" class="form-control" ng-model = "Scoredata.guide"   name ="guide{{$index}}">
+</td>
+		<td style="">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "Scoredata.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"  size="2">
+                                                       </td>
+		<td style="">                               
+                                                        <input type="text" class="form-control" ng-model = "Scoredata.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"   size="2" >
+                                                      </td>
+		
+		<td style="">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "Scoredata.score" name = "score{{$index}}"    step="0.01" placeholder=""  id="gdepatmentname"  size="2"  >
+                                                     </td>
+													 
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		
+		                             </div>	</section></div>
+									 <br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="ScoremasterSubmit(Scoredata,scoremaster)" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+						
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+				</div>
+				<div ng-if="scoremaster.productTypeCode==1">
+									<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+		                                <table ng-table="" class="table table-striped table-vmiddle" style="width:70%;" align="center">
+                                       
+                                       
+		<thead  class="bordered-blue">
+		<tr>
+        <th><span style="width:1%">Add</span></th>
+		<th><span style="width:6%">Item #</span></th>
+		<th><span style="text-align:center;margin-left:25px;">FrameSize Start</span></th>
+		<th><span style="text-align:center;margin-left:25px;">FrameSize End</span></th>
+	
+		<th><span style="text-align:center;margin-left:25px;">Score</span></th>
+	
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "PrestNeo in PrestNeoField">
+		<td  style="width:1%;"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="PrestNeo.id=='1'" ng-click='addPrestNeoForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="PrestNeo.id!='1'" ng-click='removePrestNeo(PrestNeo.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	</td>
+		<td style="text-align:center;padding: 15px 0px;width:6%;">{{PrestNeo.guide}}<input type="hidden" class="form-control" ng-model = "PrestNeo.guide"  name = "guide{{$index}}"></td>
+		<td  >
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "PrestNeo.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"  size="2" >
+                                                       </td>
+		<td  >                               
+                                                        <input type="text" class="form-control" ng-model = "PrestNeo.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"  size="2"   >
+                                                      </td>
+		
+		<td  >
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "PrestNeo.score" name = "score{{$index}}"  placeholder="" size="2">
+                                                     </td>
+													  
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		                             </div></section></div>
+									  <br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="PrestNeoSubmit(PrestNeo,scoremaster)" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+					</div>
+					<div class="col-sm-6"></div>	
+				</div></div>
+				<div  ng-if="scoremaster.productTypeCode==2">
+									<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+		                                <table ng-table="" class="table table-striped table-vmiddle" style="width:75%;"  align="center">
+                                       
+                                       
+		<thead  class="bordered-blue">
+		<tr>
+        <th><span>Add</span></th>
+		<th><span>Item #</span></th>
+		<th><span>FrameSize<br/> Start</span></th>
+		<th><span>FrameSize<br/>End</span></th>
+		<th><span>Stage</span></th>
+		<th><span>Score</span></th>
+		<th><span>Mounting Type</span></th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "bbbscore  in bbbField">
+		<td style="width:1%;"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="bbbscore.id=='1'" ng-click='addbbbscoreForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="bbbscore.id!='1'" ng-click='removebbbscoreRow(bbbscore.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	</td>
+		<td style="text-align:center;padding: 15px 0px;width:1%">{{bbbscore.guide}}<input type="hidden" class="form-control" ng-model = "bbbscore.guide"  name = "guide{{$index}}"></td>
+	
+		<td style="width:2%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "bbbscore.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"  ng-blur="validateFrame(bbbscore.frameSizeFrom,bbbscore.frameSizeTo,$index);" >
+                                                       </td>
+		<td style="width:2%;">                               
+                                                        <input type="text" class="form-control" ng-model = "bbbscore.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"  ng-blur="validateFrame(bbbscore.frameSizeFrom,bbbscore.frameSizeTo,$index);"  >
+														<p class="existValRC1{{$index}}" class="help-block" style="color:#FF0000; display:none;" ng-if="bbbscore.frameSizeTo!=null">Invalid</p>
+                                                      </td>
+		<td style="width:3%;">
+		 <div class="form-group">
+
+
+                            <select class="form-control" data-ng-model="bbbscore.stage" ng-options="stage.text as stage.text for stage in Stage " name="stage"><option value="">Stage</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+		<td style="width:1%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "bbbscore.score" name = "score{{$index}}"  placeholder="" >
+                                                     </td>
+													  <td style="width:5%;">
+		 <div class="form-group">
+
+
+                              <select class="form-control" data-ng-model="bbbscore.mountingType" ng-options="mountingType.text as mountingType.text for mountingType in Mounting " name="mountingType"  ng-change="getVlidate(bbbscore.mountingType,bbbscore.frameSizeFrom,bbbscore.frameSizeTo,$index,bbbscore.stage);"><option value="">--Select--</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		                             </div></section></div>
+									   <br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="bbbFieldSubmit(bbbscore,scoremaster)" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+				</div>
+				<div  ng-if="scoremaster.productTypeCode==3">
+									<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+		                                <table ng-table="" class="table table-striped table-vmiddle" style="width:70%;"  align="center">
+                                       
+		<thead  class="bordered-blue">
+		<tr>
+        <th><span>Add</span></th>
+		<th><span>Item #</span></th>
+		<th><span>FrameSize <br/>Start</span></th>
+		<th><span>FrameSize <br/>End</span></th>
+		<th><span>Stage</span></th>
+		<th><span>Score</span></th>
+		
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "hbbscore in hbbscoreField">
+		<td  style="width:1%;"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="hbbscore.id=='1'" ng-click='addhbbscoreForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												<button type="button" id="right_All_1" class="btn btn-danger" ng-if="hbbscore.id!='1'" ng-click='removehbbscoreRow(hbbscore.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	</td>
+		<td style="text-align:center;padding: 15px 0px;width:1%;">{{hbbscore.guide}}<input type="hidden" class="form-control" ng-model = "hbbscore.guide"  name = "guide{{$index}}"></td>
+		<td  style="width:2%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "hbbscore.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"  ng-blur="validateFrameHbb(hbbscore.frameSizeFrom,hbbscore.frameSizeTo,$index);" >
+                                                       </td>
+		<td  style="width:2%;">                               
+                                                        <input type="text" class="form-control" ng-model = "hbbscore.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"  ng-blur="validateFrameHbb(hbbscore.frameSizeFrom,hbbscore.frameSizeTo,$index);" />
+                                      <p class="existValRC12{{$index}}" class="help-block" style="color:#FF0000; display:none;" ng-if="hbbscore.frameSizeTo!=null">Invalid</p>                 
+													  
+													  </td>
+		<td  style="width:3%;">
+		 <div class="form-group">
+
+
+                            <select class="form-control" data-ng-model="hbbscore.stage" ng-options="stage.text as stage.text for stage in StageHbb " name="stage"><option value="">Stage</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+		<td  style="width:1%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "hbbscore.score" name = "score{{$index}}"  placeholder=""  id="gdepatmentname"    >
+                                                     </td>
+													  
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		                             </div> </section></div>  <br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="hbbscoreFieldSubmit(hbbscore,scoremaster)" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+				</div>
+				<div  ng-if="scoremaster.productTypeCode==4 && scoremaster.subTypeCode==1 ">
+									<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+		                                <table ng-table="" class="table table-striped table-vmiddle" style="width:70%;"  align="center">
+                                       
+		<thead  class="bordered-blue">
+		<tr>
+        <th><span>Add</span></th>
+		<th><span>Item #</span></th>
+		<th><span>FrameSize<br/> Start</span></th>
+		<th><span>FrameSize<br/> End</span></th>
+		<th><span>Stage</span></th>
+		<th><span>Score</span></th>
+		<th><span>Mounting Type</span></th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "gmscore in gmscoreField">
+		<td style="width:1%;"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="gmscore.id=='1'" ng-click='addgmscoreForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="gmscore.id!='1'" ng-click='removegmscoreRow(gmscore.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	</td>
+		<td style="text-align:center;padding: 15px 0px;width:1%">{{gmscore.guide}}<input type="hidden" class="form-control" ng-model = "gmscore.guide"  name = "guide{{$index}}"></td>
+		<td style="width:2%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "gmscore.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"   >
+                                                       </td>
+		<td style="width:2%;">                               
+                                                        <input type="text" class="form-control" ng-model = "gmscore.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"    >
+                                                      </td>
+		<td style="width:3%;">
+		 <div class="form-group">
+
+
+                            <select class="form-control" data-ng-model="gmscore.stage" ng-options="stage.text as stage.text for stage in Stage " name="stage"><option value="">Stage</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+		<td style="width:1%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "gmscore.score" name = "score{{$index}}"  placeholder=""  id="gdepatmentname"    >
+                                                     </td>
+													  <td style="width:3%;">
+		 <div class="form-group">
+
+
+                              <select class="form-control" data-ng-model="gmscore.mountingType" ng-options="mountingType.text as mountingType.text for mountingType in MountingCycloMotor " name="mountingType" ng-change="getVlidateCyclo(gmscore.mountingType,gmscore.frameSizeFrom,gmscore.frameSizeTo,$index,gmscore.stage);"><option value="">--Select--</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		                             </div></section></div><br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" ng-click="gmscoreFieldSubmit(gmscore,scoremaster)" ><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+				</div>
+								<div ng-if="scoremaster.productTypeCode==4 && scoremaster.subTypeCode==2">	
+								 	<div class="table-responsive">
+									<section class="asdok">
+										<div class="container1" >
+    <table ng-table="" class="table table-striped table-vmiddle" style="width:70%;"  align="center">
+                                       
+		<thead  class="bordered-blue" >
+		<tr>
+        <th><span>Add</span></th>
+		<th><span>Item #</span></th>
+		<th><span>FrameSize<br/>Start</span></th>
+		<th><span>FrameSize<br/>End</span></th>
+		<th text-align="center"><span>Stage</span></th>
+		<th><span>Score</span></th>
+		<th><span>Mounting Type</span></th>
+		
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "gmreducer in gmreducerField">
+		<td style="width:1%;"><button type="button" id="right_All_1" class="btn btn-primary" ng-if="gmreducer.id=='1'" ng-click='addgmreducerForm();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="gmreducer.id!='1'" ng-click='removegmreducerRow(gmreducer.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	</td>
+		<td  style="text-align:center;padding: 15px 0px;width:1%;">{{gmreducer.guide}}<input type="hidden" class="form-control" ng-model = "gmreducer.guide"  name = "guide{{$index}}"></td>
+		<td style="width:2%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "gmreducer.frameSizeFrom" name = "frameSizeFrom{{$index}}"   placeholder=""  id="contName"   >
+                                                       </td>
+		<td style="width:2%;">                               
+                                                        <input type="text" class="form-control" ng-model = "gmreducer.frameSizeTo"   name = "frameSizeTo{{$index}}"  placeholder=""  id="contactNum"    >
+                                                      </td>
+		<td style="width:3%;">
+		 <div class="form-group">
+
+
+                            <select class="form-control" data-ng-model="gmreducer.stage" ng-options="stage.text as stage.text for stage in Stage " name="stage"><option value="">Stage</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+		<td style="width:1%;">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "gmreducer.score" name = "score{{$index}}"  placeholder=""  id="gdepatmentname"    >
+                                                     </td>
+													  <td style="width:3%;"> 
+		 <div class="form-group">
+
+
+                           
+                              <select class="form-control" data-ng-model="gmreducer.mountingType" ng-options="mountingType.text as mountingType.text for mountingType in MountingCycloReducer " name="mountingType" ng-change="getVlidateReducer(gmreducer.mountingType,gmreducer.frameSizeFrom,gmreducer.frameSizeTo,$index,gmreducer.stage);"><option value="">--Select--</option>
+			
+			</select>
+
+
+                        </div>
+       </td>
+	
+                                                    
+                                                    
+		</tr>
+		
+		</tbody>
+		</table>
+		</div></section></div>
+		
+		                             <br/>
+									 <div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue"  ng-click="gmreducerFieldSubmit(gmreducer,scoremaster)"><i class="glyphicon glyphicon-save"></i>Save</button>
+						<!--<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>-->
+					</div>
+					<div class="col-sm-6"></div>	
+				</div></div>
+									 
+							
+							<div  id="popup_box1"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupHyponic();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowHyponic();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>	
+						 <div  id="popup_box2"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupPrestNeo();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowPopupPrestNeo();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>
+						 <div  id="popup_box3"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupBBB();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowPopupBBB();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>
+						 <div  id="popup_box4"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupHBB();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowPopupHBB();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>
+						 <div  id="popup_box5"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupCycloGM();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowPopupCycloGM();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>		
+						 <div  id="popup_box6"   >
+ <div style="height:100%; background-color:#FFFFFF;" >
+                                
+                                
+						    <img src="images/warning.jpg"  style="height: 71px;align-content: center;margin-left: 146px;"/>
+							<h4 style="margin-left: 55px;"><b>Are You Sure Want To Delete??</b></h4>
+							<br/>
+							
+						  
+						 <div style="text-align:center;display:; background-color:#FFFFFF;">
+						 <button type="button"   class="btn btn-primary"	 ng-click="cancelConfirmPopupCycloGR();">Cancel</button>
+						<button type="button"   class="btn btn-warning"	 ng-click="RemoveRowPopupCycloGR();">Yes,Sure</button>&nbsp;&nbsp;&nbsp;
+						</div>
+						</div>
+							
+						 </div>	 
+			</form>
+			
+			
+			
+			
+			
+		
+		
+
+
+	
+
+
+</div>
+
+
+	
+            
+	
+</div>
+</div>
+</div>
+
+	

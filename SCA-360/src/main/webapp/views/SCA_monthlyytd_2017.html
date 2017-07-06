@@ -1,0 +1,475 @@
+<!--<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #FFFFFF ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #d3d3d3;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.btn.btn-circle {
+		border-radius: 50%;
+		background-clip: padding-box;
+		width: 45px;
+		height: 45px;
+		padding: 11px 4px;
+		color: #ffffff;
+		font-weight: bold;
+	}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script type="text/javascript">
+	var product = "area";
+	var currentyear = "2017";
+	var status = "all";
+	
+	var countryCode = sessionStorage.getItem('countryCode');
+	
+	$('#THB').addClass("dropBackColor");
+	//var yAxisName = "USD (M)";
+	var ifCond = "0";
+	buttonActive(ifCond);	
+	var array = [{"TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","INT": "USD (\u0024)","EMA": "USD (\u0024)"}];
+	var countryNameArray = [{"TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","INT": "Intico","EMA": "E.Market"}];
+	var urlCountry = "monthleyytdtoareaSCA.do?link="+product+"&currentyear="+currentyear;
+	var currencyType = "USD";
+	
+	loadYTDMonthlyCurrent(product,currentyear,status,urlCountry,currencyType);
+
+ $(document).ready(function()
+  {
+	$('.renderchart').click(function()
+	{
+		buttonActive("1");
+		jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+	
+		var status = $(this).attr('id');
+		$(this).addClass("active");		
+		sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+		
+		if(status=="all")
+		{
+			//alert(product);
+			var getId = status.toUpperCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");			
+			$('#curDropdown').hide();			
+			urlCountry = "monthleyytdtoareaSCA.do?link="+product+"&currentyear="+currentyear;
+			currencyType = "USD";
+		}
+		else		
+		{
+			var getId = status.toLowerCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+			$('#curDropdown').show();
+			$('#thbSpan').text(array[0][status]);
+			currencyType = array[0][status];			
+			urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+status+"&id=local";
+		}
+				
+		loadYTDMonthlyCurrent(product,currentyear,status,urlCountry,currencyType);				
+	});
+				
+});
+
+$(document).ready(function()
+{
+	$("#THB").click(function()
+	{
+		
+		currencyType = array[0][sessionStorage.getItem("selectedCountry")];
+		urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+		asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+		$('#THB').addClass("dropBackColor");
+		$('#USD').removeClass("dropBackColor");
+		//curType = "THB (\u0E3F)";
+	});
+	$("#USD").click(function()
+	{
+		currencyType = "USD (\u0024)";
+		urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+		asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+		$('#THB').removeClass("dropBackColor");
+		$('#USD').addClass("dropBackColor");
+		//curType = "USD (\u0024)";
+	});	
+});
+
+
+
+	function buttonActive(ifCond)
+		{
+				jQuery( ".hb .countFlag").parent().addClass("hb-country");
+				jQuery( ".hb #ALL").parent().addClass("hb-refresh");
+				//jQuery(".hb-xs").parent().addClass("hb-xs-margin");
+		}
+
+	function loadYTDMonthlyCurrent(product,currentyear,status,urlCountry,currencyType)
+	{
+   		if(status == "all")
+		{
+			//alert("if");
+			var caption = " SCA Group "+ " " + currentyear + " YTD Monthly Booking ";
+		}
+		else
+		{
+			//alert("else");
+			var caption = countryNameArray[0][status]+" -YTD Monthly Booking ";
+		}
+		 $.getJSON(urlCountry, function(json) {
+			//alert(JSON.stringify(json));
+ 		 FusionCharts.ready(function()
+	 		 {
+	  	   var chartData = {
+							 "chart": {
+													
+								"palette": "2",
+								"caption": caption,
+								//"subcaption": "Harry's SuperMart",
+								"xaxisname": "Year-2017",
+								"decimals":'1',
+								"yaxisname": currencyType,
+								"showsum": "1",
+								"showvalues": "0",
+								"exportenabled": "1",
+								"exportatclient": "0",
+								"exporthandler": "http://export.api3.fusioncharts.com",
+								"html5exporthandler": "http://export.api3.fusioncharts.com",
+								//"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+								"numberPrefix": "",
+								"numbersuffix": "",
+								"bgColor": "#808080",
+								"useroundedges": "1",
+								"borderAlpha": "20",
+								"showCanvasBorder": "0",
+								"usePlotGradientColor": "0",
+								"plotBorderAlpha": "10",
+								"legendBorderAlpha": "0",
+								"legendPosition":"right",
+								"legendShadow": "1",
+								"valueFontColor": "#000000",
+								"showXAxisLine": "1",
+								"xAxisLineColor": "#999999",
+								"divlineColor": "#999999",
+								"divLineDashed": "1",
+								"showAlternateHGridColor": "0",
+								"subcaptionFontBold": "0",
+								"subcaptionFontSize": "14",
+								"baseFont":"Helvetica",		
+								"baseFontSize":"15",
+								"captionFontSize": "18",
+								"rotatelabels": "0",		
+								"rotatevalues": "0",
+								"yFormatNumberScale":"1",
+								"numberScaleValue": "1000,1000,1000",
+       							"numberScaleUnit": "K,M,B",
+								"baseFontColor":"#000000",
+								"canvasBgColor": "#B0E2FF",
+								"showCanvasBorder": "1",
+								"canvasBorderColor": "#666666",
+								"canvasBorderThickness": "4",
+								"canvasBorderAlpha": "80",
+								"legendBgColor":"#808080"
+								//"theme":"fint"   		
+								 },
+								// "categories": [{"category":json['category']}],
+								// "dataset": json['data']
+								"categories":json['xaxis'],
+								"dataset":json['budgetandbookingdata']
+							};
+		   var fusioncharts = new FusionCharts({
+				    type: 'msstackedcolumn2d',
+				    renderAt: 'chart-container',
+				    width: '100%',
+				    height: '500',
+				    dataFormat: 'json',
+				    dataSource: chartData,
+						events: {
+								  dataPlotClick: function (event,dataObj) 
+								  {	
+									//alert(JSON.stringify(dataObj));
+									sessionStorage.setItem("firstDataObject",JSON.stringify(json['data']));
+									sessionStorage.setItem("firstCategoryObject",JSON.stringify(json['xaxis']));
+									//alert(JSON.stringify(json['data']));
+									//alert(JSON.stringify(json['xaxis']));
+									sessionStorage.setItem("drillStatus",'true');
+									var cType = sessionStorage.getItem("cType");
+									
+									sessionStorage.setItem("drillYear",dataObj.categoryLabel);
+									sessionStorage.setItem("drillCat",dataObj.datasetName);
+									//var currencyType = sessionStorage.getItem("currencyType");
+									drillDown(dataObj.categoryLabel,dataObj.datasetName,cType);
+								  },	
+								  dataPlotRollOver:function(event,dataObj)
+								  {
+									$(this).css('cursor', 'pointer');
+								  }
+							  }
+									
+				});
+				
+        /*fusioncharts.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+            renderTable(fusioncharts, 'table-container');
+        });*/
+				 fusioncharts.render();
+		  });
+		});
+		
+	}
+	
+	
+	
+	function convertMillions(sumofBudget) 
+	{
+	
+		
+		var thousand = 1000;
+		var million = 1000000;
+		var billion = 1000000000;
+		var trillion = 1000000000000;
+		if (sumofBudget < thousand) {
+			return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+		}
+		
+		else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+			 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+		}
+		
+		else if (sumofBudget >= million && sumofBudget <= billion) {
+			return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+		}
+		
+		else if (sumofBudget >= billion && sumofBudget <= trillion) {
+			return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+		}
+		
+		else {
+			return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+       }
+   }     
+	
+				
+</script>
+
+  <div class="row">
+  <div class="col-sm-9">
+   <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+		<a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="all"><span class="btn btn-primary btn-circle" style="width:40px; height:40px; padding:11px 4px;position: relative;top: 0px;font-size: 13px;">SCA<!--<i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i>--></span></a>
+		 <!--<a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>-->
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="TH"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="MY"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="ID"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="SG"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="PH"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="IN"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="VN"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+			 <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="EMA"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="emarket"></i></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart" id="AU"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		</div>
+		</div> 
+		<div class="col-sm-3">
+		<span class="dropdown" style="display:none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_monthlyytd_2017" id="THB"><span id="thbSpan">THB &#xE3F;</span></a>
+				<a href="#/app/SCA_monthlyytd_2017" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+	
+	</div>
+  <div style="float:right;"><!--<input type="button" value="< Go Back" id="goback">--></div>
+  <div id="chart-container">
+      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  </div>
+  </div>
+  <div class="row">
+  	<div class="col-sm-9">
+		<div id="table-container" style="margin-left:1%;"></div>
+	</div>
+     <div class="col-sm-3">
+		<p class="avg" style="display:none;"><b></b></p>
+		<div id="table-container1" style="margin-right:1%;"></div>
+	</div>
+	
+  </div> 
+  
+  <br />

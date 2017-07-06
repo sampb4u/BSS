@@ -1,0 +1,1096 @@
+﻿ <html> 
+ <head>
+ 
+  <script type="text/javascript">
+          
+        
+			
+$(function() {
+
+$(document).on('click', '#close-preview', function(){ 
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(		
+        function () {
+           $('#'+ $(this).attr('id')).popover('show');
+        }, 
+         function () {
+		   $('#'+ $(this).attr('id')).popover('hide');
+        }
+    );    
+});
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+		var getClearId = $(this).attr('id').split("2");
+
+		//if(getClearId[1]=="siginput")
+		//{
+		//	var previewID = "signature";
+		//	var buttonText = "Upload Signature";
+		//}
+	  // else
+	//	{
+			var previewID = "photo";
+			var buttonText = "Upload Photo";
+		//}
+		//alert($(this).attr('id'));
+		var textChange = "1"+ getClearId[1];
+		var clearButton = "2"+ getClearId[1];
+		var dispFileName = "3"+ getClearId[1];
+				
+        $('#'+ previewID).attr("data-content","").popover('hide');
+        $('#'+ dispFileName).val("");
+        $('#'+ clearButton).hide();
+		$('#'+ getClearId[1]).val("");
+		$("#"+ textChange).text(buttonText);
+    }); 
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){  
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:200,
+            height:150
+        });      
+		//alert($(this).attr('id'));
+		//if($(this).attr('id')=="siginput")
+		//{
+		//	var previewID = "signature";
+		//}
+	  // else
+		//{
+			var previewID = "photo";
+		//}
+		var textChange = "1"+ $(this).attr('id');
+		var clearButton = "2"+ $(this).attr('id');
+		var dispFileName = "3"+ $(this).attr('id');
+		
+        var file = this.files[0];
+        var reader = new FileReader();		
+        // Set preview image into the popover data-content		
+        reader.onload = function (e) {
+            $("#"+ textChange).text("Change");
+            $("#"+ clearButton).show();
+            $("#"+ dispFileName).val(file.name);   			
+            img.attr('src', e.target.result);
+			//alert($(img)[0].outerHTML);
+            $("#"+ previewID).attr("data-content",$(img)[0].outerHTML).popover("show");
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+	 
+	  $(function() 
+	  {
+        $('.chosen-select').chosen();		
+      });   </script>
+<style>.wrap {
+  width: 320px;
+  margin: 0 auto;
+  display: block;
+}
+
+label {
+  display: inline-block;
+ 
+line-height: 2
+}
+
+form {
+  margin-bottom: 2em;
+}
+
+
+.wrapper {
+  
+  height: 56px;
+  margin-top: 16px;
+  border-radius: 4px;
+  position: relative;
+  font-size: 12px;
+}
+
+.wrapper p {
+  line-height: 31px;
+  text-align: center;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+table { border-spacing: 0; border-collapse: collapse }
+td { padding: 0 }
+
+</style>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'en',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+
+
+<!--<body>
+	<a href="javascript:demoFromHTML()" class="button">Run Code</a>
+ 
+<div id="testcase">
+ 
+
+ 
+</div>
+</body>-->
+<section id="content" ng-controller="testReportController"  ng-init=" loadTerminlBox();loadAccessories();loadreportData();loadspaceHeater();Loadcoupling();Loadmotorbrand();LoadmotorType();LoadPaintcolor();LoadProtection();Loadvoltage();LoadLubricastion();loadServerData();LoadCustomerPO();loadCustomerName();">  
+    <div class="horizontal-space"></div>
+
+	<div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="well with-header with-footer">
+                <div class="header bordered-blue" >Test Report</div>
+		
+				
+		<!--<button type="button" class="btn btn-primary btn-sm m-t-10 btn-hide"  ng-click="PrintrePrintReport();">Search</button>-->
+				
+		<form name="TestReportForm"   ng-submit="testReportSubmit(testReport,TestReportForm)" novalidate>	
+	
+                    <div class="row">
+						<div class="col-sm-3">
+						<div class="form-group">
+						    <label for="dtp_input2" class=""></label>
+				 <div class="input-group date form_datetime col-md-12" data-date="" data-date-format="yyyy-mm-dd HH:ii:ss " data-link-field="dtp_input1">
+                    <input class="form-control" size="16" type="text" value="" readonly data-ng-model="testReport.startDateTime">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+						
+					
+						</div>
+						</div>
+						
+						<div class="col-sm-3">
+						<div class="form-group">
+							<label></label>
+						
+						 <label for="dtp_input2" class=""></label>
+				 <div class="input-group date form_datetime col-md-12" data-date="" data-date-format="yyyy-mm-dd HH:ii:ss " data-link-field="dtp_input1">
+                    <input class="form-control" size="16" type="text" value="" readonly data-ng-model="testReport.endDateTime">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+						</div>
+						</div>
+						</br>
+						<div class="col-sm-3">
+                       <div class="form-group floating-label-wrapper">
+<div  ng-class="{ 'has-error' : TestReportForm.customerAssembyNumber.$invalid && (TestReportForm.customerAssembyNumber.$dirty || submitted)}">
+							<label for="CustomerPO"></label>
+                            <input type="text" class="form-control"  data-ng-required="true"  data-ng-model="testReport.customerAssembyNumber" name="customerAssembyNumber" placeholder="Customer Assembly No."  id="CustomerPO" ng-blur="DupCustPO(testReport.customerAssembyNumber);"  with-floating-label >
+			<p id="existValRC1" class="help-block" style="color:#FF0000; display:none;" ng-if="testReport.customerAssembyNumber!=null">Customer Assembly No. Already Exist</p>
+			<p ng-show="TestReportForm.customerAssembyNumber.$error.required && (TestReportForm.customerAssembyNumber.$dirty || submitted)" class="help-block"> Customer Assembly No. is required</p>
+
+</div>
+                        </div>
+                    </div>
+						
+						 <div class="col-sm-3">
+                        <div class="form-group floating-label-wrapper">
+<div  ng-class="{ 'has-error' : TestReportForm.customerName.$invalid && (TestReportForm.customerName.$dirty || submitted)}">
+						
+                           <!-- <input type="text" class="form-control" id="Model"   data-ng-required="true"  data-ng-model="testReport.model"  name="model" placeholder="Model" with-floating-label>-->
+						    <!--<input type="text" class="form-control" id="customername"   data-ng-required="true"  data-ng-model="testReport.customerName"  name="customerName" placeholder="CustomerName" with-floating-label>-->
+							<span class="input-icon icon-right">
+													   <input list="testList" placeholder="Customer Name"   type="" data-ng-model="testReport.customerName" class="form-control" />
+    <datalist id="testList">
+        <option ng-repeat="x1 in names" value="{{x1.name}}"></option>
+    </datalist>
+                                                    </span>
+						    
+ <p ng-show="TestReportForm.customerName.$error.required && (TestReportForm.customerName.$dirty || submitted)" class="help-block"> CustomerName is required</p>
+</div>
+                        </div>
+                    </div>
+					</div>
+					 <div class="row">
+                  
+					 <div class="col-sm-3">
+                       <div class="form-group">
+                           <label for="dtp_input2" class="col-md-3 control-label"></label>
+                <div class="input-group date form_date col-md-12" data-date="" data-date-format="dd-mm-yyyy"  data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly ng-model="testReport.dateRequired">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+
+
+                    </div>
+                   </div>
+					<div class="col-sm-3">
+                     
+              <label for="dtp_input2" class="col-md-2 control-label"></label>
+                <div class="input-group date form_date col-md-12" data-date="" data-date-format="dd-mm-yyyy"  data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly ng-model="testReport.dateReceived">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                        
+                    </div>
+					</div>
+					<div class="col-sm-3">
+                        <div class="form-group">
+
+
+                            <select class="form-control" data-ng-model="testReport.couplingType" ng-options="couplingType.label as couplingType.label for couplingType in couplingTypedata " name="couplingType"><option value="">Coupling Type</option>
+			
+			</select>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                     <!--   <div class="form-group">
+
+<select data-placeholder="Accessiories" class="chosen-select" multiple  id="picturegallery1"    name="accessories"  data-ng-model="testReport.accessories"  data-ng-required="true">
+            						</select>	
+           
+		
+
+
+                        </div>-->
+						<div class="form-group floating-label-wrapper">
+<div  ng-class="{ 'has-error' : TestReportForm.model.$invalid && (TestReportForm.model.$dirty || submitted)}">
+						<label for="Model"></label>
+                           <!-- <input type="text" class="form-control" id="Model"   data-ng-required="true"  data-ng-model="testReport.model"  name="model" placeholder="Model" with-floating-label>-->
+						    <input type="text" class="form-control" id="Model"   data-ng-required="true"  data-ng-model="testReport.model"  name="model" placeholder="model" with-floating-label>
+ <p ng-show="TestReportForm.model.$error.required && (TestReportForm.model.$dirty || submitted)" class="help-block"> model is required</p>
+</div>
+                        </div>
+                    </div>
+                   
+
+
+
+                </div>
+				
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group floating-label-wrapper">
+
+
+<label for="inputshaft"></label>
+                            <input type="text" class="form-control" placeholder="Input Shaft hollow diameter(mm)" id="inputshaft" name="inputShaft" data-ng-model="testReport.inputShaft"  with-floating-label>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-3">
+                            <div class="form-group floating-label-wrapper">
+
+
+<label for="outputshaft"></label>
+                            <input type="text" class="form-control" placeholder="Output Shaft hollow diameter (mm)" id="outputshaft" name="outputShaft" data-ng-model="testReport.outputShaft"  with-floating-label>
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                       <div class="form-group floating-label-wrapper">
+
+
+
+                        <select class="form-control" data-ng-model="testReport.motorBrand"  ng-options="motorBrand.label as motorBrand.label for motorBrand in motorBranddata "  name="motorBrand"><option value="">Motor Brand</option>
+		
+			
+			</select>
+			
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group floating-label-wrapper">
+
+<label for="outputRPM"></label>
+                            <input type="text" class="form-control" placeholder="Output RPM" id="outputRPM" name="outputrpm"  data-ng-model="testReport.outputrpm" with-floating-label>
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+				  <div class="row">
+				<div class="col-sm-6">
+                      <div class="form-group">
+
+<select data-placeholder="Accessiories" class="chosen-select" multiple  id="picturegallery1"    name="accessories"  data-ng-model="testReport.accessories"  data-ng-required="true">
+            						</select>	
+           
+		
+
+
+                        </div></div>
+                </div>
+				
+			<legend>	Specification:</legend>
+			<div style="width:100%;" class="row">
+		
+			<div class="col-sm-8">
+			<table class="table" style="width:100%; height:auto; border-style: dotted;" >
+				
+              <tr><td colspan="1">
+                            <select class="form-control" data-ng-model="testReport.motorType"  name="motorType" ng-options="motorType.label as motorType.label for motorType in motorTypedata "><option value="">Motor Type</option>
+			
+			</select></td>
+              <td colspan="1" >
+			 
+			  <div class="radio ">
+                            <label>Thermister :
+										<input type="radio" name="thermister"    class="colored-blue" value="0"  data-ng-model="testReport.thermister" checked="checked" />
+										<span class="text"> YES </span>
+										
+										</label> 
+                            <label>
+											<input type="radio" name="thermister"  class="colored-blue"  value="1" data-ng-model="testReport.thermister" />
+										<span class="text"> NO</span>
+									</label></div>
+                      </td>
+ <td colspan="1">
+ <div class="radio">
+                            <label>Space Heater :
+										<input type="radio" name="spaceHeater"  class="colored-blue" checked="checked" value="0" data-ng-model="testReport.spaceHeater" />
+											<span class="text"> YES</span>
+											</label>  &nbsp;&nbsp;
+                            <label>
+									<input type="radio" name="spaceHeater"  class="colored-blue" value="1" data-ng-model="testReport.spaceHeater" />
+										<span class="text"> NO</span>
+									</label></div>
+                       
+</td></tr>
+  <tr><td colspan="2">
+
+						
+									<select data-placeholder="Terminal Box" class="chosen-select" multiple  id="picturegallery" name="terminalBox" data-ng-model="testReport.terminalBox"  data-ng-required="true">
+            						</select>					
+									
+								
+							
+
+</td>
+     <td colspan="1">
+                            <select class="form-control" data-ng-model="testReport.paintColor" ng-options="paintColor.label as paintColor.label for paintColor in paintColordata "  name="paintColor"><option value="">Paint Color</option>
+			<
+			</select></td>
+			
+</tr>
+               <tr><td colspan="1">
+			    <div class="radio">
+			           &nbsp;&nbsp;  <label>Frequency :
+										<input  type="radio" class="colored-blue"   checked="checked" data-ng-model="testReport.frequency"  value="0" name="frequency">
+										<span class="text"> 50 Hz </span>
+										</label>
+										<label> &nbsp;
+										<input  type="radio" class="colored-blue"   data-ng-model="testReport.frequency" value="1"  name="frequency" >
+										<span class="text"> 60 Hz</span>
+									</label></div>
+                   
+</td>
+ 
+   <td colspan="1">                         <select class="form-control" name="protection"  ng-options="protection.label as protection.label for protection in protectiondata "  data-ng-model="testReport.protection"><option value="">Protection</option>
+			
+						</select>
+
+</td>
+<td colspan="1">
+             <select class="form-control"  name="voltage" ng-options="voltage.label as voltage.label for voltage in voltagedata "   data-ng-model="testReport.voltage"><option value="">Voltage</option>
+		
+			</select>
+
+        </td></tr>   
+	
+		  <tr><td colspan="1">  
+		  <div class="form-group floating-label-wrapper">
+		  <label for="breakvoltage"></label>
+		      <input type="text" class="form-control" placeholder="Brake Voltage(V)" id="breakvoltage" name="brakeVoltage"  data-ng-model="testReport.brakeVoltage" with-floating-label></div>
+
+	</td>
+           
+		   <td colspan="1">      
+		      <div class="form-group floating-label-wrapper">
+		  <label for="changebreak"></label>      
+		        <input type="text" class="form-control"  id="changebreak"  placeholder="Change Brake Kit" name="changeBrakeKit" data-ng-model="testReport.changeBrakeKit"  with-floating-label>
+</div>
+</td>
+
+                <td colspan="1">
+				<select class="form-control"  data-ng-model="testReport.lubrication"  ng-options="lubrication.label as lubrication.label for lubrication in lubricationdata "  name="lubrication"><option value="">Lubrication</option>
+			
+						</select>
+
+
+
+</td></tr>  
+
+                  
+				</table>
+			</div>
+		<div class="col-sm-4">
+			<div class="wrap">
+   
+	<label>
+									<input type="radio" name="motorDirection"  value="0" ng-model="testReport.motorDirection"  checked="checked" class="colored-blue"   />
+										<span class="text"> CW</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+									<input type="radio" name="motorDirection"   ng-model="testReport.motorDirection"  value="1" class="colored-blue"  />
+										<span class="text"> CCW</span>
+									</label> 
+    
+    <div class="wrapper">
+      <p ng-if="testReport.motorDirection == 0">	<img src="image/CW.png" style="width:100%; height:200px;"></p>
+      <h2 ng-if="testReport.motorDirection == 1"><img src="image/CCW.png" style="width:100%; height:200px;"></h2>
+    </div>
+  </div>
+		
+		
+			</div>
+			</div>
+				  
+                <br/>
+                <br/>
+				
+			
+<table class="table" style="width:100%; height:auto; border-collapse:collapse;" border="1">
+
+
+
+                    <tr>
+                        <td colspan="2">Serial No.</td>
+                        <td colspan="2"  >
+						<input type="text" class="form-control" ng-model="testReport.slno1" name="slno1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.slno2" name="slno2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.slno3" name="slno3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.slno4" name="slno4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.slno5" name="slno5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Motor Serial No.</td>
+                      <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.motorslno1" name="motorslno1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.motorslno2" name="motorslno2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.motorslno3" name="motorslno3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.motorslno4" name="motorslno4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.motorslno5" name="motorslno5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+					 <td colspan="2">Measured Gear Head Weight</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredGearHeadWeight1" name="measuredGearHeadWeight1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredGearHeadWeight2" name="measuredGearHeadWeight2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredGearHeadWeight3" name="measuredGearHeadWeight3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredGearHeadWeight4" name="measuredGearHeadWeight4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredGearHeadWeight5" name="measuredGearHeadWeight5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"> Measured Grease Weight (g)</td>
+                         <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredGreaseWeight1" name="measuredGreaseWeight1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredGreaseWeight2" name="measuredGreaseWeight2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredGreaseWeight3" name="measuredGreaseWeight3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredGreaseWeight4" name="measuredGreaseWeight4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredGreaseWeight5" name="measuredGreaseWeight5" style="border:none;">
+						</td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="2"> Measured Final Weight (g).</td>
+                          <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredFinalWeight1" name="measuredFinalWeight1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredFinalWeight2" name="measuredFinalWeight2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredFinalWeight3" name="measuredFinalWeight3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredFinalWeight4" name="measuredFinalWeight4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"   class="form-control" ng-model="testReport.measuredFinalWeight5" name="measuredFinalWeight5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Air Pressure Test (0.03mPa)</td>
+                        <td colspan="2">
+                            <label>
+										<input type="radio" name="airPressureTest1"  class="colored-blue"  value="0"  checked="checked"  ng-model="testReport.airPressureTest1" />
+										<span class="text"> PASS</span>
+									</label>  &nbsp;&nbsp; &nbsp;&nbsp;
+                            <label>
+										<input type="radio" name="airPressureTest1" ng-model="testReport.airPressureTest1"  value="1" class="colored-blue"  />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+									<input type="radio" name="airPressureTest2" class="colored-blue" checked="checked"  value="0" ng-model="testReport.airPressureTest2" />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+									<input type="radio" name="airPressureTest2"  value="1"  ng-model="airPressureTest2" class="colored-blue"  />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+										<input type="radio" name="airPressureTest3" class="colored-blue" checked="checked" value="0" ng-model="testReport.airPressureTest3" />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+											<input type="radio" name="airPressureTest3"  ng-model="testReport.airPressureTest3" value="1" class="colored-blue"   />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+										<input type="radio" name="airPressureTest4" value="0" class="colored-blue" ng-model="testReport.airPressureTest4" checked="checked"  />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+											<input type="radio" name="airPressureTest4" value="1"  ng-model="testReport.airPressureTest4" class="colored-blue"  />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									<td colspan="2">
+                            <label>
+										<input type="radio" name="airPressureTest5" value="0" class="colored-blue" ng-model="testReport.airPressureTest5"  checked="checked"  />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+										<input type="radio" name="airPressureTest5" value="1"  ng-model="testReport.airPressureTest5" class="colored-blue"  />
+										<span class="text"> FAIL</span>
+									</label> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Input Voltage (V)</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredIpVoltage1" name="measuredIpVoltage1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredIpVoltage2" name="measuredIpVoltage2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredIpVoltage3" name="measuredIpVoltage3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredIpVoltage4" name="measuredIpVoltage4" style="border:none;">
+						</td>
+                        <td colspan="2" > 
+						<input type="text"  class="form-control" ng-model="testReport.measuredIpVoltage5" name="measuredIpVoltage5" style="border:none;">
+						</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Ampere (A)</td>
+                       <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredAmpere1" name="measuredAmpere1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredAmpere2" name="measuredAmpere2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredAmpere3" name="measuredAmpere3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredAmpere4" name="measuredAmpere4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredAmpere5" name="measuredAmpere5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Input Power (W)</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredIpPower1" name="measuredIpPower1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredIpPower2" name="measuredIpPower2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredIpPower3" name="measuredIpPower3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredIpPower4" name="measuredIpPower4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredIpPower5" name="measuredIpPower5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Output Power (P.F)</td>
+                          <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredOpPower1" name="measuredOpPower1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredOpPower2" name="measuredOpPower2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredOpPower3" name="measuredOpPower3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredOpPower4" name="measuredOpPower4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control"  ng-model="testReport.measuredOpPower5" name="measuredOpPower5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" rowspan="2"> Measured Temperature ( <sup>o</sup>C)</td>
+                        <td colspan="1">Initial</td>
+                        <td colspan="1">Final</td>
+                        <td colspan="1">Initial</td>
+                        <td colspan="1">Final</td>
+                        <td colspan="1">Initial</td>
+                        <td colspan="1">Final</td>
+                        <td colspan="1">Initial</td>
+                        <td colspan="1">Final</td>
+                        <td colspan="1">Initial</td>
+                        <td colspan="1">Final</td>
+                        <!--/*<td>Initial</td><td>Final</td>
+			<td>Initial</td><td>Final</td>*/-->
+                    </tr>
+                    <tr>
+                        <td style="height:30px;"><input type="text" class="form-control"  ng-model="testReport.measuredTemperatureInitial1" name="measuredTemperatureInitial1" style="border:none;"></td>
+                        <td ><input type="text"  class="form-control" ng-model="testReport.measuredTemperatureFinal1" name="measuredTemperatureFinal1" style="border:none;"></td>
+                        <td ><input type="text"  class="form-control" ng-model="testReport.measuredTemperatureInitial2" name="measuredTemperatureInitial2" style="border:none;"></td>
+                        <td ><input type="text" class="form-control" ng-model="testReport.measuredTemperatureFinal2" name="measuredTemperatureFinal2" style="border:none;"></td>
+                        <td ><input type="text" class="form-control" ng-model="testReport.measuredTemperatureInitial3" name="measuredTemperatureInitial3" style="border:none;"></td>
+                        <td ><input type="text" class="form-control" ng-model="testReport.measuredTemperatureFinal3" name="measuredTemperatureFinal3" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  ng-model="testReport.measuredTemperatureInitial4" name="measuredTemperatureInitial4" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  ng-model="testReport.measuredTemperatureFinal4" name="measuredTemperatureFinal4" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  ng-model="testReport.measuredTemperatureInitial5" name="measuredTemperatureInitial5" style="border:none;"></td>
+                        <td ><input type="text"  class="form-control" ng-model="testReport.measuredTemperatureFinal5" name="measuredTemperatureFinal5" style="border:none;"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" rowspan="2">Measured Sound Level (dBA)</td>
+                        <td colspan="1">C.W.</td>
+                        <td colspan="1">C.C.W.</td>
+                        <td colspan="1">C.W.</td>
+                        <td colspan="1">C.C.W.</td>
+                        <td colspan="1">C.W.</td>
+                        <td colspan="1">C.C.W.</td>
+                        <td colspan="1">C.W.</td>
+                        <td colspan="1">C.C.W.</td>
+                        <td colspan="1">C.W.</td>
+                        <td colspan="1">C.C.W.</td>
+                    </tr>
+                    <tr>
+                      
+                        <td style="height:30px;"><input type="text" class="form-control"  ng-model="testReport.measuredSoundLevelcw1" name="measuredSoundLevelcw1" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control" ng-model="testReport.measuredSoundLevelccw1" name="measuredSoundLevelccw1" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control"  ng-model="testReport.measuredSoundLevelcw2" name="measuredSoundLevelcw2" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control"  ng-model="testReport.measuredSoundLevelccw2" name="measuredSoundLevelccw2" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control" ng-model="testReport.measuredSoundLevelcw3" name="measuredSoundLevelcw3" style="border:none;"></td>
+                        <td ><input type="text" class="form-control" class="form-control"  ng-model="testReport.measuredSoundLevelccw3" name="measuredSoundLevelccw3" style="border:none;"></td>
+                        <td ><input type="text"  class="form-control"  class="form-control" ng-model="testReport.measuredSoundLevelcw4" name="measuredSoundLevelcw4" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control"  ng-model="testReport.measuredSoundLevelccw4" name="measuredSoundLevelccw4" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control"  ng-model="testReport.measuredSoundLevelcw5" name="measuredSoundLevelcw5" style="border:none;"></td>
+                        <td ><input type="text" class="form-control"  class="form-control"  ng-model="testReport.measuredSoundLevelccw5" name="measuredSoundLevelccw5" style="border:none;"></td>
+						
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="left">Confirm BBB Size
+						
+                                         <div class="form-group">
+                                      
+													            <div class="input-group image-preview" id="photo" >
+                                                                
+																
+													               <input type="text" class="form-control image-preview-filename"  disabled="disabled"  name="photoPath1" data-ng-model="testReport.photoPath1" id="3photoinput">
+																	
+													                <span class="input-group-btn">
+												        	            <button type="button" class="btn btn-default image-preview-clear" style="display:none;"  id="2photoinput">
+													        	            <span class="glyphicon glyphicon-remove"></span> Clear
+												                	    </button>
+                                                                       
+													                    <div class="btn btn-default image-preview-input">
+													                        <span class="glyphicon glyphicon-folder-open"></span>
+													                        <span class="image-preview-input-title"  id="1photoinput">Upload</span>
+	<input type="file"  name="bbsimage" id="photoinput" accept="image/png, image/jpeg, image/gif"  data-ng-model="testReport.photoPath" onChange="angular.element(this).scope().uploadUserFile(this.files)"/>
+																			
+																			
+																			
+													                    </div>
+													                </span>
+																	</div>
+									<div  ng-class="{ 'has-error' : TestReportForm.dummyPhoto.$invalid && (TestReportForm.dummyPhoto.$dirty || submitted)}">
+															<input type="hidden" name="dummyPhoto" ng-required="true" ng-model="dummyPhoto"  id="dummyPhoto"/>		
+															<p ng-show="TestReportForm.dummyPhoto.$error.required && (TestReportForm.dummyPhoto.$dirty || submitted)" 
+															class="help-block"> Image is required</p>
+																</div>	
+																
+																
+														  
+														
+												</div>				
+                                                             
+															   
+										
+															   
+															   
+						</td>									   
+															   
+													      
+                        <td colspan="2"> <label>
+									<input type="radio" name="confirmbbsSize1"  class="colored-blue" checked="checked" value="0"  ng-model="testReport.confirmbbsSize1" />
+										<span class="text"> CORRECT</span>
+									</label> 
+                            <label>
+										<input type="radio" name="confirmbbsSize1" class="colored-blue" value="1"  ng-model="testReport.confirmbbsSize1"/>
+										<span class="text"> WRONG</span>
+									</label>
+                        </td>
+						<td colspan="2"> <label>
+										<input type="radio" name="confirmbbsSize2"  class="colored-blue" checked="checked" value="0"  ng-model="testReport.confirmbbsSize2" />
+										<span class="text"> CORRECT</span>
+									</label> 
+                            <label>
+										<input type="radio" name="confirmbbsSize2"  class="colored-blue" value="1"  ng-model="testReport.confirmbbsSize2" />
+										<span class="text"> WRONG</span>
+									</label>
+                        </td>
+						<td colspan="2"> <label>
+									<input type="radio" name="confirmbbsSize3"  class="colored-blue" checked="checked" value="0"  ng-model="testReport.confirmbbsSize3" />
+										<span class="text"> CORRECT</span>
+									</label> 
+                            <label>
+										<input type="radio" name="confirmbbsSize3"  class="colored-blue"  value="1"  ng-model="testReport.confirmbbsSize3" />
+										<span class="text"> WRONG</span>
+									</label>
+                        </td>
+						<td colspan="2"> <label>
+									<input type="radio" name="confirmbbsSize4"  class="colored-blue" checked="checked" value="0"  ng-model="testReport.confirmbbsSize4" />
+										<span class="text"> CORRECT</span>
+									</label> 
+                            <label>
+											<input type="radio" name="confirmbbsSize4"  class="colored-blue" value="1"  ng-model="testReport.confirmbbsSize4"  />
+										<span class="text"> WRONG</span>
+									</label>
+                        </td>
+							<td colspan="2"><label>
+									<input type="radio" name="confirmbbsSize5" class="colored-blue" checked="checked" value="0"  ng-model="testReport.confirmbbsSize5" />
+										<span class="text"> CORRECT</span>
+									</label> 
+                            <label>
+											<input type="radio" name="confirmbbsSize5"  class="colored-blue" value="1"  ng-model="testReport.confirmbbsSize5"  />
+										<span class="text"> WRONG</span>
+									</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Thermistor Cable Present? <br/>(Black Wires x 2)</td>
+                       <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredThermistorCablePresent1" name="measuredThermistorCablePresent1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredThermistorCablePresent2" name="measuredThermistorCablePresent2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredThermistorCablePresent3" name="measuredThermistorCablePresent3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredThermistorCablePresent4" name="measuredThermistorCablePresent4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredThermistorCablePresent5" name="measuredThermistorCablePresent5" style="border:none;">
+						</td>
+                          
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2">Measured Space Heater Cable Present? <br/>(Orange Wires x 2)</td>
+                           <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredSpaceHeaterCablePresent1" name="measuredSpaceHeaterCablePresent1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredSpaceHeaterCablePresent2" name="measuredSpaceHeaterCablePresent2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredSpaceHeaterCablePresent3" name="measuredSpaceHeaterCablePresent3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.measuredSpaceHeaterCablePresent4" name="measuredSpaceHeaterCablePresent4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredSpaceHeaterCablePresent5" name="measuredSpaceHeaterCablePresent5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Overall Vibration<br/>(Velocity:mm/s RMS)</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.overallVibration1" name="overallVibration1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.overallVibration2" name="overallVibration2" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control" ng-model="testReport.overallVibration3" name="overallVibration3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.overallVibration4" name="overallVibration4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.overallVibration5" name="overallVibration5" style="border:none;">
+						</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Concentricity <br /> Check
+                            <=0.2mm</td>
+                             <td colspan="2">
+                            <label>
+										<input type="radio" name="concentricity1"  class="colored-blue" checked="checked" value="0"   ng-model="testReport.concentricity1" style="border:none;"/>
+										<span class="text"> PASS</span>
+									</label>  &nbsp;&nbsp; &nbsp;&nbsp;
+                            <label>
+										<input type="radio" name="concentricity1"  class="colored-blue"  value="1" ng-model="testReport.concentricity1" style="border:none;" />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+									<input type="radio" name="concentricity2"  class="colored-blue" checked="checked" value="0"   ng-model="testReport.concentricity2" style="border:none;"/>
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+									<input type="radio" name="concentricity2"  class="colored-blue"  value="1"   ng-model="testReport.concentricity2"  style="border:none;" />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+										<input type="radio" name="concentricity3"  class="colored-blue" checked="checked" value="0"   ng-model="testReport.concentricity3" style="border:none;" />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+											<input type="radio" name="concentricity3" value="1"   ng-model="testReport.concentricity3" class="colored-blue" style="border:none;" />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									 <td colspan="2">
+                            <label>
+										<input type="radio" name="concentricity4"  class="colored-blue" value="0"  checked="checked"  ng-model="testReport.concentricity4" style="border:none;"/>
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+											<input type="radio" name="concentricity4"   value="1"   ng-model="testReport.concentricity4" class="colored-blue" style="border:none;"  />
+										<span class="text"> FAIL</span>
+									</label> </td>
+									<td colspan="2">
+                            <label>
+										<input type="radio" name="concentricity5"  class="colored-blue"  value="0" checked="checked" ng-model="testReport.concentricity5" style="border:none;" />
+										<span class="text"> PASS</span> &nbsp;&nbsp; &nbsp;&nbsp;
+									</label> 
+                            <label>
+										<input type="radio" name="concentricity5" value="1" class="colored-blue" ng-model="testReport.concentricity5"  style="border:none;" />
+										<span class="text"> FAIL</span>
+									</label> </td>
+                    </tr>
+                    <tr>
+                       <td colspan="2">Measured Output Speed (rpm)</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredOpSpeed1" name="measuredOpSpeed1" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredOpSpeed2" name="measuredOpSpeed2"  style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredOpSpeed3" name="measuredOpSpeed3" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text" class="form-control"  ng-model="testReport.measuredOpSpeed4" name="measuredOpSpeed4" style="border:none;">
+						</td>
+                        <td colspan="2" >
+						<input type="text"  class="form-control" ng-model="testReport.measuredOpSpeed5" name="measuredOpSpeed5" style="border:none;">
+						</td>
+                    </tr>
+
+                </table>
+
+              
+				
+                <br/>
+                <br/>
+
+                
+				<div class="row" >
+     								 <div class="col-lg-12 col-sm-12 col-xs-12">
+									
+                                        					<div class="row">
+                                            					<div class="col-sm-4">
+												                  <div class="row">
+													               <div class="col-sm-12">
+                                                		             <div class="form-group  floating-label-wrapper">
+																	 	<label for="assembledBy"></label>
+                                                    <input type="text" class="form-control" id="assembledBy" placeholder="Assembled By"  name="assembledBy" data-ng-model="testReport.assembledBy"  with-floating-label>
+                                                    </span>
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												
+											
+											
+											
+											
+										</div>
+											<div class="col-sm-4">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group floating-label-wrapper">
+														<label for="performed"></label>
+                                                        <input type="text" class="form-control"  id="performed"  placeholder="Test Performed by"  name="testpPerformedBy"  data-ng-model="testReport.testpPerformedBy"  with-floating-label>
+                                                    </span>
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												
+												
+													
+												
+                                                </div>
+												<div class="col-sm-4">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group">
+														
+                                                     
+												<label for="dtp_input2" class="col-md-2 control-label"></label>
+                <div class="input-group date form_date col-md-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly  ng-model="testReport.assembledDate">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>	
+                                                    </span>
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												
+											
+													
+												
+                                                </div>
+												
+												
+												
+											  </div>
+											  
+											</div>
+									
+                                	</div>
+
+<div class="row" >
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue" >Save</button>
+						<button type="reset" class="btn btn-blue" ng-click="resettestreport(TestReportForm)">Reset</button>
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+
+
+ </div>    
+ 
+</form>
+
+
+   </div>
+        </div>
+    </div>
+	</section>
+</html>

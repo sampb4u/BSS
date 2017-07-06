@@ -1,0 +1,97 @@
+
+<div ng-controller="ModalDemoCtrl" ng-init="addFormField();loadproductvatagories();" >
+   <div class="modal-body">
+	     <div class="horizontal-space"></div>
+		 <div class="row">
+		    <div class="col-xs-12 col-md-12">
+        		<div class="well with-header with-footer">								 
+					<div class="header bordered-blue">Product</div>	 
+                    	<form name="productsForm" ng-submit='productsFormSubmit(productsForm);' novalidate>
+                            <div class="row">
+	                          <div class="col-sm-3"></div>																													 								<div class="col-sm-6">
+                              		<div  ng-class="{ 'has-error' : productsForm.productCategory.$invalid && (productsForm.productCategory.$dirty)}">
+	                                   <select class="form-control" name="productCategory" ng-model="productCategory" ng-required="true" ng-options="productCategory.productcategorycode as productCategory.productcategory for productCategory in addedProducts" ng-change="getAllProducts(productCategory);">
+    	                                   <option value="">Product Category</option>
+        	                           </select>   
+                                       <p ng-show="productsForm.productCategory.$error.required && (productsForm.productCategory.$dirty)" class="help-block"> Product Category is Required</p>                                              
+                                    </div>
+                                </div>
+                                <div class="col-sm-3"></div>									
+                            </div>								 	
+							<hr></hr>
+							<div>
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-6">
+									<div class="table-scrollable">    
+									                               
+                                    	<table class="table table-hover table-striped table-bordered" border="0">
+											<thead class="bordered-blue">
+												<tr>
+												  <th>Action</th>
+												  <th>Product</th>
+                                                  <th>Product Code</th>
+                                                  <th>Booking Color</th>
+                                                  <th>Budget Color</th>
+												</tr>
+											</thead>									 
+											<tr ng-repeat="rowContent in data">											 
+												 <td width="50">
+                                                 	<button type="button" id="right_All_1" class="btn btn-primary" ng-if="rowContent.id=='1'" ng-click='addFormField();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-primary" ng-if="rowContent.id!='1'" ng-click='removeRow(rowContent.id);'>
+                                                   		<i class="glyphicon glyphicon-remove-sign"></i>
+                                                   </button>	
+                                                  </td>
+												  <td>
+                                                  	<div  ng-class="{ 'has-error' : productsForm.productName{{$index}}.$invalid && (productsForm.productName{{$index}}.$dirty)}">
+											 			<input type="text" class="form-control" placeholder="Product Name" name="productName{{$index}}" ng-model="rowContent.productName" ng-required="true">
+                                                        <p ng-show="productsForm.productName{{$index}}.$error.required && (productsForm.productName{{$index}}.$dirty)" class="help-block"> Product Name is Required</p>
+                                                   	</div>
+												  </td>
+                                                  <td>
+                                                  	<div  ng-class="{ 'has-error' : productsForm.productCode{{$index}}.$invalid && (productsForm.productCode{{$index}}.$dirty)}">
+											 			<input type="text" class="form-control" placeholder="Product Name" name="productCode{{$index}}" ng-model="rowContent.productCode" ng-required="true" maxlength="1">
+                                                        <p ng-show="productsForm.productCode{{$index}}.$error.required && (productsForm.productCode{{$index}}.$dirty)" class="help-block"> Product Code is Required</p>
+                                                   	</div>
+												  </td>
+                                                  <td>
+													<div  ng-class="{ 'has-error' : productsForm.bookColor{{$index}}.$invalid && (productsForm.bookColor{{$index}}.$dirty)}">                                                  
+                                                  		<input type="color" class="form-control" name="bookColor{{$index}}" ng-model="rowContent.bookColor"  ng-required="true">
+														<p ng-show="productsForm.bookColor{{$index}}.$error.required && (productsForm.bookColor{{$index}}.$dirty)" class="help-block"> Booking Color is Required</p>                                                        
+                                                    </div>
+                                                  </td>
+                                                  <td>
+													<div  ng-class="{ 'has-error' : productsForm.bugColor{{$index}}.$invalid && (productsForm.bugColor{{$index}}.$dirty)}">                                                   
+                                                  		<input type="color" class="form-control" name="bugColor{{$index}}" ng-model="rowContent.bugColor"  ng-required="true">
+                                                        <p ng-show="productsForm.bugColor{{$index}}.$error.required && (productsForm.bugColor{{$index}}.$dirty)" class="help-block"> Budget Color is Required</p>                                                        
+                                                    </div>
+                                                  </td>
+											 </tr>
+										</table>																		
+									</div>
+								</div>
+								<div class="col-sm-3"></div>
+							 </div>
+							</div>
+						    <br>								
+							<br>
+							<div class="row">
+							  <div class="col-sm-12" align="center">
+								<button type="submit" class="btn btn-primary">Save</button>
+								<button type="button" class="btn btn-blue" ng-click="reset(productsForm);">Reset</button>
+							  </div>
+							  <div class="col-sm-6">							
+						    </div>
+ 						  </div>		
+						  <br>                               
+                        </form>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+					
+
+   

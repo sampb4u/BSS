@@ -1,0 +1,812 @@
+<!--<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #FFFFFF ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #d3d3d3;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script type="text/javascript">
+	var product = "area";
+	var currentyear = "2017";
+	var status = "all";
+	
+	var countryCode = sessionStorage.getItem('countryCode');
+	
+	$('#THB').addClass("dropBackColor");
+	//var yAxisName = "USD (M)";
+	var ifCond = "0";
+	buttonActive(ifCond);	
+	var array = [{"TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","INT": "USD (\u0024)","EMA": "USD (\u0024)"}];
+	var countryNameArray = [{"TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","INT": "Intico","EMA": "E.Market"}];
+	var urlCountry = "";
+	var currencyType = "USD (M)";
+	
+asd(product,currentyear,status,urlCountry,currencyType);
+
+ $(document).ready(function()
+  {
+	$('.renderchart').click(function()
+	{
+		buttonActive("1");
+		jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+	
+		var status = $(this).attr('id');
+		$(this).addClass("active");		
+		sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+		
+		if(status=="all")
+		{
+			var getId = status.toUpperCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");			
+			$('#curDropdown').hide();			
+			urlCountry = "";
+			currencyType = "USD (M)";
+		}
+		else		
+		{
+			var getId = status.toLowerCase();
+			jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+			$('#curDropdown').show();
+			$('#thbSpan').text(array[0][status]);
+			currencyType = array[0][status];			
+			urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+status+"&id=local";
+		}
+				
+		asd(product,currentyear,status,urlCountry,currencyType);				
+	});
+				
+});
+
+$(document).ready(function()
+{
+	$("#THB").click(function()
+	{
+		
+		currencyType = array[0][sessionStorage.getItem("selectedCountry")];
+		urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+		asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+		$('#THB').addClass("dropBackColor");
+		$('#USD').removeClass("dropBackColor");
+		//curType = "THB (\u0E3F)";
+	});
+	$("#USD").click(function()
+	{
+		currencyType = "USD (\u0024)";
+		urlCountry = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+		asd(product,currentyear,sessionStorage.getItem("selectedCountry"),urlCountry,currencyType);
+		$('#THB').removeClass("dropBackColor");
+		$('#USD').addClass("dropBackColor");
+		//curType = "USD (\u0024)";
+	});	
+});
+
+
+
+	function buttonActive(ifCond)
+		{
+				jQuery( ".hb .countFlag").parent().addClass("hb-country");
+				jQuery( ".hb #ALL").parent().addClass("hb-refresh");
+				//jQuery(".hb-xs").parent().addClass("hb-xs-margin");
+		}
+
+function asd(product,currentyear,status,urlCountry,currencyType)
+{
+   if(status=="all")
+   {
+	$.getJSON("monthleyytdtoareaSCA.do?link="+product+"&currentyear="+currentyear, function(json) 
+	{
+		//alert(JSON.stringify(json));
+		//sessionStorage.setItem("currencyType","USD (M)");
+		var chartData = {
+							    "chart": {
+											"palette": "2",
+									        "caption": "Monthly Booking YTD",
+									        //"subcaption": "Harry's SuperMart",
+									        "xaxisname": "Year-2017",
+									        "decimals":'1',
+											"yaxisname": currencyType,
+											"showsum": "1",
+											"showvalues": "0",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											
+									        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										    "numberPrefix": "",
+									        "numbersuffix": "",
+									        "bgColor": "#808080",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"15",
+											 "captionFontSize": "18",
+											"rotatelabels": "0",		
+											"rotatevalues": "0",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+       										 "numberScaleUnit": "K,M,B",
+											"baseFontColor":"#000000",
+											 "canvasBgColor": "#B0E2FF",
+												"showCanvasBorder": "1",
+											"canvasBorderColor": "#666666",
+											"canvasBorderThickness": "4",
+											"canvasBorderAlpha": "80",
+											"legendBgColor":"#808080"
+											//"theme":"fint"   			
+										},
+									    "categories":json['xaxis'],
+									    "dataset":json['data']
+									};	
+		var i=0;
+		FusionCharts.ready(function()
+		{
+		   var fusioncharts = new FusionCharts({
+			    type: 'msstackedcolumn2d',
+			    renderAt: 'chart-container',
+			    width: '100%',
+			    height: '500',
+			    dataFormat: 'json',
+			    dataSource: chartData,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);
+													//alert(dataObj.datasetName);
+													i++;
+//													var label = "label"+i;
+//													var name = "name"+i;
+//													alert(dataObj.categoryLabel);	
+//													sessionStorage.setItem(label,dataObj.categoryLabel);
+//													sessionStorage.setItem(name,dataObj.datasetName);
+//													sessionStorage.setItem('count',i);
+//													alert(dataObj.datasetName);		
+													asd();
+									            }
+										      }
+									 // }
+								});
+			  var renderTable = function (chart, containerId) 
+			  {
+		            var chartData = chart.getDataAsCSV(),
+        				      rows,
+							  row,
+							  i,
+							  length,
+							  tableBody = '',
+							  tableBody1 = '',
+							  tableBody2 = '',
+							  tableBody3 = '',
+							  tableBody4 = '',
+							  tableBody5 = '',
+							  tableBody6 = '',
+							  tableHeader = '';
+							  tableHeader1 = '';     
+							  tableHeader2 = '';     
+							  tableHeader3 = '';     
+							  tableHeader4 = '';     
+							  tableHeader5 = ''; 
+							  tableHeader6 = '';     
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');     
+            // Retrieve the data from the rows and compute body string from the data rows
+			var accuBudget = 0;
+			var accuBooking = 0;
+            for (i = 1, length = rows.length; i < length; i++) 
+			{	
+				//alert(JSON.stringify(rows[i]));		
+                row = rows[i].split(',');
+				var sumofBudget = 0;
+				var sumofBooking = 0;
+				for(var j=1;j<=2;j++)
+				{
+					if(j<=1)
+					{
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBudget += parseInt(value);						
+					}
+				   else
+				    {
+						if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+					}
+				}
+				if(sumofBudget==null){var convertBudget = 0; }else{var convertBudget = convertMillions(sumofBudget);}
+				//convertBudget = convertMillions(sumofBudget);
+				//alert(convertBudget);
+				if(sumofBooking==null){var convertBooking = 0; }else{var convertBooking = convertMillions(sumofBooking);}
+				//var convertBooking = convertMillions(sumofBooking);
+				//alert(convertBooking);
+				var totalBudget = 0;
+				
+				//if(convertBooking==null) { convertBooking = "0"; }
+				//alert("sumofBooking "+ sumofBooking);
+				//alert("sumofBudget "+ sumofBudget);
+				var budgetPercent = convertBudget.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent = convertBooking.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentSuccess = bookingPercent/budgetPercent*100;
+				//alert(percentSuccess);
+				//alert("percentSuccess "+ percentSuccess);
+				if(isNaN(percentSuccess)|| percentSuccess == "Infinity") {var percentSuccessFixed = "0 "; }else{var percentSuccessFixed = percentSuccess.toFixed(2);}
+				 //percentSuccessFixed = percentSuccess+ " %";
+				var percentSuccessFix = percentSuccessFixed+ "%";
+				if(isNaN(accuBudget)) { accuBudget = "0"; }
+				
+				accuBudget = Number(accuBudget)+Number(sumofBudget);
+				//alert(accuBudget);
+				/*if (accuBudget < 1000) {
+					var accuBudgetCon = (Number(accuBudget)+Number(budgetPercent)).toFixed(1).replace(/\.0$/, '') + 'K';
+					//alert(accuBudgetCon);   
+				}
+				
+				else if (accuBudget >= 1000 && accuBudget <= 1000000) {
+					 var accuBudgetCon = (Number(accuBudget)+Number(budgetPercent)).toFixed(1).replace(/\.0$/, '') + 'K'; 
+				}
+				
+				else if (accuBudget >= 1000000 && accuBudget <= 1000000000) {
+					var accuBudgetCon = (Number(accuBudget)+Number(budgetPercent)).toFixed(1).replace(/\.0$/, '') + 'M';   
+				}
+				
+				else if (accuBudget >= 1000000000 && accuBudget <= 1000000000000) {
+					var accuBudgetCon = (Number(accuBudget)+Number(budgetPercent)).toFixed(1).replace(/\.0$/, '') + 'B';   
+				}
+				
+				else {
+					var accuBudgetCon = (Number(accuBudget)+Number(budgetPercent)).toFixed(1).replace(/\.0$/, '') + 'T';  
+					
+			   }*/
+				
+				var convertAccuBudget = convertMillions(accuBudget);
+				
+				//alert(convertAccuBudget);
+				if(isNaN(accuBooking)) { accuBooking = "0"; }
+				
+				accuBooking = Number(accuBooking)+Number(sumofBooking);
+				var convertAccuBooking = convertMillions(accuBooking);
+				//alert(convertAccuBooking);
+				//if(convertAccuBooking==null) { convertAccuBooking = "0"; }
+				var budgetPercent1 = convertAccuBudget.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent1 = convertAccuBooking.replace ( /[^\+|\-0-9.]/ig, '' );
+				var percentAccuSuccess = bookingPercent1/budgetPercent1*100;
+				//alert(percentAccuSuccess);
+				if(isNaN(percentAccuSuccess)|| percentAccuSuccess=="Infinity") {var  percentAccuSuccessFixed = "0"; }else{var percentAccuSuccessFixed = percentAccuSuccess.toFixed(2);}
+				var percentAccuSuccessFix = percentAccuSuccessFixed+ " %";
+				//alert(percentAccuSuccessFix);
+				//if(percentAccuSuccess=="Infinity") { percentAccuSuccessFixed = "0 %"; }
+				
+				if(convertAccuBudget==null) { var accbudgetval = "0K"; } else { var accbudgetval = convertAccuBudget; }
+				if(convertAccuBooking==null) { var accbookingval = "0K"; } else { var accbookingval = convertAccuBooking; }
+				
+                tableBody += '<th>' + row[0] + '</th>' ;
+				tableBody1 += '<td>' + convertBudget + '</td>' ;
+				tableBody2 += '<td>' + convertBooking + '</td>' ;
+				tableBody3 += '<td>' + percentSuccessFix + '</td>' ;
+				tableBody4 += '<td>' + accbudgetval + '</td>' ;
+				tableBody5 += '<td>' + accbookingval + '</td>' ;
+				tableBody6 += '<td>' + percentAccuSuccessFix + '</td>' ;
+            }
+     			//alert(tableBody2);
+            // Compute header string from first row
+            row = rows[0].split(',');
+            tableHeader = '<th>' + row[0] + '</th>';
+			tableHeader1 = '<th>Budget</th>';
+			tableHeader2 = '<th>Bookings</th>';
+			tableHeader3 = '<th>% Success</th>';
+			tableHeader4 = '<th>Accu Budget</th>';
+			tableHeader5 = '<th>Accu Bookings</th>';
+			tableHeader6 = '<th>% Success</th>';
+     
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr>'+tableHeader+tableBody+'</tr><tr  style="color:#0066CC">'+tableHeader1+tableBody1+'</tr><tr  style="color:#0066CC">'+tableHeader2+tableBody2+'</tr><tr  style="color:#0066CC">'+tableHeader3+tableBody3+'</tr><tr><td colspan="13" height="20px;"></td></tr><tr  style="color:#0066CC">'+tableHeader4+tableBody4+'</tr><tr  style="color:#0066CC">'+tableHeader5+tableBody5+'</tr><tr  style="color:#0066CC">'+tableHeader6+tableBody6+'</tr></tbody</table>';
+			
+			     					
+        };								
+		
+		var qTableHeader = "<tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr>";
+		var qTableData1 = "<tr style='color:#0066CC'><th>"+json['tabledata'][0].year+"</th><td>"+convertMillions(json['tabledata'][0].Q1)+"</td><td>"+convertMillions(json['tabledata'][0].Q2)+"</td><td>"+convertMillions(json['tabledata'][0].Q3)+"</td><td>"+convertMillions(json['tabledata'][0].Q4)+"</td></tr><tr  style='color:#0066CC'><th>"+json['tabledata'][1].year+"</th><td>"+convertMillions(json['tabledata'][1].Q1)+"</td><td>"+convertMillions(json['tabledata'][1].Q2)+"</td><td>"+convertMillions(json['tabledata'][1].Q3)+"</td><td>"+convertMillions(json['tabledata'][1].Q4)+"</td></tr><tr style='color:#0066CC'><th>"+json['tabledata'][2].year+"</th><td>"+convertMillions(json['tabledata'][2].Q1)+"</td><td>"+convertMillions(json['tabledata'][2].Q2)+"</td><td>"+convertMillions(json['tabledata'][2].Q3)+"</td><td>"+convertMillions(json['tabledata'][2].Q4)+"</td></tr>";
+		//alert(qTableData1);
+		fusioncharts.render();
+	        fusioncharts.addEventListener('renderComplete', function () 
+			{
+        	    renderTable(fusioncharts, 'table-container');
+				document.getElementById("table-container1").innerHTML = "<table width ='100%;' border='1' style='border-collapse:collapse;' class='tableCss'><thead><div      style='background-color:#4286f4;text-align:center;color:#FFFFFF;font-weight:bold;'>Average booking</div></thead>"+qTableHeader+qTableData1+"</table>";
+				$(".avg").show();
+	        });																			
+					
+					});
+				});
+				
+		}
+	   else
+	    {   
+			
+			$.getJSON(urlCountry, function(json) 
+			{
+				var caption = countryNameArray[0][status]+" - Monthly Booking YTD";
+			  // alert(JSON.stringify(json));
+				$(".avg").hide();	
+				//sessionStorage.setItem("currencyType",array[0][status]);
+				var chartData = {
+							    "chart": {
+											"palette": "2",
+									        "caption": caption,
+									        //"subcaption": "Harry's SuperMart",
+									        "xaxisname": "Year-2017",
+									        "decimals":'1',
+											"yaxisname": currencyType,
+											"showsum": "1",
+											"showvalues": "0",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											
+									        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+										    "numberPrefix": "",
+									        "numbersuffix": "",
+									        "bgColor": "#808080",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"15",
+											 "captionFontSize": "18",
+											"rotatelabels": "0",		
+											"rotatevalues": "0",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+       										 "numberScaleUnit": "K,M,B",
+											"baseFontColor":"#000000",
+								"canvasBgColor": "#B0E2FF",
+									"showCanvasBorder": "1",
+								"canvasBorderColor": "#666666",
+								"canvasBorderThickness": "4",
+							"canvasBorderAlpha": "80",
+								"legendBgColor":"#808080"
+											
+											//"theme":"fint"   			
+										},
+									    "categories":json['xaxis'],
+									    "dataset":json['data']
+									};
+									
+									//alert(JSON.stringify(json['data']));	
+		var i=0;
+		FusionCharts.ready(function()
+		{
+			
+		   var fusioncharts = new FusionCharts({
+			    type: 'msstackedcolumn2d',
+			    renderAt: 'chart-container',
+			    width: '100%',
+			    height: '500',
+			    dataFormat: 'json',
+			    dataSource: chartData,
+									events: {
+									           dataPlotClick: function (event,dataObj) 
+											   {	
+													//alert(dataObj.categoryLabel);
+													//alert(dataObj.datasetName);
+													i++;
+//													var label = "label"+i;
+//													var name = "name"+i;
+//													alert(dataObj.categoryLabel);	
+//													sessionStorage.setItem(label,dataObj.categoryLabel);
+//													sessionStorage.setItem(name,dataObj.datasetName);
+//													sessionStorage.setItem('count',i);
+//													alert(dataObj.datasetName);		
+													asd();
+									            }
+										      }
+									 // }
+								});
+			  var renderTable = function (chart, containerId) 
+			  {
+		            var chartData = chart.getDataAsCSV(),
+        				      rows,
+							  row,
+							  i,
+							  length,
+							  tableBody = '',							  
+							  tableBody1 = '',
+							  tableBody2 = '',							  							  
+							  tableBody3 = '',
+							  tableBody4 = '',
+							  tableBody5 = '',							  							  
+							  tableHeader = '';							     
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');     
+            // Retrieve the data from the rows and compute body string from the data rows
+			var accuBudget = 0;
+			var accuBooking = 0; 
+            for (i = 1, length = rows.length; i < length; i++) 
+			{	
+                row = rows[i].split(',');
+				//alert(row[1].trim().length);
+				if(row[1].trim().length==0 || row[1]==0) { var budgetVal = 0; } else { var budgetVal = row[1]; }
+				if(row[2].trim().length==0) { var bookingVal = 0; } else { var bookingVal = row[2]; }
+				
+				if(convertMillions(bookingVal)==null) { var milBookVal = "0"; } else { var milBookVal =convertMillions(bookingVal); }
+				if(convertMillions(budgetVal)==null) { var milBudgVal = "0"; } else { var milBudgVal =convertMillions(budgetVal); }
+				
+				
+				var milBookVal1 = milBookVal.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var milBudgVal1 = milBudgVal.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				percentSuccess = milBookVal1/milBudgVal1*100;
+				//alert(percentSuccess);
+				if(isNaN(percentSuccess)|| percentSuccess == "Infinity") {var  percentSuccessFixed = "0 "; }else{var  percentSuccessFixed = percentSuccess.toFixed(2);}
+				var percentSuccessFix = percentSuccessFixed+ " %";
+				
+				//alert(percentSuccessFixed);
+				accuBudget =Number(accuBudget)+Number(budgetVal);
+				var accuBudgetCov =  convertMillions(accuBudget);
+				
+				accuBooking = Number(accuBooking)+Number(bookingVal);
+				var accuBookingCov =  convertMillions(accuBooking);
+				//alert(accuBookingCov);
+				var budgetPercent2 = accuBudgetCov.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent2 = accuBookingCov.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentAccuSuccess = bookingPercent2/budgetPercent2*100;
+				if(isNaN(percentAccuSuccess)|| percentAccuSuccess == "Infinity") {var  percentSuccessVal = "0 "; }else{var  percentSuccessVal = percentAccuSuccess.toFixed(2);}
+				var percentSuccessValue = percentSuccessVal+" % ";
+				//alert(percentSuccessVal);
+				
+				if(accuBudgetCov==null) { var accbudgetval = "0"; } else { var accbudgetval = accuBudgetCov; }
+				if(accuBookingCov==null) { var accbookingval = "0"; } else { var accbookingval = accuBookingCov; }
+				
+				tableHeader +="<th>"+row[0]+"</th>";
+				tableBody +="<td>"+milBudgVal+"</td>";
+				tableBody1 +="<td>"+milBookVal+"</td>";
+				tableBody2 +="<td>"+percentSuccessFix+"</td>";
+				tableBody3 +="<td>"+accbudgetval+"</td>";
+				tableBody4 +="<td>"+accbookingval+"</td>";
+				tableBody5 +="<td>"+percentSuccessValue+"</td>";
+				//alert(tableBody);
+				
+            }
+     			
+            // Compute header string from first row
+            row = rows[0].split(',');
+           
+     
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr><th></th>'+tableHeader+'</tr><tr style="color:#0066CC"><th>Budget</th>'+tableBody+'</tr><tr style="color:#0066CC"><th>Booking</th>'+tableBody1+'</tr><tr style="color:#0066CC"><th>% Success</th>'+tableBody2+'</tr><tr><td colspan="13" height="20px;"></td></tr><tr style="color:#0066CC"><th>Accu Budget</th>'+tableBody3+'</tr><tr style="color:#0066CC"><th>Accu Booking</th>'+tableBody4+'</tr><tr style="color:#0066CC"><th>% Success</th>'+tableBody5+'</tr></tbody</table>';
+			
+			     					
+        };								
+		//alert(json['tabledata'][0].Q3);
+		var qTableHeader = "<tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr>";
+		var qTableData1 = "<tr style='color:#0066CC'><th>"+json['tabledata'][0].year+"</th><td>"+convertMillions(json['tabledata'][0].Q1)+"</td><td>"+convertMillions(json['tabledata'][0].Q2)+"</td><td>"+convertMillions(json['tabledata'][0].Q3)+"</td><td>"+convertMillions(json['tabledata'][0].Q4)+"</td></tr><tr style='color:#0066CC'><th>"+json['tabledata'][1].year+"</th><td>"+convertMillions(json['tabledata'][1].Q1)+"</td><td>"+convertMillions(json['tabledata'][1].Q2)+"</td><td>"+convertMillions(json['tabledata'][1].Q3)+"</td><td>"+convertMillions(json['tabledata'][1].Q4)+"</td></tr><tr style='color:#0066CC'><th>"+json['tabledata'][2].year+"</th><td>"+convertMillions(json['tabledata'][2].Q1)+"</td><td>"+convertMillions(json['tabledata'][2].Q2)+"</td><td>"+convertMillions(json['tabledata'][2].Q3)+"</td><td>"+convertMillions(json['tabledata'][2].Q4)+"</td></tr>";
+		
+		fusioncharts.render();
+	        fusioncharts.addEventListener('renderComplete', function () 
+			{
+        	    renderTable(fusioncharts, 'table-container');
+				document.getElementById("table-container1").innerHTML = "<table width ='100%;' border='1' style='border-collapse:collapse;' class='tableCss'>"+qTableHeader+qTableData1+"</table>";
+				$(".avg").show(); 
+	        });																			
+					
+					});
+					
+				});
+				
+		}
+	}
+	function convertMillions(sumofBudget) 
+	{
+	
+		
+		var thousand = 1000;
+		var million = 1000000;
+		var billion = 1000000000;
+		var trillion = 1000000000000;
+		if (sumofBudget < thousand) {
+			return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+		}
+		
+		else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+			 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+		}
+		
+		else if (sumofBudget >= million && sumofBudget <= billion) {
+			return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+		}
+		
+		else if (sumofBudget >= billion && sumofBudget <= trillion) {
+			return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+		}
+		
+		else {
+			return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+       }
+   }     
+	//function convertMillions(sumofBudget)
+//	{
+//		 if ((sumofBudget) >= 1000000000) 
+//		 {
+//	        return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+//		 }
+//		 else if ((sumofBudget) >= 1000000) 
+//		 {
+//		      return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+//		 }
+//		 else if ((sumofBudget) >= 1000) 
+//		 {
+//		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+//		 }				
+//		 else if ((sumofBudget) <1000) 
+//		 {
+//		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+//		 }				
+//		 
+//	
+//	}
+				
+</script>
+
+  <div class="row">
+  <div class="col-sm-9">
+   <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+		<!--<a href="#/app/SCA_monthlyytd_2016" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="hb hb-xs spin-icon" style="color:#6699FF; font-size:14px;"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>  
+		<a href="#/app/SCA_monthlyytd_2016" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-th countFlag" id="th"></i></span></a>		
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-my countFlag" id="my"></i></span></a>		
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-id countFlag" id="id"></i></span></a>  		
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-sg countFlag" id="sg"></i></span></a>
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-ph countFlag" id="ph"></i></span></a>
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-in countFlag" id="in"></i></span></a> 				
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-vn countFlag" id="vn"></i></span></a>		
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="hb hb-xs spin-icon" style="font-size:14px;color: #6699FF;"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+		<a href="#/app/SCA_monthlyytd_2016"  class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-au countFlag" id="au"></i></span></a>-->
+		 <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+            <!--<a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="INT" tooltip-placement="bottom" tooltip="INTICO"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="inticoo"></i></span></a>-->
+			  <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="EMA" tooltip-placement="bottom" tooltip="Emarket"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="emarket"></i></span></a>
+             <a href="#/app/SCA_monthlyytd_2017" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		</div>
+		</div> 
+		<div class="col-sm-3">
+		<span class="dropdown" style="display:none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_monthlyytd_2017" id="THB"><span id="thbSpan">THB &#xE3F;</span></a>
+				<a href="#/app/SCA_monthlyytd_2017" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>
+	
+	</div>
+  <div style="float:right;"><!--<input type="button" value="< Go Back" id="goback">--></div>
+  <div id="chart-container">
+      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  </div>
+  </div>
+  <div class="row">
+  	<div class="col-sm-9">
+		<div id="table-container" style="margin-left:1%;"></div>
+	</div>
+     <div class="col-sm-3">
+		<p class="avg" style="display:none;"><b></b></p>
+		<div id="table-container1" style="margin-right:1%;"></div>
+	</div>
+	
+  </div> 
+  
+  <br />

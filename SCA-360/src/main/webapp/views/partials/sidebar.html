@@ -1,0 +1,2955 @@
+
+<style>
+.menu-text
+{
+font-size:12px;
+font-weight:bold;
+
+}
+.colorok
+{
+background-color:#FF0000;
+}
+</style>
+<script type="text/javascript">
+	var countryCode = sessionStorage.getItem('countryCode');
+	if(countryCode!=null)
+	{
+		$('#'+ countryCode).show();
+	}
+   else
+   {
+   		window.location.assign("/SCA-360");
+   }
+   //alert(sessionStorage.getItem('getSessionStatus2'));
+   var asd2 = sessionStorage.getItem('getSessionStatus2');
+   var ecefun = asd2;
+   function getSessionStatusSidebar()
+					{
+						
+						ecefun();
+						alert(234324);
+					}
+   
+</script>
+<script>
+	/*var asd2 = sessionStorage.getItem('getSessionStatus2');
+	$(document).ready(function(){
+		$("li").click(function(){
+			
+			
+			
+			//asd2();
+		});
+	});*/
+</script>
+
+<div class="asd">
+<ul class="nav sidebar-menu">
+    <!--Dashboard-->
+			<li ui-sref-active="active">
+				<a ui-sref="app.dashboard">
+					<i class="menu-icon glyphicon glyphicon-home"></i>
+					<span class="menu-text">Dashboard </span>
+				</a>
+			</li>
+			<li ui-sref-active="active"> 
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Case </span>
+					<i class="menu-expand"></i>
+						</a>
+						<ul class="submenu">
+					
+						<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   Masters
+									 </span>
+									<i class="menu-expand"></i>
+								</a>
+								<ul class="submenu">						
+																			
+																			
+							<li  ui-sref-active="active">
+								<a ui-sref="app.departments">								  
+								<span class="menu-text">Department</span>
+								</a>
+							</li>
+                            <li  ui-sref-active="active">
+								<a ui-sref="app.ProspectMaster">
+								<span id="hisdata"  class="menu-text">Prospect </span>
+								</a>
+							</li>							
+							 <li  ui-sref-active="active">
+								<a ui-sref="app.customermaster">
+								<span id="hisdata"  class="menu-text">Customer </span>
+								</a>
+							</li>						
+							<li  ui-sref-active="active">
+								<a ui-sref="app.currencyMaster">
+									<span class="menu-text">Currency Exchange Rate</span>
+								</a>
+							</li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.countryTax">								  
+								<span class="menu-text">Country Tax</span>
+								</a>
+							</li>
+								<li  ui-sref-active="active">
+								<a ui-sref="app.sscCode">								  
+								<span class="menu-text">SSC Code</span>
+								</a>
+							</li>
+                            <li  ui-sref-active="active" style="display:none;">
+								<a ui-sref="app.dataMigration">								  
+								<span class="menu-text">Data Migration</span>
+								</a>
+							</li>
+							</ul>
+					</li>
+                    
+                    <!--<li>
+								<a href="#" class="menu-dropdown">
+		
+		
+									<span class="menu-text">
+									   Quotation
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								  <li>
+						<a ui-sref="app.quotations">
+							<span class="menu-text">Select Model</span>
+						</a>
+					</li>
+					
+					<li>
+						<a ui-sref="app.quotationfullunit">
+							<span class="menu-text">Quotation Full Unit</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.quotationspareparts">
+							<span class="menu-text">
+							 Spare Parts</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.quotationresponseproject">
+							<span class="menu-text">Quotation Project</span>
+						</a>
+					</li>
+					
+								</ul>
+							</li>-->
+							<!--<li  ui-sref-active="active">
+								<a ui-sref="app.casesearch">
+								<span class="menu-text">Cases/Search Cases</span>
+								</a>
+							</li>-->
+													
+                             <li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									   Functional Screens
+									</span>
+									
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								<li  ui-sref-active="active">
+                                <a ui-sref="app.newCaseManagement">
+                                   <span class="menu-text">New Case</span>
+							    </a>
+							</li>
+                            <li  ui-sref-active="active">
+                                <a ui-sref="app.addNewCase">
+                                   <span class="menu-text">Case Search</span>
+							    </a>
+							</li>
+							<li ui-sref-active="active">
+                                <a ui-sref="app.quotation">
+                                    <span class="menu-text">Quotation</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.addedQuotation">
+                                    <span class="menu-text">Quote Search</span>
+                                </a>
+                            </li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.ProductSelection">
+								<span class="menu-text">Product Selection</span>
+								</a>
+							</li>							
+							<li ui-sref-active="active">
+								<a ui-sref="app.selectionresult">
+								<span class="menu-text">Selection Result </span>
+								</a>
+							</li>
+								</ul>
+							</li>
+                             <li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									   Case Reports
+									</span>
+									
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+                                    <!--<li  ui-sref-active="active"  style="display: none;">
+                                        <a ui-sref="app.customerDashBoard">
+                                           <span class="menu-text">Customer DB</span>
+                                        </a>
+                                   </li>-->
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.CustomerDB">
+                                           <span class="menu-text">Customer DB</span>
+                                        </a>
+                                   </li>
+                                   
+                            <!--<li  ui-sref-active="active">
+                                <a ui-sref="app.addNewCase">
+                                   <span class="menu-text">Added Cases</span>
+							    </a>
+							</li>
+							<li ui-sref-active="active">
+                                <a ui-sref="app.quotation">
+                                    <span class="menu-text">Quotation</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.addedQuotation">
+                                    <span class="menu-text">Added Quotations</span>
+                                </a>
+                            </li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.ProductSelection">
+								<span class="menu-text">Product Selection</span>
+								</a>
+							</li>							
+							<li ui-sref-active="active">
+								<a ui-sref="app.selectionresult">
+								<span class="menu-text">Selection Result </span>
+								</a>
+							</li>-->
+								</ul>
+							</li>
+
+							
+						
+						</ul>
+			  </li>
+			    
+                 <li>
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Sales</span>
+		
+					<i class="menu-expand"></i>
+						</a>
+		
+						<ul class="submenu">
+                                <li>
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                       Masters
+                                         </span>
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <!--<li>
+                                            <a ui-sref="app.salesreport">
+                                                <span class="menu-text">Sales Report</span>
+                                            </a>
+                                        </li>-->
+                               <li  ui-sref-active="active">
+                                    <a ui-sref="app.countryMaster">
+                                        <span class="menu-text">Country</span>
+                                    </a>
+                                </li>
+                                <li  ui-sref-active="active">
+                                    <a ui-sref="app.countryMasterLogo">
+                                        <span class="menu-text">Country Logo</span>
+                                    </a>
+                                </li>
+                                <li  ui-sref-active="active" >
+                                                <a ui-sref="app.RegionMaster">
+                                            <span class="menu-text">Region </span>
+                                                </a>
+                                            </li>
+                                            <li  ui-sref-active="active">
+                                    <a ui-sref="app.salesmanmaster">
+                                        <span class="menu-text">Salesman</span>
+                                    </a>
+                                </li>
+								      <li  ui-sref-active="active">
+                                    <a ui-sref="app.salesmanIndices">
+                                        <span class="menu-text">Salesman Index</span>
+                                    </a>
+                                </li>
+                                        <li  ui-sref-active="active">
+                                    <a ui-sref="app.productmaster">
+                                    <span class="menu-text">Product Category</span>
+                                    </a>
+                                </li>
+                                <li  ui-sref-active="active">
+                                    <a ui-sref="app.products">
+                                    <span class="menu-text">Product</span>
+                                    </a>
+                                </li>													
+                                <li  ui-sref-active="active">
+                                    <a ui-sref="app.ProductLineMaster">
+                                    <span class="menu-text">Product Line Mapping</span>
+                                    </a>
+                                </li>
+                                    
+                                        
+                                        <li  ui-sref-active="active">
+                                    <a ui-sref="app.industrygroup">
+                                        <span class="menu-text">Industry </span>
+                                    </a>
+                                </li>
+                                    <li  ui-sref-active="active">
+                                    <a ui-sref="app.BusinessSegmentMaster">
+                                        <span class="menu-text">BusinessSegment </span>
+                                    </a>
+                                </li>
+								 <li  ui-sref-active="active">
+                                    <a ui-sref="app.applicationMaster">
+                                        <span class="menu-text">Application </span>
+                                    </a>
+                                </li>
+                                         <li>
+                                            <a ui-sref="app.salesprogressindicator">
+                                                <span class="menu-text">Sales Progress Indicators</span>
+                                            </a>
+                                                </li>
+                                                <li>
+                                                <a ui-sref="app.probabilityMaster">
+                                                <span class="menu-text">Probability </span>
+                                                </a>
+                                                </li>
+                                                <li  ui-sref-active="active" style="display:;">
+                                                    <a ui-sref="app.SalesmanBudget">
+                                                    <span id="hisdata"  class="menu-text">Salesman Budget</span>
+                                                        </a>
+                                                </li>
+                                                <li  ui-sref-active="active" style="display:;">
+                                                    <a ui-sref="app.PaymenttermsMaster">
+                                                    <span id="hisdata"  class="menu-text">Payment Terms Master</span>
+                                                        </a>
+                                                </li>
+    
+                                        
+    </ul>
+                                 </li>   
+                                <li>
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                       Functional Screens
+                                         </span>
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                            
+                                            <li>
+                                                <a ui-sref="app.salesreport">
+                                                    <span class="menu-text">Sales Report</span>
+                                                </a>
+                                            </li>
+                                            
+                                            <li  ui-sref-active="active">
+                                                <a ui-sref="app.YearlyBudget">
+                                            <span class="menu-text">Yearly Budget</span>
+                                                  </a>
+                        
+                                            </li>
+                                            <li  ui-sref-active="active">
+                                                <a ui-sref="app.historicalData">
+                                            <span id="hisdata"  class="menu-text">Historical Data</span>
+                                                </a>
+                                            </li>
+                                            
+                                      </ul>
+                                 </li>
+                                <li ui-sref-active="active" style="display:none;" id="all">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                                <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                       Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.SCA_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                           <li ui-sref-active="active" style="display:;">
+												<a ui-sref="app.SCA_monthlyytd_Current">
+													<span class="menu-text">Monthly Current</span>
+												</a>
+											</li>											
+											<li ui-sref-active="active" style="display:;">
+												<a ui-sref="app.SCA_monthlyytd_2016">
+													<span class="menu-text">Monthly Previous</span>
+												</a>
+											</li>												
+                                                
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.SCA_groupByShare">
+                                                        <span class="menu-text">Share</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active" style="display:none;">
+                                                    <a ui-sref="app.SCA_groupByArea_angularFC">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>
+                                                
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.SCA_GroupByProduct_YTD">
+    
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.SCA_groupByProductShare">
+                                                        <span class="menu-text">Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.SCA_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                                        <a ui-sref="app.SCA_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.SCA_cwQuarterWise">
+                                                    <span class="menu-text">Quarterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.SCA_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <li style="display:none;">
+                                                        <a href="#" class="menu-dropdown">
+                                                            <span class="menu-text">
+                                                               On Time Delivery
+                                                            </span>
+                                                            <i class="menu-expand"></i>
+                                                        </a>
+                                                            <ul class="submenu">
+                                                                <!--<li>
+                                                                    <a ui-sref="app.bookingByIndustry">
+                                                                        <span class="menu-text">YTD</span>
+                                                                    </a>
+                                                                </li>-->
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.otdpieChart">
+                                                                        <span class="menu-text">OTD Pie</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.volumeByQty">
+                                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.otdBusinesVolume">
+                                                                        <span class="menu-text">OTD Business Volume</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.productType">
+                                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.requestDate">
+                                                                        <span class="menu-text">Request Date</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li ui-sref-active="active">
+                                                                    <a ui-sref="app.avgleadProductType">
+                                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                  </li>
+                                                    <li style="display:;">
+                                                <a ui-sref="app.SCA_profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                                    <li style="display:none;">
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                         
+                                                </ul>
+                                    </li>
+                                <li ui-sref-active="active" style="display:none ;" id="TH">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                       Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                    Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_groupByProductShare">
+                                                        <span class="menu-text"> Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                  Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Thailand_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Thailand_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Thailand_cwQuarterWise">
+                                                    <span class="menu-text">Quarterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Thailand_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="MY">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                       Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                    Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_groupByProductShare">
+                                                        <span class="menu-text"> Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                  Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Malaysia_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Malaysia_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Malaysia_cwQuarterWise">
+                                                    <span class="menu-text">Quarterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Malaysia_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="ID">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                     Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                    Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_groupByProductShare">
+                                                        <span class="menu-text"> Share </span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                 Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Indonesia_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Indonesia_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Indonesia_cwQuarterWise">
+                                                    <span class="menu-text">Quarterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Indonesia_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="SG">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_groupByProductShare">
+                                                        <span class="menu-text"> Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                  Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Singapore_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Singapore_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Singapore_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Singapore_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="PH">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                     Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+    
+                                                    <a ui-sref="app.Philippines_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_groupByProductShare">
+                                                        <span class="menu-text"> Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                 Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Philippines_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Philippines_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Philippines_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Philippines_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="IN">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                       Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.India_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.India_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.India_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.India_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                  Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.India_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.India_groupByProductShare">
+                                                        <span class="menu-text"> Share </span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                    Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.India_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.India_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.India_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.India_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="VN">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                       Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_groupByProductShare">
+                                                        <span class="menu-text">Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Vietnam_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Vietnam_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Vietnam_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+    
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Vietnam_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="OT">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                      Regions
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Other_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Other_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Other_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Other_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Other_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Other_groupByProductShare">
+                                                        <span class="menu-text"> Share</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Other_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Other_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Other_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Other_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+                                <li ui-sref-active="active" style="display:none ;" id="AU">
+                                    <a href="#" class="menu-dropdown">
+                                        <span class="menu-text">
+                                           Booking Reports
+                                        </span>
+                                        
+                                        <i class="menu-expand"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                                    <li>
+                                                <a href="#" class="menu-dropdown">
+                                                    <span class="menu-text">
+                                                      Region
+                                                    </span>
+                                                    <i class="menu-expand"></i>
+                                                </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_groupByArea">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.groupByProductShare">
+                                                        <span class="menu-text">Product Share</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="app.bookingByIndustry">
+                                                        <span class="menu-text">Booking By Industry</span>
+                                                    </a>
+                                                </li>-->
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_monthlyytd_2016">
+                                                        <span class="menu-text">Monthly Current</span>
+                                                    </a>
+                                                </li>											
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_monthlyytd_2015">
+                                                        <span class="menu-text">Monthly Previous</span>
+                                                    </a>
+                                                </li>											
+                                                <!--<li ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_groupByShare">
+                                                        <span class="menu-text">Group % Share YTD</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                           </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Product
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_GroupByProduct_YTD">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li  ui-sref-active="active">
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text">Monthly YTD</span>
+                                                    </a>
+                                                </li>-->
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_groupByProductShare">
+                                                        <span class="menu-text">Share </span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   Industry
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li  ui-sref-active="active">
+                                                    <a ui-sref="app.Australia_bookingByIndustry">
+                                                        <span class="menu-text">Annual</span>
+                                                    </a>
+                                                </li>
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyytd">
+                                                        <span class="menu-text">Monthly By Area</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.countryBookingYTD">
+                                                        <span class="menu-text" title="Country YTD Budget/Booking">Monthly By Product</span>
+                                                    </a>
+                                                </li>-->
+                                                <!--<li>
+                                                    <a ui-sref="app.monthlyBookingYTD">
+                                                        <span class="menu-text">Budget/Booking</span>
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                       </li>
+                                                    <li  ui-sref-active="active" style="display: none;">
+                                                        <a ui-sref="app.Australia_Group">
+                                                            <span class="menu-text">Booking VS Sales</span>
+                                                        </a>
+                                                    </li>
+                                                    <li  ui-sref-active="active">
+                                                <a ui-sref="app.Australia_cwQuarterWise">
+                                                    <span class="menu-text">Quaterly Bookings</span>
+                                                </a>
+                                            </li>
+                                                    <li  ui-sref-active="active" style="display:none;">
+                                            <a ui-sref="app.Australia_historyBooking">
+                                                <span class="menu-text">History Booking</span>
+                                            </a>
+                                        </li>		
+                                                    <!--<li>
+                                            <a href="#" class="menu-dropdown">
+                                                <span class="menu-text">
+                                                   On Time Delivery
+                                                </span>
+                                                <i class="menu-expand"></i>
+                                            </a>
+                                            <ul class="submenu">
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdpieChart">
+                                                        <span class="menu-text">OTD Pie</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.volumeByQty">
+                                                        <span class="menu-text">Business Vol by Qty</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.otdBusinesVolume">
+                                                        <span class="menu-text">OTD Business Volume</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.productType">
+                                                        <span class="menu-text">Units By Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.requestDate">
+                                                        <span class="menu-text">Request Date</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ui-sref="app.avgleadProductType">
+                                                        <span class="menu-text">Avg Lead Pro.Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                <a ui-sref="app.profitProducts">
+                                                    <span class="menu-text">Profit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="app.forecastBacklog">
+                                                    <span class="menu-text">Forecast And Backlog</span>
+                                                </a>
+                                            </li>																						
+                                       </li>-->			   
+                                                </ul>
+                                </li>
+		               </ul>
+		        </li>
+		   
+		<!--<li>
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Sales </span>
+		
+					<i class="menu-expand"></i>
+						</a>
+		
+						<ul class="submenu">
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									  Customer Data
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								  <li>
+						<a ui-sref="app.buttons">
+							<span class="menu-text">Customer DB</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.buttons">
+							<span class="menu-text">Tasks</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.buttons">
+							<span class="menu-text">Meetings</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.buttons">
+							<span class="menu-text">Payments</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.buttons">
+						<span class="menu-text">Orders</span>
+						</a>
+					</li>
+								</ul>
+							</li>
+								<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									 Marketing
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+						<a ui-sref="app.refpictures">
+							<span class="menu-text">Ref. Pictures</span>
+						</a>
+					</li>
+								</ul>
+							</li>
+								<li>
+								<a href="#" class="menu-dropdown">
+		
+								  
+		
+									<span class="menu-text">
+									  Inquiry
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li>
+						<a ui-sref="app.SalesEnquiry">
+							<span class="menu-text">Sales Inquiry</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.supportresponsefullunit">
+							<span class="menu-text">SS Respose Unit</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.salesresponsespareparts">
+							<span class="menu-text">SS Respose Spare Parts</span>
+						</a>
+					</li>
+					
+					<li>
+						<a ui-sref="app.salesresponseforproject">
+							<span class="menu-text">SS Respose Project</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.salesresponsespareparts">
+							<span class="menu-text">Inquiries</span>
+						</a>
+					</li>
+					
+					<li>
+						<a ui-sref="app.salesresponseforproject">
+							<span class="menu-text">Reponses</span>
+						</a>
+					</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+		
+		
+									<span class="menu-text">
+									   Quotation
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								  <li>
+						<a ui-sref="app.quotations">
+							<span class="menu-text">Select Model</span>
+						</a>
+					</li>
+					
+					<li>
+						<a ui-sref="app.quotationfullunit">
+							<span class="menu-text">Quotation Full Unit</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.quotationspareparts">
+							<span class="menu-text">
+							 Spare Parts</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.quotationresponseproject">
+							<span class="menu-text">Quotation Project</span>
+						</a>
+					</li>
+					
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+		
+		
+									<span class="menu-text">
+									   Production
+		
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								<li>
+									<a ui-sref="app.productionscheduler">
+									<span class="menu-text">Production Scheduler</span>
+									</a>
+								</li>
+							<li>
+								<a ui-sref="app.testreport">
+									<span class="menu-text">Test Report</span>
+								</a>
+							</li>
+							<li>
+								<a ui-sref="app.calendar">
+									<span class="menu-text">Calender</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+		
+		
+									<span class="menu-text">
+									Reports
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								  <li>
+									<a ui-sref="app.OrderAcknowledgement">
+									<span class="menu-text">Job Value Report</span>
+									</a>
+									</li>
+								</ul>
+							</li>
+							
+								</ul>
+							</li>
+							
+							
+						</ul>
+						
+						
+				 </li> Sales Important -->
+			<li>
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Operation</span>
+		
+					<i class="menu-expand"></i>
+						</a>
+		
+						<ul class="submenu">
+					<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									Masters
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+									<li  ui-sref-active="active">
+								<a ui-sref="app.packageMaster">
+									<span class="menu-text">Package </span>
+								</a>
+							</li>
+								
+									
+					
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									  IT
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+		                         <ul class="submenu">
+									<li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   Asset Management
+		
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active">
+									<a ui-sref="app.AddAsset">
+								   
+									<span class="menu-text">Add Asset</span>
+								</a> 
+								 </li>
+								 <li  ui-sref-active="active">
+									<a ui-sref="app.SearchAssets">
+								   
+									<span class="menu-text">Search Assets</span>
+								</a> 
+								 </li>
+					
+								</ul>
+							</li>
+								</ul>
+								
+								
+								<ul class="submenu">
+									<li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   New User Management
+		
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active">
+									<a ui-sref="app.NewUserRequest">
+								   
+									<span class="menu-text">New User Request</span>
+								</a> 
+								 </li>
+								 <li  ui-sref-active="active">
+									<a ui-sref="app.SearchRequests">
+								   
+									<span class="menu-text">Search Requests</span>
+								</a> 
+								 </li>
+					
+								</ul>
+							</li>
+								</ul>
+								
+								
+								<ul class="submenu">
+									<li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   Ticket Management
+		
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active">
+									<a ui-sref="app.MyTickets">
+								   
+									<span class="menu-text">My Tickets</span>
+								</a> 
+								 </li>
+								 <li  ui-sref-active="active">
+									<a ui-sref="app.RaiseTicket">
+								   
+									<span class="menu-text">Raise Ticket</span>
+								</a> 
+								 </li>
+								 <li  ui-sref-active="active">
+									<a ui-sref="app.SearchTickets">
+								   
+									<span class="menu-text">Search Tickets</span>
+								</a> 
+								 </li>
+					
+								</ul>
+							</li>
+								</ul>
+		
+		
+		
+								
+							</li>
+							
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									Policy
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+								<ul class="submenu">
+									<li  ui-sref-active="active">
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   SOP
+		
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active">
+									<a ui-sref="app.nestedTable">
+								   
+									<span class="menu-text">SOPs</span>
+								</a> 
+								 </li>
+					
+								</ul>
+							</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									Project Mgt
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active" >
+						<a ui-sref="app.project">
+							<span class="menu-text">Add Project</span>
+						</a>
+					</li>
+					<li  ui-sref-active="active">
+						<a ui-sref="app.UploadProjectDocuments">
+							<span class="menu-text">Upload Prj.Documents</span>
+						</a>
+					</li>
+					<li  ui-sref-active="active">
+						<a ui-sref="app.costReview">
+							<span class="menu-text">Cost Review</span>
+						</a>
+					</li>
+					<li  ui-sref-active="active">
+						<a ui-sref="app.ProjectProgress">
+							<span class="menu-text">Project Progress</span>
+						</a>
+					</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   Production
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								 	<li  ui-sref-active="active">
+										<a ui-sref="app.productionscheduler">
+											<span class="menu-text">Production Scheduler</span>
+										</a>
+									</li>
+								 	<li  ui-sref-active="active">
+										<a ui-sref="app.score_master">
+											<span class="menu-text">Score Master</span>
+										</a>
+									</li>
+									
+									<li  ui-sref-active="active">
+										<a ui-sref="app.report">
+											<span class="menu-text">Test Reports</span>
+										</a>
+									</li>
+                                    <li  ui-sref-active="active">
+										<a ui-sref="app.testreport">
+											<span class="menu-text"> New Test Report</span>
+										</a>
+									</li>
+									<!--<li  ui-sref-active="active">
+										<a ui-sref="app.serviceScheduler">
+											<span class="menu-text">Service Scheduler</span>
+										</a>
+									</li>
+                                    <li  ui-sref-active="active">
+                   					 <a ui-sref="app.serviceInquires">
+                    			<span class="menu-text">Service Inquiries</span>
+                   					 </a>
+                   					 </li>
+                           		 <li  ui-sref-active="active">
+                   				 <a ui-sref="app.serviceINQ">
+                   		 		<span class="menu-text">Service Inquiry</span>
+                    				</a>
+                    			</li>
+									
+                                    
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaService">
+                                        <span class="menu-text">QA Issues</span>
+                                        </a>
+                                    </li>
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaServiceINT">
+                                        <span class="menu-text">QA(INT)</span>
+                                        </a>
+                                    </li>
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaServiceEXT">
+                                        <span class="menu-text">QA(EXT)</span>
+                                        </a>
+                                   </li>-->
+								 	<!--<li  ui-sref-active="active">
+										<a ui-sref="app.qaService">
+											<span class="menu-text">QA</span>
+										</a>
+									</li>-->
+								 	
+                                    
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   Service
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								 	
+								 	
+									
+									
+                                    
+									<li  ui-sref-active="active">
+										<a ui-sref="app.serviceScheduler">
+											<span class="menu-text">Service Scheduler</span>
+										</a>
+									</li>
+                                    <li  ui-sref-active="active">
+                   					 <a ui-sref="app.serviceInquires">
+                    			<span class="menu-text">Service Search</span>
+                   					 </a>
+                   					 </li>
+                           		 <li  ui-sref-active="active">
+                   				 <a ui-sref="app.serviceINQ">
+                   		 		<span class="menu-text">Service Inquiry</span>
+                    				</a>
+                    			</li>
+									
+                                    
+                                   
+								 	<!--<li  ui-sref-active="active">
+										<a ui-sref="app.qaService">
+											<span class="menu-text">QA</span>
+										</a>
+									</li>-->
+								 	
+                                    
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   QA
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								 	
+                                    
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaService">
+                                        <span class="menu-text">QA Search</span>
+                                        </a>
+                                    </li>
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaServiceINT">
+                                        <span class="menu-text">QA(INT)</span>
+                                        </a>
+                                    </li>
+                                    <li  ui-sref-active="active">
+                                        <a ui-sref="app.qaServiceEXT">
+                                        <span class="menu-text">QA(EXT)</span>
+                                        </a>
+                                   </li>
+								 	<!--<li  ui-sref-active="active">
+										<a ui-sref="app.qaService">
+											<span class="menu-text">QA</span>
+										</a>
+									</li>-->
+								 	
+                                    
+								</ul>
+							</li>
+								
+						</ul>
+						
+					</li>				
+			<li>
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Setting</span>
+		
+					<i class="menu-expand"></i>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+									 User Mgmt
+		
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">									  
+								<li  ui-sref-active="active">
+								<a ui-sref="app.Designation">
+									<span class="menu-text">Designations</span>
+								</a>
+							</li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.Users">
+									<span class="menu-text">Users</span>
+								</a>
+							</li>
+					
+								</ul>
+							</li>
+							
+							<li>
+								<a href="#" class="menu-dropdown">
+									<span class="menu-text">
+								   BSS Setup
+									 </span>
+									<i class="menu-expand"></i>
+								</a>
+								<!--<ul class="submenu">
+									<li>
+								<a href="#" class="menu-dropdown">
+		
+		
+									<span class="menu-text">
+								  Case
+									</span>
+									<i class="menu-expand"></i>
+								</a>
+		
+								<ul class="submenu">
+								   <li  ui-sref-active="active">
+									<a ui-sref="app.casestatus">
+							<span class="menu-text">Case Status</span>
+						</a>
+								 </li>
+					
+								</ul>
+							</li>
+									
+									<li>
+										<a href="#" class="menu-dropdown">
+											<span class="menu-text">
+										  Customer Data
+											</span>
+											<i class="menu-expand"></i>
+										</a>
+				
+										<ul class="submenu">
+										   <li  ui-sref-active="active">
+								<a ui-sref="app.industrygroup">
+									<span class="menu-text">Industry Group</span>
+								</a>
+							</li>
+								<li  ui-sref-active="active">
+								<a ui-sref="app.applicationmaster">
+									<span class="menu-text">Application Master</span>
+								</a>
+							</li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.customergroup">
+									<span class="menu-text">Customer Type</span>
+								</a>
+							</li>
+							<li>
+								<a ui-sref="app.customermaster">
+									<span class="menu-text">Customer</span>
+								</a>
+							</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#" class="menu-dropdown">
+											<span class="menu-text">
+										  Sales
+											</span>
+											<i class="menu-expand"></i>
+										</a>
+				
+				
+										<ul class="submenu">
+										   <li  ui-sref-active="active">
+								<a ui-sref="app.countryMaster">
+									<span class="menu-text">Country</span>
+								</a>
+							</li>
+				<li  ui-sref-active="active">
+								<a ui-sref="app.Areamaster">
+									<span class="menu-text">Area</span>
+								</a>
+							</li>
+				
+				<li  ui-sref-active="active">
+								<a ui-sref="app.salesmanmaster">
+									<span class="menu-text">Salesman</span>
+								</a>
+							</li>
+				<li  ui-sref-active="active">
+								<a ui-sref="app.salesprogressindicator">
+									<span class="menu-text">Sales Progress Indicator</span>
+								</a>
+							</li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.salesprogressindicator">
+									<span class="menu-text">Indicator Weightage</span>
+								</a>
+							</li>
+							<li  ui-sref-active="active">
+								<a ui-sref="app.CompetitorMaster">
+									<span class="menu-text">Competitor Master</span>
+								</a>
+							</li>
+				
+				<li  ui-sref-active="active">
+								<a ui-sref="app.taxtypemaster">
+									<span class="menu-text">Tax Type</span>
+								</a>
+							</li>
+				
+										</ul>
+									</li>
+									<li>
+										<a href="#" class="menu-dropdown">
+											<span class="menu-text">
+										Operations
+											</span>
+											<i class="menu-expand"></i>
+										</a>
+				
+										<ul class="submenu">
+										   
+				
+				<li  ui-sref-active="active">
+										<a ui-sref="app.AccountType">
+											<span class="menu-text">Account Types</span>
+										</a>
+									</li>
+				<li  ui-sref-active="active">
+								<a ui-sref="app.currencyMaster">
+									<span class="menu-text">Currency Master</span>
+								</a>
+							</li>
+				
+					<li  ui-sref-active="active">
+								<a ui-sref="app.currencyConverseMaster">
+									<span class="menu-text">Currency Conversion</span>
+								</a>
+							</li>
+				<li  ui-sref-active="active">
+								<a ui-sref="app.projectDocumentMaster">
+									<span class="menu-text">Project Document</span>
+								</a>
+							</li>
+				<li  ui-sref-active="active">
+								<a ui-sref="app.ProgressTrackingItems">
+									<span class="menu-text">Progress Track Items</span>
+								</a>
+							</li>
+							
+							<li  ui-sref-active="active">
+								<a ui-sref="app.sumitomoofficemaster">
+									<span class="menu-text">Sumitomo Offices</span>
+								</a>
+							</li> 
+				
+										
+								</ul>
+								
+							</li>
+								</ul>-->
+							</li>
+						  
+			  
+		</ul>
+		   </li>
+		  <!-- <li tabindex="2">
+						<a href="#" class="menu-dropdown">
+							<i class="menu-icon fa fa-th"></i>
+					<span class="menu-text"> Test Pages </span>
+					<i class="menu-expand"></i>
+						</a>
+						<ul class="submenu">
+							<li  ui-sref-active="active">
+								<a ui-sref="app.ProductSelection">
+								<span class="menu-text">Product Selection</span>
+								</a>
+							</li>							
+							<li ui-sref-active="active">
+								<a ui-sref="app.selectionresult">
+								<span class="menu-text">Selection Result </span>
+								</a>
+							</li>		
+							<li  ui-sref-active="active">
+											<a ui-sref="app.generateScore">
+										<span class="menu-text">Generate Score</span>
+											</a>
+										</li>
+						<li  ui-sref-active="active">
+											<a ui-sref="app.frameSizeTag">
+										<span class="menu-text">Frame Size And Tag</span>
+											</a>
+										</li>
+
+							<li  ui-sref-active="active">
+											<a ui-sref="app.itemValue">
+										<span class="menu-text">Item Value</span>
+											</a>
+										</li>											
+						</ul>
+			  </li>-->
+		   
+    
+</ul>
+</div>			
+<!-- /Sidebar Menu -->

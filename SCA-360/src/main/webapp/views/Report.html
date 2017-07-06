@@ -1,0 +1,484 @@
+﻿<!--<script>
+ function radiocheckyes()
+ {
+ var yes = document.getElementById("yes").checked;
+ var no = document.getElementById("no").checked;
+  if(yes==true)
+  {
+  document.getElementById("inventory").style.display="block";
+   document.getElementById("inventory2").style.display="block";
+  }
+  else
+  {
+  	document.getElementById("inventory").style.display="none";
+   document.getElementById("inventory2").style.display="none";
+  }
+ }
+function enableInternalOverseas()
+	{
+		
+		document.getElementById("internal").disabled=false;
+		document.getElementById("overseas").disabled=false;
+	}
+	
+ </script>
+
+ <script>
+  $(document).ready(function()
+  {
+  $("#quotepopup").click(function()
+ {
+
+ 	$("#addquote").show();
+	$("#applicationdatasheetpopup").hide();
+	
+ });
+ $("#quotationpopup").click(function()
+ {
+ 	$("#addquote").hide();
+	$("#applicationdatasheetpopup").show();
+	
+ });
+	 });
+ </script>-->
+ <style>
+ #pageHeadding{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}</style>
+<style>.imageclass{margin-left: 247%;}
+.mainheading{margin-left: 143%;}
+hr {
+   
+    width: 82%;
+	 border-bottom: 1px solid #000000;
+}
+.textClass{
+border-top: none;
+border-left: none;
+border-right: none;
+color: white;
+background-color: white;}
+
+	legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    width: 83%;
+}</style>					
+                      <section id="content" ng-controller="ReportController"  ng-init="loadAccountmandropdown();">          
+								
+                						<div class="row">
+                    						<div class="col-lg-12 col-sm-12 ">
+											 <div class="well with-header ">
+            <div class="header bordered-blue" id="pageHeadding">
+             Test Reports List
+            </div>
+			<div class="row"><div class="col-sm-3"><div class="form-group floating-label-wrapper">
+
+  								
+                                                     <label for="fromdate"></label>
+    		        					          <input type="text" class="form-control datepicker " placeholder="From Date" maxlength="10" name="fromdata" ng-model="report.fromdata" data-input-mask="{mask: '00-00-0000'}"   id="fromdate"  ng-mouseover="ShowDatePicker();"  data-ng-pattern="/(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/" ng-change="getReports(report.fromdata,report.todate)" with-floating-label/>
+					                	        </div></div><div class="col-sm-3"><div class="form-group floating-label-wrapper">
+
+  								
+                                                     <label for="todate"></label>
+    		        					          <input type="text" class="form-control datepicker " placeholder="To Date" maxlength="10" name="todate" ng-model="report.todate" data-input-mask="{mask: '00-00-0000'}"   id="todate"  ng-mouseover="ShowDatePicker();"  data-ng-pattern="/(^(((0[1-9]|1[0-9]|2[0-8])[-](0[1-9]|1[012]))|((29|30|31)[-](0[13578]|1[02]))|((29|30)[-](0[4,6,9]|11)))[-](19|[2-9][0-9])\d\d$)|(^29[-]02[-](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/" ng-change="getReports(report.fromdata,report.todate)" with-floating-label/>
+				                	        </div></div>
+											<div class="col-sm-3" style="margin-left:120px">	
+			 <p align="right">						   
+       <span class="btn btn-blue popup-btn"><a  href="#/app/testreport" >New Test Report</a></span>
+	</p></div>
+         </div>      
+                        						
+                    	</div>
+                    </div>
+            	
+  		
+		
+  		
+		
+                           
+						
+<div class="horizontal-space"></div>
+<div class="row">
+    
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header">
+            <div class="header bordered-blue">
+              
+            </div>
+			<div class="table-scrollable"  id="showtable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr>
+						<th>Actions</th>
+							<th>Customer P.O</th>
+							<th>Date & Time Start.</th>
+							<th>Model No</th>
+							<th>Assembled Date</th>
+							<th>Assembled By</th>
+							<th>TestPerformed By</th>
+							<th>Motor Brand</th>
+							<th>PrintPdf</th>
+							
+							
+							
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="report in reportData" >
+					<td style="width:1%; text-align:left;"><a  href="#/app/testreport" ng-click="LoadReportCustomer(report.customerAssembyNumber);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Edit">  <span class="glyphicon glyphicon-pencil"></span></a><a  href="#/app/testreport" ng-click="CopyReportCustomer(report.customerAssembyNumber);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Copy"><i class="glyphicon glyphicon-copy"></i></a></td>
+							<td>{{report.customerAssembyNumber}}</td>
+							<td>{{report.startDateTime}}</td>
+							<td>{{report.model}}</td>
+							<td>{{report.assembledDate}}</td>
+							<td>{{report.assembledBy}}</td>
+							<td>{{report.testpPerformedBy}}</td>
+							<td>{{report.motorBrand}}</td>
+								<td><button ng-click="printpdf(report.customerAssembyNumber);" ></button></td>
+						</tr>
+					
+						
+					</tbody>
+				</table>
+			</div>
+
+            
+        </div>
+    </div>
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+<div  id="records1"  style="display:none" >
+<br/><br/><br/>
+<div id="myDiv" style="border:thin solid #000000;height:auto;width:91%;margin-left:5%;">
+<div class="row" >
+<div class="col-sm-3" >
+<img src="images/uio.png" class="imageclass" />
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-6"  style="margin-left:143px;font-size: 22px;color: black;"><b><u>FACTORY NO LOAD TEST REPORT</u></b>
+</div>
+
+</div><br/>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;;color: black;">Customer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;;color: black;">{{testReport.customerName}}
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;;color: black;">Customer PO :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;;color: black;">{{testReport.customerAssembyNumber}}
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;;color: black;">Test Date &nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;;color: black;">{{testReport.assembledDate}} 
+</div>
+
+</div>
+<div class="row" ><div class="col-sm-12"  style="margin-left:50px;font-size: 18px;;color: black;"><hr/></div></div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;color: black;">Model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.model}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Frequency &nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.frequency}}
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;color: black;">Serial No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.slno1}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Phase &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.phaseVoltage}} 
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;color: black;">Motor S/No&nbsp;&nbsp;&nbsp;&nbsp;:
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.motorslno1}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Voltage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.voltage}} 
+</div>
+
+</div><br/><br/>
+
+
+   <legend style="margin-left:145px;font-size: 18px;;color: black;">No Load Test Readings </legend>
+   <div style="border:1px solid #000000;width: 84%;
+    margin-left: 143px;" >
+   <table >
+   <tr>
+   <td ><div style="margin-left:12px;font-size: 16px;;">
+    Measured Input Voltage(V)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredIpVoltage1" name="measuredIpVoltage1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:148px;font-size: 16px;;">
+   Measured Sound Level-CW(dBA)&nbsp;&nbsp;: <input type="text" size="4"  ng-model="testReport.measuredSoundLevelcw1" name="measuredSoundLevelcw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td >  <div style="margin-left:12px;font-size: 16px;;">
+    Measured Ampere (A)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredAmpere1" name="measuredAmpere1"
+	style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:148px;font-size: 16px;;">
+   Measured Sound Level-CCW(dBA): <input type="text" size="4"   ng-model="testReport.measuredSoundLevelccw1" name="measuredSoundLevelccw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td > <div style="margin-left:12px;font-size: 16px;;">
+ Measured Input Power(W)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredIpPower1" name="measuredIpPower1"
+ style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+ <td ><div style="margin-left:148px;font-size: 16px;;">
+   Overall Vibration (mm/s RMS)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text"  size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+	<tr>
+	<td ><div style="margin-left:12px;font-size: 16px;;">
+  Measured Temperature (Initial): <input type="text" size="4"  ng-model="testReport.measuredTemperatureInitial1" name="measuredTemperatureInitial1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+  <td ><div style="margin-left:148px;font-size: 16px;;">
+   Measured Output Speed (rpm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredOpSpeed1" name="measuredOpSpeed1"  style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+<tr>
+<td > <div style="margin-left:12px;font-size: 16px;;">
+Measured Temperature (Final)&nbsp;: <input type="text" ng-model="testReport.measuredTemperatureFinal1" name="measuredTemperatureFinal1" size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td></tr>
+</table></div><br/><br/>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;;color: black;">Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-71px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:143px;font-size: 18px;;color: black;">Remarks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-71px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div><br/>
+<div class="row" >
+
+<div class="col-sm-5"  style="margin-left:143px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div>
+<div class="row" >
+
+<div class="col-sm-4"  style="margin-left:143px;font-size: 18px;;color: black;">Certified by Production Manager
+</div>
+<div class="col-sm-6"  style="margin-left:32px;font-size: 18px;;color: black;">Conducted By 
+</div>
+<div class="col-sm-2"  style="margin-left:-381px;font-size: 18px;;color: black;"><input type="text"  ng-model="testReport.testpPerformedBy" name="testpPerformedBy" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/>
+</div>
+
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+<br/><br/><br/><br/>
+</div>
+
+
+
+<div  id="records2"   style="display:none">
+<div id="myDiv" style="border:thin solid #000000;height:auto;width:91%;margin-left:5%;">
+<div class="row" >
+<div class="col-sm-3" >
+<img src="images/uio.png" class="imageclass" />
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-6"  style="margin-left:80px;font-size: 22px;color: black;"><b><u>FACTORY NO LOAD TEST REPORT</u></b>
+</div>
+
+</div><br/>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;;color: black;">Customer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;;color: black;">{{testReport.customerName}}
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;;color: black;">Customer PO :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;;color: black;">{{testReport.customerAssembyNumber}}
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;;color: black;">Test Date &nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;;color: black;">{{testReport.assembledDate}} 
+</div>
+
+</div>
+<div class="row" ><div class="col-sm-12"  style="margin-left:-2px;font-size: 18px;;color: black;"><hr/></div></div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;color: black;">Model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.model}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Frequency &nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.frequency}}
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;color: black;">Serial No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.slno1}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Phase &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.phaseVoltage}} 
+</div>
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;color: black;">Motor S/No&nbsp;&nbsp;&nbsp;&nbsp;:
+</div>
+<div class="col-sm-5"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.motorslno1}} 
+</div>
+<div class="col-sm-2"  style="margin-left:-71px;font-size: 18px;color: black;">Voltage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+</div>
+<div class="col-sm-2"  style="margin-left:-56px;font-size: 18px;color: black;">{{testReport.voltage}} 
+</div>
+
+</div><br/><br/>
+
+
+   <legend style="margin-left:80px;font-size: 18px;;color: black;">No Load Test Readings </legend>
+   <div style="border:1px solid #000000;width: 84%;
+    margin-left: 80px;height: 382px;
+padding-top: 14px;" >
+   <table >
+   <tr>
+   <td ><div style="margin-left:12px;font-size: 17px;; width:101%;line-height: 2;">
+    Measured Gear Head Weight(Kg)&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredIpVoltage1" name="measuredIpVoltage1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+  Measured Sound Level (CW)(dBA)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4"  ng-model="testReport.measuredSoundLevelcw1" name="measuredSoundLevelcw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td >  <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+  Measured Grease Weight (Kg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredAmpere1" name="measuredAmpere1"
+	style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:100px;font-size: 16px;width:100%;line-height: 2;">
+    Measured Sound Level (CCW)(dBA)&nbsp;&nbsp;&nbsp;&nbsp;:  <input type="text" size="4"   ng-model="testReport.measuredSoundLevelccw1" name="measuredSoundLevelccw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td > <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+Measured Final Weight (Kg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <input type="text" size="4" ng-model="testReport.measuredIpPower1" name="measuredIpPower1"
+ style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+ <td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+   Measure Input Shaft(mm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text"  size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+	<tr>
+	<td ><div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+ Air Pressure Test (0.03mPa)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <input type="text" size="4"  ng-model="testReport.measuredTemperatureInitial1" name="measuredTemperatureInitial1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+  <td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+ Measure Output Shaft(mm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredOpSpeed1" name="measuredOpSpeed1"  style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+<tr>
+<td > <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+Measured Input Voltage (V)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" ng-model="testReport.measuredTemperatureFinal1" name="measuredTemperatureFinal1" size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+<td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+  Confirm BBB Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredOpSpeed1" name="measuredOpSpeed1"  style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td></tr>
+<tr>
+   <td ><div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+     Measured Ampere (A)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredIpVoltage1" name="measuredIpVoltage1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+   Measured Thermistor Cable Resistance:<input type="text" size="4"  ng-model="testReport.measuredSoundLevelcw1" name="measuredSoundLevelcw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td >  <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+    Measured Input Power (W)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredAmpere1" name="measuredAmpere1"
+	style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+	<td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+   Measured Space Heater Resistance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" size="4"   ng-model="testReport.measuredSoundLevelccw1" name="measuredSoundLevelccw1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+  <tr>
+  <td > <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+ Measured Power Factor (P.F)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredIpPower1" name="measuredIpPower1"
+ style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+ <td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+  Overall Vibration
+(mm/s RMS)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text"  size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+	<tr>
+	<td ><div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+  Measured Temperature (Intial)( oC): <input type="text" size="4"  ng-model="testReport.measuredTemperatureInitial1" name="measuredTemperatureInitial1" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+  <td ><div style="margin-left:100px;font-size: 16px;line-height: 2;">
+   Concentricity
+Check <=0.2mm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" size="4" ng-model="testReport.measuredOpSpeed1" name="measuredOpSpeed1"  style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td>
+   </tr>
+<tr>
+<td > <div style="margin-left:12px;font-size: 17px;width:101%;line-height: 2;">
+  Measured Temperature (Final)( oC): <input type="text" ng-model="testReport.measuredTemperatureFinal1" name="measuredTemperatureFinal1" size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td><td > <div style="margin-left:100px;font-size: 16px;line-height: 2;">
+Measured Output Speed (rpm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" ng-model="testReport.measuredTemperatureFinal1" name="measuredTemperatureFinal1" size="4" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/><br></div></td></tr>
+</table></div><br/><br/>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;;color: black;">Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-71px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div>
+<div class="row" >
+<div class="col-sm-2"  style="margin-left:80px;font-size: 18px;;color: black;">Remarks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+</div>
+<div class="col-sm-5"  style="margin-left:-71px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div><br/>
+<div class="row" >
+
+<div class="col-sm-5"  style="margin-left:80px;font-size: 18px;;color: black;"><input type="text" style="border-top:none;border-left: none;border-right: none;color: white;background-color: white;"/>
+</div>
+
+
+</div>
+<div class="row" >
+
+<div class="col-sm-4"  style="margin-left:80px;font-size: 18px;;color: black;">Certified by Production Manager
+</div>
+<div class="col-sm-6"  style="margin-left:32px;font-size: 18px;;color: black;">Conducted By 
+</div>
+<div class="col-sm-2"  style="margin-left:-381px;font-size: 18px;;color: black;"><input type="text"  ng-model="testReport.testpPerformedBy" name="testpPerformedBy" style="border-top:none;border-left: none;border-right: none;color: black;background-color: white;"/>
+</div>
+
+</div>
+<br/><br/><br/>
+</div>
+</div>
+<div class="row"  style="display:none">
+					<div class="col-sm-12" align="center">
+						<button  class="btn btn-blue"  ng-click="printInternalPdf();">Generate Pdf</button>
+						<button  class="btn btn-blue"  ng-click="cancelPreview();">Cancel</button>
+						
+					</div>
+					<div class="col-sm-6"></div>	
+				</div>
+</section>

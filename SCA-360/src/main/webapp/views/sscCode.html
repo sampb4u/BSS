@@ -1,0 +1,141 @@
+<style>
+#pageheading
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+.container
+		{
+			margin-left:30px;
+			width:95%;
+		}
+
+.asdok 
+		{
+			  position: relative;
+			  padding-top: 25px;
+			  background-color:#ffffff;
+			  color:#333333;
+		}
+		.asdok.positioned 
+		{
+			  position: absolute;
+			  width:95%;
+			  box-shadow: 0 0 15px #333;
+		}
+		.container1 
+		{
+			  overflow-y: auto;
+			 /* height: 300px;*/
+		}
+		.table 
+		{
+			 border-spacing: 0; border-width: 0; padding: 0; border-width: 0;
+		}
+		.table td + .table td 
+		{
+			  border-left:1px solid #eee;
+			  text-align:left;
+		}
+		.table td, .table th 
+		{
+			  border-bottom:1px solid #eee;
+			  color: #000;
+			  width:0%;
+		}
+		.table th span
+		{
+			  position: absolute;
+			  background: transparent;
+			  color: #333333;
+			  top: 0;
+		}
+		.table th:first-child div
+		{
+			  border: none;
+		}
+
+</style>
+					
+	   <div   data-ng-controller="SScCodeController" ng-init="loadAllSSCcode();"> 					
+
+<div class="row">
+    
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue" id="pageheading">
+  SSC Code Master
+            </div>
+			
+			 <form name="sscCodeForm" novalidate ng-submit="sscCodeMasterFormSubmit(sscCodeForm);" enctype="multipart/form-data">
+                  
+                   <div class="row">
+                         <div class="col-sm-12">
+                             <div class="table-responsive">
+                                <section class="asdok">
+                                     <div class="container1" ng-init="currentPage = 1; itemsPerPage = 10;" >
+                                        <table class="table table-hover table-striped table-bordered">
+                                        <thead class="bordered-blue">
+                                            <tr>
+                                                <th style="width: 5%;">Item No.</th>
+                                                <th style="width: 20%;">SSC Code</th>
+                                                <th style="width: 55%;">Description</th>
+												
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr ng-repeat="sscCodeArr in filteredItems = items">
+                                                 <td style="width: 5%; padding: 20px 5px 0px 5px; text-align: center;">{{sscCodeArr.id}}</td>
+                                                 <td style="width: 20%; padding: 20px 5px 0px 5px;"><div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : sscCodeForm.ssccode{{$index}}.$invalid && (sscCodeForm.ssccode{{$index}}.$dirty || submitted)}">
+                                                    <label for="ssccode"></label>
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="ssccode" placeholder="sscCode Code" name="ssccode{{$index}}" ng-model="sscCodeArr.ssccode" ng-required="true" with-floating-label readonly="readonly">
+                                                        <!--<i class="glyphicon glyphicon-user circular"></i>-->
+                                                    </span>
+                                                    <p ng-show="sscCodeForm.ssccode{{$index}}.$error.required && (sscCodeForm.ssccode{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div></td>	
+                        <td style="width: 55%; padding: 20px 5px 0px 5px;"><div class="form-group floating-label-wrapper" ng-class="{ 'has-error' : sscCodeForm.desc1{{$index}}.$invalid && (sscCodeForm.desc1{{$index}}.$dirty || submitted)}">
+                                                    <label for="desc1"></label>
+                                                    <span class="input-icon icon-right">
+                                                        <input type="text" class="form-control" id="desc1" placeholder="Description" name="desc1{{$index}}" ng-model="sscCodeArr.desc1" ng-required="true" with-floating-label>
+                                                        <!--<i class="glyphicon glyphicon-user circular"></i>-->
+                                                    </span>
+                                                    <p ng-show="sscCodeForm.desc1{{$index}}.$error.required && (sscCodeForm.desc1{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div></td>
+                      						 </tr>
+                                        </tbody>
+                                  </table>
+                                     </div>
+                                 </section>
+                                 <br />
+                                 <br />
+                                 <!--	<uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ></uib-pagination>-->
+				                  <pagination total-items="totalItems" ng-model="currentPage" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+                             </div>
+                             <br />
+                			<h>Page: {{currentPage}} / {{numPages}}</h>
+		
+                         </div>
+                  </div>
+				   
+			        <br/>
+					<div class="row">
+					<div class="col-sm-12" align="center">
+						<button type="submit" class="btn btn-blue"><i class="glyphicon glyphicon-save"></i>Save</button>
+					<!--	<button type="reset" class="btn btn-blue" ng-click="resetsscCode(sscCodeForm)">Reset</button>-->
+						
+					</div>
+						
+				</div>
+               </form>
+									 
+
+          
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,1135 @@
+<!--<style>
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>-->
+<style type="text/css">
+.switchButton
+{
+	border:none;
+	padding:3px 18px 3px 18px;	
+	background-color:#015AAC;
+	color:#FFFFFF;
+	
+}
+.switchButton2
+{
+	border:none;
+	padding:3px 18px 3px 18px;		
+}
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #d3d3d3 ;color:#000000;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF; color:#000000;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#000000;}
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+.icn
+{
+	width:45px;
+	
+}
+.flg
+{
+	font-size: 39px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.allcon
+{
+	font-size: 35px;
+	color: rgb(102, 153, 255);
+	position: relative;
+	top: 14px;
+}
+.hb-country,
+.hb-country:before,
+.hb-country:after {
+	background: #3B5998;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-country:hover,
+.hb-country:hover:before,
+.hb-country:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.hb-refresh,
+.hb-refresh:before,
+.hb-refresh:after {
+	background: #fff;
+	border-color: #3B5998;
+	color: #ffffff;
+}
+.hb-refresh:hover,
+.hb-refresh:hover:before,
+.hb-refresh:hover:after {
+	background: transparent;
+	border-color: #3B5998;
+	color: #3B5998;
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:1905%;
+	right:20%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+	background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f9f9f9;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+<script>
+		//===============Grid Start============//
+		//alert(JSON.stringify(chart));
+	var renderTable = function(chart, containerId)
+		{
+		
+            // After the chart is rendered we export the data as CSV, parse it and then create a markup
+            // equivalent to a table by parsing the exported CSV.
+            var data = chart.getDataAsCSV(),
+                rows,
+                row,
+				rowSum
+                i,
+                length,                
+                tableHeader = '';
+				tableData = '';
+				rowHeading = "";
+				yearHeadigs = "";
+				tableBody3 = '';
+				
+            // Get all the rows by splitting data with '\n' seperator
+			//alert(JSON.stringify(data));
+            rows = data.replace(/"/g, '').split('\n');
+			//alert(rows);
+            // Retrieve the data from the rows and compute body string from the data rows
+			//var val1 = 0;
+			
+			rowHeading = rows[0].split(',');
+			var arrayObj = [];
+			var arrayObj1 = [];
+			var sumofTotalBooking = 0;
+			var convertBooking = [];
+			var finalTableData = [];
+			var finalTableData2 = [];
+            for (i = 1, length = rows.length; i < length; i++) 
+			{
+				//alert(rows[i]);
+                row = rows[i].split(',');
+			  //alert(row);
+				var sumofRow = 0;	
+				var sumofBooking = 0;
+				var tableBody1 = '';
+				var sumPercent = "";
+				var tableData = [];
+				var tableData2 = [];
+				for(var j=0;j<row.length;j++)
+				{
+				     //alert(row[j]);
+					if(j>=1)
+					{
+					    if(row[j].trim().length==0) { var value = 0; } else { var value=row[j];}
+						sumofBooking += parseInt(value);
+						if(row[j]==null) { var productValue = 0; } else { var productValue = row[j]; }
+						if(convertMillions(productValue)==null) { var convertproductValue="0K"; } else { var convertproductValue=convertMillions(productValue); }						 						//sumPercent +=parseInt(convertproductValue);
+						tableData.push("<td>"+convertproductValue+"</td>");
+						tableData2.push(productValue);
+					}				   					
+					tableBody1 += "<tr id='tableRow"+ j + "'><th>"+ rowHeading[j] +"</th></tr>";	
+										
+					
+				}
+			 // alert(convertproductValue);
+				yearHeadigs += "<td>"+ row[0] +"</td>";
+				if(convertMillions(sumofBooking)==null){var totalSum="0K";}else{totalSum=convertMillions(sumofBooking);}
+				convertBooking.push("<th>"+ totalSum +"</th>");
+				//arrayObj1.push(sumPercent);
+				var sumPercent = 0;			
+			
+				finalTableData.push(tableData);
+				finalTableData2.push(tableData2);
+				sumofTotalBooking +=parseInt(sumofBooking);
+				
+            }   			
+			tableData =tableBody1;
+			//alert(tableData);
+			document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody>'+ tableData +'<tr id="total"><th>Total</th></tr></tbody></table>';			
+			$('#tableRow0').append(yearHeadigs);
+			$('#tableRow0').append("<td>%</td>");
+			$('#tableRow0').css("font-weight","bold");
+			
+			
+			
+			for(var k=0;k<finalTableData.length;k++)
+			{
+			  	var rowVal =[];
+				for(var l=0;l<finalTableData[k].length;l++)
+				{
+				    //alert(finalTableData[k][k]);
+					var count = Number(l)+1;
+					$('#tableRow'+ count).append(finalTableData[k][l]);
+					var TotalValue = 0;
+					for(var m=0;m<finalTableData.length;m++)
+					{
+						
+						TotalValue +=parseInt(finalTableData2[m][l]);
+						
+					}
+					rowVal.push(TotalValue);
+					
+				}
+				var count1=Number(k)+1;
+				$('#total').append(convertBooking[k]);
+				//alert(TotalValue);
+				//$('#tableRow'+ count1).append("<td>"+ TotalValue +"</td>");
+			}
+			
+			var totalPercentage = 0;
+			for(var t=0;t<rowVal.length;t++)
+			{
+			   //alert(sumofTotalBooking);
+				var next = Number(t)+1;
+				
+				if(rowVal[t]=="NaN"){var rowVal2="0";}else{rowVal2=rowVal[t];}
+				
+				var data1 = convertMillions(rowVal2).replace ( /[^\+|\-0-9.]/ig, '' );//replace(/\+|\-/ig, '-')
+				//alert(data1);
+				var data2 = convertMillions(sumofTotalBooking).replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				if(calculatePercentage(data1,data2)=="NaN"){var rowVal3="0";}else{rowVal3=calculatePercentage(data1,data2);}
+				
+				var percentcol = "<td>"+ rowVal3  +" %</td>"
+				$('#tableRow'+ next).append(percentcol);				
+				totalPercentage +=parseFloat(rowVal3);
+				//alert(percentcol); 
+			}
+			$('#total').append("<td></td>");			
+			//$('#total').append("<td><b>"+ totalPercentage.toFixed(0) +" %</b></td>");
+			
+        };
+		function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }
+		function calculatePercentage(rowTotalVal,totalValue)
+		{
+		   //alert(rowTotalVal);
+			var percent =  (rowTotalVal/totalValue)*100;
+			 //alert(percent);
+			return percent.toFixed(2);
+			//sumoftotalPercent = sumoftotalPercent+percent;
+			//alert(sumoftotalPercent);
+			
+		}
+	//==============Grid End===============//	
+		$('#btn1').addClass("switchButton");
+		$('#btn2').addClass("switchButton");
+		
+        var ifCond = "0";
+	    buttonActive(ifCond);
+		$('#SCA').addClass("dropBackColor");
+		
+		var group = "sca";
+		var status = "all";
+		var countrycode = sessionStorage.getItem('countrycode');
+		var yAxisName = "Profit (%)";
+		var percent = "1";
+		var cType = "local";
+		sessionStorage.setItem("cType",cType);
+		sessionStorage.setItem("status","all");
+		sessionStorage.setItem("yAxisName",yAxisName);
+		sessionStorage.setItem("#status","1");
+		var ajaxLink = "profitProducts.do";
+		var drillAjaxLink = "profitProductsDrilldown.do";
+		sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+		sessionStorage.setItem('drilldownStatus',"");
+	    sessionStorage.setItem('drilldownStatus1',"");
+		var array = [{"TH":"THB (\u0E3F)","IN":"INR (\u20B9)","MY":"MYR (\u0024)","ID":"IDR (\u0052\u0070)","SG":"SGD (\u0024)","PH":"PHP (\u20b1)","AU":"AUD (\u0024)","VN":"VND (\u20ab)","OT":"USD (\u0024)"}];
+	var countryNameArray = [{"TH":"Thailand","IN":"India","MY":"Malaysia","ID":"Indonesia","SG":"Singapore","PH":"Philippines","AU":"Australia","VN":"Vietnam","OT":"Other"}];
+	
+	loadChartforAll(ajaxLink,status,yAxisName,cType); 
+	//alert(sessionStorage.getItem("#status"));
+	//document.getElementById("status").Value = sessionStorage.getItem("#status");
+	
+	$(document).ready(function()
+	{
+		$('.renderchart').click(function()
+		{
+			var status = $(this).attr('id');
+			buttonActive("1");
+			jQuery( ".hb .countFlag").parent().addClass("hb-country").removeClass("hb-refresh");
+			//$("#btn1").hide();
+			//$("#btn2").hide();
+			//$('#goback').hide();
+			
+			sessionStorage.setItem("selectedCountry",$(this).attr('id'));
+			if(status=="all")
+			{
+				yAxisName = "Profit (%)";
+				var ajaxLink = "profitProducts.do?id=dollar";
+				var drillAjaxLink = "profitProductsDrilldown.do";
+				sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+				sessionStorage.setItem("status",status);
+				sessionStorage.setItem("cType",cType);
+				//loadChartforAll(ajaxLink);
+				var getId = status.toUpperCase();
+				sessionStorage.setItem("#status","1");
+				jQuery( ".hb #"+getId).parent().addClass("hb-refresh");	
+				sessionStorage.setItem("drilldownStatus",'false');
+			    sessionStorage.setItem("drilldownStatus1",'false');
+				$('#btn1').addClass("switchButton");
+				$('#btn2').removeClass("switchButton");
+				$('#btn2').addClass("switchButton2");
+				$(".goback").hide(); 	
+				
+			}
+			else
+			{
+				yAxisName = "Profit (%)";//"profitProductsforcountry.do"
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id=local";
+				var drillAjaxLink = "profitProductsDrilldown.do";
+				sessionStorage.setItem("drillAjaxLink",drillAjaxLink);
+				sessionStorage.setItem("status",status);
+				sessionStorage.setItem("cType",cType);
+				sessionStorage.setItem("#status","1");
+				sessionStorage.setItem("status",status);
+				//loadChartforAll(ajaxLink);	
+				var getId = status.toLowerCase();
+				$('#curDropdown').show();
+				$('#scaSpan').text(array[0][status]);
+				//alert(JSON.stringify(array[0][status]));
+				jQuery( ".hb #"+getId).parent().addClass("hb-refresh");
+				sessionStorage.setItem("drilldownStatus",'false');
+			    sessionStorage.setItem("drilldownStatus1",'false');
+				//sessionStorage.setItem("currencyType",array[0][status]);
+				$('#btn1').addClass("switchButton");
+				$('#btn2').removeClass("switchButton");
+				$('#btn2').addClass("switchButton2");
+				$(".goback").hide(); 
+			}
+			$(this).addClass("active");		
+			loadChartforAll(ajaxLink,status,yAxisName,cType);	
+				
+		});
+	});
+	
+	$(document).ready(function(){
+		
+		 $("#SCA").click(function(){
+			 sessionStorage.setItem("cType","local");
+			 	 if(sessionStorage.getItem("#status")=="1")
+				 {
+					 //alert(sessionStorage.getItem("drilldownStatus"));
+					if(sessionStorage.getItem("drilldownStatus")=='false')
+					{
+						var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+						loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));
+						//alert(ajaxLink);
+						$(".goback").hide(); 
+					}
+					else if(sessionStorage.getItem("drilldownStatus")=='true')
+					{					
+						drillDown(sessionStorage.getItem('drillLabel'),sessionStorage.getItem('drillCat'),'local');
+						$(".goback").show(); 
+					}
+				 }
+				 else
+				 {
+					if(sessionStorage.getItem("drilldownStatus1")=='false')
+					{
+						var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+						loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));
+						$(".goback").hide(); 
+					}
+					else if(sessionStorage.getItem("drilldownStatus1")=='true')
+					{					
+						drillDown(sessionStorage.getItem('drillLabel'),sessionStorage.getItem('drillCat'),'local');
+						$(".goback").show(); 
+					} 
+				 }
+				// alert(sessionStorage.getItem("drilldownStatus"));
+			 	// var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=local";
+				 // alert(ajaxLink);
+				//loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));
+				$('#SCA').addClass("dropBackColor");
+		        $('#USD').removeClass("dropBackColor");	
+			 });
+		 $("#USD").click(function(){
+			 sessionStorage.setItem("cType","dollar");
+			 if(sessionStorage.getItem("#status")=="1")
+				 {
+					 //alert(sessionStorage.getItem("drilldownStatus"));
+					if(sessionStorage.getItem("drilldownStatus")=='false')
+					{
+						var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+						loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));			
+						$(".goback").hide(); 
+					}		
+					else if(sessionStorage.getItem("drilldownStatus")=='true')
+					{
+						drillDown(sessionStorage.getItem('drillLabel'),sessionStorage.getItem('drillCat'),'dollar');
+						$(".goback").show(); 
+					}
+				 }
+				 else
+				 {
+					if(sessionStorage.getItem("drilldownStatus1")=='false')
+					{
+						var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+sessionStorage.getItem("selectedCountry")+"&id=dollar";
+						loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));			
+						$(".goback").hide(); 
+					}		
+					else if(sessionStorage.getItem("drilldownStatus1")=='true')
+					{
+						drillDown(sessionStorage.getItem('drillLabel'),sessionStorage.getItem('drillCat'),'dollar');
+						$(".goback").show(); 
+					} 
+				 }
+               // sessionStorage.getItem("drilldownStatus1")
+			 	 $('#SCA').removeClass("dropBackColor");
+		         $('#USD').addClass("dropBackColor");
+				 // alert(ajaxLink);
+				//loadChartforAll(ajaxLink,sessionStorage.getItem("selectedCountry"),yAxisName,sessionStorage.getItem("cType"));
+			 });
+		
+		});
+	function buttonActive(ifCond)
+		{
+				jQuery( ".hb .countFlag").parent().addClass("hb-country");
+				jQuery( ".hb #ALL").parent().addClass("hb-refresh");
+				//jQuery(".hb-xs").parent().addClass("hb-xs-margin");
+		}
+  function loadChartforAll(ajaxLink,status,yAxisName,cType)
+  {
+	  		//$('#status').val('1');
+			//sessionStorage.getItem("#status");
+			//alert(sessionStorage.getItem("cType"));
+	 /*if(sessionStorage.getItem("#status")=="1")
+	 {
+		
+	        $('#btn1').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			 //$('#status').val('1');
+		  if(sessionStorage.getItem("status")=="all")
+		  {
+			  ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+			  yAxisName = "Profit (%)";
+			  var percent = "1";
+			  var captionName = "SCA-Profit Products";
+		  }
+		  else if(cType!="local")
+		  {
+			  ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+			  yAxisName = "Profit (%)";
+			   var percent = "1";
+			   var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" -Profit Products";
+			  //alert(ajaxLink);
+		  }
+		  else
+		  {
+			  ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+	          yAxisName = "Profit (%)";
+	          var percent = "1";
+			  var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" -Profit Products";
+		  }
+	 }*/
+	 //else
+	// {
+		 //alert(sessionStorage.getItem("#status"));
+			$('#btn2').addClass("switchButton");
+			$('#btn1').removeClass("switchButton");
+			$('#btn1').addClass("switchButton2");
+			 //$('#status').val('1');
+		  if(sessionStorage.getItem("status")=="all")
+		  {
+			  ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+			  yAxisName = "Profit (M)";
+			  var percent = "0";
+			  var captionName = "SCA-Profit Products";
+		  }
+		  else if(sessionStorage.getItem("cType")!="local")
+		  {
+			  ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+sessionStorage.getItem("cType");
+			  yAxisName = "Profit (M)";
+			   var percent = "0";
+			   var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" -Profit Products";
+			   
+		  }
+		  else
+		  {
+			  ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+sessionStorage.getItem("cType");
+	        yAxisName = "Profit (M)";
+	          var percent = "0";
+			  var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" -Profit Products";
+		  }
+ 
+	// }
+	  $.getJSON(ajaxLink, function(json) {
+		  var chartData = {
+						"chart": {
+							"caption": captionName,
+							//"subCaption": "Harry's SuperMart",
+							"xAxisname": "Country",
+							"yAxisName": yAxisName,
+							"decimals":'1',
+							"xAxisNameFont": "Helvetica",
+							 "xAxisNameFontSize": "14",
+							 "xAxisNameFontBold":"1",
+							"yAxisNameFontBold":"1",
+							"yAxisNameFontSize": "14",
+							"yAxisNameFont": "Helvetica",
+							"yFormatNumberScale":"1",
+							 "numberScaleValue": "1000,1000,1000",
+       						 "numberScaleUnit": "K,M,B",
+							"paletteColors": "#0075c2,#1aaf5d",
+							"exportenabled": "1",
+							"exportatclient": "0",
+							"exporthandler": "http://export.api3.fusioncharts.com",
+							"html5exporthandler": "http://export.api3.fusioncharts.com",
+							"bgColor": "#ffffff",
+							"baseFont":"Helvetica",	
+							"stack100Percent":percent,
+							//"stack100Percent":"0",	
+							"baseFontSize":"14",
+							"captionFontSize":"18",
+							"showPercentValues":"0",
+							"showsum": "0",
+							"decimals":"1",
+							"showvalues": "0",
+							 "valueFontColor": "#000000",
+							 "baseFontColor":"#000000",
+							"borderAlpha": "20",
+							"useroundedges": "1",
+							"valuePadding":"50",
+							"showCanvasBorder": "0",
+							"usePlotGradientColor": "0",
+							"plotBorderAlpha": "10",
+							"placeValuesInside": "0",
+							"formatnumberscale": "1",
+							"legendBgColor": "#ffffff",
+							"legendBorderColor":"#000000",
+							"legendBorder":"1",
+							"legendBorderAlpha": "1",
+							"legendShadow": "1",
+							"legendPosition":"right",
+							"xAxisLineColor": "#999999",
+							"divlineColor": "#999999",
+							//"subcaptionFontBold": "0",
+							//"subcaptionFontSize": "14",
+							//"rotatelabels": "1",		
+							"rotatevalues": "1",
+						},
+						"categories":json["countries"],
+						"dataset":json["data"]						
+					};
+		FusionCharts.ready(function () {
+           
+			 var revenueChart = new FusionCharts({
+			
+			type: 'stackedcolumn2d',
+			renderAt: 'container',
+			width: '100%',
+			height: '500',
+				dataFormat: 'json',
+				dataSource:	chartData,
+				events: {
+				           dataPlotClick: function (event,dataObj) 
+					 	  {	
+						  		//alert(JSON.stringify(dataObj));
+						  		sessionStorage.setItem("count","0");
+								//sessionStorage.getItem("#status");
+								sessionStorage.setItem("firstCategory",JSON.stringify(json['countries']));
+								sessionStorage.setItem("firstData",JSON.stringify(json['data']));
+								sessionStorage.setItem("drillLabel",dataObj.categoryLabel);
+								sessionStorage.setItem("drillCat",dataObj.datasetName);
+								sessionStorage.setItem("drilldownStatus",'true');
+								var cType = sessionStorage.getItem("cType");
+								drillDown(dataObj.categoryLabel,dataObj.datasetName,cType);
+				          }
+				        }
+			 });
+			revenueChart.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+			
+            renderTable(revenueChart, 'table-container');
+        });
+		revenueChart.render();
+		  });
+	  });
+  }
+  
+  function drillDown(categoryLabel,datasetName,cType)
+  {
+	  //alert(JSON.stringify(datasetName));
+	/*if(sessionStorage.getItem("#status")=="1")
+	 {
+		 $('#btn1').addClass("switchButton");
+		 $('#btn2').removeClass("switchButton");
+		 $('#btn2').addClass("switchButton2");
+		 sessionStorage.setItem('drilldownStatus',"true");  
+	//$('#goBack'+ sessionStorage.getItem("count")).show();
+	//alert(sessionStorage.getItem("cType"));
+	if(sessionStorage.getItem("status")=="all")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id=dollar";
+				var yAxisName = "Profit (%)";
+		        var percent = "1";
+				var captionName = "SCA-"+datasetName+"- Products";
+				//alert(DrillAjaxLink);
+			}
+			else if(cType!="local")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id="+cType;
+				var yAxisName = "Profit (%)";
+		        var percent = "1";
+				var captionName = countryNameArray[0][sessionStorage.getItem("status")]+datasetName+"- Products";
+				
+			}
+			else
+			{
+			  var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id="+cType;
+				var yAxisName = "Profit (%)";
+		        var percent = "1";
+				var captionName = countryNameArray[0][sessionStorage.getItem("status")]+datasetName+"- Products";
+			}
+	 }
+	 else
+	 {*/
+		// $('#goBack'+ sessionStorage.getItem("count")).show();
+		$('#btn2').addClass("switchButton");
+		$('#btn1').removeClass("switchButton");
+		$('#btn1').addClass("switchButton2");
+		sessionStorage.setItem('drilldownStatus1',"true");
+		 if(sessionStorage.getItem("status")=="all")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id=dollar";
+				var yAxisName = "Profit (M)";
+		        var percent = "0";
+				var captionName = "SCA-"+datasetName+"- Products";
+				
+			}
+			else if(cType!="local")
+			{
+				var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id="+cType;
+				var yAxisName = "Profit (M)";
+		        var percent = "0";
+				var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" - "+datasetName+"- Products";
+				
+			}
+			else
+			{
+			  var DrillAjaxLink = sessionStorage.getItem("drillAjaxLink")+"?categoryLabel="+categoryLabel+"&catageory="+datasetName+"&id="+cType;
+				var yAxisName = "Profit (M)";
+		        var percent = "0";
+				var captionName = countryNameArray[0][sessionStorage.getItem("status")]+" - "+datasetName+"- Products";
+			}
+	// }
+		$.getJSON(DrillAjaxLink,function(json) 
+	    {
+			//alert(DrillAjaxLink);
+			var data = {
+								    "chart": {
+											"caption": captionName,
+											//"subCaption": "Harry's SuperMart",
+											/* "xAxisname": "Country", */
+											"yAxisName": yAxisName,
+											"decimals":'1',
+											"xAxisNameFont": "Helvetica",
+											 "xAxisNameFontSize": "14",
+											 "xAxisNameFontBold":"1",
+											"yAxisNameFontBold":"1",
+											"yAxisNameFontSize": "14",
+											"yAxisNameFont": "Helvetica",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+											 "numberScaleUnit": "K,M,B",
+											"paletteColors": "#0075c2,#1aaf5d",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+											"bgColor": "#ffffff",
+											"baseFont":"Helvetica",	
+											"stack100Percent": percent,	
+											"baseFontSize":"14",
+											"captionFontSize":"18",
+											//"showsum": "1",
+											"showPercentValues":"0",
+											//"showPercentInToolTip":"1",
+											"decimals":"1",
+											 "showvalues": "0",
+											 "valueFontColor": "#000000",
+											 "baseFontColor":"#000000",
+											"borderAlpha": "20",
+											"useroundedges": "1",
+											"valuePadding":"50",
+											"showCanvasBorder": "0",
+											"usePlotGradientColor": "0",
+											"plotBorderAlpha": "10",
+											//"placeValuesInside": "1",
+											"formatnumberscale": "1",
+											"showLegend": "1",
+											"legendBgColor": "#ffffff",
+											"legendBorderColor":"#000000",
+											"legendBorder":"1",
+											"legendBorderAlpha": "1",
+											"legendShadow": "1",
+											"legendPosition":"right",
+											"xAxisLineColor": "#999999",
+											"divlineColor": "#999999"
+										},
+										  "categories": [
+														{
+															"category":json["xaxis"]
+														}
+													],
+													"dataset": [
+														{
+															//"seriesname": "Q1",
+															"data":json["data"]
+														},
+														
+													]
+										};
+				FusionCharts.ready(function () {
+					var DrillDown_revenueChart = new FusionCharts({
+				    type: 'stackedcolumn2d',
+				    renderAt: 'container',
+				    width: '100%',
+				    height: '500',
+				    dataFormat: 'json',
+				    dataSource: data,
+					});
+			DrillDown_revenueChart.addEventListener('renderComplete', function () {
+            // In the renderComplete event create the table, even when the data is updated by calling setChartData method, this event will be fired and the updated data will reflect in the table too, since renderTable will be called again.
+            // Creating the table on 'render' event will not update the table everytime, it will only update when render() method is called.
+			
+            renderTable(DrillDown_revenueChart, 'table-container');
+        });
+					DrillDown_revenueChart.render();
+				});
+		})
+  	 $("#goBack").show(); 
+  }
+  $(document).ready(function(){
+	 
+	 $(".goback").click(function(){
+		 var curId = $(this).attr('id');
+		 var curIdSplit= curId.split("goBack");
+		// alert(curId);
+		$('#goBack'+ curIdSplit[1]).hide();				
+		 var sessionObjName = "firstData";
+		 var sessionCatName = "firstCategory";
+		 var json = new Object();
+		 json.data = $.parseJSON(sessionStorage.getItem(sessionObjName));
+		 json.category = $.parseJSON(sessionStorage.getItem(sessionCatName));
+		    $('#btn1').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			//sessionStorage.setItem("cType")=="local";
+			var status = sessionStorage.getItem("status");
+			var cType = sessionStorage.getItem("cType");
+			var categoryLabel =	sessionStorage.getItem("drillLabel");
+			var datasetName = sessionStorage.getItem("drillCat");
+			//sessionStorage.setItem('drilldownStatus',"false");
+			//sessionStorage.setItem('drilldownStatus1',"false");
+		/*if(sessionStorage.getItem("#status")=="1")
+		{
+			sessionStorage.setItem('drilldownStatus',"false");
+		 if(status=="all")
+			{
+				var ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+				var yAxisName = "Profit (%)";
+		        var percent = "1";
+				//alert(ajaxLink);
+			}
+			else if(cType!="local")
+			{
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (%)";
+		         var percent = "1";
+			}
+			else
+			{
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (%)";
+		         var percent = "1";
+			}
+			
+			if(sessionStorage.getItem('drilldownStatus')=="true")
+			{
+				//$(".goback").show();
+				drillDown(categoryLabel,datasetName,cType);
+			}
+			else
+			{
+				//$(".goback").hide(); 
+				loadChartforAll(ajaxLink,status,yAxisName,cType);
+			}
+			
+		}
+		else
+		{*/
+		
+			sessionStorage.setItem('drilldownStatus1',"false");
+			 if(status=="all")
+			{
+				var ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+				var yAxisName = "Profit (M)";
+		        var percent = "0";
+			}
+			else if(cType!="local")
+			{
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (M)";
+		         var percent = "0";
+			}
+			else
+			{
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (M)";
+		         var percent = "0";
+			}
+			if(sessionStorage.getItem('drilldownStatus1')=="true")
+			{
+				$(".goback").show();
+				drillDown(categoryLabel,datasetName,cType);
+			}
+			else
+			{
+				$(".goback").hide(); 
+				loadChartforAll(ajaxLink,status,yAxisName,cType);
+			}
+			
+		//}
+			//loadChartforAll(ajaxLink,status,yAxisName,cType);
+		 
+		 });
+	  
+  });
+  
+ // $(document).ready(function(){
+		$("#btn1").click(function(){
+			//alert(45);
+			//$('#status').val('1');
+			$("#goBack").hide(); 
+			sessionStorage.setItem("#status","1");
+			$('#btn1').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn2').addClass("switchButton2");
+			var categoryLabel =	sessionStorage.getItem("drillLabel");
+			var datasetName = sessionStorage.getItem("drillCat");
+			var cType = sessionStorage.getItem("cType");
+			var status = sessionStorage.getItem("status");
+			//alert(status);
+		    sessionStorage.setItem('drilldownStatus1',"false");
+		
+		 if(status=="all")
+			{
+				var ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+				var yAxisName = "Profit (%)";
+		        var percent = "1";
+				//alert(ajaxLink);
+			}
+			else if(cType!="local")
+			{
+				//alert(sessionStorage.getItem("selectedCountry"));
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (%)";
+		         var percent = "1";
+				 // alert(ajaxLink);
+			}
+			else
+			{
+				//alert(sessionStorage.getItem("status"));
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (%)";
+		         var percent = "1";
+				// alert(ajaxLink);
+			}
+			
+			if(sessionStorage.getItem('drilldownStatus')=="true")
+			{
+				$(".goback").show();
+				drillDown(categoryLabel,datasetName,cType);
+				//alert(sessionStorage.getItem('drilldownStatus'));
+			}
+			else
+			{
+				$(".goback").hide(); 
+				loadChartforAll(ajaxLink,status,yAxisName,cType);
+			}
+		});
+		
+	  
+	//  });
+	  
+	  // $(document).ready(function(){
+		$("#btn2").click(function(){
+			//$('#status').val('2');
+			$("#goBack").hide(); 
+			$('#btn2').addClass("switchButton");
+			$('#btn2').removeClass("switchButton");
+			$('#btn1').addClass("switchButton2");
+			sessionStorage.setItem("#status","2");
+		var categoryLabel =	sessionStorage.getItem("drillLabel");
+		var datasetName = sessionStorage.getItem("drillCat");
+			//alert(sessionStorage.getItem("#status"));
+			//alert(sessionStorage.getItem("cType"));
+			var cType = sessionStorage.getItem("cType");
+			var status = sessionStorage.getItem("status");
+			sessionStorage.setItem('drilldownStatus',"false");
+		 if(status=="all")
+			{
+				var ajaxLink = "profitProducts.do?group="+group+"&id=dollar";
+				var yAxisName = "Profit (M)";
+		        var percent = "0";
+				//alert(percent);
+			}
+			else if(cType!="local")
+			{
+				//alert(sessionStorage.getItem("selectedCountry"));
+				 var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (M)";
+		         var percent = "0";
+				// alert(ajaxLink);
+			}
+			else
+			{
+				//alert(sessionStorage.getItem("status"));
+				var ajaxLink = "profitProductsforcountry.do?group="+group+"&countryCode="+status+"&id="+cType;
+				 var yAxisName = "Profit (M)";
+		         var percent = "0";
+				//  alert(ajaxLink);
+			}
+			
+			if(sessionStorage.getItem('drilldownStatus1')=="true")
+			{
+				$(".goback").show(); 
+				drillDown(categoryLabel,datasetName,cType);
+			}
+			else
+			{
+				$(".goback").hide();
+				loadChartforAll(ajaxLink,status,yAxisName,cType); 
+			}
+		});
+		
+	  
+	//  });
+
+</script>
+<div class="row">
+  <div class="col-sm-9">
+   <div class="container" style=" display: inline; position:relative; left: 40%; height:100%;">
+		<!--<a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="hb hb-xs spin-icon" style="color:#6699FF; font-size:14px;"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>  
+		<a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-th countFlag" id="th"></i></span></a>		
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-my countFlag" id="my"></i></span></a>		
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-id countFlag" id="id"></i></span></a>  		
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-sg countFlag" id="sg"></i></span></a>
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-ph countFlag" id="ph"></i></span></a>
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-in countFlag" id="in"></i></span></a> 				
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-vn countFlag" id="vn"></i></span></a>		
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="hb hb-xs spin-icon" style="font-size:14px;color: #6699FF;"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+		<a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span class="hb hb-xs spin-icon"><i class="famfamfam-flag-au countFlag" id="au"></i></span></a>-->
+		
+		 <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="all" tooltip-placement="bottom" tooltip="All"><span class="allcon"><i class="glyphicon glyphicon-refresh countFlag" id="ALL"></i></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="TH" tooltip-placement="bottom" tooltip="Thailand"><span><img src="image/Flag_of_Th.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="MY" tooltip-placement="bottom" tooltip="Malaysia"><span><img src="image/Flag_of_Ma.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="ID" tooltip-placement="bottom" tooltip="Indonesia"><span><img src="image/Flag_of_Id.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="SG" tooltip-placement="bottom" tooltip="Singapore"><span><img src="image/Flag_of_Sg.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="PH" tooltip-placement="bottom" tooltip="Philippines"><span><img src="image/Flag_of_Ph.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="IN" tooltip-placement="bottom" tooltip="India"><span><img src="image/Flag_of_In.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="VN" tooltip-placement="bottom" tooltip="Vietnam"><span><img src="image/Flag_of_Vn.png" class="icn"/></span></a>
+             <a href="#/app/SCA_profitProducts"  class="renderchart tooltip-blue" id="OT" tooltip-placement="bottom" tooltip="Other"><span class="flg"><i class="glyphicon glyphicon-globe countFlag" id="ot"></i></span></a>
+             <a href="#/app/SCA_profitProducts" class="renderchart tooltip-blue" id="AU" tooltip-placement="bottom" tooltip="Australia"><span><img src="image/Flag_of_Au.png" class="icn"/></span></a>
+		
+		</div>
+		</div> 
+		<!--<div class="col-sm-3">
+		<span class="dropdown" style="display:none;" id="curDropdown">
+			 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+			 <span class="dropdown-content">
+				<a href="#/app/SCA_profitProducts" id="SCA"><span id="scaSpan">USD &#x24;</span></a>
+				<a href="#/app/SCA_profitProducts" id="USD"><span>USD &#x24;</span></a>
+			 </span>
+		</span>
+		</div>-->
+</div>
+
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-3">
+		<!--<button type="button" id="btn1" style="float:left; cursor:pointer;" class="switchButton">Percent</button>
+		<button type="button" id="btn2" style="float:left; cursor:pointer;" class="switchButton">Amount</button>-->
+	</div>
+<div class="col-sm-5"></div>
+</div>
+<input type="hidden" id="status">
+	  <br/>
+<div style="float: right; margin-right:20px; margin-top:10px;height:30px;" id="firstDiv"><p><input type="button"   value="< Go Back" style=" border:none;display:none;" id="goBack" class="goback switchButton"/></p></div>
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 		 
+		 </div>
+         <div id="table-container" style="padding-left:2%; padding-right:2%; display:none;"></div><br />
+<!--<div style="float: right; margin-right:20px; margin-top:10px;height:30px; display:none;" id="secondDiv"><p><input type="button"   value="< Go Back" style=" border:none;display:none; " id="goback1" class="goback"/></p></div>-->
+    	 <!--<div id='container1' style="display:none">
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 		 
+		 </div>-->

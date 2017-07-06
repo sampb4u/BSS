@@ -1,0 +1,311 @@
+﻿  <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+               
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget flat radius-bordered">
+                            <div class="widget-header bg-blue">
+                                
+                            </div>
+                            <div class="widget-body">
+                                <div id="registration-form">
+                                    <form role="form">
+                                       
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                        <select class="form-control">
+														<option value="">Projects</option>
+														<option value="project 1">project 1</option>
+														<option value="project 2">project 2</option>
+														<option value="project 3">project 3</option>
+														</select>
+                                                        
+                                                    </span>
+                                                </div>
+                                            </div>
+											 </div>
+                                           <!-- <div class="col-sm-6">
+												<div class="radio"> 
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-primary" >
+													<span class="text"> Pending</span>
+													
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-primary">
+													<span class="text"> Latest</span>
+												</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<label>
+													<input name="form-field-radio" type="radio" class="colored-primary" checked="checked">
+													<span class="text"> All</span>
+												</label>
+												  
+											</div>
+											
+                                               
+                                            </div>-->
+                                       
+										
+                                       <div ng-controller="ModalDemoCtrl">
+                            <script type="text/ng-template" id="myModalContent.html">
+                               
+                                <div class="modal-body">
+                                 <h3 style="font-weight:bold;"> Upload Template</h3>
+								 <hr>
+								
+								       <div class="row">
+                                            	<div class="col-sm-6">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group">
+                                                       <input type="text" class="form-control" placeholder="Project Code" />
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Order No" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+											<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Title" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+											<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Upload" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+											</div>
+											
+											<div class="col-sm-6">
+												<div class="row">
+													 <div class="col-sm-12">
+                                                		<div class="form-group">
+                                                       <input type="text" class="form-control" placeholder="Date" />
+                                                      </div>  
+                                                    </div>
+                                                </div>
+												
+												<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Client" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+											<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Rivision No" />
+                                                        
+                                                    </div>
+                                                </div>	
+                                            </div>
+											<div class="row">
+													<div class="col-sm-12">
+                                               			 <div class="form-group">
+                                                     <input type="text" class="form-control" placeholder="Prepared By" />
+                                                        
+                                                    			</div>
+                                                			</div>	
+                                            			</div>
+													</div>
+												</div>
+								 
+								<div style="text-align:center;">
+                                    <button class="btn btn-blue" ng-click="ok()">Save</button>
+                                    <button class="btn btn-blue" ng-click="cancel()">Cancel</button>
+                                </div>
+								 <br>
+								 <br>
+								 
+                            </script> 
+
+                           <p align="right">
+						   
+						    <button class="btn btn-blue" ng-click="open('','myModalContent.html', 'lg')">Add Upload Project Documents</button>
+						   </p>
+                         
+                        </div>
+                                      
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+		<br />
+		
+<div class="col-lg-12 col-sm-12 col-xs-12">
+      <div class="well with-header with-footer">
+        <div class="widget" >
+            <div class="widget-header bordered-blue">
+                <span class="widget-caption" style="color:#;"><b>APECO Order</b></span>
+
+                <div class="widget-buttons">
+                    <a href="" ></a>
+                    <a href="" ></a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="dd dd-draghandle darker">
+                    <ol class="dd-list">
+                        <li class="dd-item dd2-item" data-id="13">
+                           <!-- <div class="dd-handle dd2-handle">
+                                <i class="normal-icon fa fa-android"></i>
+
+                                <i class="drag-icon fa fa-arrows-alt "></i>
+                            </div>-->
+                            <div class="dd2-content" ><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">Cost Analysis</a></div></div>
+							
+							
+							
+                        </li>
+						<!--<ol class="dd-list" style="">-->
+                                <li class="dd-item dd2-item" data-id="16">
+                                    <!--<div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-google-plus "></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>-->
+                                    <div class="dd2-content" style='color: #3399CC;'>Contract Review</div>
+                                </li>
+
+                                <li class="dd-item dd2-item " data-id="17">
+                                    <!--<div class="dd-handle dd2-handle bg-info">
+                                        <i class="normal-icon fa fa-instagram"></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>-->
+                                    <div class="dd2-content" style='color: #3399CC;'>Drawing Submission</div>
+                                </li>
+                                <li class="dd-item dd2-item" data-id="18">
+                                    <!--<div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-taxi"></i>
+                                        <i class="drag-icon fa fa-arrows-alt"></i>
+                                    </div>-->
+                                    <div class="dd2-content" style='color: #3399CC;'>Factory Feedback On the Order</div>
+                                </li>
+                            <!--</ol>-->
+
+                        <li class="dd-item dd2-item" data-id="14">
+                            <!--<div class="dd-handle dd2-handle">
+                                <i class="normal-icon fa fa-facebook "></i>
+
+                                <i class="drag-icon fa fa-arrows-alt "></i>
+                            </div>-->
+                            <div class="dd2-content" style='color: #3399CC;'>Technical Calculation</div>
+							
+                        </li>
+						<!--<ol class="dd-list" style="">
+                                <li class="dd-item dd2-item" data-id="16">
+                                    <!--<div class="dd-handle dd2-handle">
+                                       <!-- <i class="normal-icon fa fa-google-plus "></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>-->
+                                    <div class="dd2-content" style='color: #3399CC;'>Other Vendor's Status Update</div>
+                                </li>
+
+                                <li class="dd-item dd2-item dd-colored" data-id="17">
+                                    <!--<div class="dd-handle dd2-handle bg-info">
+                                        <i class="normal-icon fa fa-instagram"></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>-->
+									
+                                    <div class="dd2-content" ><div ng-controller="ModalDemoCtrl"><a href="" style="text-decoration:none;" ng-click="open('','myModalContent.html', 'lg')">Delivery Schedule/Plan</a></div>
+                                </li>
+                                <li class="dd-item dd2-item" data-id="18">
+                                    <!--<div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-taxi"></i>
+                                        <i class="drag-icon fa fa-arrows-alt"></i>
+                                    </div>-->
+                                    <div class="dd2-content" style='color: #3399CC;'>AOB</div>
+                                </li>
+								<!--<li class="dd-item dd2-item" data-id="18">
+                                    <div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-taxi"></i>
+                                        <i class="drag-icon fa fa-arrows-alt"></i>
+                                    </div>
+                                    <div class="dd2-content">Offer Sales Order</div>
+                                </li>
+								<li class="dd-item dd2-item" data-id="18">
+                                    <div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-taxi"></i>
+                                        <i class="drag-icon fa fa-arrows-alt"></i>
+                                    </div>
+                                    <div class="dd2-content">SOP Order Request</div>
+                                </li>
+                            </ol>
+
+                        <li class="dd-item dd2-item" data-id="15">
+                            <div class="dd-handle dd2-handle">
+                                <i class="normal-icon fa fa-twitter "></i>
+
+                                <i class="drag-icon fa fa-arrows-alt "></i>
+                            </div>
+                            <div class="dd2-content">Production Management</div>
+							
+								<ol class="dd-list" style="">
+                                <li class="dd-item dd2-item" data-id="16">
+                                    <div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-google-plus "></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>
+                                    <div class="dd2-content">Project Management</div>
+                                </li>
+									
+                                
+                                
+                            </ol>
+							
+							<li class="dd-item dd2-item" data-id="14">
+                            <div class="dd-handle dd2-handle">
+                                <i class="normal-icon fa fa-facebook "></i>
+
+                                <i class="drag-icon fa fa-arrows-alt "></i>
+                            </div>
+                            <div class="dd2-content">Training Management</div>
+                        </li>
+
+                            <ol class="dd-list" style="">
+                                <li class="dd-item dd2-item" data-id="16">
+                                    <div class="dd-handle dd2-handle">
+                                        <i class="normal-icon fa fa-google-plus "></i>
+
+                                        <i class="drag-icon fa fa-arrows-alt "></i>
+                                    </div>
+                                    <div class="dd2-content">Training Document</div>
+                                </li>
+
+                               
+                            </ol>
+                        </li>
+                    </ol>-->
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>

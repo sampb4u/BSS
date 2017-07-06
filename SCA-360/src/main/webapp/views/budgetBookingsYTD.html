@@ -1,0 +1,243 @@
+
+<html>
+<head>
+ <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script> 
+-->
+ 
+<!-- <script src="jquery.min.js"></script>
+<script src="highcharts.js"></script> 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="drilldown.js"></script>
+ -->
+<script>
+$(function () {
+
+    // Create the chart
+    
+    Highcharts.setOptions({
+		lang: {
+			thousandsSep: ','
+		}
+	}); 
+	 
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            
+            	lang: {
+        			thousandsSep: ','
+        		}
+        },
+        title: {
+            text: 'Basic drilldown'
+        },
+        xAxis: {
+            type: 'category'
+        },
+
+        legend: {
+            enabled: true
+        },
+        credits: {
+            enabled: false
+          },
+
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                pointWidth: 40,
+                dataLabels: {
+                    enabled: false
+                },
+                stacking: 'normal',
+              
+            }
+        },
+       
+
+        series: [{
+            name: 'Australia',
+            color:'yellow',
+             
+            data: [{
+                name: 'Budget',
+                y: 9639320,
+                
+            }, {
+                name: 'Bookings',
+                y: 620785.74,
+                drilldown: 'Australia'
+            }]
+        },{
+            name: 'Thailand',
+            color:'Brown',
+             
+            data: [{
+                name: 'Budget',
+                y: 20156067,
+                
+            }, {
+                name: 'Bookings',
+                y: 481213.54,
+                drilldown: 'Thailand'
+            }]
+        },{
+            name: 'Malaysia',
+            color:'green',
+           
+            data: [{
+                name: 'Budget',
+                y: 11392375,
+               
+            }, {
+                name: 'Bookings',
+                y: 3126.54,
+                drilldown: 'Malaysia'
+            }]
+        },{
+            name: 'Indonesia',
+            color:'Blue',
+           
+            data: [{
+                name: 'Budget',
+                y: 7206000,
+                
+            }, {
+                name: 'Bookings',
+                y: 1173181.64,
+                drilldown: 'Indonesia'
+            }]
+        },{
+            name: 'Singapore',
+            color:'red',
+            
+            data: [{
+                name: 'Budget',
+                y: 5313794,
+                
+            }, {
+                name: 'Bookings',
+                y: 21009.77,
+                drilldown: 'Singapore'
+            }]
+        },{
+            name: 'Philippines',
+            color:'Orange',
+          
+            data: [{
+                name: 'Budget',
+                y: 5507000,
+                
+            }, {
+                name: 'Bookings',
+                y: 2444362.1,
+                drilldown: 'Philippines'
+            }]
+        },{
+            name: 'India',
+            color:'pink',
+            
+            data: [{
+                name: 'Budget',
+                y: 3673000,
+               
+            }, {
+                name: 'Bookings',
+                y: 238635.01,
+                drilldown: 'india'
+            }]
+        },{
+            name: 'Vietnam',
+            color:'Cyan',
+            
+            data: [{
+                name: 'Budget',
+                y: 4220000,
+                
+            }, {
+                name: 'Bookings',
+                y: 76.8,
+                drilldown: 'Vietnam'
+            }]
+        },{
+            name: 'Others',
+            color:'Black',
+            
+            data: [{
+                name: 'Budget',
+                y: 191000,
+                
+            }, {
+                name: 'Bookings',
+                y: 27599.56,
+                drilldown: 'others'
+            }]
+        }],
+        drilldown: {
+            series: [{
+            	 id: 'india',
+                 name: 'Booking',
+                 color:'#0000FF',
+                 data: [
+ {name:'South',x:1, y:828223.85,color:'orange',drilldown: 'south'},
+ {name:'North',x:1, y:1149016.64,color:'red',drilldown: 'north'},
+ {name:'East',x:1, y:329593.97,color:'cyan',drilldown: 'east'},
+ {name:'West',x:1, y:-4092.07,color:'safron',drilldown: 'west'},
+ {name:'Region',x:1, y:null,color:'safron'},
+  
+
+ {name:'India Total Booking', x:0,y:3673000,color:'#0000FF'}
+                 ]
+            	
+                 
+            }, {
+                id: 'south',
+                name:'south Region Sales Man',
+                data: [
+                    ['CHAUDHARI',6268.18],
+                    ['DHOlE',578469.26],
+                    ['ELISETTI',578469.26],
+                    ['DholE',578469.26]
+                ]
+            }, {
+                id: 'north',
+                name:'North Region Sales Man',
+                data: [
+                    ['KUMAR',7954.4],
+                    ['PAL',7588],
+                    ['PARADKAR',1133474.24]
+                ]
+            },{
+                id: 'east',
+                name:'East Region Sales Man',
+                data: [
+                    ['PHALKE',139436.14],
+                    ['PITHWA',36800.49],
+                    ['RAVAL',38491.14],
+                    ['SHAH',56873]
+                ]
+            },{
+                id: 'west',
+                name:'West Region Sales Man',
+                data: [
+                    ['SIRCAR',23698],
+                    ['SORATUR',214761.59],
+                    ['SUBRAMANIAM',-241551.66]
+                ]
+            }]
+        }
+    });
+});
+
+
+
+</script>
+</head>
+<body>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+</body>
+
+</html>

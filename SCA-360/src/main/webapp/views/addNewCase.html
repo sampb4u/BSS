@@ -1,0 +1,494 @@
+<style>
+div
+{
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+} 
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 0px solid #ddd;
+} 
+/*.datePic > span:hover{cursor: pointer;}
+.pointer {
+    cursor: pointer;
+}
+.ui-datepicker-calendar {
+    display: none;
+    }*/
+	
+.sucessstyle {
+	background-color: #53a93f !important;
+	/*border-color: #53a93f !important;*/
+	color: #fff;}
+.draftstyle{
+	background-color: #57b5e3 !important;
+	/*border-color: #57b5e3;*/
+	color: #fff;} 
+
+	
+.active2 {
+       pointer-events: none;
+       cursor: pointer;
+	   
+	  
+    }
+.dataNotFound
+{
+	color:#a94442;
+}
+.ui-datepicker {
+    width: 275px;
+    padding: .2em .2em 0;
+   /* display: none;*/
+}
+</style>
+<!--<script>
+
+$('.datepicker').datepicker(
+                    {
+                        dateFormat: "mm-yy",
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                        onClose: function(dateText, inst) {
+
+
+                            function isDonePressed(){
+                                return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                            }
+
+                            if (isDonePressed()){
+                                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+                                
+                                 $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                            }
+                        },
+                        beforeShow : function(input, inst) {
+
+                            inst.dpDiv.addClass('month_year_datepicker')
+
+                            if ((datestr = $(this).val()).length > 0) {
+                                year = datestr.substring(datestr.length-4, datestr.length);
+                                month = datestr.substring(0, 2);
+                                $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                                $(this).datepicker('setDate', new Date(year, month-1, 1));
+                                $(".ui-datepicker-calendar").hide();
+                            }
+                        }
+                    })					
+					
+</script>-->
+<script>
+/*$(document).keyup(keyDownHandler); // use appropriate selector for the keydown handler
+
+function keyDownHandler(e) {
+	alert(e);
+    if(e.keyCode === 13) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        return false;
+    }
+}*/
+$(document).ready(function() {
+	/*$('#dateFrom').bind('keydown', function(event) {
+		alert(event + "dateFrom");
+
+    if (event.which == 13) {var e=jQuery.Event("keydown");
+                    e.which = 9;//tab 
+                    e.keyCode = 9;
+                    $(this).trigger(e);
+                    return false;
+                }
+            });
+	$('#dateTo').bind('keydown', function(event) {
+		alert(event + "dateTo");
+
+    if (event.which == 13) {var e=jQuery.Event("keydown");
+                    e.which = 9;//tab 
+                    e.keyCode = 9;
+                    $(this).trigger(e);
+                    return false;
+                }
+            });*/
+		/*$("#dateFrom" ).on('keyup',function(event){
+			alert(7888);
+			alert(event);
+		});*/
+			
+    $( "#dateFrom" ).datepicker({
+        dateFormat:"dd-mm-yy",
+		changeMonth: true,
+        changeYear: true,
+       // showButtonPanel: true,
+	   onClose: function(dateText, inst) {
+		  $("#dateTo").focus();
+	   },
+        // before datepicker opens run this function
+        beforeShow: function(){
+            // this gets today's date       
+            var theDate = new Date();
+            
+            // sets "theDate" 2 days ahead of today
+            theDate.setDate(theDate.getDate());
+			//theDate.setDate(<?php echo $checkin ?>);
+            // set min date as 2 days from today
+            $(this).datepicker('option',theDate);         
+        }
+       
+    })/*.on('keydown', function(event) {
+		alert(event + "dateFrom");
+
+    if (event.which == 13) {var e=jQuery.Event("keydown");
+                    e.which = 9;//tab 
+                    e.keyCode = 9;
+                    $(this).trigger(e);
+                    return false;
+                }
+            })*/;
+			
+	$( "#dateTo" ).datepicker({
+        dateFormat:"dd-mm-yy",
+		changeMonth: true,
+        changeYear: true,
+       // showButtonPanel: true,
+	   onClose: function(dateText, inst) {
+		  //$(".ui-datepicker").css("display", "none");
+		  $( "#ModelNum" ).focus();
+		  /*function isDonePressed(){
+                                return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                            }
+
+                            if (isDonePressed()){
+                                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+                                
+                                // $('#dateTo').focus();//Added to remove focus from datepicker input box on selecting date
+                            }*/
+	   },
+        // before datepicker opens run this function
+        beforeShow: function(){
+            // this gets today's date       
+            var theDate = new Date();
+            
+            // sets "theDate" 2 days ahead of today
+            theDate.setDate(theDate.getDate());
+			//theDate.setDate(<?php echo $checkin ?>);
+            // set min date as 2 days from today
+            $(this).datepicker('option',theDate);         
+        }
+       
+    })/*.on('keydown', function(event) {
+		alert(event + "dateTo");
+
+    if (event.which == 13) {var e=jQuery.Event("keydown");
+                    e.which = 9;//tab 
+                    e.keyCode = 9;
+                    $(this).trigger(e);
+                    return false;
+                }
+            })*/;
+});
+/*$('.datepicker').datepicker(
+                    {
+                        dateFormat: "mm-yy",
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                        onClose: function(dateText, inst) {
+
+
+                            function isDonePressed(){
+                                return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                            }
+
+                            if (isDonePressed()){
+                                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+                                
+                                 $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                            }
+                        },
+                        beforeShow : function(input, inst) {
+
+                            inst.dpDiv.addClass('month_year_datepicker')
+
+                            if ((datestr = $(this).val()).length > 0) {
+                                year = datestr.substring(datestr.length-4, datestr.length);
+                                month = datestr.substring(0, 2);
+                                $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                                $(this).datepicker('setDate', new Date(year, month-1, 1));
+                                $(".ui-datepicker-calendar").hide();
+                            }
+                        }
+                    })*/					
+					
+</script>
+<div ng-controller="addNewCaseCtrl" ng-init="getAddNewCaseFormData(); loadAddNewCaseCountrys();getAddNewCaseSalesmanCode();loadAddNewCaseSalesMan(); loadAllCaseTypes();loadAddedNewcaseDepartments();">									
+	<div class="well with-header with-footer">
+      <div class="header bordered-blue" id="pageHeadding">Case Search</div>
+	<form name="addedCasesForm" ng-keyup="$event.keyCode == 13 ? getCaseName(addedNewCase,addedCasesForm) : null" novalidate>
+        <!--<div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+                                                              
+            </div>
+           <div class="col-sm-3">
+                                                         
+           </div>
+           <div class="col-sm-3" align="right">
+                  <div class="form-group">
+                       <span class="btn btn-blue" ng-click="loadNewCaseCustomer();">New Case</span>
+                  </div>
+                  
+                  
+           </div>                                            
+	 </div>-->
+     <!--<div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" placeholder="Email address">
+  </div>-->
+  
+     <div class="row">
+     		<div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="Country">Country</label>
+                                               			<select class="form-control" placeholder="" name="country" ng-model="addedNewCase.country" id="Country" ng-options = "country.country as country.country for country in countryData" autofocus="autofocus">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                                
+                                            </div>
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="Manufacturing">Manufacturing No.</label>
+                                                <span class="input-icon icon-right">	
+                                                      <!--<label for="Manufacturing"></label>-->																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="manufacturing" ng-model="addedNewCase.manufacturing" id="Manufacturing"/>
+                                                    <i class="glyphicon glyphicon-pencil circular"></i>
+                                                                    </span>
+                                                                   
+                                                
+                                            </div>
+            </div>
+            <div class="col-sm-2">
+            		<div class="form-group">
+                                  <label for="dateFrom">From</label>
+                                  		<span class="input-icon icon-right">
+													 
+<input type="text" class="form-control datepicker " placeholder="" maxlength="10" name="monthYear" ng-model="addedNewCase.monthYear" id="dateFrom"/>
+												<i class="glyphicon glyphicon-calendar circular"></i>
+                                                                    </span>
+                                                    
+                                                </div>
+            </div>
+            <div class="col-sm-2">
+            		<div class="form-group">
+                                 <label for="dateTo">To</label>
+                                  		<span class="input-icon icon-right">
+													
+<input type="text" class="form-control datepicker " placeholder="" maxlength="10" name="dateto" ng-model="addedNewCase.dateto" id="dateTo"/>
+												<i class="glyphicon glyphicon-calendar circular"></i>
+                                                                    </span>
+                                                    
+                                                </div>
+                                                <!--<input type="text" class="form-control" placeholder="" id="getfocus"/>-->
+            </div>
+     </div>
+     <div class="row">
+     		<div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="CaseType">Case Type</label>
+                                               			<select class="form-control" placeholder="" name="caseType" ng-model="addedNewCase.caseType" id="CaseType" ng-options = "caseType.id as caseType.caseType for caseType in caseTypeData">
+                                                             <!--<option value="">-----Select-----</option>-->
+                                                        </select>																																																					
+                                                    
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="ModelNum">Model No.</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																										
+                                                    <input type="text" class="form-control" placeholder="" name="modelNumber" ng-model="addedNewCase.modelNumber" id="ModelNum"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                    </span>
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="CaseRef">Case Ref Number</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																										
+                                                    <input type="text" class="form-control" placeholder="" name="caseRef" ng-model="addedNewCase.caseRef" id="CaseRef"/>
+                                                    <i class="glyphicon glyphicon-tag circular"></i>
+                                                                    </span>
+                                                                   
+                                                
+                                            </div>	
+            </div>
+            
+     </div>
+     <div class="row">
+     		<div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="UserName">User Name</label>
+                                                <span class="input-icon icon-right">	
+                                                     																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="username" ng-model="addedNewCase.username" id="UserName"/>
+                                                    <i class="glyphicon glyphicon-user circular"></i>
+                                                                    </span>
+                                                                   
+                                               
+                                            </div>	
+            </div>
+     		<div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="Serial">Motor Serial No.</label>
+                                                <span class="input-icon icon-right">	
+                                                      																																																										
+                                                    <input type="text" class="form-control" placeholder="" name="serialNo" ng-model="addedNewCase.serialNo" id="Serial"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                    </span>
+                                                                   
+                                                
+                                            </div>
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                                <label for="GearHead">GearHead Serial No.</label>
+                                                <span class="input-icon icon-right">	
+                                                     																																																											
+                                                    <input type="text" class="form-control" placeholder="" name="gearhead" ng-model="addedNewCase.gearhead" id="GearHead"/>
+                                                    <i class="fa fa-cog circular" aria-hidden="true"></i>
+                                                    </span>
+                                                                   
+                                                
+                                            </div>
+            </div>
+     </div>
+     <div class="row">
+     		<div class="col-sm-4">
+            		<div class="form-group">
+                                            			<label for="Customer">Prospect Name / Customer Name</label>
+                                                      <span class="input-icon icon-right">
+                                                         
+                                                        <input type="text" name="customer" id="Customer" ng-model="addedNewCase.customer" placeholder="" typeahead="customer.name as customer.name for customer in names | filter:{name:$viewValue}:startsWith" typeahead-no-results="noResults" typeahead-on-select='selectCustomerCase($label)' typeahead-min-length='3' autocomplete="off" class="form-control">
+                                                       
+                            <i class="glyphicon glyphicon-search blue circular"></i>
+                        </span>
+                        <div ng-if="noResults" class="dataNotFound">No Results Found!</div>
+                          
+                </div>
+            </div>
+            <div class="col-sm-4">
+            		<div class="form-group">
+                                        <label for="DepartmentName">Assigned To</label>
+                                        
+                                       
+                                         <select class="form-control" ng-model = "addedNewCase.departmentname" name = "departmentname" id="DepartmentName" placeholder="" ng-options = "departmentname.departmentnameshortcut as departmentname.departmentname for departmentname in departmentData">
+                                                       <!-- <option value="">Select Department</option>-->
+                                                   </select>
+                                       
+                                                    
+										
+										</div>
+            </div>
+            <div class="col-sm-4">
+            		
+            </div>
+     </div>
+     <div class="row">
+     		<div class="col-sm-4">
+            		
+            </div>
+     		<div class="col-sm-4">
+            	<div class="form-group">
+                    <button type="button" class="btn btn-info" id="searbtn"  ng-click="getCaseName(addedNewCase,addedCasesForm);">
+                      <span class="glyphicon glyphicon-search"></span> Search
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+            	<div class="form-group">
+                                
+                                  <span class="btn btn-info btn-xs btn-circle active2"><i class="fa fa-floppy-o" aria-hidden="true"></i></span> Draft
+                                  <span class="btn btn-success btn-xs btn-circle active2"><i class="fa fa-envelope" aria-hidden="true"></i></span> Current
+                                   
+                               
+                   </div>	
+            </div>
+     </div>
+	
+	     
+   </form>
+   		<div class="row">
+    
+    <div class="col-sm-12">
+       
+			<div class="table-scrollable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr>
+                        	<th>Date</th>
+							<th>Case Ref No.</th>
+							<th>Prospect / Customer</th>
+							<th>Country</th>
+							<th>Case Type</th>
+                            <th>Model No.</th>
+                            <th>Mfg No.</th>
+                            <th>Motor Serial No.</th>
+                            <th>Gearhead Serial No.</th>
+							<th>Assigned To</th>
+							<th>Description</th>
+                            <th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="addNewCase in addedCasesData" >
+                   			<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.dateCase}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.caseRef}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.customer}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.country}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.caseType}}<span style="display:none;">{{addNewCase.tab}}</span></td>
+                            <td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.selectModel}}</td>
+                            <td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.shiMfg}}</td>
+                            <td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.motorSerial}}</td>
+                            <td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.gearhead}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.assigned}}</td>
+							<td ng-class="{sucessstyle: addNewCase.action==1,draftstyle: addNewCase.action==100}">{{addNewCase.description}}</td>
+							<td><span ng-click="loadAddedCasesDetailsCopy(addNewCase.caseRef,addNewCase.customer,addNewCase.tab,addNewCase.action,addNewCase.caseid);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Copy" style="color: #23527c; cursor:pointer;" ng-if="addNewCase.action!=100"><i class="glyphicon glyphicon-copy"></i></span>&nbsp;&nbsp;&nbsp;<span ng-click="loadCaseCustomerDetails(addNewCase.caseRef,addNewCase.customer,addNewCase.tab,addNewCase.action,addNewCase.caseid);" class="tooltip-blue" tooltip-placement="bottom" tooltip="Edit" style="color: #23527c; cursor:pointer;"><i class="glyphicon glyphicon-pencil"></i></span>&nbsp;&nbsp;&nbsp;<span ng-click="loadAddedCasesDetailsView(addNewCase.caseRef,addNewCase.customer,addNewCase.tab,addNewCase.action,addNewCase.caseid);" class="tooltip-blue" tooltip-placement="bottom" tooltip="View" style="color: #23527c; cursor:pointer;" ng-if="addNewCase.action!=100"><i class="fa fa-eye" aria-hidden="true"></i></span>&nbsp;&nbsp;&nbsp;<span class="tooltip-blue" tooltip-placement="bottom" tooltip="Delete" style="color: #23527c; cursor:pointer;" ng-click="removeCaseFromGrid(addNewCase.caseRef,addNewCase.tab,addNewCase.action,addNewCase.caseid);"><i class="glyphicon glyphicon-trash"></i></span></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+            
+       
+    </div>
+</div>
+	</div>		
+</div>

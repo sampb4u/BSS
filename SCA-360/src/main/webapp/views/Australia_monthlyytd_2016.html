@@ -1,0 +1,340 @@
+<style type="text/css">
+
+/*.tableCss tr:nth-child(even) {background: #CCC}
+.tableCss tr:nth-child(odd) {background: #FFF}*/
+.tableCss tr:nth-child(2n+0) {background: #1995AD;color:#FFFFFF; opacity:0.5;}
+.tableCss tr:nth-child(odd) {background: #FFFFFF;}
+.tableCss tr:nth-child(1) {background: #015AAC;color:#FFFFFF;}
+
+.tableCss
+{
+ font-weight:normal;
+ font-family:"Helvetica";	
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    z-index: 20;
+	top:20px;
+	right: 8%;
+	
+}
+.dropbtn {
+    background-color: #015AAC;
+    color: white;
+    border: none;
+	border-radius: 20px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px ;
+    text-decoration: none;
+    display: block;
+	width:70px;
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #015AAC;
+}
+.dropBackColor
+{
+background-color: #f1f1f1;
+}
+</style>
+
+<script type="text/javascript">
+	var product = "area";
+	var currentyear = "2016";
+	var countryCode = sessionStorage.getItem('countryCode');
+	var url = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+countryCode+"&id=local";
+	var curType = "AUD (\u0024)";
+	renderCurrencyDynamic(url);
+	
+	$(document).ready(function()
+	{
+			$("#AUD").click(function()
+			{
+				url = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+countryCode+"&id=local";
+				renderCurrencyDynamic(url);
+				curType = "AUD (\u0024)";
+				$('#AUD').addClass("dropBackColor");
+				$('#USD').removeClass("dropBackColor");	
+	        });
+			$("#USD").click(function()
+			{
+				url = "monthleyytdtoareaCountryWise.do?link="+product+"&currentyear="+currentyear+"&countryCode="+countryCode+"&id=dollar";
+				renderCurrencyDynamic(url);
+				curType = "USD (\u0024)";
+				$('#AUD').removeClass("dropBackColor");
+				$('#USD').addClass("dropBackColor");
+	        });
+			
+	
+	});
+	
+	function renderCurrencyDynamic(url)	
+	{
+	$.getJSON(url, function(json) 
+	{
+		//alert(JSON.stringify(json));
+		var chartData = {
+							    "chart": {
+											"palette": "2",
+									        "caption": "Monthly Booking YTD",
+									        //"subcaption": "Harry's SuperMart",
+									        "xaxisname": "Year-2016",
+									        "decimals":'1',
+											"yaxisname": curType,
+											"xAxisNameFont": "Helvetica",
+											 "xAxisNameFontSize": "14",
+											 "xAxisNameFontBold":"1",
+											"yAxisNameFontBold":"1",
+											"yAxisNameFontSize": "14",
+											"yAxisNameFont": "Helvetica",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+											 "numberScaleUnit": "K,M,B",
+											"showsum": "1",
+											"showvalues": "0",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+									        "bgColor": "#ffffff",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"14",
+											"rotatelabels": "0",		
+											"rotatevalues": "1",
+											"baseFontColor":"#000000"
+											//"theme":"fint"   			
+										},
+									    "categories":json['xaxis'],
+									    "dataset":json['data']
+									};	
+		var i=0;
+		FusionCharts.ready(function()
+		{
+		   var fusioncharts = new FusionCharts({
+			    type: 'msstackedcolumn2d',
+			    renderAt: 'chart-container',
+			    width: '100%',
+			    height: '500',
+			    dataFormat: 'json',
+			    dataSource: chartData,
+									//events: {
+//									           dataPlotClick: function (event,dataObj) 
+//											   {	
+//													//alert(dataObj.categoryLabel);
+//													//alert(dataObj.datasetName);
+//													/*i++;
+//													var label = "label"+i;
+//													var name = "name"+i;
+//													alert(dataObj.categoryLabel);	
+//													sessionStorage.setItem(label,dataObj.categoryLabel);
+//													sessionStorage.setItem(name,dataObj.datasetName);
+//													sessionStorage.setItem('count',i);
+//													alert(dataObj.datasetName);	*/	
+//													asd();
+//									            }
+//										      }
+								});
+			  var renderTable = function (chart, containerId) 
+			  {
+		            var chartData = chart.getDataAsCSV(),
+        				      rows,
+							  row,
+							  i,
+							  length,
+							  tableBody = '',							  
+							  tableBody1 = '',
+							  tableBody2 = '',							  							  
+							  tableBody3 = '',
+							  tableBody4 = '',
+							  tableBody5 = '',							  							  
+							  tableHeader = '';							     
+            // Get all the rows by splitting data with '\n' seperator
+            rows = chartData.replace(/"/g, '').split('\n');     
+            // Retrieve the data from the rows and compute body string from the data rows
+			var accuBudget = 0;
+			var accuBooking = 0; 
+            for (i = 1, length = rows.length; i < length; i++) 
+			{	
+                row = rows[i].split(',');
+
+				if(row[1].trim().length==0) { var budgetVal = 0; } else { var budgetVal = row[1]; }
+				if(row[2].trim().length==0) { var bookingVal = 0; } else { var bookingVal = row[2]; }
+				
+				if(convertMillions(bookingVal)==null) { var milBookVal = "0K"; } else { var milBookVal =convertMillions(bookingVal); }
+				if(convertMillions(budgetVal)==null) { var milBudgVal = "0K"; } else { var milBudgVal =convertMillions(budgetVal); }
+				
+				var budgetPercent = milBudgVal.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent = milBookVal.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentSuccess = bookingPercent/budgetPercent*100;
+				//alert(percentSuccess);
+				if(isNaN(percentSuccess)|| percentSuccess == "Infinity") {var percentSuccessFixed = "0 "; }else{var percentSuccessFixed = percentSuccess;}
+				 percentSuccessFixed = percentSuccess.toFixed(2)+ " %";
+				//if(isNaN(percentSuccess)) { percentSuccessFixed = "0 %"; }
+				if(isNaN(accuBudget)) { accuBudget = "0"; }
+				accuBudget = Number(accuBudget)+Number(budgetVal);
+				var convertAccuBudget = convertMillions(accuBudget);
+				
+				if(isNaN(accuBooking)) { accuBooking = "0"; }
+				accuBooking = Number(accuBooking)+Number(bookingVal);
+				var convertAccuBooking = convertMillions(accuBooking);
+				
+				var budgetPercent1 = convertAccuBudget.replace ( /[^\+|\-0-9.]/ig, '' );
+				var bookingPercent1 = convertAccuBooking.replace ( /[^\+|\-0-9.]/ig, '' );
+				
+				var percentAccuSuccess = bookingPercent1/budgetPercent1*100;
+				if(isNaN(percentAccuSuccess)|| percentAccuSuccess=="Infinity") {var  percentAccuSuccessFixed = "0 "; }else{var percentAccuSuccessFixed = percentAccuSuccess.toFixed(2);}
+				 var percentAccuSuccessFix = percentAccuSuccessFixed+ " %";
+				//if(isNaN(percentAccuSuccess)) { percentAccuSuccessFixed = "0 %"; }
+				if(convertAccuBudget==null) { var accbudgetval = "0K"; } else { var accbudgetval = convertAccuBudget; }
+				if(convertAccuBooking==null) { var accbookingval = "0K"; } else { var accbookingval = convertAccuBooking; }
+				
+				tableHeader +="<th>"+row[0]+"</th>";
+				tableBody +="<td>"+milBudgVal+"</td>";
+				tableBody1 +="<td>"+milBookVal+"</td>";
+				tableBody2 +="<td>"+percentSuccessFixed+"</td>";
+				tableBody3 +="<td>"+accbudgetval+"</td>";
+				tableBody4 +="<td>"+accbookingval+"</td>";
+				tableBody5 +="<td>"+percentAccuSuccessFix+"</td>";
+            }
+     
+            // Compute header string from first row
+            row = rows[0].split(',');
+           
+     
+            // Create the table string and append it to the table container
+            document.getElementById(containerId).innerHTML = '<table width ="100%;" border="1" style="border-collapse:collapse;" class="tableCss"><tbody><tr><th>Year-2016</th>'+tableHeader+'</tr><tr><th>Budget</th>'+tableBody+'</tr><tr><th>Booking</th>'+tableBody1+'</tr><tr><th>% Success</th>'+tableBody2+'</tr><tr><td colspan="13" height="20px;"></td></tr><tr><th>Accu Budget</th>'+tableBody3+'</tr><tr><th>Accu Booking</th>'+tableBody4+'</tr><tr><th>% Success</th>'+tableBody5+'</tr></tbody</table>';
+			
+			     					
+        };								
+		
+		var qTableHeader = "<tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr>";
+		var qTableData1 = "<tr><th>"+json['tabledata'][0].year+"</th><td>"+convertMillions(json['tabledata'][0].Q1)+"</td><td>"+convertMillions(json['tabledata'][0].Q2)+"</td><td>"+convertMillions(json['tabledata'][0].Q3)+"</td><td>"+convertMillions(json['tabledata'][0].Q4)+"</td></tr><tr><th>"+json['tabledata'][1].year+"</th><td>"+convertMillions(json['tabledata'][1].Q1)+"</td><td>"+convertMillions(json['tabledata'][1].Q2)+"</td><td>"+convertMillions(json['tabledata'][1].Q3)+"</td><td>"+convertMillions(json['tabledata'][1].Q4)+"</td></tr><tr><th>"+json['tabledata'][2].year+"</th><td>"+convertMillions(json['tabledata'][2].Q1)+"</td><td>"+convertMillions(json['tabledata'][2].Q2)+"</td><td>"+convertMillions(json['tabledata'][2].Q3)+"</td><td>"+convertMillions(json['tabledata'][2].Q4)+"</td></tr>";
+		
+		fusioncharts.render();
+	        fusioncharts.addEventListener('renderComplete', function () 
+			{
+        	    renderTable(fusioncharts, 'table-container');
+				document.getElementById("table-container1").innerHTML = "<table width ='100%;' border='1' style='border-collapse:collapse;' class='tableCss'>"+qTableHeader+qTableData1+"</table>";
+				$(".avg").show();
+	        });																			
+					
+					});
+				});
+	 } 
+	 function convertMillions(sumofBudget) 
+		{
+			//alert(sumofBudget);
+			var thousand = 1000;
+			var million = 1000000;
+			var billion = 1000000000;
+			var trillion = 1000000000000;
+			if (sumofBudget < thousand) {
+				return (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K';   
+			}
+			
+			else if (sumofBudget >= thousand && sumofBudget <= 1000000) {
+				 return  (sumofBudget/thousand).toFixed(1).replace(/\.0$/, '') + 'K'; 
+			}
+			
+			else if (sumofBudget >= million && sumofBudget <= billion) {
+				return (sumofBudget/million).toFixed(1).replace(/\.0$/, '') + 'M';   
+			}
+			
+			else if (sumofBudget >= billion && sumofBudget <= trillion) {
+				return (sumofBudget/billion).toFixed(1).replace(/\.0$/, '') + 'B';   
+			}
+			
+			else {
+				return (sumofBudget/trillion).toFixed(1).replace(/\.0$/, '') + 'T';   
+		   }
+	   }    
+	/*function convertMillions(sumofBudget)
+	{
+		 if (Math.abs(sumofBudget) >= 1000000000) 
+		 {
+	        return (sumofBudget / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000000) 
+		 {
+		      return (sumofBudget / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+		 }
+		 else if (Math.abs(sumofBudget) >= 1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 else if (Math.abs(sumofBudget) <1000) 
+		 {
+		       return (sumofBudget / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+		 }				
+		 
+	
+	}*/
+				
+</script>
+<div class="row">
+		<div class="col-sm-12" align="left" >
+				<div class="dropdown">
+					 <button class="dropbtn tooltip-blue" tooltip-placement="left" tooltip="Currency"><span style="font-size:24px; padding: 5px 5px;">&curren;</span></button>
+
+					 <div class="dropdown-content">
+						<a href="#/app/Australia_monthlyytd_2016" id="AUS"><span>AUD &#x24;</span></a>
+						<a href="#/app/Australia_monthlyytd_2016" id="USD"><span>USD &#x24;</span></a>
+					  </div>
+				</div>
+		</div>
+</div>
+<br/>
+ <div class="row">
+ 	<div class="col-sm-12"> 
+	  <div id="chart-container">
+      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+		<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+	  </div>
+  </div>
+  </div>
+</div>
+  <div class="row">
+  	<div class="col-sm-9">
+		<div id="table-container"  style="padding-left:2%;"></div>
+	</div>
+	<div class="col-sm-3 avg" style="display:none">
+		<p><b>Average booking</b></p>
+		<div id="table-container1" align="left"></div>
+	</div>
+  </div>  
+  
+  <br />

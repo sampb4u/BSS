@@ -1,0 +1,843 @@
+<style>
+/*label{margin-left: 20px;}*/
+/*#datepicker{width:180px; margin: 0 20px 20px 20px;}*/
+div {
+	   /*color:#666666;*/
+	   font-family:Geneva, Arial, Helvetica, sans-serif;
+	   
+	}
+#datepicker > span:hover{cursor: pointer;}
+.customerDetails
+{
+	border:1px dashed #000;
+	padding: 0px 5px 0px 5px;
+}
+#pageHeadding
+{
+	font-size: 25px;
+	font-weight: 300;
+	color: #000000;
+	text-align: center;
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
+/*.popover {
+    -webkit-border-radius: 3px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 3px;
+    -moz-background-clip: padding;
+    border-radius: 3px;
+    background-clip: padding-box;
+    padding: 0;
+    border-color: #ccc;
+    border-width: 1px;
+    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    color: #444;
+    background-color: #fbfbfb;
+}*/
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+    max-width: 276px;
+    padding: 1px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    line-break: auto;
+}
+.dataNotFound
+{
+	color:#a94442;
+}
+
+</style>
+
+<script>
+$(function() {
+    
+    
+    $( "#DateToStart" ).datepicker({
+        dateFormat:"dd-mm-yy",
+		changeMonth: true,
+        changeYear: true,
+       // showButtonPanel: true,
+        // before datepicker opens run this function
+        beforeShow: function(){
+            // this gets today's date       
+            var theDate = new Date();
+            
+            // sets "theDate" 2 days ahead of today
+            theDate.setDate(theDate.getDate());
+			//theDate.setDate(<?php echo $checkin ?>);
+            // set min date as 2 days from today
+            $(this).datepicker('option',theDate);         
+        }
+       
+    });
+    
+});
+</script>
+  
+<script>
+
+$(function() {
+   
+$(document).on('click', '#close-preview', function(){ 
+    
+    $('.image-preview').popover('hide');
+    // Hover before close the preview
+    $('.image-preview').hover(		
+        function () {
+           $('#'+ $(this).attr('id')).popover('show');
+		   
+        }, 
+         function () {
+		   $('#'+ $(this).attr('id')).popover('hide');
+        }
+    );    
+});
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+	
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+		
+		var getClearId = $(this).attr('id').split("2");
+		 
+		$('#btn-hide').attr('disabled',false);
+        
+		//if(getClearId[1]=="siginput")
+		//{
+		//	var previewID = "signature";
+		//	var buttonText = "Upload Signature";
+		//}
+	  // else
+	//	{
+			var previewID2 = "photo";
+			var buttonText = "Upload Logo";
+		//}
+		//alert("clear");
+		//alert($(this).attr('id'));
+		var textChange = "1"+ getClearId[1];
+		var clearButton = "2"+ getClearId[1];
+		var dispFileName = "3"+ getClearId[1];
+//		 //alert(JSON.stringify($('#'+ getClearId[1]).val("")));		
+        $('#'+ previewID2).attr("data-content","").popover('hide');
+        $('#'+ dispFileName).val("");
+        $('#'+ clearButton).hide();
+//		$('#'+ getClearId[1]).val("");
+		$("#"+ textChange).text(buttonText);
+    });
+	
+	
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){  
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:200,
+            height:150
+        }); 
+		
+		//alert($(this).attr('id'));
+		//if($(this).attr('id')=="siginput")
+		//{
+		//	var previewID = "signature";
+		//}
+	  // else
+		//{
+			var previewID3 = "photo";
+		//}
+		var textChange = "1"+ $(this).attr('id');
+		var clearButton = "2"+ $(this).attr('id');
+		var dispFileName = "3"+ $(this).attr('id');
+		
+        var file = this.files[0]; 
+		
+        var reader = new FileReader();		
+        // Set preview image into the popover data-content		
+        reader.onload = function (e) {
+			
+            $("#"+ textChange).text("Change");
+            $("#"+ clearButton).show();
+            $("#"+ dispFileName).val(file.name);   			
+            img.attr('src', e.target.result);
+			
+            $("#"+ previewID3).attr("data-content",$(img)[0].outerHTML).popover("show");
+			
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+
+
+
+
+ 
+	</script>
+
+
+
+  
+<div ng-controller="CustomerMaster" ng-init="addField();loadAccountCodes();getApplications();getApplicationIndustry();loadCountries();getSalesPerson();getCustomerStatus(); getTerritory();getPayment(); loadcustomerType(); loadAddedDepartments(); loadCurrency();loadCustomerCurrency();loadDate(); loadCreditStatus(); getTaxNameByCountry(customerMaster.billingCountries);loadCustomerDBData(customerMasterForm);">
+    
+      
+	     
+    
+        <div class="well with-header with-footer">
+           <div class="header bordered-blue" id="pageHeadding">Customer Master</div>
+             
+             <form name="customerMasterForm" enctype="multipart/form-data" ng-submit="customerMasterFormSubmit(customerMaster,customerMasterForm);" novalidate>
+                   <div class="row">
+                        <div class="col-sm-4">
+                        <div class="form-group floating-label-wrapper">
+                               <span class="input-icon icon-right">
+                                                          <label for="AccountCode"></label>
+                                                        <input type="text" name="customerName" id="AccountCode" ng-model="customerName" placeholder="Type Customer Name" typeahead="customerName.name as customerName.name for customerName in customerNameCode | filter:{name:$viewValue}:startsWith" typeahead-on-select='loadsavedCustmers($label,customerMasterForm)' typeahead-no-results="noResults" typeahead-min-length='3' class="form-control" autocomplete="off" with-floating-label autofocus="autofocus"  tabindex="1">
+                                                        <!--<i class="icon-search nav-search-icon"></i>-->
+                                                  <i class="glyphicon glyphicon-search blue circular"></i>
+                                                    </span>
+                                                    <div ng-if="noResults" class="dataNotFound">No Results Found!</div>
+                              <!--<label for="AccountCode">Customer Name</label>
+                              <select data-placeholder="Customer Name" class="chosen-select"  id="AccountCode" name="customerName" ng-model="customerName" ng-keyup="loadsavedCustmers(customerName,customerMasterForm);">
+                                        
+            						      </select>-->
+                       
+                        </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                              <div ng-class="{ 'has-error' : customerMasterForm.customerStatus.$invalid && (customerMasterForm.customerStatus.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                    <!--<label for="CustomerStatus">Customer Status</label>-->
+                                                        <select class="form-control" ng-model = "customerMaster.customerStatus" name = "customerStatus"  ng-required="true" ng-options = "customerStatus.customerStatus as customerStatus.customerStatus for customerStatus in customerStatusArray" id="CustomerStatus" placeholder="Customer Status" tabindex="2" with-floating-label>
+                                                        <!--<option value="">Select</option>-->
+														
+													</select>
+                                                   
+                                                    </span>
+                                                    <p ng-show="customerMasterForm.customerStatus.$error.required && (customerMasterForm.customerStatus.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                </div>
+                                                </div>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                        <div ng-class="{ 'has-error' : customerMasterForm.dummyPhoto.$invalid && (customerMasterForm.dummyPhoto.$dirty || submitted)}">
+                                           <!--<label for="3photoinput">User Logo (optional)</label>-->
+													            <div class="input-group image-preview photo" id="photo">
+                                                                
+													                <input type="text" class="form-control image-preview-filename" disabled="disabled"  name="photoPath1" placeholder="User Logo" ng-model="customerMaster.photoPath1" id="3photoinput">
+													                <span class="input-group-btn">
+												        	            <button type="button" class="btn btn-default image-preview-clear" style="display:none;"  id="2photoinput" ng-click="rmvFilePath(customerMaster.imagename);">
+													        	            <span class="glyphicon glyphicon-remove"></span> Clear
+												                	    </button>
+                                                                       
+													                    <div class="btn btn-default image-preview-input">
+													                        <span class="glyphicon glyphicon-folder-open"></span>
+													                        <span class="image-preview-input-title"  id="1photoinput">Upload Logo</span>
+																			<input type="file"  name="photoPath" id="photoinput" class="photoinput" accept="image/png, image/jpeg, image/gif" ng-model="customerMaster.photoPath" tabindex="3" onchange="angular.element(this).scope().uploadCustomerLogo(this.files)" data-max-size="100000"/>
+													                    </div>
+													                </span>
+													            </div>
+																
+																	<input type="hidden" name="dummyPhoto"  ng-model="dummyPhoto" id="dummyPhoto"/>
+																	<p ng-show="customerMasterForm.dummyPhoto.$error.required && (customerMasterForm.dummyPhoto.$dirty || submitted)" class="help-block"> User Logo is required</p>
+                                                                    <!--<p id="logoSize" style="color:#a94442; display:none;" ng-if="customerMaster.photoPath!=null">File Size Too Large</p>-->
+                                                                    <input type="hidden" name="imagename"  ng-model="customerMaster.imagename" id="GetImage"/>
+																	
+                                                                 
+																</div>
+                                                               </div>
+                        </div>
+                   </div>
+                  <input type="hidden" name="modifyFlag" ng-model="customerMaster.modifyFlag">
+                 
+                   
+                   <div class="customerDetails">
+                       <br> <br>
+                       <div class="row">
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                            <div class="floating-label-wrapper">
+                                                    <span class="input-icon icon-right">
+                                                    <label for="CustomerCode"></label>
+                                                       <input type="text" class="form-control" ng-model = "customerMaster.account" name = "account"  placeholder="Customer Code" tabindex="4" id="CustomerCode" ng-keyup="validCode(customerMaster.account,customerMaster.custid);"  with-floating-label readonly>
+                                                       <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                    <!--<p ng-show="customerMasterForm.account.$error.required && (customerMasterForm.account.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                    <p class="existVal" style="color:#a94442; display:none;" ng-if="customerMaster.account!=null">Already Exist</p>-->
+                                                    <!--<p ng-show="customerMasterForm.account.$error.pattern  && (customerMasterForm.account.$dirty || submitted)" class="help-block">Enter Valid Customer Code</p>-->
+                                                    
+                                                </div>
+                                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                            <div class="floating-label-wrapper">
+                                                    <span class="input-icon icon-right">
+                                                    <label for="CustName"></label>
+                                                       <input type="text" class="form-control" ng-model = "customerMaster.accountid" name = "accountid"  placeholder="Customer Name" ng-required="true" id="CustName" tabindex="5"  with-floating-label readonly>
+                                                       <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                    <!--<p ng-show="customerMasterForm.accountid.$error.required && (customerMasterForm.accountid.$dirty || submitted)" class="help-block"> You can't leave this empty</p>-->
+                                                   <!-- <p ng-show="customerMasterForm.accountid.$error.pattern  && (customerMasterForm.accountid.$dirty || submitted)" class="help-block">Enter Valid Customer Name</p>-->
+                                                </div>
+                                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="Website"></label>
+                                       <input class="form-control" id="Website" type="text" ng-model="customerMaster.clientwebsite" name="clientwebsite" placeholder="Website (optional)" tabindex="6"  with-floating-label>
+                                       <i class="glyphicon glyphicon-globe circular"></i>
+                                                    </span>
+                                       </div>
+                                       </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="BillingAdress"></label>
+                                       <input class="form-control" id="BillingAdress" type="text" ng-model="customerMaster.mailingadress" tabindex="7" name="mailingadress"  placeholder="Billing Address" with-floating-label readonly>
+                                       <i class="glyphicon glyphicon-envelope circular"></i>
+                                                    </span>
+                                       </div>
+                                       </div>
+                            </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="shippingAddress"></label>
+                                       <input class="form-control" id="shippingAddress" type="text" ng-model="customerMaster.shippingadress" tabindex="8" name="shippingadress"  placeholder="Shipping Address" with-floating-label readonly>
+                                       <i class="glyphicon glyphicon-envelope circular"></i>
+                                                    </span>
+                                       </div>
+                                       </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group floating-label-wrapper">
+                                                         <select class="form-control" ng-model = "customerMaster.billingCountries" tabindex="9" id="BillingCountries" name = "billingCountries" ng-options = "billingCountries.id as billingCountries.billingCountries for billingCountries in countryNameArray" placeholder="Country" ng-change="getTaxNameByCountry(customerMaster.billingCountries);" with-floating-label ng-disabled="isDisabled">
+														<!--<option value="">Select </option>-->
+														</select>
+                                                 </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                   <div class="floating-label-wrapper">
+                                                    <span class="input-icon icon-right">
+                                                        <select class="form-control" ng-model = "customerMaster.creditStatus" name = "creditStatus"  tabindex="10" ng-options = "customerMaster.id as customerMaster.creditStatus for customerMaster in creditStatusArray" id="CreditStatus" placeholder="Credit Status" with-floating-label ng-disabled="isDisabled">
+                                                        <!--<option value="">Select Credit Status</option>-->
+														
+													</select>
+                                                   
+                                                    </span>
+                                                   
+                                 </div>                       
+                            </div>    
+                                
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                               <div ng-class="{ 'has-error' : customerMasterForm.customerGroup.$invalid && (customerMasterForm.customerGroup.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                    
+                                                    <select class="form-control" ng-model = "customerMaster.customerGroup" name = "customerGroup" ng-required="true" tabindex="11" ng-options = "customerGroup.id as customerGroup.customerGroup for customerGroup in customerTypeData" id="CustomerGroup" placeholder="Customer Type" with-floating-label>
+                                                        <!--<option value="">Select Customer Type</option>-->
+                                                        
+                                                        </select>
+                                                    </span>
+                                                    <p ng-show="customerMasterForm.customerGroup.$error.required && (customerMasterForm.customerGroup.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                   
+                                              </div>
+                                              </div>
+                            </div>
+                       </div>
+                       <div class="row">
+                            
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                              <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.application.$invalid && (customerMasterForm.application.$dirty || submitted)}">
+                                           
+                                             <span class="input-icon icon-right">
+                                                          <label for="ApplicationCode"></label>
+                                                        <input type="text" name="application" id="ApplicationCode" ng-model="customerMaster.application" placeholder="Industrial Code" tabindex="12" typeahead="application.application as application.applicationshortcutnamename for application in applicationData | filter:$viewValue" typeahead-on-select='applicanIndustryName($label)' typeahead-min-length='2' autocomplete="off" class="form-control" ng-required="true" with-floating-label>
+                                                        
+                                                  <i class="glyphicon glyphicon-search blue circular"></i>
+                                                    </span>
+                                                    
+                             
+                                        
+                                                    <p ng-show="customerMasterForm.application.$error.required && (customerMasterForm.application.$dirty || submitted)" class="help-block"> You can't leave this empty</p> 
+                                                  <!-- <p class="help-block" id="appCodeIndus" style="color:#a94442; display:none;" ng-if="customerMaster.application!=null">Search Results {{customerMaster.application}} Not Found</p>-->
+                                                </div>
+                                                </div>
+                            </div>
+                           <!--<div class="col-sm-5">
+                                 <div class="form-group">
+                                              <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.applicanIndustry.$invalid && (customerMasterForm.applicanIndustry.$dirty || submitted)}">
+                                                  <span class="input-icon icon-right">
+                                                          <label for="ApplicanIndustry"></label>
+                                                        <input type="text" name="applicanIndustry" id="ApplicanIndustry" ng-model="customerMaster.applicanIndustry" tabindex="13" placeholder="Application" typeahead="applicanIndustry.applicanIndustry as applicanIndustry.applicanIndustry for applicanIndustry in applicanIndustryData | filter:$viewValue | limitTo:10" typeahead-on-select='applicanIndustryCodes($label)' autocomplete="off" typeahead-min-length='2' class="form-control" ng-required="true" with-floating-label>
+                                                        <i class="icon-search nav-search-icon"></i>
+                                                  <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                                  
+                                                   <p ng-show="customerMasterForm.applicanIndustry.$error.required && (customerMasterForm.applicanIndustry.$dirty || submitted)" class="help-block"> You can't leave this empty</p>   
+                                                </div>
+                                                </div>
+                            </div>-->
+                           
+                            <div class="col-sm-3">
+                                 <div class="form-group floating-label-wrapper">
+                                                     
+                                                    
+                                                        <select class="form-control" ng-model = "customerMaster.territory" name = "territory"  tabindex="14"  placeholder="Territory (optional)" id="Territory" ng-options = "territory.territory as territory.territory for territory in territoryData" with-floating-label>
+                                                        <!--<option value="">Select</option>-->
+                                                       
+                                                        </select>
+                                                    
+                                                    
+                                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                 <div class="form-group">
+                                            <div class="floating-label-wrapper">
+                                                    <span class="input-icon icon-right">
+                                                    <label for="Corporate"></label>
+                                                       <input type="text" class="form-control" ng-model = "customerMaster.corporate" tabindex="15" name = "corporate"  placeholder="Corporate (optional)"  id="Corporate"  with-floating-label>
+                                                       <i class="fa fa-building-o circular" aria-hidden="true"></i>
+                                                    </span>
+                                                   
+                                                </div>
+                                                </div>
+                            </div>
+                       </div>
+                        <br> 
+                    </div>
+                    <br> 
+                    <legend style="font-size:14px;">Contact Details</legend>
+                    <div class="row">
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.contName.$invalid && (customerMasterForm.contName.$dirty || submitted)}">
+                                         <span class="input-icon icon-right">
+                                         <label for="contName"></label>
+										<input class="form-control" id="contName" type="text" ng-model = "customerMaster.contName"  tabindex="16" name="contName"  placeholder="Contact Name" ng-required="true" with-floating-label>
+                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+										<p ng-show="customerMasterForm.contName.$error.required && (customerMasterForm.contName.$dirty || submitted)" class="help-block">You can't leave this empty</p>
+                                        <!--<p ng-show="customerMasterForm.contName.$error.pattern  && (customerMasterForm.contName.$dirty || submitted)" class="help-block">Enter Valid Contact Name</p>-->
+										</div>
+										</div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="Title"></label>
+										<input class="form-control" id="Title" type="text" ng-model = "customerMaster.title" name="title"  placeholder="Title" tabindex="17"  with-floating-label>
+                                        <i class="glyphicon glyphicon-pencil circular"></i>
+                                                    </span>
+										
+                                            </div>
+                                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                            <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.phnumber.$invalid && (customerMasterForm.phnumber.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                    <label for="Phone"></label>
+                                                       <input type="text" class="form-control" ng-model = "customerMaster.phnumber" tabindex="18" name = "phnumber"  placeholder="Phone Number" ng-required="true" id="Phone"  with-floating-label>
+                                                       <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span>
+                                                    
+                                                    <p ng-show="customerMasterForm.phnumber.$error.required && (customerMasterForm.phnumber.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                    <!--<p ng-show="customerMasterForm.phnumber.$error.pattern  && (customerMasterForm.phnumber.$dirty || submitted)" class="help-block">Enter Valid Phone Number</p>-->
+                                                </div>
+                                                </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="mbNumber"></label>
+                                       <input class="form-control" id="mbNumber" type="text"  ng-model = "customerMaster.mbnumber" tabindex="19"  name="mbnumber"  placeholder="Mobile Number (optional)"  with-floating-label>
+                                        <i class="glyphicon glyphicon-phone circular"></i>
+                                                    </span>
+                                      
+                                       </div>
+                                       </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                          <span class="input-icon icon-right">
+                                         <label for="ophNumber"></label>
+                                       <input class="form-control" id="ophNumber" type="text"  ng-model = "customerMaster.ophnumber" tabindex="20"    name="ophnumber"  placeholder="Other Phone Number (optional)"  with-floating-label>
+                                        <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span>
+                                       
+                                       </div>
+                                       </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                            <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.email.$invalid && (customerMasterForm.email.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                    <label for="Email"></label>
+                                                       <input type="text" class="form-control" ng-model = "customerMaster.email" tabindex="21" name = "email"  placeholder="Email" ng-required="true" id="Email" ng-keyup="validEmail(customerMaster.email);"  with-floating-label>
+                                                       <i class="glyphicon glyphicon-envelope circular"></i>
+                                                    </span>
+                                                    <p ng-show="customerMasterForm.email.$error.required && (customerMasterForm.email.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                <!--<p ng-show="customerMasterForm.email.$error.pattern  && (customerMasterForm.email.$dirty || submitted)" class="help-block">Enter Valid Email</p>ng-pattern="/^[a-zA-Z0-9.@]*$/"-->
+                                                 <p class="help-block" id="existVal" style="color:#a94442; display:none;" ng-if="customerMaster.email!=null">Enter Valid Email</p>
+                                                </div>
+                                                </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="Fax"></label>
+                                       <input class="form-control" id="Fax" type="text"  ng-model="customerMaster.fax" name="fax"  placeholder="Fax Number (optional)" tabindex="22"   with-floating-label>
+                                       <i class="fa fa-fax circular" aria-hidden="true"></i>
+
+                                     
+                                                    </span>
+                                       
+                                       </div>
+                                       </div>
+                        </div>
+                        <div class="col-sm-3">
+                                  <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                        
+                                       
+                                         <select class="form-control" ng-model = "customerMaster.departmentname" name = "departmentname" tabindex="23"  id="DepartmentName" placeholder="Department" ng-options = "departmentname.departmentnameshortcut as departmentname.departmentname for departmentname in departmentData"  with-floating-label>
+                                                       <!-- <option value="">Select Department</option>-->
+                                                   </select>
+                                       
+                                                    
+										</div>
+										</div>
+                        </div>
+                  </div>
+                 	<div class="row">
+                       <div class="col-sm-3">
+                             <div class="floating-label-wrapper">
+                                            <span class="input-icon icon-right">
+                                            <label for="Reports"></label>
+										<input class="form-control" id="Reports" type="text" ng-model="customerMaster.reports" name="reports" tabindex="24"  placeholder="Reports-To (optional)" with-floating-label>
+                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                        </div>
+                        </div>
+                        <div class="col-sm-3">
+                             
+                        </div>
+                        <div class="col-sm-3">
+                             
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                       <input class="form-control" id="custId" type="hidden" ng-model="customerMaster.custid" name="custid"  placeholder="cust id">
+                                       
+                             </div>
+                        </div>
+                  </div>
+                  
+                  <hr/> 
+                  
+                   <div class="row">
+                        <div class="col-sm-3">
+                             <div class="form-group floating-label-wrapper">
+                                                    
+                                                     <span class="input-icon icon-right">
+                                                          <label for="SalesPerson"></label>
+                                                        <input type="text" name="salesPerson" id="SalesPerson" ng-model="customerMaster.salesPerson" placeholder="Salesman" tabindex="25" typeahead="salesPerson.salesPerson as salesPerson.salesPerson for salesPerson in salesPersonData | filter:$viewValue" typeahead-on-select='saleamancode($label)' typeahead-min-length='2' class="form-control" autocomplete="off" with-floating-label readonly>
+                                                        
+                                                  <i class="glyphicon glyphicon-search blue circular"></i>
+                                                    </span>
+                                                   
+                                                       
+                                                        </span>
+                                                        
+                                                    
+                                                </div>
+                                                </div>
+                        <div class="col-sm-3">
+                             <div class="form-group floating-label-wrapper">
+                                     <span class="input-icon icon-right">
+                                       <label for="SalesPersonCode"></label>
+										<input class="form-control" id="SalesPersonCode" type="text" ng-model="customerMaster.salesPersonCode" tabindex="26" name="salesPersonCode"  placeholder="Salesman Code" readonly with-floating-label> 
+                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+                                        </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         <span class="input-icon icon-right">
+                                         <label for="leadSource"></label>
+										<input class="form-control" id="leadSource" type="text" ng-model="customerMaster.leadsource" tabindex="27" name="leadsource"  placeholder="Lead Source (optional)"  with-floating-label>
+                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span>
+										<!--<p ng-show="customerMasterForm.leadsource.$error.required && (customerMasterForm.leadsource.$dirty || submitted)" class="help-block"> Lead Source is Required</p>-->
+										</div>
+										</div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper">
+                                         
+                                                    <select class="form-control" id="Currency" name="currency" ng-model="customerMaster.currency" placeholder="Currency" ng-options = "currency.id as currency.currency for currency in currencyCustomer"  tabindex="28" with-floating-label ng-disabled="isDisabled">
+                                                            <!--<option value="">Select</option>-->
+                                                        </select>
+										
+										</div>
+										</div>
+                        </div>
+                  </div>
+                   <div class="row">
+                       <div class="col-sm-3">
+                             <div class="form-group floating-label-wrapper">
+                                                    <select class="form-control" id="TaxName" name="taxName" ng-model="customerMaster.taxName" placeholder="Tax Name" ng-options = "taxName.taxName as taxName.taxName for taxName in taxNameData" tabindex="29" with-floating-label>
+                                                          
+                                                        </select>
+							</div>
+						</div>
+                        <div class="col-sm-3">
+                             <div class="form-group floating-label-wrapper">
+                                                      <select class="form-control" ng-model = "customerMaster.paymentTerm" name = "paymentTerm" tabindex="30"  ng-options = "paymentTerm.id as paymentTerm.paymentTerm for paymentTerm in paymentTermData" id="PaymentTerm" placeholder="Payment Term" with-floating-label ng-disabled="isDisabled">
+                                                        
+                                                   </select>
+                                                </div>
+                        </div>                        
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                         <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.discountmultiplier.$error.pattern && (customerMasterForm.discountmultiplier.$dirty || submitted)}">
+                                         <span class="input-icon icon-right">
+                                         <label for="DiscountMultiplier"></label>
+                                       <input class="form-control" id="DiscountMultiplier" type="text"  ng-model = "customerMaster.discountmultiplier" tabindex="31" name="discountmultiplier" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" placeholder="Discount Multiplier (optional)"  with-floating-label>
+                                       <i class="fa fa-calculator circular" aria-hidden="true"></i>
+                                       </span>
+									   <p ng-show="customerMasterForm.discountmultiplier.$error.pattern  && (customerMasterForm.discountmultiplier.$dirty || submitted)" class="help-block">Enter Valid Discount Multiplier</p>
+                                      
+                                      
+                                       </div>
+                                       </div>
+                        </div>
+                        <div class="col-sm-3">
+                             <div class="form-group">
+                                                    <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.opportunityAmount.$error.pattern && (customerMasterForm.opportunityAmount.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                      <label for="opportAmount"></label>
+                                                       <input type="text" class="form-control"  ng-model = "customerMaster.opportunityAmount"  tabindex="32" name = "opportunityAmount" placeholder="Opportunity Amount (optional)"    ng-pattern="/^[0-9.]*$/" id="opportAmount" with-floating-label>
+													     <i class="fa fa-calculator circular" aria-hidden="true"></i>
+                                                    </span>
+                                                    
+                                                    <p ng-show="customerMasterForm.opportunityAmount.$error.pattern  && (customerMasterForm.opportunityAmount.$dirty || submitted)" class="help-block">Enter Valid Opportunity Amount</p>  
+                                                </div>
+                                                </div>
+                        </div>
+                  </div>
+                   <div class="row">
+				       <div class="col-sm-3">
+					       <div class="form-group">
+                                         <div class="floating-label-wrapper" ng-class="{ 'has-error' : customerMasterForm.bddate.$invalid && (customerMasterForm.bddate.$dirty || submitted)}">
+                                         <span class="input-icon icon-right">
+                                         <label for="DateToStart"></label>
+                                             <input type="text" id="DateToStart" class="form-control" placeholder="Date of start" name="bddate" ng-model='customerMaster.bddate' ng-required="true"  size="10" maxlength="33" with-floating-label readonly="readonly"/>
+                                             <i class="glyphicon glyphicon-calendar circular"></i>
+                                             </span>
+                                         <!--<div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                              <input class="form-control" type="text" id="Date" name="bddate" ng-model="customerMaster.bddate" placeholder="Date of start" ng-required="true" readonly with-floating-label/>
+                                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            
+                                        </div>-->
+                                        <p ng-show="customerMasterForm.bddate.$error.required && (customerMasterForm.bddate.$dirty || submitted)" class="help-block"> You can't leave this empty</p>	
+                                        </div>
+											
+                                                </div> 
+					   </div>
+					    <div class="col-sm-3">
+						    <div class="floating-label-wrapper">
+                                       <span class="input-icon icon-right">
+                                       <label for="createdBy"></label>
+                                       <input class="form-control" id="createdBy" type="text" ng-model = "customerMaster.createdby" name = "createdby" tabindex="34"  placeholder="Created By (optional)" with-floating-label>
+                                       <i class="glyphicon glyphicon-user circular"></i>
+                                       </span>
+                                       </div>
+					   </div>
+					    <div class="col-sm-3">
+						     <div class="floating-label-wrapper">
+                                           <span class="input-icon icon-right">
+                                           <label for="lastModifiedby"></label>
+                                       <input class="form-control" id="lastModifiedby" type="text"  ng-model = "customerMaster.lastmodifiedby" tabindex="35" name = "lastmodifiedby"  placeholder="Last Modified By (optional)" with-floating-label>
+                                       <i class="glyphicon glyphicon-user circular"></i>
+                                       </span>
+                                       </div>
+					   </div>
+					   <div class="col-sm-3">
+					        
+					   </div>
+				  </div>     
+                 
+				  
+                  <br>
+                   <div>
+                                    <span>Additional Contact (optional)</span>
+                                    <div class="table-scrollable">
+		                               <table class="table table-hover table-striped table-bordered" style="font-weight:normal;">
+                                       
+		<thead class="bordered-blue">
+		<tr>
+        <th>Add</th>
+		<th>Item #</th>
+		<th>Contact Name</th>
+		<th>Telephone</th>
+		<th>Mobile</th>
+		<th>Department</th>
+		<th>Email</th>
+		<th>Title</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat = "rowData in data">
+		<td><button type="button" id="right_All_1" class="btn btn-primary" ng-if="rowData.id=='1'" ng-click='addField();'>
+                                                    	<i class="glyphicon glyphicon-plus-sign"></i>
+                                                    </button>
+												   <button type="button" id="right_All_1" class="btn btn-danger" ng-if="rowData.id!='1'" ng-click='removeRow(rowData.id);'>
+                                                   		<!--<i class="glyphicon glyphicon-remove-sign"></i>-->
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                   </button>	</td><td style="text-align:center;padding: 15px 0px;">{{$index+1}}</td>
+		<td><div ng-class="{ 'has-error' : customerMasterForm.contactName{{$index}}.$invalid && (customerMasterForm.contactName{{$index}}.$dirty || submitted)}"><span class="input-icon icon-right">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "rowData.contactName" name = "contactName{{$index}}"  placeholder="Contact" tabindex="36"  id="contName">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span><p ng-show="customerMasterForm.contactName{{$index}}.$error.required && (customerMasterForm.contactName{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                    <p ng-show="customerMasterForm.contactName{{$index}}.$error.pattern  && (customerMasterForm.contactName{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Contact Name</p>
+                                                    </div></td>
+		<td><!--<div ng-class="{ 'has-error' : customerMasterForm.contactNumber{{$index}}.$invalid && (customerMasterForm.contactNumber{{$index}}.$dirty || submitted)}"><span class="input-icon icon-right">
+                                                           
+                                                        <input type="text" class="form-control" ng-model = "rowData.contactNumber"  name = "contactNumber{{$index}}"  placeholder="Contact Number" ng-pattern="/^[0-9-]*$/" tabindex="37"  id="contactNum">
+                                                        <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span><p ng-show="customerMasterForm.contactNumber{{$index}}.$error.required && (customerMasterForm.contactNumber{{$index}}.$dirty || submitted)" class="help-block">You can't leave this empty</p>
+                                                    <p ng-show="customerMasterForm.contactNumber{{$index}}.$error.pattern  && (customerMasterForm.contactNumber{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Contact Number</p>
+                                                    </div>--><div class="form-group">
+                                                    <div ng-class="{ 'has-error' : customerMasterForm.contactNumber{{$index}}.$error.pattern && (customerMasterForm.contactNumber{{$index}}.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                      <!--<label for="contactNum"></label>-->
+                                                       <input type="text" class="form-control"  ng-model = "rowData.contactNumber"  tabindex="37" name = "contactNumber{{$index}}" placeholder="Contact Number"  ng-pattern="/^[0-9- ]*$/" id="contactNum">
+													     <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span>
+                                                   
+                                                    <p ng-show="customerMasterForm.contactNumber{{$index}}.$error.pattern  && (customerMasterForm.contactNumber{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Contact Number</p>  
+                                                </div>
+                                                </div></td>
+		<td><!--<div ng-class="{ 'has-error' : customerMasterForm.contactAltNumber{{$index}}.$invalid && (customerMasterForm.contactAltNumber{{$index}}.$dirty || submitted)}"><span class="input-icon icon-right">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "rowData.contactAltNumber"  name = "contactAltNumber{{$index}}"  placeholder="Mobile Number" ng-pattern="/^[0-9-]*$/" tabindex="38" id="contactAltNum">
+                                                        <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span><p ng-show="customerMasterForm.contactAltNumber{{$index}}.$error.required && (customerMasterForm.contactAltNumber{{$index}}.$dirty || submitted)" class="help-block">You can't leave this empty</p>
+                                                    <p ng-show="customerMasterForm.contactAltNumber{{$index}}.$error.pattern  && (customerMasterForm.contactAltNumber{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Mobile Number</p>
+                                                    </div>--><div class="form-group">
+                                                    <div ng-class="{ 'has-error' : customerMasterForm.contactAltNumber{{$index}}.$error.pattern && (customerMasterForm.contactAltNumber{{$index}}.$dirty || submitted)}">
+                                                    <span class="input-icon icon-right">
+                                                      <!--<label for="contactAltNum"></label>-->
+                                                       <input type="text" class="form-control"  ng-model = "rowData.contactAltNumber"  tabindex="38" name = "contactAltNumber{{$index}}" placeholder="Mobile Number"  ng-pattern="/^[0-9- ]*$/" id="contactAltNum">
+													     <i class="glyphicon glyphicon-earphone circular"></i>
+                                                    </span>
+                                                   
+                                                    <p ng-show="customerMasterForm.contactAltNumber{{$index}}.$error.pattern  && (customerMasterForm.contactAltNumber{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Mobile Number</p>  
+                                                </div>
+                                                </div></td>
+		<td><div ng-class="{ 'has-error' : customerMasterForm.department{{$index}}.$invalid && (customerMasterForm.department{{$index}}.$dirty || submitted)}"><span class="input-icon icon-right">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "rowData.department" name = "department{{$index}}"   placeholder="Department" tabindex="39"  id="Department">
+                                                        <i class="glyphicon glyphicon-user circular"></i>
+                                                    </span><p ng-show="customerMasterForm.department{{$index}}.$error.required && (customerMasterForm.department{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                    <p ng-show="customerMasterForm.department{{$index}}.$error.pattern  && (customerMasterForm.department{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Department Name</p>
+                                                    </div> </td>
+		                                             <td><div><span class="input-icon icon-right">
+                                                            
+                                                        <input type="text" class="form-control" ng-model = "rowData.emailAddr" name = "emailAddr{{$index}}"  ng-keyup="validEmailAddress(rowData.emailAddr);" tabindex="40"  placeholder="Email">
+                                                        <i class="glyphicon glyphicon-envelope circular"></i>
+                                                    </span>
+                                                         <p class="help-block" id="emailAddress{{$index}}" style="color:#a94442; display:none;" ng-if="rowData.emailAddr!=null">Enter Valid Email</p>
+                                                     <!--<p ng-show="customerMasterForm.emailAddr{{$index}}.$error.pattern  && (customerMasterForm.emailAddr{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Email</p>-->
+                                                    </div></td>
+                                                    
+                                                    <td><div ng-class="{ 'has-error' : customerMasterForm.titleName{{$index}}.$invalid && (customerMasterForm.titleName{{$index}}.$dirty || submitted)}"><span class="input-icon icon-right">
+                                                         
+                                                        <input type="text" class="form-control" ng-model = "rowData.titleName" name = "titleName{{$index}}"   placeholder="Title" tabindex="41" id="TitleName">
+                                                        <i class="glyphicon glyphicon-pencil circular"></i>
+                                                    </span><p ng-show="customerMasterForm.titleName{{$index}}.$error.required && (customerMasterForm.titleName{{$index}}.$dirty || submitted)" class="help-block"> You can't leave this empty</p>
+                                                    <p ng-show="customerMasterForm.titleName{{$index}}.$error.pattern  && (customerMasterForm.titleName{{$index}}.$dirty || submitted)" class="help-block">Enter Valid Title</p>
+                                                    </div></td>
+		</tr>
+		
+		</tbody>
+		</table>
+		                             </div>
+                                     </div>
+                   <br /><br />
+		  		   <div class="row">
+                                       <div class="col-sm-12" align="center">
+                                            <button type="submit" class="btn btn-primary btn-hide2" id="btn-hide"><i class="glyphicon glyphicon-save"></i>Save</button>
+                                            <button type="reset" class="btn btn-danger" ng-click='resetCustomerMasterForm(customerMasterForm);'><i class="glyphicon glyphicon-trash"></i>Delete</button>
+                                       </div>
+						            </div>
+             </form>
+		</div>
+</div>
+			      
+	
+
+

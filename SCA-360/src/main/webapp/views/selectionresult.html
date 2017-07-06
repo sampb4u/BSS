@@ -1,0 +1,185 @@
+﻿
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$.ajax({ 
+		    type: 'POST', 
+		    url: 'https://gb.paramax-vss.com/api/authentication', 
+		    data: {"AuthID":"SCA360_Server", "Password":"994E70E986D7DEAFC6E86E5C707D34DAC373E225FA5345C2AC467C92D1E07DCC", "UserCode":"SCA0046"}, 
+		    dataType: 'json',
+		    success: function (data) 
+			{ 
+				$('#sessionkey').val(data['SessionKey']); 
+		    }
+		});		
+		
+		$('#getData').click(function()
+		{
+			var sessionkey = $('#sessionkey').val();
+			var selectionid = $('#selectionid').val();
+		
+			$.ajax({ 
+				    type: 'POST', 
+				    url: 'https://gb.paramax-vss.com/api/sca360SelectionResult', 
+				    data: {
+							"SessionKey":sessionkey,
+							"SelectionID":[ selectionid ]
+						  }, 
+				    dataType: 'json',
+				    success: function (data) 
+					{ 
+						
+						
+							//$('#rq').text(JSON.stringify(data));
+							//Input1
+						if(data['Status']==1)
+						{	
+							
+							
+							$('#Selectionid').text(data['SelectionResult'][0]['SelectionID']);
+							$('#SelectionNumber').text(data['SelectionResult'][0]['SelectionNumber']);
+							$('#CustomerName').text(data['SelectionResult'][0]['CustomerName']);
+							$('#ProductModel').text(data['SelectionResult'][0]['ProductModel']);
+							$('#SpeedType').text(data['SelectionResult'][0]['SpeedType']);
+							
+							$('#Power').text(data['SelectionResult'][0]['Input1']['Power']);
+							$('#Speed').text(data['SelectionResult'][0]['Input1']['Speed']);
+							$('#OperatingHours').text(data['SelectionResult'][0]['Input1']['OperatingHours']);
+
+							$('#Power1').text(data['SelectionResult'][0]['Input2']['Power']);
+							$('#Speed1').text(data['SelectionResult'][0]['Input2']['Speed']);
+							$('#OperatingHours1').text(data['SelectionResult'][0]['Input2']['OperatingHours']);
+
+							$('#AmbientTemperature').text(data['SelectionResult'][0]['AmbientTemperature']);
+							$('#RequirementSF').text(data['SelectionResult'][0]['RequirementSF']);
+							$('#NominalRatio').text(data['SelectionResult'][0]['NominalRatio']);
+							$('#ActualRatio').text(data['SelectionResult'][0]['ActualRatio']);
+							$('#OutputSpeed').text(data['SelectionResult'][0]['OutputSpeed']);
+							$('#MechanicalRating').text(data['SelectionResult'][0]['MechanicalRating']);
+
+
+							$('#Code').text(data['SelectionResult'][0]['Options'][0]['Code']);
+							$('#Name').text(data['SelectionResult'][0]['Options'][0]['Name']);
+							$('#SSCDelivery').text(data['SelectionResult'][0]['Options'][0]['SSCDelivery']);
+							$('#Quantity').text(data['SelectionResult'][0]['Options'][0]['Quantity']);
+							$('#Delivery').text(data['SelectionResult'][0]['Options'][0]['Delivery']);
+							$('#SSCDelivery').text(data['SelectionResult'][0]['Options'][0]['SSCDelivery']);
+							$('#Price').text(data['SelectionResult'][0]['Options'][0]['Price']);							
+							
+						}
+						else
+						{
+							alert(data['Message']);
+							
+							$('#Selectionid').text("");
+							$('#SelectionNumber').text("");
+							$('#CustomerName').text("");
+							$('#ProductModel').text("");
+							$('#SpeedType').text("");
+							
+							$('#Power').text("");
+							$('#Speed').text("");
+							$('#OperatingHours').text("");
+
+							$('#Power1').text("");
+							$('#Speed1').text("");
+							$('#OperatingHours1').text("");
+
+							$('#AmbientTemperature').text("");
+							$('#RequirementSF').text("");
+							$('#NominalRatio').text("");
+							$('#ActualRatio').text("");
+							$('#OutputSpeed').text("");
+							$('#MechanicalRating').text("");
+
+
+							$('#Code').text("");
+							$('#Name').text("");
+							$('#SSCDelivery').text("");
+							$('#Quantity').text("");
+							$('#Delivery').text("");
+							$('#SSCDelivery').text("");
+							$('#Price').text("");
+						}
+							
+				    }
+				});					
+		});
+	});
+</script>
+<br />
+<div class="row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<input type="text" id="sessionkey" class="form-control" readonly/>
+	</div>
+	<div class="col-sm-3"></div>
+</div><br />
+<div class="row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<input type="text" id="selectionid"  class="form-control" placeholder="Selection ID"/>
+	</div>
+	<div class="col-sm-3"></div>
+</div><br />
+<div class="row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6" align="center">
+		<input type="button" value="Get Product Data" id="getData" class="btn btn-blue"/>
+	</div>
+	<div class="col-sm-3"></div>
+</div><br />
+
+<div>
+	<table class="table table-hover table-striped table-bordered">		
+		<thead class="bordered-blue">
+			<tr><td align="center" colspan="5">Selection Result</td></tr>
+			<tr><th>Selection ID</th><th>Selection Number</th><th>Customer Name</th><th>Product Model</th><th>Speed Type</th></tr>
+		</thead>
+		<tbody>
+			<tr><td id="Selectionid"></td><td id="SelectionNumber"></td><td id="CustomerName"></td><td id="ProductModel"></td><td id="SpeedType"></td></tr>
+		</tbody>
+   </table>
+   <div class="row">
+   <div class="col-sm-6">   
+	<table class="table table-hover table-striped table-bordered">		
+		<thead class="bordered-blue">
+			<tr><td align="center" colspan="3">Input1</td></tr>
+			<tr><th>Power</th><th>Speed</th><th>Operating Hours</th></tr>
+		</thead>
+		<tbody>
+			<tr><td id="Power"></td><td id="Speed"></td><td id="OperatingHours"></td></tr>
+		</tbody>
+   </table>   
+   </div>
+   <div class="col-sm-6">
+	<table class="table table-hover table-striped table-bordered">		
+		<thead class="bordered-blue">
+			<tr><td align="center" colspan="3">Input2</td></tr>
+			<tr><th>Power</th><th>Speed</th><th>Operating Hours</th></tr>
+		</thead>
+		<tbody>
+			<tr><td id="Power1"></td><td id="Speed1"></td><td id="OperatingHours1"></td></tr>
+		</tbody>
+   </table>      	
+   </div>
+   </div>
+  <table class="table table-hover table-striped table-bordered">		
+		<thead class="bordered-blue">
+			<tr><th>Ambient Temperature</th><th>Requirement SF</th><th>Nominal Ratio</th><th>Actual Ratio</th><th>Output Speed</th><th>Mechanical Rating</th></tr>
+		</thead>
+		<tbody>
+			<tr><td id="AmbientTemperature"></td><td id="RequirementSF"></td><td id="NominalRatio"></td><td id="ActualRatio"></td><td id="OutputSpeed"></td><td id="MechanicalRating"></td></tr>
+		</tbody>
+   </table>   
+<table class="table table-hover table-striped table-bordered">		
+		<thead class="bordered-blue">
+			<tr><td align="center" colspan="7">Torque Rating</td></tr>
+			<tr><th>Code</th><th>Name</th><th>Quantity</th><th>Delivery</th><th>SSCDelivery</th><th>Price</th><th>SSCPrice</th></tr>
+		</thead>
+		<tbody>
+			<tr><td id="Code"></td><td id="Name"></td><td id="Quantity"></td><td id="Delivery"></td><td id="SSCDelivery"></td><td id="Price"></td><td id="SSCPrice"></td></tr>
+		</tbody>
+   </table>   
+</div>
+

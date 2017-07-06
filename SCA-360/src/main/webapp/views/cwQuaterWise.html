@@ -1,0 +1,90 @@
+<script>
+$(document).ready(function()
+{
+  $.getJSON("cwQwarterlyBooking.do", function(json) 
+  {
+  	//alert(JSON.stringify(json['dataset']));
+ 	FusionCharts.ready(function () 
+	{           
+ 		 var revenueChart = new FusionCharts({		
+		        type: 'mscolumn2d',
+			    renderAt: 'container',
+		        width: '100%',
+		        height: '500',
+			    dataFormat: 'json',
+			    dataSource: {
+								"chart": {
+											"caption": "Quarterly Bookings",
+											"bgcolor": "FFFFFF",
+									        "decimals":'0',
+											"yaxisname": "USD (M)",
+											"showsum": "1",
+											"showvalues": "1",
+											"exportenabled": "1",
+											"exportatclient": "0",
+											"exporthandler": "http://export.api3.fusioncharts.com",
+											"html5exporthandler": "http://export.api3.fusioncharts.com",
+									        "bgColor": "#ffffff",
+											"useroundedges": "1",
+									        "borderAlpha": "20",
+										    "showCanvasBorder": "0",
+									        "usePlotGradientColor": "0",
+										    "plotBorderAlpha": "10",
+									        "legendBorderAlpha": "0",
+											"legendPosition":"right",
+										    "legendShadow": "1",
+									        "valueFontColor": "#000000",
+									        "showXAxisLine": "1",
+									        "xAxisLineColor": "#999999",
+									        "divlineColor": "#999999",
+									        "divLineDashed": "1",
+											"showAlternateHGridColor": "0",
+									        "subcaptionFontBold": "0",
+									        "subcaptionFontSize": "14",
+											"baseFont":"Helvetica",		
+											"baseFontSize":"14",
+											"rotatelabels": "0",		
+											"rotatevalues": "0",
+											"baseFontColor":"#000000",
+											"yFormatNumberScale":"1",
+											 "numberScaleValue": "1000,1000,1000",
+       										 "numberScaleUnit": "K,M,B",
+											"plotToolText":"$seriesname $label Bookings $datavalue"	
+										},
+										"categories": [
+														{
+															"category": [
+																			{
+																				"label": "Jan-Mar"
+																			},
+																			{
+																				"label": "Apr-Jun"
+																			},
+																			{
+																				"label": "Jul-Sept"
+																			},
+																			{
+																				"label": "Oct-Dec"
+																			}
+																		]
+														}
+							  						 ],
+													"dataset": json['dataset']												
+										}
+								    }).render();		
+							 })		 
+						 });	 							 
+					 });
+</script>
+
+<div class="row">
+  	<div class="col-sm-12">
+    	 <div id='container'>
+		      <div style="font-size:20px; position:fixed; top:40%; left:50%;" id="loading">
+				<img src="image/PreLoader.gif"   /> <br><span style="color:#5876D1; font-size:20px; margin-left:-25px;">Please Wait..</span>
+			  </div>		 			 
+		 </div>
+	</div>
+</div>
+
+

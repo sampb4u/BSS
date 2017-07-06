@@ -1,0 +1,800 @@
+<script type="text/javascript">
+
+var category = [
+        {
+            "category": [
+                {
+                    "label": "Thailand"
+                },
+                {
+                    "label": "Malaysia"
+                },
+                {
+                    "label": "Indonesia"
+                },
+                {
+                    "label": "Singapore"
+                },
+                {
+                    "label": "Philippiness"
+                },
+                {
+                    "label": "India"
+                },
+                {
+                    "label": "Vietnam"
+                },
+                {
+                    "label": "Other"
+                },
+                {
+                    "label": "Australia"
+                }
+            ]
+        }
+    ];
+
+var data = [
+        {
+            "dataset": [
+                {
+                    "seriesname": "Budget of GM",
+					"color": "67b7dc",
+                    "data": [
+                        {
+                            "value": "1053375",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "327327",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "258333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "335944",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "297000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "167333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "263000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "47333",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of GB",
+					"color": "fdd400",
+                    "data": [
+                        {
+                            "value": "324945",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "420521",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "224667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "72083",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "61667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "80833",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "34333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "61000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "118531",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of SGM",
+					"color": "84b761",
+                    "data": [
+                        {
+                            "value": "202515",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "106129",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "17333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "43679",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "57667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "43750",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "24000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "33667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "11925",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of parts/srvc",
+					"color": "cc4748",
+                    "data": [
+                        {
+                            "value": "130365",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "78641",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "121667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "94512",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "2533",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "44767",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "3000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "567",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "188410",
+							"alpha" : "60"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "dataset": [
+                {
+                    "seriesname": "Booking of Gm",
+					"color": "67b7dc",
+                    "data": [
+                        {
+                            "value": "778257"
+                        },
+                        {
+                            "value": "318318"
+                        },
+                        {
+                            "value": "208897"
+                        },
+                        {
+                            "value": "271041"
+                        },
+                        {
+                            "value": "342496"
+                        },
+                        {
+                            "value": "24420"
+                        },
+                        {
+                            "value": "357926"
+                        },
+                        {
+                            "value": "25468"
+                        },
+                        {
+                            "value": "303700"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of GB",
+					"color": "fdd400",
+                    "data": [
+                        {
+                            "value": "442783"
+                        },
+                        {
+                            "value": "456548"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "96163"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "53414"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "107319"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of SGM",
+					"color": "84b761",
+                    "data": [
+                        {
+                            "value": "202515"
+                        },
+                        {
+                            "value": "106129"
+                        },
+                        {
+                            "value": "17333"
+                        },
+                        {
+                            "value": "43679"
+                        },
+                        {
+                            "value": "57667"
+                        },
+                        {
+                            "value": "43750"
+                        },
+                        {
+                            "value": "24000"
+                        },
+                        {
+                            "value": "33667"
+                        },
+                        {
+                            "value": "11925"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of Parts/service",
+					"color": "cc4748",
+                    "data": [
+                        {
+                            "value": "919293"
+                        },
+                        {
+                            "value": "105675"
+                        },
+                        {
+                            "value": "143344"
+                        },
+                        {
+                            "value": "138605"
+                        },
+                        {
+                            "value": "33299"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "5755"
+                        },
+                        {
+                            "value": "1365"
+                        },
+                        {
+                            "value": "142398"
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+	
+	var dataok = [
+        {
+            "dataset": [
+                {
+                    "seriesname": "Budget of GM213",
+					"color": "67b7dc",
+                    "data": [
+                        {
+                            "value": "1053375",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "327327",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "258333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "335944",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "297000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "167333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "263000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "47333",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of GB",
+					"color": "fdd400",
+                    "data": [
+                        {
+                            "value": "324945",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "420521",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "224667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "72083",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "61667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "80833",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "34333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "61000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "118531",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of SGM",
+					"color": "84b761",
+                    "data": [
+                        {
+                            "value": "202515",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "106129",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "17333",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "43679",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "57667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "43750",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "24000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "33667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "11925",
+							"alpha" : "60"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Budget of parts/srvc",
+					"color": "cc4748",
+                    "data": [
+                        {
+                            "value": "130365",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "78641",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "121667",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "94512",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "2533",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "44767",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "3000",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "567",
+							"alpha" : "60"
+                        },
+                        {
+                            "value": "188410",
+							"alpha" : "60"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "dataset": [
+                {
+                    "seriesname": "Booking of Gm",
+					"color": "67b7dc",
+                    "data": [
+                        {
+                            "value": "778257"
+                        },
+                        {
+                            "value": "318318"
+                        },
+                        {
+                            "value": "208897"
+                        },
+                        {
+                            "value": "271041"
+                        },
+                        {
+                            "value": "342496"
+                        },
+                        {
+                            "value": "24420"
+                        },
+                        {
+                            "value": "357926"
+                        },
+                        {
+                            "value": "25468"
+                        },
+                        {
+                            "value": "303700"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of GB",
+					"color": "fdd400",
+                    "data": [
+                        {
+                            "value": "442783"
+                        },
+                        {
+                            "value": "456548"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "96163"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "53414"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "107319"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of SGM",
+					"color": "84b761",
+                    "data": [
+                        {
+                            "value": "202515"
+                        },
+                        {
+                            "value": "106129"
+                        },
+                        {
+                            "value": "17333"
+                        },
+                        {
+                            "value": "43679"
+                        },
+                        {
+                            "value": "57667"
+                        },
+                        {
+                            "value": "43750"
+                        },
+                        {
+                            "value": "24000"
+                        },
+                        {
+                            "value": "33667"
+                        },
+                        {
+                            "value": "11925"
+                        }
+                    ]
+                },
+                {
+                    "seriesname": "Booking of Parts/service",
+					"color": "cc4748",
+                    "data": [
+                        {
+                            "value": "919293"
+                        },
+                        {
+                            "value": "105675"
+                        },
+                        {
+                            "value": "143344"
+                        },
+                        {
+                            "value": "138605"
+                        },
+                        {
+                            "value": "33299"
+                        },
+                        {
+                            "value": "221210"
+                        },
+                        {
+                            "value": "5755"
+                        },
+                        {
+                            "value": "1365"
+                        },
+                        {
+                            "value": "142398"
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+  var i=0;
+  FusionCharts.ready(function(){
+   var fusioncharts = new FusionCharts({
+   //$('#chart-container').insertFusionCharts({
+    type: 'msstackedcolumn2d',
+    renderAt: 'chart-container',
+    width: '100%',
+    height: '500',
+    dataFormat: 'json',
+    dataSource: {
+    "chart": {
+		"palette": "2",
+        "caption": "Group By Product YTD",
+        //"subcaption": "Harry's SuperMart",
+        //"xaxisname": "Quarter",
+        //"yaxisname": "Sales (In USD)",
+		"showsum": "1",
+		"showvalues": "0",
+        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+        "numberPrefix": " $",
+        "numbersuffix": " USD",
+        "bgColor": "#ffffff",
+		"useroundedges": "1",
+        "borderAlpha": "20",
+        "showCanvasBorder": "0",
+        "usePlotGradientColor": "0",
+        "plotBorderAlpha": "10",
+        "legendBorderAlpha": "0",
+		"legendPosition":"right",
+        "legendShadow": "1",
+        "valueFontColor": "#000000",
+        "showXAxisLine": "1",
+        "xAxisLineColor": "#999999",
+        "divlineColor": "#999999",
+        "divLineDashed": "1",
+        "showAlternateHGridColor": "0",
+        "subcaptionFontBold": "0",
+        "subcaptionFontSize": "14",
+		"baseFont":"Helvetica",		
+		"baseFontSize":"14",
+		"rotatelabels": "1",		
+		"rotatevalues": "1",
+		"baseFontColor":"#000000"
+		//"theme":"fint"   
+		
+    },
+    "categories": category,
+    "dataset": data
+},
+events: {
+           dataPlotClick: function (event,dataObj) 
+			{	
+			alert(dataObj.categoryLabel);
+			alert(dataObj.datasetName);
+				/*i++;
+				var label = "label"+i;
+				var name = "name"+i;
+				alert(dataObj.categoryLabel);	
+				sessionStorage.setItem(label,dataObj.categoryLabel);
+				sessionStorage.setItem(name,dataObj.datasetName);
+				sessionStorage.setItem('count',i);
+				alert(dataObj.datasetName);	*/	
+				asd();
+            }
+        }
+}
+);
+
+
+    fusioncharts.render();
+});
+
+
+$(document).ready(function()
+{
+	$('#goback').click(function()
+	{
+		alert(sessionStorage.getItem('count'));
+		var labelok = "label"+ sessionStorage.getItem('count');
+		var nameok = "name"+ sessionStorage.getItem('count');
+		alert(sessionStorage.getItem(labelok));
+		alert(sessionStorage.getItem(nameok));
+		sessionStorage.setItem('count',sessionStorage.getItem('count')-1)
+	});
+});
+/*function asd()
+{
+var fusioncharts = new FusionCharts({
+   //$('#chart-container').insertFusionCharts({
+    type: 'msstackedcolumn2d',
+    renderAt: 'chart-container',
+    width: '100%',
+    height: '80%',
+    dataFormat: 'json',
+    dataSource: {
+    "chart": {
+		"palette": "2",
+        "caption": "Group By Product YTD",
+        //"subcaption": "Harry's SuperMart",
+        //"xaxisname": "Quarter",
+        //"yaxisname": "Sales (In USD)",
+		"showsum": "1",
+		"showvalues": "0",
+        //"paletteColors": "#0075c2,#45AFF5,#2C8A56,#1aaf5d,#50DE90",
+        "numberPrefix": " $",
+        "numbersuffix": " USD",
+        "bgColor": "#ffffff",
+		"useroundedges": "1",
+        "borderAlpha": "20",
+        "showCanvasBorder": "0",
+        "usePlotGradientColor": "0",
+        "plotBorderAlpha": "10",
+        "legendBorderAlpha": "0",
+		"legendPosition":"right",
+        "legendShadow": "1",
+        "valueFontColor": "#000000",
+        "showXAxisLine": "1",
+        "xAxisLineColor": "#999999",
+        "divlineColor": "#999999",
+        "divLineDashed": "1",
+        "showAlternateHGridColor": "0",
+        "subcaptionFontBold": "0",
+        "subcaptionFontSize": "14",
+		"baseFont":"Helvetica",		
+		"baseFontSize":"14",
+		"rotatelabels": "1",		
+		"rotatevalues": "1",
+		"baseFontColor":"#000000"
+		//"theme":"fint"   
+		
+    },
+    "categories": category,
+    "dataset": dataok
+},
+events: {
+           dataPlotClick: function (event,dataObj) 
+			{	
+				alert(dataObj.categoryLabel);		
+				alert(dataObj.datasetName);		
+				//asd();
+            }
+        }
+}
+);
+    fusioncharts.render();
+//});
+}*/
+</script>
+  <div style="float:right;"><input type="button" value="< Go Back" id="goback"></div>
+  <div id="chart-container" style="height:100%;">
+  </div>
