@@ -1,0 +1,71 @@
+
+<div class="mycontainer" ng-controller="ITUserController"
+	data-ng-init="getusers()">
+
+
+
+
+	<div class="mytabs">
+		<div class=" tabs">
+			<ul>
+				<li><a href="#tabs-1">HR</a>
+					<button type="button" id="right_All_1" class="btn btn-danger"
+						ng-click='opencreateuser()'>
+						<i class="glyphicon glyphicon-plus"></i>
+					</button></li>
+				<li><a href="#tabs-2">IT Admin</a></li>
+			</ul>
+
+			<div id="tabs-1">
+
+
+  <accordion>
+    <accordion-group heading=" {{user.requestid}}        {{user.firstname}} {{user.middlename}} {{user.lastname}}           {{user.employeeid}}" ng-repeat="user in users">
+      <ul>
+     
+						{{user.computername}}
+						{{user.firstname}}
+						{{user.middlename}}
+						{{user.lastname}}
+						{{user.employeeid}}
+						{{user.assignedto}}
+						{{user.emailid}}
+						{{user.managername}}
+						{{ user.designation}}
+						{{ user.personalphonenumber}}
+						{{ user.officephonenumber}}
+						{{ user.officephonebrand}}
+						{{ user.officephonemodel}}
+						{{ user.officephonestorage}}
+						{{ user.officephonesno}}
+
+							<div ng-if="user.status == 'assginedtoit'">
+             <font color="red">Assinged to IT Team</font>
+         </div> 
+         		<div ng-if="user.status == 'hrdraft'">
+             <button type="button" id="right_All_1" class="btn btn-danger"
+						ng-click='openedituser(user)'>
+						<i class="glyphicon glyphicon-edit"></i>
+					</button></li>
+         </div> 
+
+
+						
+      </ul>
+    </accordion-group>   
+  </accordion>
+				
+			</div>
+
+			<div id="tabs-2"></div>
+
+		</div>
+	</div>
+
+
+</div>
+
+
+<script type='text/javascript'>
+	$(".mytabs").tabs();
+</script>

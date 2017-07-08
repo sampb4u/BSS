@@ -6018,6 +6018,7 @@ angular.module('app')
 					.state('app.NewUserRequest', {
                         url: '/NewUserRequest',
                         templateUrl: 'views/NewUserRequest.html',
+                        params : { user : null } ,
                         ncyBreadcrumb: {
                             label: '',
                             description: ''
@@ -6042,7 +6043,8 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.tableTools.min.js',
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
-                                                    'app/controllers/datatable.js'
+                                                    'app/controllers/datatable.js',
+													'app/controllers/it/ituser.js'
                                                 ]
                                             });
                                         }
@@ -6079,7 +6081,8 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.tableTools.min.js',
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
-                                                    'app/controllers/datatable.js'
+                                                    'app/controllers/datatable.js',
+													'app/controllers/it/ituser.js'
                                                 ]
                                             });
                                         }
