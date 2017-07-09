@@ -6018,7 +6018,7 @@ angular.module('app')
 					.state('app.NewUserRequest', {
                         url: '/NewUserRequest',
                         templateUrl: 'views/NewUserRequest.html',
-                        params : { user : null } ,
+                        params : { user : null , read : false } ,
                         ncyBreadcrumb: {
                             label: '',
                             description: ''

@@ -1,16 +1,39 @@
 ﻿'use strict';
-angular.module('app', []).controller('ITUserController',
-		function($scope, $modal, $log, $http, $state, $stateParams) {
+angular.module('app', ['ngAnimate', 'toaster']).controller('ITUserController',
+		function($scope, $modal, $log, $http, $state, $stateParams ,$mdToast,toaster) {
 
 			$scope.user = $stateParams.user;
+			if ($scope.user != undefined ){
+				
+				if ($stateParams.read) {
+					$scope.hr=true;
+					$scope.it=true;
+				}else {	if ($scope.user.status == 'HR-Submitted' ){
+					$scope.hr=true;
+				}else if ($scope.user.status == 'Closed' ){
+					$scope.it=true;
+				}}
+			
+				
+				
+			}
+			if ($scope.user == undefined ){
+				$scope.user ={status : 'New'}
+			}
+					
 
 			$scope.createUser = function(status) {
 
+				
 				if (status == 'hrsave') {
-					$scope.user.status = 'hrdraft';
+					$scope.user.status = 'HR-In Progress';
 				} else if (status == 'hrsubmit') {
-					$scope.user.status = 'assginedtoit';
-				}
+					$scope.user.status = 'HR-Submitted';
+				} else if (status == 'itsave') {
+					$scope.user.status = 'IT-In Progress';
+				} else if (status == 'close') {
+					$scope.user.status = 'Closed';
+				} 
 
 				var req = {
 					method : 'POST',
@@ -22,8 +45,9 @@ angular.module('app', []).controller('ITUserController',
 				}
 
 				$http(req).then(function(data) {
+					toaster.success({title: "Status Updated ", body:$scope.user.status});
 					$state.go('app.SearchRequests');
-					console.log("usercreated");
+					
 
 				}, function() {
 					console.log("failed to create user")
@@ -59,6 +83,13 @@ angular.module('app', []).controller('ITUserController',
 
 				$state.go('app.NewUserRequest', {
 					'user' : user
+				});
+			}
+			$scope.openreaduser = function(user) {
+
+				$state.go('app.NewUserRequest', {
+					'user' : user ,
+					'read' : true
 				});
 			}
 

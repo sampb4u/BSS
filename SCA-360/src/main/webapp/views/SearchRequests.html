@@ -5,67 +5,38 @@
 
 
 
-	<div class="mytabs">
-		<div class=" tabs">
-			<ul>
-				<li><a href="#tabs-1">HR</a>
-					<button type="button" id="right_All_1" class="btn btn-danger"
-						ng-click='opencreateuser()'>
-						<i class="glyphicon glyphicon-plus"></i>
-					</button></li>
-				<li><a href="#tabs-2">IT Admin</a></li>
-			</ul>
-
-			<div id="tabs-1">
 
 
-  <accordion>
-    <accordion-group heading=" {{user.requestid}}        {{user.firstname}} {{user.middlename}} {{user.lastname}}           {{user.employeeid}}" ng-repeat="user in users">
-      <ul>
-     
-						{{user.computername}}
-						{{user.firstname}}
-						{{user.middlename}}
-						{{user.lastname}}
-						{{user.employeeid}}
-						{{user.assignedto}}
-						{{user.emailid}}
-						{{user.managername}}
-						{{ user.designation}}
-						{{ user.personalphonenumber}}
-						{{ user.officephonenumber}}
-						{{ user.officephonebrand}}
-						{{ user.officephonemodel}}
-						{{ user.officephonestorage}}
-						{{ user.officephonesno}}
+	<table border="1">
+		<tr>
+			<th>Request ID</th>
+			<th>Employee Id</th>
+			<th>First name</th>
 
-							<div ng-if="user.status == 'assginedtoit'">
-             <font color="red">Assinged to IT Team</font>
-         </div> 
-         		<div ng-if="user.status == 'hrdraft'">
-             <button type="button" id="right_All_1" class="btn btn-danger"
-						ng-click='openedituser(user)'>
-						<i class="glyphicon glyphicon-edit"></i>
-					</button></li>
-         </div> 
+			<th>Last name</th>
+
+			<th>Assigned To</th>
+			<th>Email</th>
+			<th>Created date</th>
+			<th>Status</th>
+			<th>Options</th>
 
 
-						
-      </ul>
-    </accordion-group>   
-  </accordion>
-				
-			</div>
+		</tr>
+		<tr ng-repeat="user in users">
+			<td>{{user.requestid}}</td>
+			<td>{{user.user.employeeid}}</td>
+			<td>{{user.firstname}}</td>
 
-			<div id="tabs-2"></div>
+			<td>{{user.lastname}}</td>
+            <td>not yet</td>
+			<td>{{user.assignedto}}</td>
+			<td>{{user.emailid}}</td>
+			<td>{{user.status}}</td>
+			<td><a ng-click="openedituser(user)">edit </a>  <a ng-click="openreaduser(user)"> view </a>
+				<!-- <a> delete </a> --></td>
 
-		</div>
-	</div>
-
-
+		</tr>
+	</table>
 </div>
 
-
-<script type='text/javascript'>
-	$(".mytabs").tabs();
-</script>

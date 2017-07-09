@@ -28,8 +28,7 @@ public class ITUser {
 	private String assignedto;
 	@Column
 	private String status;
-	@Column
-	private String computername;
+
 	@Column
 	private String designation;
 	
@@ -51,6 +50,58 @@ public class ITUser {
 	private String officephonestorage;
 	@Column
 	private String officephonesno;
+	
+	@Column
+	private String createdby;
+	
+	@Column
+	private String computertype;
+	
+	 
+	@Column
+	private String computerbrand;
+	@Column
+	private String	computermodel;
+	@Column
+		private String computerram;
+	@Column
+		private String  computerstorage;
+	@Column
+		private String  assetid;
+	@Column
+		private String  lan;
+	@Column
+		private String  computername;
+	@Column
+		private String  ip;
+	@Column
+		private String  shiid;
+	@Column
+		private String  vpnid;
+	@Column
+		private String  vpnpassowrd;
+	@Column
+		private String  macaddress;
+	@Column
+		private String  monitorbrand;
+	@Column
+		private String  monitormodel;
+	@Column
+		private String  monitorsize;
+	@Column
+		private String  keyboardtype;
+	@Column
+		private String  keyboardbrand;
+	@Column
+		private String  mousetype;
+	@Column
+		private String  mousebrand;
+	@Column
+		private String  exstorage1;
+	@Column
+		private String  exstorage2;
+	@Column
+		private String  notesit;
 	
 	@Column
 	private String notes;
@@ -197,6 +248,190 @@ public class ITUser {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public String getCreatedby() {
+		return createdby;
+	}
+
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
+
+	public String getComputertype() {
+		return computertype;
+	}
+
+	public void setComputertype(String computertype) {
+		this.computertype = computertype;
+	}
+
+	public String getComputerbrand() {
+		return computerbrand;
+	}
+
+	public void setComputerbrand(String computerbrand) {
+		this.computerbrand = computerbrand;
+	}
+
+	public String getComputermodel() {
+		return computermodel;
+	}
+
+	public void setComputermodel(String computermodel) {
+		this.computermodel = computermodel;
+	}
+
+	public String getComputerram() {
+		return computerram;
+	}
+
+	public void setComputerram(String computerram) {
+		this.computerram = computerram;
+	}
+
+	public String getComputerstorage() {
+		return computerstorage;
+	}
+
+	public void setComputerstorage(String computerstorage) {
+		this.computerstorage = computerstorage;
+	}
+
+	public String getAssetid() {
+		return assetid;
+	}
+
+	public void setAssetid(String assetid) {
+		this.assetid = assetid;
+	}
+
+	public String getLan() {
+		return lan;
+	}
+
+	public void setLan(String lan) {
+		this.lan = lan;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getShiid() {
+		return shiid;
+	}
+
+	public void setShiid(String shiid) {
+		this.shiid = shiid;
+	}
+
+	public String getVpnid() {
+		return vpnid;
+	}
+
+	public void setVpnid(String vpnid) {
+		this.vpnid = vpnid;
+	}
+
+	public String getVpnpassowrd() {
+		return vpnpassowrd;
+	}
+
+	public void setVpnpassowrd(String vpnpassowrd) {
+		this.vpnpassowrd = vpnpassowrd;
+	}
+
+	public String getMacaddress() {
+		return macaddress;
+	}
+
+	public void setMacaddress(String macaddress) {
+		this.macaddress = macaddress;
+	}
+
+	public String getMonitorbrand() {
+		return monitorbrand;
+	}
+
+	public void setMonitorbrand(String monitorbrand) {
+		this.monitorbrand = monitorbrand;
+	}
+
+	public String getMonitormodel() {
+		return monitormodel;
+	}
+
+	public void setMonitormodel(String monitormodel) {
+		this.monitormodel = monitormodel;
+	}
+
+	public String getMonitorsize() {
+		return monitorsize;
+	}
+
+	public void setMonitorsize(String monitorsize) {
+		this.monitorsize = monitorsize;
+	}
+
+	public String getKeyboardtype() {
+		return keyboardtype;
+	}
+
+	public void setKeyboardtype(String keyboardtype) {
+		this.keyboardtype = keyboardtype;
+	}
+
+	public String getKeyboardbrand() {
+		return keyboardbrand;
+	}
+
+	public void setKeyboardbrand(String keyboardbrand) {
+		this.keyboardbrand = keyboardbrand;
+	}
+
+	public String getMousetype() {
+		return mousetype;
+	}
+
+	public void setMousetype(String mousetype) {
+		this.mousetype = mousetype;
+	}
+
+	public String getMousebrand() {
+		return mousebrand;
+	}
+
+	public void setMousebrand(String mousebrand) {
+		this.mousebrand = mousebrand;
+	}
+
+	public String getExstorage1() {
+		return exstorage1;
+	}
+
+	public void setExstorage1(String exstorage1) {
+		this.exstorage1 = exstorage1;
+	}
+
+	public String getExstorage2() {
+		return exstorage2;
+	}
+
+	public void setExstorage2(String exstorage2) {
+		this.exstorage2 = exstorage2;
+	}
+
+	public String getNotesit() {
+		return notesit;
+	}
+
+	public void setNotesit(String notesit) {
+		this.notesit = notesit;
 	}
 	
 	
