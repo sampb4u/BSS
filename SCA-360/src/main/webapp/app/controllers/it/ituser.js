@@ -1,6 +1,6 @@
 ﻿'use strict';
 angular.module('app', ['ngAnimate', 'toaster']).controller('ITUserController',
-		function($scope, $modal, $log, $http, $state, $stateParams ,$mdToast,toaster) {
+		function($scope, $modal, $log, $http, $state, $stateParams ,$mdToast,toaster ,$timeout) {
 
 			$scope.user = $stateParams.user;
 			if ($scope.user != undefined ){
@@ -46,7 +46,10 @@ angular.module('app', ['ngAnimate', 'toaster']).controller('ITUserController',
 
 				$http(req).then(function(data) {
 					toaster.success({title: "Status Updated ", body:$scope.user.status});
-					$state.go('app.SearchRequests');
+					 $timeout(function () {
+						 $state.go('app.SearchRequests');
+					    }, 3000);
+					
 					
 
 				}, function() {
