@@ -104,6 +104,13 @@ public class ITUser {
 		private String  notesit;
 	
 	@Column
+	private String  emailid1;
+	@Column
+	private String  emailid2;
+	@Column
+	private String  emailid3;
+	
+	@Column
 	private String notes;
 
 	public String getOfficephonesno() {
@@ -432,6 +439,30 @@ public class ITUser {
 
 	public void setNotesit(String notesit) {
 		this.notesit = notesit;
+	}
+
+	public String getEmailid1() {
+		return emailid1;
+	}
+
+	public void setEmailid1(String emailid1) {
+		this.emailid1 = emailid1;
+	}
+
+	public String getEmailid2() {
+		return emailid2;
+	}
+
+	public void setEmailid2(String emailid2) {
+		this.emailid2 = emailid2;
+	}
+
+	public String getEmailid3() {
+		return emailid3;
+	}
+
+	public void setEmailid3(String emailid3) {
+		this.emailid3 = emailid3;
 	}
 	
 	
