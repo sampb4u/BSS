@@ -8,9 +8,10 @@ angular.module('app', ['ngAnimate', 'toaster']).controller('ITUserController',
 				if ($stateParams.read) {
 					$scope.hr=true;
 					$scope.it=true;
-				}else {	if ($scope.user.status == 'HR-Submitted' ){
+				}else {	if ($scope.user.status == 'HR-Submitted' ||  $scope.user.status == 'IT-In Progress'){
 					$scope.hr=true;
 				}else if ($scope.user.status == 'Closed' ){
+					$scope.hr=true;
 					$scope.it=true;
 				}}
 			
