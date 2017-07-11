@@ -53,11 +53,15 @@
 						  <div class="panel-body">
 						  <form class="form-horizontal" role="form">
 						    <div class="row">						  	
-						       <div class="col-md-6">														  
-									  <div class="form-group">
-										<label for="title" class="col-md-4 control-label">Title</label>
-										<div class="col-md-7">										  
-											<input type="text" id="title" class="form-control" ng-model="ticket.title"   ng-readonly="tkt">										  
+						       <div class="col-md-6">
+                                      <div class="form-group">
+										<label for="Country" class="col-md-4 control-label">Country</label>
+										<div class="col-md-7 ">
+											<select class="form-control" id="Country" ng-model="ticket.country" ng-change="createticketid()"  ng-readonly="tkt">
+											  <option selected="selected">SP</option>
+											  <option>IN</option>
+											  <option>PL</option>
+											</select>
 										</div>
 									  </div>
                                       <div class="form-group">
@@ -65,27 +69,20 @@
 										<div class="col-md-7">										  
 											<input type="text" id="ticketid" class="form-control"  ng-model="ticket.ticketid" ng-readonly="true">										  
 										</div>
-									  </div>
-										<div class="form-group">
-										<label for="TicketType" class="col-md-4 control-label">Ticket Type</label>
-										<div class="col-md-7">
-											<select class="form-control" id="TicketType" ng-model="ticket.tickettype"  ng-readonly="tkt">
-											  <option selected="selected">Hardware</option>
-											  <option>Software</option>
-											  <option>Office 365</option>
-											  <option>Lotus Notes & PGN</option>
-											  <option>Network</option>
-											  <option>Others</option>											  											 
-											</select>
+									  </div>									  
+									  <div class="form-group">
+										<label for="title" class="col-md-4 control-label">Title</label>
+										<div class="col-md-7">										  
+											<input type="text" id="title" class="form-control" ng-model="ticket.title"   ng-readonly="tkt">										  
 										</div>
 									  </div>
-									  <div class="form-group">
+                                     <div class="form-group">
 										<label for="Raisedby" class="col-md-4 control-label">Raised by*</label>
 										<div class="col-md-7">										  
 											<input type="text" id="Raisedby"  ng-model="ticket.raisedby" class="form-control" ng-model="ticket.raisedby"  ng-readonly="tkt">										  
 										</div>
 									  </div>
-                                      <div class="form-group">
+									   <div class="form-group">
 									    <label for="CreateDate" class="col-md-4 control-label">Create Date</label>
 									    <div class="col-md-7">	
                                         
@@ -94,14 +91,10 @@
 										 </md-datepicker>
 										</div>
                                       </div>
-                                      <div class="form-group">
-									    <label for="EndDate" class="col-md-4 control-label">End Date</label>
-									    <div class="col-md-7">	
-                                          <md-datepicker ng-model="ticket.enddate"  ng-readonly="tkt">
-										  
-										 </md-datepicker>
-										</div>
-                                      </div>									  
+										
+									  
+                                     
+                                      									  
 							   </div>
 							   
 							   <div class="col-md-6">
@@ -117,26 +110,19 @@
 										</div>
 									  </div>
 									  <div class="form-group">
-										<label for="AssignedTo" class="col-md-4 control-label">Assigned To</label>
-										<div class="col-md-7 ">
-											<select class="form-control" id="AssignedTo" ng-model="ticket.assignedto"  ng-readonly="tkt">
-											  <option selected="selected">Claire Mason</option>
-											  <option>Option 2</option>
-											  <option>Option 3</option>
-											</select>
-										</div>
-									  </div>									  
-									  <div class="form-group">
-										<label for="Country" class="col-md-4 control-label">Country</label>
-										<div class="col-md-7 ">
-											<select class="form-control" id="Country" ng-model="ticket.country" ng-change="createticketid()"  ng-readonly="tkt">
-											  <option selected="selected">SP</option>
-											  <option>IN</option>
-											  <option>PL</option>
+										<label for="TicketType" class="col-md-4 control-label">Ticket Type</label>
+										<div class="col-md-7">
+											<select class="form-control" id="TicketType" ng-model="ticket.tickettype"  ng-readonly="tkt">
+											  <option selected="selected">Hardware</option>
+											  <option>Software</option>
+											  <option>Office 365</option>
+											  <option>Lotus Notes & PGN</option>
+											  <option>Network</option>
+											  <option>Others</option>											  											 
 											</select>
 										</div>
 									  </div>
-									  <div class="form-group">
+									    <div class="form-group">
 										<label for="Priority" class="col-md-4 control-label">Priority</label>
 										<div class="col-md-7 ">
 											<select class="form-control" id="Priority" ng-model="ticket.priority"  ng-readonly="tkt">
@@ -146,7 +132,27 @@
 											  <option>Low</option>
 											</select>
 										</div>
-									  </div>								  
+									  </div>
+									  <div class="form-group">
+										<label for="AssignedTo" class="col-md-4 control-label">Assigned To</label>
+										<div class="col-md-7 ">
+											<select class="form-control" id="AssignedTo" ng-model="ticket.assignedto"  ng-readonly="tkt">
+											  <option selected="selected">Claire Mason</option>
+											  <option>Option 2</option>
+											  <option>Option 3</option>
+											</select>
+										</div>
+									  </div>
+                                      <div class="form-group">
+									    <label for="EndDate" class="col-md-4 control-label">End Date</label>
+									    <div class="col-md-7">	
+                                          <md-datepicker ng-model="ticket.enddate"  ng-readonly="tkt">
+										  
+										 </md-datepicker>
+										</div>
+                                      </div>									  
+									 
+																	  
 							   </div>							   						   							   
 							</div>
 							<div class="row">

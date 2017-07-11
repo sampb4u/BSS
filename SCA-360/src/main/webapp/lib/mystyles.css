@@ -406,3 +406,136 @@ background:#fff;
 .mytabs.ui-tabs .ui-tabs-nav li{
 margin-right:0.6em;
 }
+
+
+
+/*jquery data table overides starts here*/
+.mycontainer table.dataTable{font-weight:normal; font-size:13px;}
+.mycontainer table.dataTable.nowrap th {
+	background:#b4daf2;
+	color:#333;
+	padding-left: 10px;
+}
+.mycontainer table.dataTable thead th{border-bottom-color:#b4daf2;}
+.mycontainer table.dataTable.display tbody tr.odd {
+    background-color: #f6f5f5;
+}
+.mycontainer table.dataTable.no-footer {
+    border-bottom: 1px solid #dadada;
+}
+.mycontainer .dataTables_filter input[type="search"]{
+	border-color:#dadada;
+	padding: 6px;
+}
+.mycontainer .dataTables_paginate a {
+    padding: 6px 9px !important;
+    background: #e3e3e3 !important;
+    border-color: #e3e3e3 !important;
+}
+.mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #2b94d6 !important;
+    border-color: #2b94d6 !important;
+	color:#fff!important;
+}
+.mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{color:#fff!important;}
+.mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color:#7b7b7b!important;
+}
+.status {
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    background-clip: padding-box;
+    font-size: 12px;
+    font-weight: normal;
+	display:inline-block;
+	background-color:#ccc;
+	padding:2px 6px;
+	color:#fff;
+}
+.status.status-inprogress{background-color:#fbbe1b;}
+.status.status-cancelled{background-color:#e44a3c;}
+.status.status-closed, .status.status-completed{background-color:#84c725;}
+.status.status-pending{background-color:#9c27b0;}
+.status.status-onhold{background-color:#bdbdbc;}
+.status.status-submitted{background-color:#57c8e9;}
+.dataTable a.option-link {
+    margin: 0 3px;
+    font-size: 14px;
+}
+.option-box {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+	background-color:#57c8e9;
+	 -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.option-box .glyphicon {
+	position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+	line-height: inherit;
+    top: 0;
+	color:#fff;
+	
+}
+ a.option-link:hover{color:#000; text-decoration:none;}
+ a.option-link:hover .glyphicon {color:#000; text-decoration:none;}
+ .option-box .glyphicon-eye-open{background-color:#2ccec3;
+  -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	}
+/*jquery data table overides ends here*/
+
+.mycontainer {
+    color: #7b7b7b;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.mycontainer .ui-widget {
+    color: #7b7b7b;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.mycontainer .ui-widget input, 
+.mycontainer .ui-widget select, 
+.mycontainer .ui-widget textarea {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.mycontainer .ui-widget button, 
+.mycontainer button, .mycontainer input[type="submit"], .mycontainer input[type="button"] {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+
+.mycontainer table {
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border: 0;
+	width:100%
+}
+.mycontainer table th {
+	background: #b4daf2;
+    color: #333;
+    text-align: left;
+    padding: 9px 3px 9px 4px;
+    border: 0px;
+    border-bottom: 1px solid #b4daf2;
+}
+.mycontainer table td {
+	border: 0px;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 5px 8px 0;
+}
+.mycontainer table tr:nth-child(odd) td{ background-color:#f6f5f5; }
+.mycontainer table tr:nth-child(even) td{ background-color:#fff; }

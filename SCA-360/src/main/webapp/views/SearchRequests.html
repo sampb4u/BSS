@@ -1,19 +1,41 @@
-
 <div class="mycontainer" ng-controller="ITUserController"
 	data-ng-init="getusers()">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header-section clearfix">
+                <div class="pull-left">
+                    <ol class="breadcrumb-new">
+                        <li><a href="#">Dashboard</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+                        <li><a href="#">Operations</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+                        <li class="active"><span>Search Requests</span></li>
+                    </ol>
+                    <h1>Search Requests</h1>
+                </div>
+                <div class="pull-right">
 
 
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row center-block">
+        <div class="col-md-12">
+            <div class="panel-box">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span class="panel-title">Request List</span>
+                    </div>
 
-
-
-	<table border="1">
+                    <div class="panel-body">
+                        <table id="requestList" class="display nowrap" cellspacing="0" width="100%">
+                            
 		<tr>
 			<th>Request ID</th>
 			<th>Employee Id</th>
 			<th>First name</th>
 
-			<th>Last name</th>
+			<th>Last Name</th>
 
 			<th>Assigned To</th>
 			<th>Email</th>
@@ -51,5 +73,17 @@
 
 		</tr>
 	</table>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
+<script type='text/javascript'>
+        $(document).ready(function() {
+		$('#requestList').DataTable( {        
+        } );
+</script>
