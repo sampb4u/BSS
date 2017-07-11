@@ -17,7 +17,7 @@
 
 			<th>Assigned To</th>
 			<th>Email</th>
-			<th>Created date</th>
+			<!-- <th>Created date</th> -->
 			<th>Status</th>
 			<th>Options</th>
 
@@ -31,9 +31,22 @@
 			<td>{{user.lastname}}</td>
            
 			<td>{{user.assignedto}}</td>
-			<td>{{user.emailid}}</td> <td>not yet</td>
+			<td>{{user.emailid}}</td> <!-- <td>not yet</td> -->
 			<td>{{user.status}}</td>
-			<td><a ng-click="openedituser(user)">edit </a>  <a ng-click="openreaduser(user)"> view </a>
+			<td>
+			
+			<a href="#" class="option-link" title="View" ng-click="openreaduser(user)">
+							<span class="option-box">	
+							    <i class="glyphicon glyphicon-eye-open"></i>							    
+							</span>
+						</a>
+						
+						<a href="#" class="option-link" title="Edit" ng-hide="user.status=='Closed'"  ng-click="openedituser(user)">
+							<span class="option-box">	
+							    <i class="glyphicon glyphicon-edit"></i>							    
+							</span>
+						</a>
+		
 				<!-- <a> delete </a> --></td>
 
 		</tr>

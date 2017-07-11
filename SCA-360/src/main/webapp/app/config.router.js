@@ -6093,7 +6093,7 @@ angular.module('app')
                     })
 					.state('app.MyTickets', {
                         url: '/MyTickets',
-                        templateUrl: 'views/MyTickets.html',
+                        templateUrl: 'views/SearchTickets.html',
                         ncyBreadcrumb: {
                             label: '',
                             description: ''
@@ -6118,7 +6118,8 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.tableTools.min.js',
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
-                                                    'app/controllers/datatable.js'
+                                                    'app/controllers/datatable.js',
+                                                    'app/controllers/it/ticketController.js'
                                                 ]
                                             });
                                         }
@@ -6130,6 +6131,7 @@ angular.module('app')
 					.state('app.RaiseTicket', {
                         url: '/RaiseTicket',
                         templateUrl: 'views/RaiseTicket.html',
+                        params : { ticket : null , read : false } ,
                         ncyBreadcrumb: {
                             label: '',
                             description: ''
@@ -6154,7 +6156,8 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.tableTools.min.js',
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
-                                                    'app/controllers/datatable.js'
+                                                    'app/controllers/datatable.js',
+                                                    'app/controllers/it/ticketController.js'
                                                 ]
                                             });
                                         }
@@ -6190,7 +6193,8 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.tableTools.min.js',
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
-                                                    'app/controllers/datatable.js'
+                                                    'app/controllers/datatable.js',
+                                                    'app/controllers/it/ticketController.js'
                                                 ]
                                             });
                                         }

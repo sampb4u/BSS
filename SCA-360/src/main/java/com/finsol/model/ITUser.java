@@ -10,20 +10,19 @@ import javax.persistence.Id;
  */
 @Entity
 public class ITUser {
-	
 
 	@Id
-	private String requestid;	
+	private String requestid;
 	@Column
 	private String employeeid;
 	@Column
 	private String firstname;
 	@Column
-	private String  lastname;
+	private String lastname;
 	@Column
-	private String  middlename;
+	private String middlename;
 	@Column
-	private String  emailid;
+	private String emailid;
 	@Column
 	private String assignedto;
 	@Column
@@ -31,85 +30,84 @@ public class ITUser {
 
 	@Column
 	private String designation;
-	
+
 	@Column
 	private String managername;
-	
+
 	@Column
 	private String personalphonenumber;
-	
+
 	@Column
 	private String officephonenumber;
 	@Column
 	private String officephonebrand;
-	
+
 	@Column
 	private String officephonemodel;
-	
+
 	@Column
 	private String officephonestorage;
 	@Column
 	private String officephonesno;
-	
+
 	@Column
 	private String createdby;
-	
+
 	@Column
 	private String computertype;
-	
-	 
+
 	@Column
 	private String computerbrand;
 	@Column
-	private String	computermodel;
+	private String computermodel;
 	@Column
-		private String computerram;
+	private String computerram;
 	@Column
-		private String  computerstorage;
+	private String computerstorage;
 	@Column
-		private String  assetid;
+	private String assetid;
 	@Column
-		private String  lan;
+	private String lan;
 	@Column
-		private String  computername;
+	private String computername;
 	@Column
-		private String  ip;
+	private String ip;
 	@Column
-		private String  shiid;
+	private String shiid;
 	@Column
-		private String  vpnid;
+	private String vpnid;
 	@Column
-		private String  vpnpassowrd;
+	private String vpnpassowrd;
 	@Column
-		private String  macaddress;
+	private String macaddress;
 	@Column
-		private String  monitorbrand;
+	private String monitorbrand;
 	@Column
-		private String  monitormodel;
+	private String monitormodel;
 	@Column
-		private String  monitorsize;
+	private String monitorsize;
 	@Column
-		private String  keyboardtype;
+	private String keyboardtype;
 	@Column
-		private String  keyboardbrand;
+	private String keyboardbrand;
 	@Column
-		private String  mousetype;
+	private String mousetype;
 	@Column
-		private String  mousebrand;
+	private String mousebrand;
 	@Column
-		private String  exstorage1;
+	private String exstorage1;
 	@Column
-		private String  exstorage2;
+	private String exstorage2;
 	@Column
-		private String  notesit;
-	
+	private String notesit;
+
 	@Column
-	private String  emailid1;
+	private String emailid1;
 	@Column
-	private String  emailid2;
+	private String emailid2;
 	@Column
-	private String  emailid3;
-	
+	private String emailid3;
+
 	@Column
 	private String notes;
 
@@ -464,9 +462,5 @@ public class ITUser {
 	public void setEmailid3(String emailid3) {
 		this.emailid3 = emailid3;
 	}
-	
-	
-	
-	
-	
+
 }

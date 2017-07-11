@@ -1,5 +1,7 @@
-﻿
-                    <div class="mycontainer">				
+
+                    <div class="mycontainer" ng-controller="TicketController" data-ng-init="createnewticketid()" >		
+                    	<toaster-container
+		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>		
 					<div class="row">
 						  <div class="col-xs-12">
 							<div class="page-header-section clearfix">
@@ -55,19 +57,19 @@
 									  <div class="form-group">
 										<label for="title" class="col-md-4 control-label">Title</label>
 										<div class="col-md-7">										  
-											<input type="text" id="title" class="form-control">										  
+											<input type="text" id="title" class="form-control" ng-model="ticket.title"   ng-readonly="tkt">										  
 										</div>
 									  </div>
                                       <div class="form-group">
-										<label for="ticketid" class="col-md-4 control-label">Ticket ID</label>
+										<label for="ticketid" class="col-md-4 control-label" >Ticket ID</label>
 										<div class="col-md-7">										  
-											<input type="text" id="ticketid" class="form-control" placeholder="TIN00001" disabled>										  
+											<input type="text" id="ticketid" class="form-control"  ng-model="ticket.ticketid" ng-readonly="true">										  
 										</div>
 									  </div>
 										<div class="form-group">
 										<label for="TicketType" class="col-md-4 control-label">Ticket Type</label>
 										<div class="col-md-7">
-											<select class="form-control" id="TicketType">
+											<select class="form-control" id="TicketType" ng-model="ticket.tickettype"  ng-readonly="tkt">
 											  <option selected="selected">Hardware</option>
 											  <option>Software</option>
 											  <option>Office 365</option>
@@ -80,25 +82,24 @@
 									  <div class="form-group">
 										<label for="Raisedby" class="col-md-4 control-label">Raised by*</label>
 										<div class="col-md-7">										  
-											<input type="text" id="Raisedby" class="form-control" placeholder="David Morrison">										  
+											<input type="text" id="Raisedby"  ng-model="ticket.raisedby" class="form-control" ng-model="ticket.raisedby"  ng-readonly="tkt">										  
 										</div>
 									  </div>
                                       <div class="form-group">
 									    <label for="CreateDate" class="col-md-4 control-label">Create Date</label>
 									    <div class="col-md-7">	
-                                          <span class="input-icon icon-right">
-										  <input type="text" class="form-control" id="CreateDate" placeholder="Date">
-										  <i class="glyphicon glyphicon-calendar calendar"></i>
-										  </span>
+                                        
+										  <md-datepicker  ng-model="ticket.createdate"  ng-readonly="tkt">
+										  
+										 </md-datepicker>
 										</div>
                                       </div>
                                       <div class="form-group">
 									    <label for="EndDate" class="col-md-4 control-label">End Date</label>
 									    <div class="col-md-7">	
-                                          <span class="input-icon icon-right">
-										  <input type="text" class="form-control" id="EndDate" placeholder="Date">
-										  <i class="glyphicon glyphicon-calendar calendar"></i>
-										  </span>
+                                          <md-datepicker ng-model="ticket.enddate"  ng-readonly="tkt">
+										  
+										 </md-datepicker>
 										</div>
                                       </div>									  
 							   </div>
@@ -107,17 +108,18 @@
 										<div class="form-group">
 										<label for="Status" class="col-md-4  control-label">Status</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Status">
+											<select class="form-control" id="Status" ng-model="ticket.status"  ng-readonly="tkt">
 											  <option selected="selected">In Progress</option>
-											  <option>Option 2</option>
-											  <option>Option 3</option>
+											  <option>Completed</option>
+											  <option>Cancelled</option>
+											  <option>Escalated</option>
 											</select>
 										</div>
 									  </div>
 									  <div class="form-group">
 										<label for="AssignedTo" class="col-md-4 control-label">Assigned To</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="AssignedTo">
+											<select class="form-control" id="AssignedTo" ng-model="ticket.assignedto"  ng-readonly="tkt">
 											  <option selected="selected">Claire Mason</option>
 											  <option>Option 2</option>
 											  <option>Option 3</option>
@@ -127,20 +129,21 @@
 									  <div class="form-group">
 										<label for="Country" class="col-md-4 control-label">Country</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Country">
-											  <option selected="selected">Singapore</option>
-											  <option>Option 2</option>
-											  <option>Option 3</option>
+											<select class="form-control" id="Country" ng-model="ticket.country" ng-change="createticketid()"  ng-readonly="tkt">
+											  <option selected="selected">SP</option>
+											  <option>IN</option>
+											  <option>PL</option>
 											</select>
 										</div>
 									  </div>
 									  <div class="form-group">
 										<label for="Priority" class="col-md-4 control-label">Priority</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Priority">
+											<select class="form-control" id="Priority" ng-model="ticket.priority"  ng-readonly="tkt">
 											  <option selected="selected">Critical</option>
-											  <option>Option 2</option>
-											  <option>Option 3</option>
+											  <option>High</option>
+											  <option>Medium</option>
+											  <option>Low</option>
 											</select>
 										</div>
 									  </div>								  
@@ -153,7 +156,7 @@
 											<span class="p-R5">Notes</span>
 										</label>
 										<div class="col-xs-11 col-md-7 col-lg-8 form-textarea">
-											<textarea class="form-control" cols="20" id="notes" name="notes" rows="5"></textarea>									  
+											<textarea class="form-control" cols="20" id="notes" name="notes" rows="5" ng-model="ticket.notes"  ng-readonly="tkt"></textarea>									  
 										</div>
 									</div>
 								</div>
@@ -162,8 +165,8 @@
 								<div class="col-md-6">								  																		  									 
                                       <div class="form-group">
                                             <div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4">
-                                                <button type="button" class="btn">Cancel</button>
-												<button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="button" class="btn" ng-click="cancel()" ng-hide="tkt">Cancel</button>
+												<button type="submit" class="btn btn-primary" ng-click="createticket()" ng-hide="tkt">Submit</button>
                                             </div>
                                       </div>									  
 								</div>

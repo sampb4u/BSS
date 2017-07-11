@@ -1,5 +1,5 @@
 
-<div class="mycontainer" ng-controller="ITUserController">
+<div class="mycontainer" ng-controller="ITUserController" data-ng-init="createnewrequestid()">
 	<toaster-container
 		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
@@ -66,11 +66,18 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
+												<select class="form-control" id="country" ng-readonly="hr"
+															ng-model="country" ng-change="createrequestid()">
+															<option ng-selected="selected">CN</option>
+															<option>IN</option>
+															<option>PL</option>
+														</select>
 													<label for="RequestID" class="col-md-4 control-label">Request
 														ID</label>
 													<div class="col-md-7">
+													
 														<input type="text" id="RequestID" class="form-control"
-															ng-readonly="hr" ng-model="user.requestid">
+															ng-readonly="true" ng-model="user.requestid">
 													</div>
 												</div>
 												<!-- 		  <div class="form-group">
@@ -269,7 +276,7 @@
 													<div class="col-md-9 ">
 														<select class="form-control" id="ComputerType" ng-readonly="it"
 															ng-model="user.computertype">
-															<option selected="selected">Laptop</option>
+															<option ng-ng-selected="selected">Laptop</option>
 															<option>Option 2</option>
 															<option>Option 3</option>
 														</select>
@@ -304,7 +311,7 @@
 													<div class="col-md-4 ">
 														<select class="form-control" id="AssetID"
 															ng-model="user.assetid" ng-readonly="it">
-															<option selected="selected">Please select</option>
+															<option ng-selected="selected">Please select</option>
 															<option>option 1</option>
 															<option>option 1</option>
 														</select>
@@ -396,7 +403,7 @@
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-4 ">
-														<input type="password" id="VPNPassword"
+														<input type="input" id="VPNPassword"
 															class="form-control" ng-model="user.vpnpassowrd" ng-readonly="it">
 													</div>
 												</div>
@@ -409,7 +416,7 @@
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-4 ">
-														<input type="password" id="mac" class="form-control"
+														<input type="input" id="mac" class="form-control"
 															ng-model="user.macaddress" ng-readonly="it">
 													</div>
 												</div>
@@ -462,7 +469,7 @@
 													<div class="col-md-3 ">
 														<select class="form-control marginB15" id="Status"
 															ng-model="user.keyboardtype" ng-readonly="it">
-															<option selected="selected">Wireless</option>
+															<option ng-selected="selected">Wireless</option>
 															<option>Option 2</option>
 															<option>Option 3</option>
 														</select>
@@ -481,7 +488,7 @@
 													<div class="col-md-3 ">
 														<select class="form-control marginB15" id="Status"
 															ng-model="user.mousetype" ng-readonly="it">
-															<option selected="selected">Wired</option>
+															<option ng-selected="selected">Wired</option>
 															<option>Option 2</option>
 															<option>Option 3</option>
 														</select>
