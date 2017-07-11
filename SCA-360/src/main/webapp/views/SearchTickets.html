@@ -1,0 +1,53 @@
+
+
+<div class="mycontainer" ng-controller="TicketController"
+	data-ng-init="gettickets()">
+	<table id="example" class="display nowrap" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Ticket ID</th>
+				<th>Title</th>
+				<th>Ticket Type</th>
+				<th>Raised by</th>
+				
+				<th>Created Date</th>
+				<th>End Date Date</th>
+				<th>Assigned To</th>
+				<th>Country</th>
+				<th>Priority</th>
+				<th>Status</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="ticket in tickets">
+				<td>{{ticket.ticketid}}</td>
+				<td>{{ticket.title}}</td>
+				<td>{{ticket.tickettype}}</td>
+				<td>{{ticket.raisedby}}</td>
+				<td>{{ticket.createdate}}</td>
+				<td>{{ticket.enddate}}</td>
+				
+				<td>{{ticket.assignedto}}</td>
+				<td>{{ticket.country}}</td>
+				<td>{{ticket.priority}}</td>
+				<td>{{ticket.status}}</td>
+						<td>
+			
+			<a href="#" class="option-link" title="View" ng-click="openreadticket(ticket)">
+							<span class="option-box">	
+							    <i class="glyphicon glyphicon-eye-open"></i>							    
+							</span>
+						</a>
+						
+						<a href="#" class="option-link" title="Edit" ng-hide="ticket.status=='Closed'"  ng-click="openeditticket(ticket)">
+							<span class="option-box">	
+							    <i class="glyphicon glyphicon-edit"></i>							    
+							</span>
+						</a>
+		
+				<!-- <a> delete </a> --></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
