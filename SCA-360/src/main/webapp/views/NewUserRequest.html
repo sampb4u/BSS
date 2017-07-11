@@ -1,5 +1,6 @@
 
-<div class="mycontainer" ng-controller="ITUserController" data-ng-init="createnewrequestid()">
+<div class="mycontainer" ng-controller="ITUserController"
+	data-ng-init="createnewrequestid()">
 	<toaster-container
 		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
@@ -27,8 +28,8 @@
 			<div class="panel-box">
 				<div class="panel">
 					<div class="panel-heading">
-						<span class="panel-title">Manage New User</span>   
-						<div>Status :: {{user.status}} </div>
+						<span class="panel-title">Manage New User</span>
+						<div>Status :: {{user.status}}</div>
 					</div>
 
 					<div class="panel-body">
@@ -65,24 +66,30 @@
 									<form class="form-horizontal" role="form">
 										<div class="row">
 											<div class="col-md-6">
-											<div class="form-group">
+												<div class="form-group">
 													<label for="country" class="col-md-4 control-label">Country</label>
 													<div class="col-md-7">
-														<select class="form-control" id="country" ng-readonly="hr"
-															ng-model="country" ng-change="createrequestid()">
-															<option ng-selected="selected">CN</option>
-															<option>IN</option>
-															<option>PL</option>
+														<select class="form-control" id="country"
+															ng-disabled="con" ng-model="user.country"
+															ng-change="createrequestid()">
+															<option value="SG">Singapore</option>
+															<option value="MY">Malaysia</option>
+															<option value="PH">Philippines</option>
+															<option value="ID">Indonesia</option>
+															<option value="TH">Thailand</option>
+															<option value="VN">Vietnam</option>
+															<option value="AU">Australia</option>
+
 														</select>
 													</div>
 												</div>
-												
+
 												<div class="form-group">
-												
+
 													<label for="RequestID" class="col-md-4 control-label">Request
 														ID</label>
 													<div class="col-md-7">
-													
+
 														<input type="text" id="RequestID" class="form-control"
 															ng-readonly="true" ng-model="user.requestid">
 													</div>
@@ -282,29 +289,33 @@
 													<label for="ComputerType" class="col-md-2  control-label">Computer
 														Type</label>
 													<div class="col-md-9 ">
-														<select class="form-control" id="ComputerType" ng-readonly="it"
-															ng-model="user.computertype">
-															<option ng-ng-selected="selected">Laptop</option>
-															<option>Option 2</option>
-															<option>Option 3</option>
+														<select class="form-control" id="ComputerType"
+															ng-disabled="it" ng-model="user.computertype">
+															<option ng-selected="selected">Laptop</option>
+															<option>Desktop</option>
+
 														</select>
 
 														<div class="row marginT15">
 															<div class="col-md-3 ">
 																<input type="text" class="form-control marginB15"
-																	placeholder="Brand" ng-model="user.computerbrand" ng-readonly="it">
+																	placeholder="Brand" ng-model="user.computerbrand"
+																	ng-readonly="it">
 															</div>
 															<div class="col-md-3 ">
 																<input type="text" class="form-control marginB15"
-																	placeholder="Model" ng-model="user.computermodel" ng-readonly="it">
+																	placeholder="Model" ng-model="user.computermodel"
+																	ng-readonly="it">
 															</div>
 															<div class="col-md-3 ">
 																<input type="text" class="form-control marginB15"
-																	placeholder="RAM" ng-model="user.computerram" ng-readonly="it">
+																	placeholder="RAM" ng-model="user.computerram"
+																	ng-readonly="it">
 															</div>
 															<div class="col-md-3 ">
 																<input type="text" class="form-control marginB15"
-																	placeholder="Storage" ng-model="user.computerstorage" ng-readonly="it">
+																	placeholder="Storage" ng-model="user.computerstorage"
+																	ng-readonly="it">
 															</div>
 														</div>
 													</div>
@@ -317,12 +328,9 @@
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-4 ">
-														<select class="form-control" id="AssetID"
+														<input type="text" class="form-control marginB15"
 															ng-model="user.assetid" ng-readonly="it">
-															<option ng-selected="selected">Please select</option>
-															<option>option 1</option>
-															<option>option 1</option>
-														</select>
+
 													</div>
 												</div>
 											</div>
@@ -335,7 +343,8 @@
 											<label for="LANRegistration" class="col-md-2 control-label">LAN
 												Registration</label>
 											<div class="col-md-9">
-												<div class="radio-inline" ng-model="user.lan" ng-readonly="it"> 
+												<div class="radio-inline" ng-model="user.lan"
+													ng-readonly="it">
 													<label class="control-text p-R5"> <input name="lan"
 														type="radio" value="yes"> Yes
 													</label>
@@ -411,8 +420,8 @@
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-4 ">
-														<input type="input" id="VPNPassword"
-															class="form-control" ng-model="user.vpnpassowrd" ng-readonly="it">
+														<input type="input" id="VPNPassword" class="form-control"
+															ng-model="user.vpnpassowrd" ng-readonly="it">
 													</div>
 												</div>
 
@@ -437,15 +446,18 @@
 												<div class="row">
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Brand" ng-model="user.monitorbrand" ng-readonly="it">
+															placeholder="Brand" ng-model="user.monitorbrand"
+															ng-readonly="it">
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Model" ng-model="user.monitormodel" ng-readonly="it">
+															placeholder="Model" ng-model="user.monitormodel"
+															ng-readonly="it">
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Size" ng-model="user.monitorsize" ng-readonly="it">
+															placeholder="Size" ng-model="user.monitorsize"
+															ng-readonly="it">
 													</div>
 												</div>
 											</div>
@@ -457,15 +469,18 @@
 												<div class="row">
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Email ID 1" ng-model="user.emailid1" ng-readonly="it">
+															placeholder="Email ID 1" ng-model="user.emailid1"
+															ng-readonly="it">
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Email ID 2" ng-model="user.emailid2" ng-readonly="it">
+															placeholder="Email ID 2" ng-model="user.emailid2"
+															ng-readonly="it">
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Email ID 3" ng-model="user.emailid3" ng-readonly="it">
+															placeholder="Email ID 3" ng-model="user.emailid3"
+															ng-readonly="it">
 													</div>
 												</div>
 											</div>
@@ -476,15 +491,15 @@
 												<div class="row">
 													<div class="col-md-3 ">
 														<select class="form-control marginB15" id="Status"
-															ng-model="user.keyboardtype" ng-readonly="it">
+															ng-model="user.keyboardtype" ng-disabled="it">
 															<option ng-selected="selected">Wireless</option>
-															<option>Option 2</option>
-															<option>Option 3</option>
+															<option>Wired</option>
 														</select>
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Brand" ng-model="user.keyboardbrand" ng-readonly="it">
+															placeholder="Brand" ng-model="user.keyboardbrand"
+															ng-readonly="it">
 													</div>
 												</div>
 											</div>
@@ -495,15 +510,16 @@
 												<div class="row">
 													<div class="col-md-3 ">
 														<select class="form-control marginB15" id="Status"
-															ng-model="user.mousetype" ng-readonly="it">
+															ng-model="user.mousetype" ng-disabled="it">
 															<option ng-selected="selected">Wired</option>
-															<option>Option 2</option>
-															<option>Option 3</option>
+															<option>Wireless</option>
+
 														</select>
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="Brand" ng-model="user.mousebrand" ng-readonly="it">
+															placeholder="Brand" ng-model="user.mousebrand"
+															ng-readonly="it">
 													</div>
 												</div>
 											</div>
@@ -515,11 +531,13 @@
 												<div class="row">
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="" ng-model="user.exstorage1" ng-readonly="it">
+															placeholder="" ng-model="user.exstorage1"
+															ng-readonly="it">
 													</div>
 													<div class="col-md-3 ">
 														<input type="text" class="form-control marginB15"
-															placeholder="" ng-model="user.exstorage2" ng-readonly="it">
+															placeholder="" ng-model="user.exstorage2"
+															ng-readonly="it">
 													</div>
 												</div>
 											</div>
@@ -551,7 +569,7 @@
 							</div>
 						</div>
 
-						
+
 					</div>
 				</div>
 			</div>

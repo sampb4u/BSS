@@ -109,7 +109,18 @@ public class ITUser {
 	private String emailid3;
 
 	@Column
+	private String country;
+
+	@Column
 	private String notes;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getOfficephonesno() {
 		return officephonesno;

@@ -7,15 +7,20 @@ angular
 						$mdToast, toaster, $timeout) {
 
 					$scope.ticket = $stateParams.ticket;
-					
-					if ($scope.ticket != undefined) {
-						$scope.ticket.createdate=new Date($scope.ticket.createdate);
-						$scope.ticket.enddate=new Date($scope.ticket.enddate);
+					//$scope.con = true;
 
-						if ($stateParams.read || $scope.ticket.status == 'Closed') {
+					if ($scope.ticket != undefined) {
+						$scope.con = true;
+						$scope.ticket.createdate = new Date(
+								$scope.ticket.createdate);
+						$scope.ticket.enddate = new Date($scope.ticket.enddate);
+
+						if ($stateParams.read
+								|| $scope.ticket.status == 'Closed') {
 							$scope.tkt = true;
-						
-						} 
+							
+
+						}
 					}
 
 					$scope.createnewticketid = function() {
@@ -31,19 +36,22 @@ angular
 								}
 							}
 
-							$http(req).then(function(data) {
-								$scope.id = data.data;
-								createticketid();
+							$http(req).then(
+									function(data) {
+										$scope.id = data.data;
+										$scope.ticket.raisedby = sessionStorage
+												.getItem("sessionUserName");
+										createticketid();
 
-							}, function() {
-								console.log("failed to create ticket")
-							});
+									}, function() {
+										console.log("failed to create ticket")
+									});
 						}
 					}
 
 					$scope.cancel = function() {
 						$scope.ticket = undefined;
-						//createnewticketid();
+						// createnewticketid();
 					}
 					$scope.createticketid = function() {
 						$scope.country = $scope.ticket.country;
@@ -68,28 +76,7 @@ angular
 						}
 
 					}
-					$scope.createrequestid = function(status) {
-						if ($scope.ticket.requestid == undefined) {
-							$scope.ticket.requestid = 'R' + $scope.country
-									+ $scope.id;
-							if ($scope.ticket.requestid.length < 10) {
-
-								$scope.ticket.requestid = 'R' + $scope.country;
-								for (var i = 0; i < 10 - $scope.ticket.requestid.length; i++) {
-									$scope.ticket.requestid = $scope.ticket.requestid
-											+ '0';
-								}
-								$scope.ticket.requestid = $scope.ticket.requestid
-										+ $scope.id;
-							}
-						} else {
-							$scope.ticket.requestid = 'R' + $scope.country
-									+ $scope.ticket.requestid.substr(3);
-							;
-
-						}
-
-					}
+					
 
 					$scope.createticket = function() {
 
@@ -107,6 +94,12 @@ angular
 								title : "Status Updated ",
 								body : $scope.ticket.status
 							});
+							$scope.con = true;
+							if ($scope.ticket.status == 'Closed') {
+								$scope.tkt = true;
+								$scope.con = true;
+
+							}
 							/*
 							 * $timeout(function() {
 							 * $state.go('app.SearchRequests'); }, 3000);

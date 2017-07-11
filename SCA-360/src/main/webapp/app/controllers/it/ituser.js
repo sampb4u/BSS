@@ -7,18 +7,26 @@ angular
 						$mdToast, toaster, $timeout) {
 
 					$scope.user = $stateParams.user;
+					
 					if ($scope.user != undefined) {
-
+						$scope.con=true;
 						if ($stateParams.read) {
 							$scope.hr = true;
 							$scope.it = true;
+							
 						} else {
 							if ($scope.user.status == 'HR-Submitted'
 									|| $scope.user.status == 'IT-In Progress') {
 								$scope.hr = true;
+								
 							} else if ($scope.user.status == 'Closed') {
 								$scope.hr = true;
 								$scope.it = true;
+								
+							}else if ($scope.user.status == 'HR-In Progress') {
+								
+								$scope.it = true;
+								
 							}
 						}
 
@@ -38,6 +46,7 @@ angular
 
 							$http(req).then(function(data) {
 								$scope.id = data.data;
+								$scope.it = true;
 								createrequestid();
 
 							}, function() {
@@ -48,11 +57,11 @@ angular
 
 					$scope.createrequestid = function(status) {
 						if ($scope.user.requestid == undefined) {
-							$scope.user.requestid = 'R' + $scope.country
+							$scope.user.requestid = 'R' + $scope.user.country
 									+ $scope.id;
 							if ($scope.user.requestid.length < 10) {
 
-								$scope.user.requestid = 'R' + $scope.country;
+								$scope.user.requestid = 'R' + $scope.user.country;
 								for (var i = 0; i < 10 - $scope.user.requestid.length; i++) {
 									$scope.user.requestid = $scope.user.requestid
 											+ '0';
@@ -61,9 +70,9 @@ angular
 										+ $scope.id;
 							}
 						} else {
-							$scope.user.requestid = 'R' + $scope.country
+							$scope.user.requestid = 'R' + $scope.user.country
 									+ $scope.user.requestid.substr(3);
-							;
+							
 
 						}
 
@@ -97,6 +106,7 @@ angular
 												title : "Status Updated ",
 												body : $scope.user.status
 											});
+											$scope.con = true;
 											if ($scope.user.status == 'HR-Submitted'
 													|| $scope.user.status == 'IT-In Progress') {
 												$scope.hr = true;
