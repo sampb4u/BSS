@@ -60,7 +60,24 @@
            
 			<td>{{user.assignedto}}</td>
 			<td>{{user.emailid}}</td> <!-- <td>not yet</td> -->
-			<td>{{user.status}}</td>
+			<td ng-if="user.status=='IT-In Progress'">
+				<span class="status status-inprogress">IT - In Progress</span>
+			</td>
+			<td ng-if="user.status=='HR-In Progress'">
+				<span class="status status-inprogress">HR - In Progress</span>
+			</td>
+			<td ng-if="user.status=='HR-Submitted'">
+				<span class="status status-submitted">HR - Submitted</span>
+			</td>
+			<td ng-if="user.status=='IT-Submitted'">
+				<span class="status status-submitted">IT - Submitted</span>
+			</td>
+			<td ng-if="user.status=='Completed'">
+				<span class="status status-completed">Completed</span>
+			</td>
+			<td ng-if="user.status=='Closed'">
+				<span class="status status-closed">Closed</span>
+			</td>
 			<td>
 			
 			<a href="#" class="option-link" title="View" ng-click="openreaduser(user)">
@@ -69,7 +86,7 @@
 							</span>
 						</a>
 						
-						<a href="#" class="option-link" title="Edit" ng-hide="user.status=='Closed'"  ng-click="openedituser(user)">
+						<a href="#" class="option-link" title="Edit" ng-hide="user.status==''Closed'"  ng-click="openedituser(user)">
 							<span class="option-box">	
 							    <i class="glyphicon glyphicon-edit"></i>							    
 							</span>
