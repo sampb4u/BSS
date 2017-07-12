@@ -444,7 +444,10 @@ margin-right:0.6em;
 .mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     color:#7b7b7b!important;
 }
-.status {
+
+
+
+.status, .priority {
     -moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -457,11 +460,14 @@ margin-right:0.6em;
 	color:#fff;
 }
 .status.status-inprogress{background-color:#fbbe1b;}
-.status.status-cancelled{background-color:#e44a3c;}
+.status.status-cancelled, .status.status-escalated{background-color:#e44a3c;}
 .status.status-closed, .status.status-completed{background-color:#84c725;}
 .status.status-pending{background-color:#9c27b0;}
 .status.status-onhold{background-color:#bdbdbc;}
 .status.status-submitted{background-color:#57c8e9;}
+.priority.priority-low{background-color:#57c8e9}
+.priority.priority-medium{background-color:#fbbe1b;}
+.priority.priority-critical{background-color:#e44a3c}
 .dataTable a.option-link {
     margin: 0 3px;
     font-size: 14px;
@@ -473,7 +479,7 @@ margin-right:0.6em;
     height: 2em;
     line-height: 2em;
     vertical-align: middle;
-	background-color:#57c8e9;
+	background-color:#ccc;
 	 -moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -491,8 +497,15 @@ margin-right:0.6em;
 }
  a.option-link:hover{color:#000; text-decoration:none;}
  a.option-link:hover .glyphicon {color:#000; text-decoration:none;}
- .option-box .glyphicon-eye-open{background-color:#2ccec3;
+ .option-box .glyphicon-eye-open{
+	 background-color:#2ccec3;
   -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	}
+	.option-box .glyphicon-edit{
+		background-color:#57c8e9;
+		-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	}
