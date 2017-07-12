@@ -38,7 +38,7 @@
 	border-color:#dadada;
 }
 .panel-box .panel-heading{
-	background:#9e9e9e;
+	background:#b0b0b0;
 }
 .panel-box .panel-title{
 	color:#fff;
@@ -295,6 +295,9 @@ ol.attach-links li a:hover {text-decoration:none;}
 .breadcrumb-new>li span {
     padding-left: 8px;
 }
+.breadcrumb-new>li.active span {
+    padding-left: 4px;
+}
 .mycontainer input[type=radio] {
     opacity: 1;
     left: auto;
@@ -343,7 +346,7 @@ box-shadow:inset 0 1px 0px 0px #f6f6f6
 .panel-box .ui-tabs .ui-tabs-panel {
 	padding:0;
 }
-.ui-tabs .ui-tabs-nav li {
+.mytabs.ui-tabs .ui-tabs-nav li {
 	list-style: none;
 	float: left;
 	position: relative;
@@ -354,20 +357,20 @@ box-shadow:inset 0 1px 0px 0px #f6f6f6
 	white-space: nowrap;
 	outline:none;
 }
-.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+.mytabs.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
 	float: left;
-	padding: .5em 1em;
+	padding: 8px 20px;
 	text-decoration: none;
 	outline:none;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+.mytabs.ui-tabs .ui-tabs-nav li.ui-tabs-active {
 	margin-bottom: -1px;
 	padding-bottom: 1px;
 	outline:none;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
-.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
-.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+.mytabs.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.mytabs.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+.mytabs.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
 	cursor: text;
 	outline:none;
 }
@@ -375,7 +378,7 @@ box-shadow:inset 0 1px 0px 0px #f6f6f6
 	cursor: pointer;
 	outline:none;
 }
-.ui-tabs .ui-tabs-panel {
+.mytabs.ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
 	padding: 1em 1.4em;
@@ -522,20 +525,22 @@ margin-right:0.6em;
 	border-spacing: 0px;
 	border-collapse: collapse;
 	border: 0;
-	width:100%
+	width:100%;
+	font-size: 13px;
+	font-weight: normal;
 }
 .mycontainer table th {
 	background: #b4daf2;
     color: #333;
     text-align: left;
-    padding: 9px 3px 9px 4px;
+    padding: 9px 5px 9px 10px;
     border: 0px;
     border-bottom: 1px solid #b4daf2;
 }
 .mycontainer table td {
 	border: 0px;
     border-bottom: 1px solid #ddd;
-    padding: 8px 5px 8px 0;
+    padding: 11px 5px 9px 10px;
 }
 .mycontainer table tr:nth-child(odd) td{ background-color:#f6f5f5; }
 .mycontainer table tr:nth-child(even) td{ background-color:#fff; }
