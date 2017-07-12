@@ -59,8 +59,23 @@
 				<td>{{ticket.assignedto}}</td>
 				<td>{{ticket.country}}</td>
 				<td>{{ticket.priority}}</td>
-				<td>{{ticket.status}}</td>
-						<td>
+				<td ng-if="ticket.status=='New'">
+					<span class="status status-pending">New</span>
+				</td>
+				<td ng-if="ticket.status=='In Progress'">
+					<span class="status status-inprogress">In Progress</span>
+				</td>
+				<td ng-if="ticket.status=='Cancelled'">
+					<span class="status status-cancelled">Cancelled</span>
+				</td>
+				<td ng-if="ticket.status=='Escalated'">
+					<span class="status status-cancelled">Escalated</span>
+				</td>
+				<td ng-if="ticket.status=='Closed'">
+					<span class="status status-closed">Closed</span>
+				</td>
+
+				<td>
 			
 			<a href="#" class="option-link" title="View" ng-click="openreadticket(ticket)">
 							<span class="option-box">	
