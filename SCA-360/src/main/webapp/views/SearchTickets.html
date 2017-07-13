@@ -53,8 +53,8 @@
 				<td>{{ticket.title}}</td>
 				<td>{{ticket.tickettype}}</td>
 				<td>{{ticket.raisedby}}</td>
-				<td>{{ticket.createdate}}</td>
-				<td>{{ticket.enddate}}</td>
+				<td> <span ng-bind="convertToDate(ticket.createdate)"></span></td>
+				<td><span ng-bind="convertToDate(ticket.enddate)"></span></td>
 				
 				<td>{{ticket.assignedto}}</td>
 				<td>{{ticket.country}}</td>

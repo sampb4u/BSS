@@ -4,16 +4,15 @@ angular
 		.controller(
 				'TicketController',
 				function($scope, $modal, $log, $http, $state, $stateParams,
-						$mdToast, toaster, $timeout) {
+						$mdToast, toaster, $timeout, $filter) {
 
 					$scope.ticket = $stateParams.ticket;
 					//$scope.con = true;
 
 					if ($scope.ticket != undefined) {
 						$scope.con = true;
-						$scope.ticket.createdate = new Date(
-								$scope.ticket.createdate);
-						$scope.ticket.enddate = new Date($scope.ticket.enddate);
+						$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss Z');
+						$scope.enddate=$filter('date')(new Date($scope.ticket.enddate),'yyyy-MM-dd HH:mm:ss Z');
 
 						if ($stateParams.read
 								|| $scope.ticket.status == 'Closed') {
@@ -41,6 +40,9 @@ angular
 										$scope.id = data.data;
 										$scope.ticket.raisedby = sessionStorage
 												.getItem("sessionUserName");
+										var date=new Date();
+										$scope.ticket.createdate =date.getTime();
+										$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss Z');
 										createticketid();
 
 									}, function() {
@@ -144,5 +146,14 @@ angular
 							'read' : true
 						});
 					}
+					$scope.convertToDate = function(date) {
+
+						if (date == 0) {
+							return '-';
+						}
+						return $filter('date')(new Date(date),
+								'yyyy-MM-dd HH:mm:ss Z');
+
+					};
 
 				});

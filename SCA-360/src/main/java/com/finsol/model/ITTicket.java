@@ -18,9 +18,10 @@ public class ITTicket {
 	@Column
 	private String raisedby;
 	@Column
-	private Date createdate;
+	private long createdate;
 	@Column
-	private Date enddate;
+	private long enddate;
+
 	@Column
 	private String status;
 	@Column
@@ -55,16 +56,16 @@ public class ITTicket {
 	public void setRaisedby(String raisedby) {
 		this.raisedby = raisedby;
 	}
-	public Date getCreatedate() {
+	public long getCreatedate() {
 		return createdate;
 	}
-	public void setCreatedate(Date createdate) {
+	public void setCreatedate(long createdate) {
 		this.createdate = createdate;
 	}
-	public Date getEnddate() {
+	public long getEnddate() {
 		return enddate;
 	}
-	public void setEnddate(Date enddate) {
+	public void setEnddate(long enddate) {
 		this.enddate = enddate;
 	}
 	public String getStatus() {
