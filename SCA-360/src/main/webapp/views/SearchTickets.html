@@ -71,10 +71,12 @@
 				<td ng-if="ticket.status=='Escalated'">
 					<span class="status status-cancelled">Escalated</span>
 				</td>
+				<td ng-if="ticket.status=='Completed'">
+					<span class="status status-completed">Completed</span>
+				</td>
 				<td ng-if="ticket.status=='Closed'">
 					<span class="status status-closed">Closed</span>
 				</td>
-
 				<td>
 			
 			<a href="#" class="option-link" title="View" ng-click="openreadticket(ticket)">
@@ -83,7 +85,7 @@
 							</span>
 						</a>
 						
-						<a href="#" class="option-link" title="Edit" ng-hide="ticket.status=='Closed'"  ng-click="openeditticket(ticket)">
+						<a href="#" class="option-link" title="Edit" ng-hide="ticket.status=='Closed' || ticket.status=='Completed' || ticket.status=='Cancelled'"  ng-click="openeditticket(ticket)">
 							<span class="option-box">	
 							    <i class="glyphicon glyphicon-edit"></i>							    
 							</span>
