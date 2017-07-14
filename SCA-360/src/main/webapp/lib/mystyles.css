@@ -2,6 +2,10 @@
 	background-color:#e9eef1;
 }
 
+li.open ul.submenu li ul.submenu{margin-top:-1px!important;}
+li.open ul.submenu+ul.submenu{margin-bottom: -1px!important;border-top: 0px!important;}
+li.open ul.submenu li.open ul.submenu li.open ul.submenu {border-top:0!important}
+
 .p-R5{padding-right:5px;}
 .space-bottom{margin-bottom:15px;}
 .space-top{margin-top:15px;}
@@ -12,19 +16,19 @@
 .align-right{text-align:right}
 .align-left{text-align:left}
 .mycontainer input[type="text"]::-webkit-input-placeholder {
-    color:#7b7b7b;
+    color:#888;
 	font-weight:normal
 }
 .mycontainer input[type="text"]:-moz-placeholder {
-    color:#7b7b7b;
+    color:#888;
 	font-weight:normal
 }
 .mycontainer input[type="text"]::-moz-placeholder {
-    color:#7b7b7b;
+    color:#888;
 	font-weight:normal
 }
 .mycontainer input[type="text"]:-ms-input-placeholder {
-    color:#7b7b7b;
+    color:#888;
 	font-weight:normal
 }
 .form-horizontal .form-group {
@@ -34,18 +38,34 @@
 
 
 .mycontainer  {
-	color: #7b7b7b;
+	color: #888;
 }
 .panel-box .panel{
 	border-color:#dadada;
 }
 .panel-box .panel-heading{
-	background:#b0b0b0;
+	background:#f1f1f1;
+	border-bottom: 1px solid #dadada;
 }
-.panel-box .panel-title{
-	color:#fff;
+.panel-box .panel-title {
+    color: #333;
+    font-weight: bold;
+	font-size:15px;
 }
 
+.panel-box .panel-title .status-new {
+   background-color:#1acbff;
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    background-clip: padding-box;
+    font-size: 12px;
+    font-weight: normal;
+	display:inline-block;
+	padding:2px 6px;
+	color:#fff;
+	line-height: normal;
+}
 
 .form-horizontal .form-group {
     margin-right: 0;
@@ -68,7 +88,7 @@
 .mycontainer input[type="search"], 
 .mycontainer input[type="tel"], 
 .mycontainer input[type="color"] {
-	color: #7b7b7b!important;
+	color: #888!important;
 border-color:#dadada;
 background-color:#fff;
 -moz-border-radius:4px!important;
@@ -109,7 +129,7 @@ input[type="color"]:hover {
 .mycontainer input[type="tel"]:focus,
 .mycontainer input[type="color"]:focus,
 .mycontainer select:focus {
-    color: #7b7b7b!important;
+    color: #888!important;
     background-color: #fff;
 	border-color:rgba(82,168,236,.8);
     outline: 0;
@@ -130,11 +150,11 @@ input[type="color"]:hover {
 	background:#f1f1f1;
 	border-color:#dadada;
 }
-.mycontainer .control-label, .control-text{ color: #7b7b7b!important;}
-.mycontainer  .small-text{ color: #7b7b7b!important; font-size:10px;}
+.mycontainer .control-label, .control-text{ color: #888!important;}
+.mycontainer  .small-text{ color: #888!important; font-size:10px;}
 .mycontainer select {
     font-size: 13px;
-    color: #7b7b7b!important;
+    color: #888!important;
     background-color: #f1f1f1;
     border: 1px solid #dadada;
 }
@@ -233,7 +253,7 @@ ol.attach-links li {
 ol.attach-links li a {
     margin:0;
 	padding: 0 5px;
-	color:#7b7b7b;
+	color:#888;
 	text-decoration:underline;
 }
 ol.attach-links li a:hover {text-decoration:none;}
@@ -282,7 +302,7 @@ ol.attach-links li a:hover {text-decoration:none;}
 
 .breadcrumb-new > li {
     color: #909090;
-    margin-left: 8px;
+    margin-left: 1px;
     font-size: 11px;
 	display: inline-block;
 }
@@ -295,12 +315,14 @@ ol.attach-links li a:hover {text-decoration:none;}
 	margin-left:0
 }
 .breadcrumb-new>li span {
-    padding-left: 8px;
+    padding-left: 4px;
+    font-size: 9px;
 }
 .breadcrumb-new>li.active span {
-    padding-left: 4px;
+    padding-left: 1px;
+	font-size: 11px;
 }
-.mycontainer input[type=radio] {
+.mycontainer input[type=radio], .mycontainer input[type=checkbox] {
     opacity: 1;
     left: auto;
     z-index: 12;
@@ -383,7 +405,7 @@ box-shadow:inset 0 1px 0px 0px #f6f6f6
 .mytabs.ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	padding: 1em 1.4em;
+	padding: 0;
 	background: none;
 	outline:none;
 }
@@ -444,7 +466,7 @@ margin-right:0.6em;
 }
 .mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{color:#fff!important;}
 .mycontainer .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    color:#7b7b7b!important;
+    color:#888!important;
 }
 
 
@@ -460,6 +482,7 @@ margin-right:0.6em;
 	background-color:#ccc;
 	padding:2px 6px;
 	color:#fff;
+	line-height: normal;
 }
 .status.status-inprogress{background-color:#fbbe1b;}
 .status.status-cancelled, .status.status-escalated{background-color:#e44a3c;}
@@ -514,12 +537,12 @@ margin-right:0.6em;
 /*jquery data table overides ends here*/
 
 .mycontainer {
-    color: #7b7b7b;
+    color: #888;
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-size: 13px;
 }
 .mycontainer .ui-widget {
-    color: #7b7b7b;
+    color: #888;
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-size: 13px;
 }

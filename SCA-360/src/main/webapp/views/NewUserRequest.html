@@ -32,7 +32,7 @@
 			<div class="panel-box">
 				<div class="panel">
 					<div class="panel-heading">
-						<span class="panel-title">Status :: {{user.status}}</span>
+						<span class="panel-title">Status :: <span class="status-new">{{user.status}}</span></span>
 						<div></div>
 					</div>
 
@@ -293,12 +293,18 @@
 													<label for="ComputerType" class="col-md-2  control-label">Computer
 														Type</label>
 													<div class="col-md-9 ">
-														<select class="form-control" id="ComputerType"
+														<!--<select class="form-control" id="ComputerType"
 															ng-disabled="it" ng-model="user.computertype">
 															<option ng-selected="selected">Laptop</option>
 															<option>Desktop</option>
 
-														</select>
+														</select>-->
+														<div class="checkbox-inline">
+															<label class="control-text p-R5"> <input name="laptop" type="checkbox" value="laptop">Laptop</label>
+														</div>
+														<div class="checkbox-inline">
+															<label class="control-text p-R5"> <input name="desktop" type="checkbox" value="desktop">Desktop</label>
+														</div>
 
 														<div class="row marginT15">
 															<div class="col-md-3 ">
