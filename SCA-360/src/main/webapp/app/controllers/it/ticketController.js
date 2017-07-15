@@ -7,6 +7,10 @@ angular
 						$mdToast, toaster, $timeout, $filter) {
 
 					$scope.ticket = $stateParams.ticket;
+					
+					  $scope.sortType     = 'name'; // set the default sort type
+					  $scope.sortReverse  = false;  // set the default sort order
+					  $scope.searchFish   = '';    
 					//$scope.con = true;
 
 					if ($scope.ticket != undefined) {
@@ -158,7 +162,7 @@ angular
 							return '-';
 						}
 						return $filter('date')(new Date(date),
-								'yyyy-MM-dd HH:mm:ss Z');
+								'yyyy-MM-dd HH:mm:ss');
 
 					};
 
