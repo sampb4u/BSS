@@ -1,3 +1,4 @@
+<script lang="javascript" src="dist/xlsx.full.min.js"></script>
 <div class="mycontainer" ng-controller="TicketController"
 	data-ng-init="gettickets()">
 	<div class="row">
@@ -145,8 +146,8 @@
 									<td>{{ticket.title}}</td>
 									<td>{{ticket.tickettype}}</td>
 									<td>{{ticket.raisedby}}</td>
-									<td><span ng-bind="convertToDate(ticket.createdate)"></span></td>
-									<td><span ng-bind="convertToDate(ticket.enddate)"></span></td>
+									<td>{{ticket.createdatestring}}</td>
+									<td>{{ticket.enddatestring}}</td>
 
 									<td>{{ticket.assignedto}}</td>
 									<td>{{ticket.country}}</td>

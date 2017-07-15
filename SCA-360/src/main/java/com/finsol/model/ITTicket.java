@@ -1,7 +1,5 @@
 package com.finsol.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,6 +19,10 @@ public class ITTicket {
 	private long createdate;
 	@Column
 	private long enddate;
+	@Column
+	private String createdatestring;
+	@Column
+	private String enddatestring;
 
 	@Column
 	private String status;
@@ -32,6 +34,21 @@ public class ITTicket {
 	private String priority;
 	@Column
 	private String notes;
+	
+	
+	
+	public String getCreatedatestring() {
+		return createdatestring;
+	}
+	public void setCreatedatestring(String createdatestring) {
+		this.createdatestring = createdatestring;
+	}
+	public String getEnddatestring() {
+		return enddatestring;
+	}
+	public void setEnddatestring(String enddatestring) {
+		this.enddatestring = enddatestring;
+	}
 	public String getTicketid() {
 		return ticketid;
 	}
