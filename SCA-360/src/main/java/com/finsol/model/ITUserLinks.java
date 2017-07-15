@@ -1,13 +1,13 @@
-package com.finsol.model;
+/*package com.finsol.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
+*//**
  * @author Anvesh
  *
- */
+ *//*
 @Entity
 public class ITUserLinks {
 
@@ -50,3 +50,4 @@ public class ITUserLinks {
 	
 
 }
+*/

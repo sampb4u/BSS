@@ -183,9 +183,10 @@ angular
 					};
 					
 					 $scope.exportData = function () {
-						    var blob = new Blob($scope.tickets, {
-			                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-			                });
-			                saveAs(blob, "Report.xls");
+						 
+			                
+			                var file = new Blob($scope.tickets, {type: 'application/pdf'});
+			                var fileURL = URL.createObjectURL(file);
+			                saveAs(file, "Report.pdf");
 					  };
 				});

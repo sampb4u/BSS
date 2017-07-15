@@ -1,11 +1,10 @@
 package com.finsol.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.OutputStream;
-import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.hssf.record.chart.TickRecord;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,7 +73,7 @@ public class ITManagementController {
 		return j1;
 	}
 
-	public static String convertPojoToJson(Object object) {
+	public  String convertPojoToJson(Object object) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		OutputStream outputStream = new ByteArrayOutputStream();
 		try {
@@ -85,4 +84,7 @@ public class ITManagementController {
 		return outputStream.toString();
 	}
 
+	public String uploadFileToDisk(File file){
+		return null;
+	}
 }

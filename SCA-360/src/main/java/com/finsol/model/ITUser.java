@@ -117,13 +117,13 @@ public class ITUser {
 	@Column
 	private String notes;
 
-	@OneToMany(targetEntity = ITUserLinks.class)
+/*	@OneToMany(targetEntity = ITUserLinks.class)
 	private List<ITUserLinks> hrlinks;
 
 	@OneToMany(targetEntity = ITUserLinks.class)
-	private List<ITUserLinks> itlinks;
+	private List<ITUserLinks> itlinks;*/
 
-	public List<ITUserLinks> getHrlinks() {
+/*	public List<ITUserLinks> getHrlinks() {
 		return hrlinks;
 	}
 
@@ -137,7 +137,7 @@ public class ITUser {
 
 	public void setItlinks(List<ITUserLinks> itlinks) {
 		this.itlinks = itlinks;
-	}
+	}*/
 
 	public String getCountry() {
 		return country;
