@@ -1,8 +1,11 @@
 package com.finsol.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * @author Anvesh
@@ -113,6 +116,28 @@ public class ITUser {
 
 	@Column
 	private String notes;
+
+	@OneToMany(targetEntity = ITUserLinks.class)
+	private List<ITUserLinks> hrlinks;
+
+	@OneToMany(targetEntity = ITUserLinks.class)
+	private List<ITUserLinks> itlinks;
+
+	public List<ITUserLinks> getHrlinks() {
+		return hrlinks;
+	}
+
+	public void setHrlinks(List<ITUserLinks> hrlinks) {
+		this.hrlinks = hrlinks;
+	}
+
+	public List<ITUserLinks> getItlinks() {
+		return itlinks;
+	}
+
+	public void setItlinks(List<ITUserLinks> itlinks) {
+		this.itlinks = itlinks;
+	}
 
 	public String getCountry() {
 		return country;

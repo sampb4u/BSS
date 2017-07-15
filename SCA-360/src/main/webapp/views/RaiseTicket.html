@@ -1,194 +1,215 @@
 
-                    <div class="mycontainer" ng-controller="TicketController" data-ng-init="createnewticketid()" >		
-                    	<toaster-container
-		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>		
-					<div class="row">
-						  <div class="col-xs-12">
-							<div class="page-header-section clearfix">
-							<div class="pull-left">
-								<ol class="breadcrumb-new">
-									<li><a href="#">Dashboard</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li><a href="#">Operation</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li><a href="#">IT</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li><a href="#">Ticket Management</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li class="active"><span>Raise Ticket</span></li>
-								</ol>
-								<h1>Raise Ticket</h1>
-							</div>
-							<div class="pull-right">
+<div class="mycontainer" ng-controller="TicketController"
+	data-ng-init="createnewticketid()">
+	<toaster-container
+		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="page-header-section clearfix">
+				<div class="pull-left">
+					<ol class="breadcrumb-new">
+						<li><a href="#">Dashboard</a><span
+							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+						<li><a href="#">Operation</a><span
+							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+						<li><a href="#">IT</a><span
+							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+						<li><a href="#">Ticket Management</a><span
+							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+						<li class="active"><span>Raise Ticket</span></li>
+					</ol>
+					<h1>Raise Ticket</h1>
+				</div>
+				<div class="pull-right"></div>
+			</div>
+		</div>
+	</div>
 
-
-							</div>	
-							</div>
-						 </div>
+	<div class="row center-block">
+		<div class="col-md-12">
+			<div class="panel-box">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Create Ticket</span>
 					</div>
-
-					<div class="row center-block">
-					  <div class="col-md-12">
-					    <div class="panel-box">
-						<div class="panel">
-						  <div class="panel-heading">
-							<span class="panel-title">Create Ticket</span>
-						  </div>
-						 <div class="attach-box clearfix">
-													<div class="pull-left">
-															<div class="attach-box-inner">
-															<span class="attach-title">Manage Attachment:</span>      
-																	  <ol class="attach-links">              
-																		   <li><a href="#">File name</a></li>
-																		   <li><a href="#">File name</a></li>
-																		   <li><a href="#">File name</a></li>
-																	  </ol>
-															</div>
-													</div>
-													<div class="align-right">
-														<button type="button" class="btn btn-sm custom-btn">
-															<span class="glyphicon glyphicon-paperclip"></span>Attach file
-														</button>																												
-														<div class="small-text">
-															Limit size: <strong>2MB</strong> per attachment. 																												
-															Allowed file extensions : 
-															XLs/ PDF/ JPEG/ DOC													       														
-														</div>																																														
-													</div>
+					<div class="attach-box clearfix">
+						<div class="pull-left">
+							<div class="attach-box-inner">
+								<span class="attach-title">Manage Attachment:</span>
+								<ol class="attach-links">
+									<li><a href="#">File name</a></li>
+									<li><a href="#">File name</a></li>
+									<li><a href="#">File name</a></li>
+								</ol>
+							</div>
 						</div>
-						  <div class="panel-body">
-						  <form class="form-horizontal" role="form">
-						    <div class="row">						  	
-						       <div class="col-md-6">
-                                      <div class="form-group">
+						<div class="align-right">
+							<button type="button" class="btn btn-sm custom-btn">
+								<span class="glyphicon glyphicon-paperclip"></span>Attach file
+							</button>
+							<div class="small-text">
+								Limit size: <strong>2MB</strong> per attachment. Allowed file
+								extensions : XLs/ PDF/ JPEG/ DOC
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" role="form">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
 										<label for="Country" class="col-md-4 control-label">Country</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Country" ng-model="ticket.country" ng-change="createticketid()"  ng-disabled="con" ng-selected="$index==0">
-											  <option value="SG">Singapore</option>
-															<option value="MY">Malaysia</option>
-															<option value="PH">Philippines</option>
-															<option value="ID">Indonesia</option>
-															<option value="TH">Thailand</option>
-															<option value="VN">Vietnam</option>
-															<option value="AU">Australia</option>
+											<select class="form-control" id="Country"
+												ng-model="ticket.country" ng-change="createticketid()"
+												ng-disabled="con" ng-selected="$index==0">
+												<option value="SG">Singapore</option>
+												<option value="MY">Malaysia</option>
+												<option value="PH">Philippines</option>
+												<option value="ID">Indonesia</option>
+												<option value="TH">Thailand</option>
+												<option value="VN">Vietnam</option>
+												<option value="AU">Australia</option>
 											</select>
 										</div>
-									  </div>
-                                      <div class="form-group">
-										<label for="ticketid" class="col-md-4 control-label" >Ticket ID</label>
-										<div class="col-md-7">										  
-											<input type="text" id="ticketid" class="form-control"  ng-model="ticket.ticketid" ng-readonly="true">										  
+									</div>
+									<div class="form-group">
+										<label for="ticketid" class="col-md-4 control-label">Ticket
+											ID</label>
+										<div class="col-md-7">
+											<input type="text" id="ticketid" class="form-control"
+												ng-model="ticket.ticketid" ng-readonly="true">
 										</div>
-									  </div>									  
-									  <div class="form-group">
+									</div>
+									<div class="form-group">
 										<label for="title" class="col-md-4 control-label">Title</label>
-										<div class="col-md-7">										  
-											<input type="text" id="title" class="form-control" ng-model="ticket.title"   ng-readonly="tkt">										  
+										<div class="col-md-7">
+											<input type="text" id="title" class="form-control"
+												ng-model="ticket.title" ng-readonly="tkt">
 										</div>
-									  </div>
-                                     <div class="form-group">
-										<label for="Raisedby" class="col-md-4 control-label">Raised by*</label>
-										<div class="col-md-7">										  
-											<input type="text" id="Raisedby"  ng-model="ticket.raisedby" class="form-control" ng-model="ticket.raisedby"  ng-readonly="true">										  
+									</div>
+									<div class="form-group">
+										<label for="Raisedby" class="col-md-4 control-label">Raised
+											by*</label>
+										<div class="col-md-7">
+											<input type="text" id="Raisedby" ng-model="ticket.raisedby"
+												class="form-control" ng-model="ticket.raisedby"
+												ng-readonly="true">
 										</div>
-									  </div>
-									   <div class="form-group">
-									    <label for="CreateDate" class="col-md-4 control-label">Create Date</label>
-									    <div class="col-md-7">	
-                                        
-										  <input type="text"  ng-model="createdate"  ng-readonly="true" class="form-control">
-										  
-										 </>
+									</div>
+									<div class="form-group">
+										<label for="CreateDate" class="col-md-4 control-label">Create
+											Date</label>
+										<div class="col-md-7">
+
+											<input type="text" ng-model="createdate" ng-readonly="true"
+												class="form-control"> </>
 										</div>
-                                      </div>
-										
-									  
-                                     
-                                      									  
-							   </div>
-							   
-							   <div class="col-md-6">
-										<div class="form-group">
+									</div>
+
+
+
+
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
 										<label for="Status" class="col-md-4  control-label">Status</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Status" ng-model="ticket.status"  ng-disabled="tkt">
-											  <option selected="selected">In Progress</option>
-											 
-											  <option>Cancelled</option>
-											  <option>Escalated</option>
-											   <option>Closed</option>
+											<select class="form-control" id="Status"
+												ng-model="ticket.status" ng-disabled="tkt" ng-change="closecheck()">
+												<option selected="selected">In Progress</option>
+
+												<option>Cancelled</option>
+												<option>Escalated</option>
+												<option>Closed</option>
 											</select>
 										</div>
-									  </div>
-									  <div class="form-group">
-										<label for="TicketType" class="col-md-4 control-label">Ticket Type</label>
+									</div>
+									<div class="form-group">
+										<label for="TicketType" class="col-md-4 control-label">Ticket
+											Type</label>
 										<div class="col-md-7">
-											<select class="form-control" id="TicketType" ng-model="ticket.tickettype"  ng-disabled="tkt">
-											  <option selected="selected">Hardware</option>
-											  <option>Software</option>
-											  <option>Office 365</option>
-											  <option>Lotus Notes & PGN</option>
-											  <option>Network</option>
-											  <option>Others</option>											  											 
+											<select class="form-control" id="TicketType"
+												ng-model="ticket.tickettype" ng-disabled="tkt">
+												<option selected="selected">Hardware</option>
+												<option>Software</option>
+												<option>Office 365</option>
+												<option>Lotus Notes & PGN</option>
+												<option>Network</option>
+												<option>Others</option>
 											</select>
 										</div>
-									  </div>
-									    <div class="form-group">
+									</div>
+									<div class="form-group">
 										<label for="Priority" class="col-md-4 control-label">Priority</label>
 										<div class="col-md-7 ">
-											<select class="form-control" id="Priority" ng-model="ticket.priority"  ng-disabled="tkt">
-											  <option selected="selected">Critical</option>
-											  <option>High</option>
-											  <option>Medium</option>
-											  <option>Low</option>
+											<select class="form-control" id="Priority"
+												ng-model="ticket.priority" ng-disabled="tkt">
+												<option selected="selected">Critical</option>
+												<option>High</option>
+												<option>Medium</option>
+												<option>Low</option>
 											</select>
 										</div>
-									  </div>
-									  <div class="form-group">
-										<label for="AssignedTo" class="col-md-4 control-label">Assigned To</label>
+									</div>
+									<div class="form-group">
+										<label for="AssignedTo" class="col-md-4 control-label">Assigned
+											To</label>
 										<div class="col-md-7 ">
-										<input type="text" id="title" class="form-control" ng-model="ticket.assignedto"   ng-readonly="tkt">	
+											<input type="text" id="title" class="form-control"
+												ng-model="ticket.assignedto" ng-readonly="true">
 										</div>
-									  </div>
-          <!--                             <div class="form-group">
-									    <label for="EndDate" class="col-md-4 control-label">End Date</label>
-									    <div class="col-md-7">	
-                                          <md-datepicker ng-model="ticket.enddate"  ng-readonly="tkt">
-										  
-										 </md-datepicker>
+									</div>
+									<div class="form-group">
+										<label for="EndDate" class="col-md-4 control-label" ng-show="close">End
+											Date</label>
+										<div class="col-md-7">
+											<input type="text" ng-readonly="true" class="form-control"
+												ng-model="enddate" ng-readonly="true" ng-show="close" />
+
+
 										</div>
-                                      </div>									  
-									  -->
-																	  
-							   </div>							   						   							   
+									</div>
+
+
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group ">
-										<label class=" col-md-2  col-lg-2 control-label">
-											<span class="p-R5">Notes</span>
+										<label class=" col-md-2  col-lg-2 control-label"> <span
+											class="p-R5">Notes</span>
 										</label>
 										<div class="col-xs-11 col-md-7 col-lg-8 form-textarea">
-											<textarea class="form-control" cols="20" id="notes" name="notes" rows="5" ng-model="ticket.notes"  ng-readonly="tkt"></textarea>									  
+											<textarea class="form-control" cols="20" id="notes"
+												name="notes" rows="5" ng-model="ticket.notes"
+												ng-readonly="tkt"></textarea>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-6">								  																		  									 
-                                      <div class="form-group">
-                                            <div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4">
-                                                <button type="button" class="btn" ng-click="cancel()" ng-hide="tkt">Cancel</button>
-												<button type="submit" class="btn btn-primary" ng-click="createticket()" ng-hide="tkt">Submit</button>
-                                            </div>
-                                      </div>									  
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4">
+											<button type="button" class="btn" ng-click="cancel()"
+												ng-hide="tkt">Cancel</button>
+											<button type="submit" class="btn btn-primary"
+												ng-click="createticket()" ng-hide="tkt">Submit</button>
+										</div>
+									</div>
 								</div>
-							</div>														
-							</form>
-						  </div>
-						</div>
-					   </div>
-                       </div>
-					  
+							</div>
+						</form>
 					</div>
-                    </div>					
-				
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
 <script type='text/javascript'>
-    $(".mytabs").tabs();
+	$(".mytabs").tabs();
 </script>

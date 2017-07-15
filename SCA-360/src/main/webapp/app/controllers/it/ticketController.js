@@ -11,12 +11,17 @@ angular
 
 					if ($scope.ticket != undefined) {
 						$scope.con = true;
-						$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss Z');
-						$scope.enddate=$filter('date')(new Date($scope.ticket.enddate),'yyyy-MM-dd HH:mm:ss Z');
+						$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss');
+						$scope.enddate=$filter('date')(new Date($scope.ticket.enddate),'yyyy-MM-dd HH:mm:ss');
 
 						if ($stateParams.read
-								|| $scope.ticket.status == 'Closed') {
+								|| $scope.ticket.status == 'Closed' || $scope.ticket.status == 'Cancelled')  {
 							$scope.tkt = true;
+							
+
+						}
+						if ( $scope.ticket.status == 'Closed') {
+							$scope.close = true;
 							
 
 						}
@@ -42,7 +47,8 @@ angular
 												.getItem("sessionUserName");
 										var date=new Date();
 										$scope.ticket.createdate =date.getTime();
-										$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss Z');
+										$scope.createdate=$filter('date')(new Date($scope.ticket.createdate),'yyyy-MM-dd HH:mm:ss');
+										$scope.ticket.assignedto = 'IT Admin';
 										createticketid();
 
 									}, function() {
@@ -97,7 +103,7 @@ angular
 								body : $scope.ticket.status
 							});
 							$scope.con = true;
-							if ($scope.ticket.status == 'Closed') {
+							if ($scope.ticket.status == 'Closed' || $scope.ticket.status == 'Cancelled' ) {
 								$scope.tkt = true;
 								$scope.con = true;
 
@@ -156,4 +162,30 @@ angular
 
 					};
 
+					$scope.closecheck = function() {
+						if ( $scope.ticket.status == 'Closed') {
+							var date=new Date();
+							$scope.ticket.enddate =date.getTime();
+							$scope.enddate=$filter('date')(new Date($scope.ticket.enddate),'yyyy-MM-dd HH:mm:ss');
+							$scope.close = true;
+							
+							
+
+						}else {
+							$scope.close = false;
+						}
+						if ($scope.ticket.status ==  'Escalated'){
+							$scope.ticket.assignedto = 'SG - IT Admin';
+						}else if ($scope.ticket.status ==  'In Progress'){
+							$scope.ticket.assignedto = 'IT Admin';
+						}
+					
+					};
+					
+					 $scope.exportData = function () {
+						    var blob = new Blob($scope.tickets, {
+			                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+			                });
+			                saveAs(blob, "Report.xls");
+					  };
 				});
