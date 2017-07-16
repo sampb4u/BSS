@@ -320,17 +320,12 @@
 
 														</select>-->
 														
-															<div class="checkbox-inline">
+															<div class="checkbox pL20">
 																<label class="control-text p-R5"> <input
 																	name="laptop" type="checkbox" ng-model="user.laptop" ng-disabled="it">Laptop
 																</label>
 															</div>
-															<div  class="checkbox-inline">
-																<label class="control-text p-R5"> <input
-																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
-																</label>
-															</div>
-																<div class="row marginT15" ng-show="user.laptop">
+															<div class="row" ng-show="user.laptop">
 																	<div class="col-md-3 ">
 																		<input type="text" class="form-control marginB15"
 																			placeholder="Brand" ng-model="user.laptopbrand"
@@ -351,30 +346,35 @@
 																			placeholder="Storage" ng-model="user.laptopstorage"
 																			ng-readonly="it">
 																	</div>
+															</div>
+															<div  class="checkbox pL20">
+																<label class="control-text p-R5"> <input
+																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
+																</label>
+															</div>
+																																													
+															<div class="row" ng-show="user.desktop">
+																<div class="col-md-3 ">
+																	<input type="text" class="form-control marginB15"
+																		placeholder="Brand" ng-model="user.computerbrand"
+																		ng-readonly="it">
 																</div>
-																													
-																<div class="row marginT15" ng-show="user.desktop">
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Brand" ng-model="user.computerbrand"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Model" ng-model="user.computermodel"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="RAM" ng-model="user.computerram"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Storage" ng-model="user.computerstorage"
-																			ng-readonly="it">
-																	</div>
+																<div class="col-md-3 ">
+																	<input type="text" class="form-control marginB15"
+																		placeholder="Model" ng-model="user.computermodel"
+																		ng-readonly="it">
 																</div>
+																<div class="col-md-3 ">
+																	<input type="text" class="form-control marginB15"
+																		placeholder="RAM" ng-model="user.computerram"
+																		ng-readonly="it">
+																</div>
+																<div class="col-md-3 ">
+																	<input type="text" class="form-control marginB15"
+																		placeholder="Storage" ng-model="user.computerstorage"
+																		ng-readonly="it">
+																</div>
+															</div>
 
 
 													</div>
