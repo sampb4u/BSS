@@ -6095,6 +6095,7 @@ angular.module('app')
 					.state('app.MyTickets', {
                         url: '/MyTickets',
                         templateUrl: 'views/SearchTickets.html',
+                        params : { mytickets : true },
                         ncyBreadcrumb: {
                             label: '',
                             description: ''
@@ -6171,6 +6172,7 @@ angular.module('app')
 					.state('app.SearchTickets', {
                         url: '/SearchTickets',
                         templateUrl: 'views/SearchTickets.html',
+                        params : { mytickets : false },
                         ncyBreadcrumb: {
                             label: '',
                             description: ''

@@ -8,11 +8,13 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finsol.bean.ITAdmin;
 import com.finsol.dao.ITUserDaoImpl;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
@@ -50,10 +53,11 @@ public class ITManagementController {
 
 	}
 
-	@RequestMapping(value = "/getITTickets", method = RequestMethod.GET)
-	public @ResponseBody String getITTickets() {
+	@RequestMapping(value = "/getITTickets", method = RequestMethod.POST)
+	public @ResponseBody String getITTickets(@RequestBody ITAdmin admin) {
 
-		return convertPojoToJson(dataSource.getTickets());
+		return convertPojoToJson(
+				admin.getUser() == null ? dataSource.getTickets() : dataSource.getTickets(admin.getUser()));
 
 	}
 
@@ -77,9 +81,9 @@ public class ITManagementController {
 	}
 
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
-	public @ResponseBody JSONObject  saveimage(@RequestParam MultipartFile file) throws Exception {
+	public @ResponseBody JSONObject saveimage(@RequestParam MultipartFile file) throws Exception {
 
-		//ServletContext context = session.getServletContext();
+		// ServletContext context = session.getServletContext();
 		String path = "C:/files/";
 		String filename = file.getOriginalFilename();
 

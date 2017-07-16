@@ -84,4 +84,17 @@ public class ITUserDaoImpl {
 
 	}
 
+	public List getTickets(String user) {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM ITTicket where assignedto = :key or raisedby = :key1 ";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("key", user);
+		query.setParameter("key1", user);
+		query.addEntity(ITTicket.class);
+
+		return query.list();
+		
+
+	}
+
 }

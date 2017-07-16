@@ -7,13 +7,8 @@ angular
 			$mdToast, toaster, $timeout, $filter) {
 
 			$scope.ticket = $stateParams.ticket;
-			$scope.csvTemplateHeaders = [ "slNo", "routeName",
-				"vehicleName", "driverName", "startTime",
-				"endTime", "distance" ],
-			$scope.csvTemplateHeadersXlx = [ "Sl No.",
-				"Route Name", "Vehicle Name",
-				"Driver Name", "Start Time", "End Time",
-				"Distance in km" ]
+
+
 
 			$scope.sortType = 'name'; // set the default sort type
 			$scope.sortReverse = false; // set the default sort order
@@ -142,13 +137,20 @@ angular
 			}
 
 			$scope.gettickets = function() {
+				var tic = {};
+				
+				if ($stateParams.mytickets) {
+					tic.user = sessionStorage
+						.getItem("sessionUserName");
+				}
 
 				var req = {
-					method : 'GET',
+					method : 'POST',
 					url : "/SCA-360/getITTickets.do",
 					headers : {
 						'Content-Type' : 'application/json'
 					},
+					data : tic
 				}
 
 				$http(req).then(function(data) {
@@ -321,7 +323,7 @@ angular
 
 							saveAs(new Blob([ $scope.s2ab(wbout) ], {
 								type : ""
-							}), "Tickets_"+date+".xlsx")
+							}), "Tickets_" + date + ".xlsx")
 						}
 					}
 				}
