@@ -319,11 +319,17 @@
 															<option>Desktop</option>
 
 														</select>-->
-														<div class="col">
-															<div >
+														
+															<div class="checkbox-inline">
 																<label class="control-text p-R5"> <input
 																	name="laptop" type="checkbox" ng-model="user.laptop" ng-disabled="it">Laptop
 																</label>
+															</div>
+															<div  class="checkbox-inline">
+																<label class="control-text p-R5"> <input
+																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
+																</label>
+															</div>
 																<div class="row marginT15" ng-show="user.laptop">
 																	<div class="col-md-3 ">
 																		<input type="text" class="form-control marginB15"
@@ -346,15 +352,7 @@
 																			ng-readonly="it">
 																	</div>
 																</div>
-															</div>
-
-
-
-
-															<div >
-																<label class="control-text p-R5"> <input
-																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
-																</label>
+																													
 																<div class="row marginT15" ng-show="user.desktop">
 																	<div class="col-md-3 ">
 																		<input type="text" class="form-control marginB15"
@@ -377,8 +375,7 @@
 																			ng-readonly="it">
 																	</div>
 																</div>
-															</div>
-														</div>
+
 
 													</div>
 												</div>
