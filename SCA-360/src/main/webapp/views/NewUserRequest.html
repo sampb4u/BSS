@@ -13,9 +13,9 @@
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
 						<li><a href="#">Operation</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-							<li><a href="#">IT</a><span
+						<li><a href="#">IT</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-							<li><a href="#">New User Management</a><span
+						<li><a href="#">New User Management</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
 						<li class="active"><span>New User Request</span></li>
 					</ol>
@@ -146,7 +146,7 @@
 														To</label>
 													<div class="col-md-7">
 														<input type="text" id="AssignedTo" class="form-control"
-															ng-readonly="hr" ng-model="user.assignedto">
+															ng-readonly="true" ng-model="user.assignedto">
 													</div>
 												</div>
 
@@ -172,6 +172,26 @@
 													<div class="col-md-7">
 														<input type="text" id="Designation" class="form-control"
 															ng-readonly="hr" ng-model="user.designation">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="CreateDate" class="col-md-4 control-label">Create
+														Date</label>
+													<div class="col-md-7">
+
+														<input type="text" ng-model="user.createdatestring"
+															ng-readonly="true" class="form-control" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="EndDate" class="col-md-4 control-label"
+														ng-show="close">End Date</label>
+													<div class="col-md-7">
+														<input type="text" ng-readonly="true" class="form-control"
+															ng-model="user.enddatestring" ng-readonly="true"
+															ng-show="close" />
+
+
 													</div>
 												</div>
 
@@ -299,35 +319,67 @@
 															<option>Desktop</option>
 
 														</select>-->
-														<div class="checkbox-inline">
-															<label class="control-text p-R5"> <input name="laptop" type="checkbox" value="laptop">Laptop</label>
-														</div>
-														<div class="checkbox-inline">
-															<label class="control-text p-R5"> <input name="desktop" type="checkbox" value="desktop">Desktop</label>
+														<div class="col">
+															<div >
+																<label class="control-text p-R5"> <input
+																	name="laptop" type="checkbox" ng-model="user.laptop" ng-disabled="it">Laptop
+																</label>
+																<div class="row marginT15" ng-show="user.laptop">
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Brand" ng-model="user.laptopbrand"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Model" ng-model="user.laptopmodel"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="RAM" ng-model="user.laptopram"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Storage" ng-model="user.laptopstorage"
+																			ng-readonly="it">
+																	</div>
+																</div>
+															</div>
+
+
+
+
+															<div >
+																<label class="control-text p-R5"> <input
+																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
+																</label>
+																<div class="row marginT15" ng-show="user.desktop">
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Brand" ng-model="user.computerbrand"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Model" ng-model="user.computermodel"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="RAM" ng-model="user.computerram"
+																			ng-readonly="it">
+																	</div>
+																	<div class="col-md-3 ">
+																		<input type="text" class="form-control marginB15"
+																			placeholder="Storage" ng-model="user.computerstorage"
+																			ng-readonly="it">
+																	</div>
+																</div>
+															</div>
 														</div>
 
-														<div class="row marginT15">
-															<div class="col-md-3 ">
-																<input type="text" class="form-control marginB15"
-																	placeholder="Brand" ng-model="user.computerbrand"
-																	ng-readonly="it">
-															</div>
-															<div class="col-md-3 ">
-																<input type="text" class="form-control marginB15"
-																	placeholder="Model" ng-model="user.computermodel"
-																	ng-readonly="it">
-															</div>
-															<div class="col-md-3 ">
-																<input type="text" class="form-control marginB15"
-																	placeholder="RAM" ng-model="user.computerram"
-																	ng-readonly="it">
-															</div>
-															<div class="col-md-3 ">
-																<input type="text" class="form-control marginB15"
-																	placeholder="Storage" ng-model="user.computerstorage"
-																	ng-readonly="it">
-															</div>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -552,6 +604,7 @@
 												</div>
 											</div>
 										</div>
+
 
 										<div class="row">
 											<div class="col-md-12">

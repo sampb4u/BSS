@@ -35,8 +35,7 @@ public class ITTicket {
 	@Column
 	private String notes;
 	
-	
-	
+
 	public String getCreatedatestring() {
 		return createdatestring;
 	}

@@ -116,28 +116,116 @@ public class ITUser {
 
 	@Column
 	private String notes;
+	@Column
+	private String laptopbrand;
+	@Column
+	private String laptopmodel;
+	@Column
+	private String laptopram;
+	@Column
+	private String laptopstorage;
+	@Column
+	private long createdate;
+	@Column
+	private long enddate;
+	@Column
+	private String createdatestring;
+	@Column
+	private String enddatestring;
+	
+	@Column
+	@org.hibernate.annotations.Type(type="true_false")
+	private boolean desktop;
+	@Column
+	@org.hibernate.annotations.Type(type="true_false")
+	private boolean laptop;
+	
+	
+	
+	
+	
 
-/*	@OneToMany(targetEntity = ITUserLinks.class)
-	private List<ITUserLinks> hrlinks;
 
-	@OneToMany(targetEntity = ITUserLinks.class)
-	private List<ITUserLinks> itlinks;*/
 
-/*	public List<ITUserLinks> getHrlinks() {
-		return hrlinks;
+	public boolean isDesktop() {
+		return desktop;
 	}
 
-	public void setHrlinks(List<ITUserLinks> hrlinks) {
-		this.hrlinks = hrlinks;
+	public void setDesktop(boolean desktop) {
+		this.desktop = desktop;
 	}
 
-	public List<ITUserLinks> getItlinks() {
-		return itlinks;
+	public boolean isLaptop() {
+		return laptop;
 	}
 
-	public void setItlinks(List<ITUserLinks> itlinks) {
-		this.itlinks = itlinks;
-	}*/
+	public void setLaptop(boolean laptop) {
+		this.laptop = laptop;
+	}
+
+	public String getLaptopbrand() {
+		return laptopbrand;
+	}
+
+	public void setLaptopbrand(String laptopbrand) {
+		this.laptopbrand = laptopbrand;
+	}
+
+	public String getLaptopmodel() {
+		return laptopmodel;
+	}
+
+	public void setLaptopmodel(String laptopmodel) {
+		this.laptopmodel = laptopmodel;
+	}
+
+	public String getLaptopram() {
+		return laptopram;
+	}
+
+	public void setLaptopram(String laptopram) {
+		this.laptopram = laptopram;
+	}
+
+	public String getLaptopstorage() {
+		return laptopstorage;
+	}
+
+	public void setLaptopstorage(String laptopstorage) {
+		this.laptopstorage = laptopstorage;
+	}
+
+	public long getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(long createdate) {
+		this.createdate = createdate;
+	}
+
+	public long getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(long enddate) {
+		this.enddate = enddate;
+	}
+
+	public String getCreatedatestring() {
+		return createdatestring;
+	}
+
+	public void setCreatedatestring(String createdatestring) {
+		this.createdatestring = createdatestring;
+	}
+
+	public String getEnddatestring() {
+		return enddatestring;
+	}
+
+	public void setEnddatestring(String enddatestring) {
+		this.enddatestring = enddatestring;
+	}
 
 	public String getCountry() {
 		return country;
