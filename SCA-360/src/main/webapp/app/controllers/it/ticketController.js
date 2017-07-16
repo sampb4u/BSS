@@ -205,18 +205,6 @@ angular
 
 					};
 
-					/*
-					 * $scope.exportData = function () { var myJsonString =
-					 * JSON.stringify( Object.keys($scope.items).map(function(k) {
-					 * return $scope.items[k] }));
-					 * 
-					 * var blob = new Blob( [myJsonString], { type:
-					 * "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-					 * }); saveAs(blob, "Report.xls");
-					 * JSONToCSVConvertor($scope.tickets, "Tickets Report",
-					 * true); };
-					 */
-
 					$scope.Workbook = function() {
 						if (!(this instanceof $scope.Workbook))
 							return new $scope.Workbook();
@@ -339,4 +327,34 @@ angular
 
 					}
 
-				});
+					$scope.selectedFile=[]; 
+                    $scope.onFileSelect = function ($files) { 
+                          $scope.uploadProgress = 0; 
+                          $scope.selectedFile = $files; 
+                      }; 
+                      $scope.myData = {}; 
+
+/*                    $scope.upload = function(){ 
+                          var formData = new FormData(); 
+                          formData.append("file",$scope.myFile); 
+                      //    formData.append("data", myData.message.value); 
+                 
+                          
+                          $.ajax({
+                        	    url: '/SCA-360/savefile.do',
+                        	    data: formData,
+                        	   
+                        	    processData: false,
+                        	    contentType: false,
+                        	    type: 'POST',
+                        	    success: function(data){
+                        	    	alert("done"); 
+                        	    }
+                        	  });
+                          
+                          
+                          
+                   
+			}*/
+
+		});

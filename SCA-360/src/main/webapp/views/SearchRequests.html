@@ -1,108 +1,156 @@
 <div class="mycontainer" ng-controller="ITUserController"
 	data-ng-init="getusers()">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="page-header-section clearfix">
-                <div class="pull-left">
-                    <ol class="breadcrumb-new">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="page-header-section clearfix">
+				<div class="pull-left">
+					<ol class="breadcrumb-new">
 						<li><a href="#">Dashboard</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
 						<li><a href="#">Operation</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-							<li><a href="#">IT</a><span
+						<li><a href="#">IT</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-							<li><a href="#">New User Management</a><span
+						<li><a href="#">New User Management</a><span
 							class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
 						<li class="active"><span>Search Requests</span></li>
 					</ol>
-                    <h1>Search Requests</h1>
-                </div>
-                <div class="pull-right">
+					<h1>Search Requests</h1>
+				</div>
+				<div class="pull-right"></div>
+			</div>
+		</div>
+	</div>
+
+	<form>
+		<div class="form-group">
+			<div class="input-group">
+				<div class="input-group-addon">
+					<i class="fa fa-search"></i>
+				</div>
+				<input type="text" class="form-control" placeholder="Search"
+					ng-model="searchFish">
+			</div>
+		</div>
+	</form>
+	<div class="row center-block">
+		<div class="col-md-12">
+			<div class="panel-box">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Request List</span>
+					</div>
+
+					<div class="panel-body">
+						<table id="requestList" class="display nowrap" cellspacing="0"
+							width="100%">
+
+							<tr>
+								<th><a href="#"
+									ng-click="sortType = 'requestid'; sortReverse = !sortReverse">
+										Request ID <span
+										ng-show="sortType == 'requestid' && !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'requestid' && sortReverse"
+										class="fa fa-caret-up"></span>
+								</a></th>
+								<th><a href="#"
+									ng-click="sortType = 'employeeid'; sortReverse = !sortReverse">
+										Employee Id <span
+										ng-show="sortType == 'employeeid' && !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'employeeid' && sortReverse"
+										class="fa fa-caret-up"></span>
+								</a></th>
+								<th><a href="#"
+									ng-click="sortType = 'firstname'; sortReverse = !sortReverse">
+										First name <span
+										ng-show="sortType == 'firstname' && !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'firstname' && sortReverse"
+										class="fa fa-caret-up"></span>
+								</a></th>
+
+								<th><a href="#"
+									ng-click="sortType = 'lastname'; sortReverse = !sortReverse">
+										Last Name <span
+										ng-show="sortType == 'lastname' && !sortReverse"
+										class="fa fa-caret-down"></span> <span
+										ng-show="sortType == 'lastname' && sortReverse"
+										class="fa fa-caret-up"></span>
+								</a></th>
+
+								<th><a href="#"
+										ng-click="sortType = 'assignedto'; sortReverse = !sortReverse">
+											Assigned To <span
+											ng-show="sortType == 'assignedto' && !sortReverse"
+											class="fa fa-caret-down"></span> <span
+											ng-show="sortType == 'assignedto' && sortReverse"
+											class="fa fa-caret-up"></span>
+									</a></th>
+								<th><a href="#"
+										ng-click="sortType = 'emailid'; sortReverse = !sortReverse">
+											Email ID <span
+											ng-show="sortType == 'emailid' && !sortReverse"
+											class="fa fa-caret-down"></span> <span
+											ng-show="sortType == 'emailid' && sortReverse"
+											class="fa fa-caret-up"></span>
+									</a></th>
+								<!-- <th>Created date</th> -->
+								<th><a href="#"
+										ng-click="sortType = 'status'; sortReverse = !sortReverse">
+											Status <span
+											ng-show="sortType == 'status' && !sortReverse"
+											class="fa fa-caret-down"></span> <span
+											ng-show="sortType == 'status' && sortReverse"
+											class="fa fa-caret-up"></span>
+									</a></th>
+								<th>Options</th>
 
 
-                </div>
-            </div>
-        </div>
-    </div>
+							</tr>
+							<tr ng-repeat="user in users  | orderBy:sortType:sortReverse | filter:searchFish">
+								<td>{{user.requestid}}</td>
+								<td>{{user.employeeid}}</td>
+								<td>{{user.firstname}}</td>
 
-    <div class="row center-block">
-        <div class="col-md-12">
-            <div class="panel-box">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <span class="panel-title">Request List</span>
-                    </div>
+								<td>{{user.lastname}}</td>
 
-                    <div class="panel-body">
-                        <table id="requestList" class="display nowrap" cellspacing="0" width="100%">
-                            
-		<tr>
-			<th>Request ID</th>
-			<th>Employee Id</th>
-			<th>First name</th>
+								<td>{{user.assignedto}}</td>
+								<td>{{user.emailid}}</td>
+								<!-- <td>not yet</td> -->
+								<td ng-if="user.status=='IT-In Progress'"><span
+									class="status status-inprogress">IT - In Progress</span></td>
+								<td ng-if="user.status=='HR-In Progress'"><span
+									class="status status-inprogress">HR - In Progress</span></td>
+								<td ng-if="user.status=='HR-Submitted'"><span
+									class="status status-submitted">HR - Submitted</span></td>
+								<td ng-if="user.status=='IT-Submitted'"><span
+									class="status status-submitted">IT - Submitted</span></td>
+								<td ng-if="user.status=='Completed'"><span
+									class="status status-completed">Completed</span></td>
+								<td ng-if="user.status=='Closed'"><span
+									class="status status-closed">Closed</span></td>
+								<td><a href="#" class="option-link" title="View"
+									ng-click="openreaduser(user)"> <span class="option-box">
+											<i class="glyphicon glyphicon-eye-open"></i>
+									</span>
+								</a> <a href="#" class="option-link" title="Edit"
+									ng-hide="user.status=='Closed' || user.status=='Completed'"
+									ng-click="openedituser(user)"> <span class="option-box">
+											<i class="glyphicon glyphicon-edit"></i>
+									</span>
+								</a> <!-- <a> delete </a> --></td>
 
-			<th>Last Name</th>
+							</tr>
+						</table>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
-			<th>Assigned To</th>
-			<th>Email</th>
-			<!-- <th>Created date</th> -->
-			<th>Status</th>
-			<th>Options</th>
-
-
-		</tr>
-		<tr ng-repeat="user in users">
-			<td>{{user.requestid}}</td>
-			<td>{{user.employeeid}}</td>
-			<td>{{user.firstname}}</td>
-
-			<td>{{user.lastname}}</td>
-           
-			<td>{{user.assignedto}}</td>
-			<td>{{user.emailid}}</td> <!-- <td>not yet</td> -->
-			<td ng-if="user.status=='IT-In Progress'">
-				<span class="status status-inprogress">IT - In Progress</span>
-			</td>
-			<td ng-if="user.status=='HR-In Progress'">
-				<span class="status status-inprogress">HR - In Progress</span>
-			</td>
-			<td ng-if="user.status=='HR-Submitted'">
-				<span class="status status-submitted">HR - Submitted</span>
-			</td>
-			<td ng-if="user.status=='IT-Submitted'">
-				<span class="status status-submitted">IT - Submitted</span>
-			</td>
-			<td ng-if="user.status=='Completed'">
-				<span class="status status-completed">Completed</span>
-			</td>
-			<td ng-if="user.status=='Closed'">
-				<span class="status status-closed">Closed</span>
-			</td>
-			<td>
-			
-			<a href="#" class="option-link" title="View" ng-click="openreaduser(user)">
-							<span class="option-box">	
-							    <i class="glyphicon glyphicon-eye-open"></i>							    
-							</span>
-						</a>
-						
-						<a href="#" class="option-link" title="Edit" ng-hide="user.status=='Closed' || user.status=='Completed'"  ng-click="openedituser(user)">
-							<span class="option-box">	
-							    <i class="glyphicon glyphicon-edit"></i>							    
-							</span>
-						</a>
-		
-				<!-- <a> delete </a> --></td>
-
-		</tr>
-	</table>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+	</div>
 </div>
 <!-- 
 <script type='text/javascript'>

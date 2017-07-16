@@ -7,6 +7,9 @@ angular
 						$mdToast, toaster, $timeout) {
 
 					$scope.user = $stateParams.user;
+					$scope.sortType = 'name'; // set the default sort type
+					$scope.sortReverse = false; // set the default sort order
+					$scope.searchFish = '';
 					
 					if ($scope.user != undefined) {
 						$scope.con=true;

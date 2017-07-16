@@ -36,6 +36,13 @@
 						<div class="pull-left">
 							<div class="attach-box-inner">
 								<span class="attach-title">Manage Attachment:</span>
+								<!-- 		<div>
+
+								
+									<input type="file" ng-model = "myFile"/>
+								</div>
+								<button type="button" class="btn" ng-click="upload()">upload</button> -->
+
 								<ol class="attach-links">
 									<li><a href="#">File name</a></li>
 									<li><a href="#">File name</a></li>
@@ -71,7 +78,9 @@
 												<option value="VN">Vietnam</option>
 												<option value="AU">Australia</option>
 											</select>
+
 										</div>
+									
 									</div>
 									<div class="form-group">
 										<label for="ticketid" class="col-md-4 control-label">Ticket
@@ -102,8 +111,8 @@
 											Date</label>
 										<div class="col-md-7">
 
-											<input type="text" ng-model="ticket.createdatestring" ng-readonly="true"
-												class="form-control"> </>
+											<input type="text" ng-model="ticket.createdatestring"
+												ng-readonly="true" class="form-control"> </>
 										</div>
 									</div>
 
@@ -117,7 +126,8 @@
 										<label for="Status" class="col-md-4  control-label">Status</label>
 										<div class="col-md-7 ">
 											<select class="form-control" id="Status"
-												ng-model="ticket.status" ng-disabled="tkt" ng-change="closecheck()">
+												ng-model="ticket.status" ng-disabled="tkt"
+												ng-change="closecheck()">
 												<option selected="selected">In Progress</option>
 
 												<option>Cancelled</option>
@@ -162,11 +172,12 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="EndDate" class="col-md-4 control-label" ng-show="close">End
-											Date</label>
+										<label for="EndDate" class="col-md-4 control-label"
+											ng-show="close">End Date</label>
 										<div class="col-md-7">
 											<input type="text" ng-readonly="true" class="form-control"
-												ng-model="ticket.enddatestring" ng-readonly="true" ng-show="close" />
+												ng-model="ticket.enddatestring" ng-readonly="true"
+												ng-show="close" />
 
 
 										</div>
