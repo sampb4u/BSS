@@ -50,21 +50,37 @@
 											<div class="attach-box-inner">
 												<span class="attach-title">Manage Attachment:</span>
 												<ol class="attach-links">
-													<li><a href="#">File name</a></li>
-													<li><a href="#">File name</a></li>
-													<li><a href="#">File name</a></li>
+													<li ng-repeat="a in hratt"><a href="#"
+														ng-click="download(a.name)">{{a.filename}}</a></li>
+
 												</ol>
 											</div>
 										</div>
 										<div class="align-right">
-											<button type="button" class="btn btn-sm custom-btn">
-												<span class="glyphicon glyphicon-paperclip"></span>Attach
-												file
-											</button>
-											<div class="small-text">
-												Limit size: <strong>2MB</strong> per attachment. Allowed
-												file extensions : XLs/ PDF/ JPEG/ DOC
-											</div>
+											<form method="post" id="fromFileUpload"
+												enctype="multipart/form-data" ng-submit="uploadhr"
+												ng-hide="hr">
+
+
+
+												<input class="inline-block" type="file" name="file"
+													ng-model="file" data-rule-required="true" id="file"
+													class="photoinput" style="display: none;"
+													accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
+													data-max-size="2097152"
+													onchange="angular.element(this).scope().uploadhr()(this.files)">
+
+												<button onclick="document.getElementById('file').click();"
+													class="btn btn-sm custom-btn">
+													<span class="glyphicon glyphicon-paperclip"></span>Attach
+													file
+												</button>
+												<div class="small-text">
+													Limit size: <strong>2MB</strong> per attachment. Allowed
+													file extensions : XLs/ PDF/ JPEG/ DOC
+												</div>
+
+											</form>
 										</div>
 									</div>
 									<form class="form-horizontal" role="form">
@@ -289,21 +305,36 @@
 											<div class="attach-box-inner">
 												<span class="attach-title">Manage Attachment:</span>
 												<ol class="attach-links">
-													<li><a href="#">File name</a></li>
-													<li><a href="#">File name</a></li>
-													<li><a href="#">File name</a></li>
+													<li ng-repeat="a in itatt"><a href="#"
+														ng-click="download(a.name)">{{a.filename}}</a></li>
 												</ol>
 											</div>
 										</div>
 										<div class="align-right">
-											<button type="button" class="btn btn-sm custom-btn">
-												<span class="glyphicon glyphicon-paperclip"></span>Attach
-												file
-											</button>
-											<div class="small-text">
-												Limit size: <strong>2MB</strong> per attachment. Allowed
-												file extensions : XLs/ PDF/ JPEG/ DOC
-											</div>
+											<form method="post" id="fromFileUpload"
+												enctype="multipart/form-data" ng-submit="uploadit"
+												ng-hide="it">
+
+
+
+												<input class="inline-block" type="file" name="fileit"
+													ng-model="fileit" data-rule-required="true" id="fileit"
+													class="photoinput" style="display: none;"
+													accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
+													data-max-size="2097152"
+													onchange="angular.element(this).scope().uploadit()(this.files)">
+
+												<button onclick="document.getElementById('fileit').click();"
+													class="btn btn-sm custom-btn">
+													<span class="glyphicon glyphicon-paperclip"></span>Attach
+													file
+												</button>
+												<div class="small-text">
+													Limit size: <strong>2MB</strong> per attachment. Allowed
+													file extensions : XLs/ PDF/ JPEG/ DOC
+												</div>
+
+											</form>
 										</div>
 									</div>
 									<form class="form-horizontal" role="form">
@@ -319,62 +350,64 @@
 															<option>Desktop</option>
 
 														</select>-->
-														
-															<div class="checkbox pL20">
-																<label class="control-text p-R5"> <input
-																	name="laptop" type="checkbox" ng-model="user.laptop" ng-disabled="it">Laptop
-																</label>
+
+														<div class="checkbox pL20">
+															<label class="control-text p-R5"> <input
+																name="laptop" type="checkbox" ng-model="user.laptop"
+																ng-disabled="it">Laptop
+															</label>
+														</div>
+														<div class="row" ng-show="user.laptop">
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Brand" ng-model="user.laptopbrand"
+																	ng-readonly="it">
 															</div>
-															<div class="row" ng-show="user.laptop">
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Brand" ng-model="user.laptopbrand"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Model" ng-model="user.laptopmodel"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="RAM" ng-model="user.laptopram"
-																			ng-readonly="it">
-																	</div>
-																	<div class="col-md-3 ">
-																		<input type="text" class="form-control marginB15"
-																			placeholder="Storage" ng-model="user.laptopstorage"
-																			ng-readonly="it">
-																	</div>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Model" ng-model="user.laptopmodel"
+																	ng-readonly="it">
 															</div>
-															<div  class="checkbox pL20">
-																<label class="control-text p-R5"> <input
-																	name="desktop" type="checkbox" ng-model="user.desktop" ng-disabled="it">Desktop
-																</label>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="RAM" ng-model="user.laptopram"
+																	ng-readonly="it">
 															</div>
-																																													
-															<div class="row" ng-show="user.desktop">
-																<div class="col-md-3 ">
-																	<input type="text" class="form-control marginB15"
-																		placeholder="Brand" ng-model="user.computerbrand"
-																		ng-readonly="it">
-																</div>
-																<div class="col-md-3 ">
-																	<input type="text" class="form-control marginB15"
-																		placeholder="Model" ng-model="user.computermodel"
-																		ng-readonly="it">
-																</div>
-																<div class="col-md-3 ">
-																	<input type="text" class="form-control marginB15"
-																		placeholder="RAM" ng-model="user.computerram"
-																		ng-readonly="it">
-																</div>
-																<div class="col-md-3 ">
-																	<input type="text" class="form-control marginB15"
-																		placeholder="Storage" ng-model="user.computerstorage"
-																		ng-readonly="it">
-																</div>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Storage" ng-model="user.laptopstorage"
+																	ng-readonly="it">
 															</div>
+														</div>
+														<div class="checkbox pL20">
+															<label class="control-text p-R5"> <input
+																name="desktop" type="checkbox" ng-model="user.desktop"
+																ng-disabled="it">Desktop
+															</label>
+														</div>
+
+														<div class="row" ng-show="user.desktop">
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Brand" ng-model="user.computerbrand"
+																	ng-readonly="it">
+															</div>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Model" ng-model="user.computermodel"
+																	ng-readonly="it">
+															</div>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="RAM" ng-model="user.computerram"
+																	ng-readonly="it">
+															</div>
+															<div class="col-md-3 ">
+																<input type="text" class="form-control marginB15"
+																	placeholder="Storage" ng-model="user.computerstorage"
+																	ng-readonly="it">
+															</div>
+														</div>
 
 
 													</div>
@@ -402,22 +435,50 @@
 											<label for="LANRegistration" class="col-md-2 control-label">LAN
 												Registration</label>
 											<div class="col-md-9">
-												<div class="radio-inline" ng-model="user.lan"
-													ng-readonly="it">
-													<label class="control-text p-R5"> <input name="lan"
-														type="radio" value="yes"> Yes
-													</label>
+												<div class="radio-inline">
+													 <input
+														ng-model="user.lan" type="radio" value="true"
+														ng-readonly="it"> Yes
+													
 												</div>
 												<div class="radio-inline">
-													<label class="control-text p-R5"> <input name="lan"
-														type="radio" value="no"> No
-													</label>
+													 <input
+														ng-model="user.lan" type="radio" value="false"
+														ng-readonly="it"> No
+													
 												</div>
 
-												<button type="button" class="btn btn-sm custom-btn2">
-													<span class="glyphicon glyphicon-paperclip"></span>Attach
-													file
-												</button>
+												<form method="post" id="fromFileUpload"
+													enctype="multipart/form-data" ng-submit="uploadhr"
+													ng-hide="it">
+
+
+
+													<input class="inline-block" type="file" name="filelan"
+														ng-model="file" data-rule-required="true" id="filelan"
+														class="photoinput" style="display: none;"
+														accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
+														data-max-size="2097152"
+														onchange="angular.element(this).scope().uploadlan()(this.files)">
+
+													<button
+														onclick="document.getElementById('filelan').click();"
+														class="btn btn-sm custom-btn">
+														<span class="glyphicon glyphicon-paperclip"></span>Attach
+														file
+													</button>
+													<div class="small-text">
+														Limit size: <strong>2MB</strong> per attachment. Allowed
+														file extensions : XLs/ PDF/ JPEG/ DOC
+													</div>
+													<ol class="attach-links">
+													<li ng-repeat="a in lanatt"><a href="#"
+														ng-click="download(a.name)">{{a.filename}}</a></li>
+
+												</ol>
+
+												</form>
+
 
 											</div>
 										</div>

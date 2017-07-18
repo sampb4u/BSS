@@ -353,20 +353,20 @@ angular
 
 			}
 
-			$scope.selectedFile = [];
+		/*	$scope.selectedFile = [];
 			$scope.onFileSelect = function($files) {
 				$scope.uploadProgress = 0;
 				$scope.selectedFile = $files;
 			};
-			$scope.myData = {};
+			$scope.myData = {};*/
 
-			var formdata = new FormData();
+			/*var formdata = new FormData();
 			$scope.getTheFiles = function($files) {
 				angular.forEach($files, function(value, key) {
 					formdata.append(key, value);
 				});
 			};
-
+*/
 			$scope.continueFileUpload = function() {
 				//	var uploadUrl=serverUrl+"continueFileUpload";
 				var formData = new FormData();

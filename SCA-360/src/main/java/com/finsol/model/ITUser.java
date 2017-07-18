@@ -70,7 +70,8 @@ public class ITUser {
 	@Column
 	private String assetid;
 	@Column
-	private String lan;
+	@org.hibernate.annotations.Type(type="true_false")
+	private boolean lan;
 	@Column
 	private String computername;
 	@Column
@@ -435,16 +436,18 @@ public class ITUser {
 		this.assetid = assetid;
 	}
 
-	public String getLan() {
-		return lan;
-	}
-
-	public void setLan(String lan) {
-		this.lan = lan;
-	}
+	
 
 	public String getIp() {
 		return ip;
+	}
+
+	public boolean isLan() {
+		return lan;
+	}
+
+	public void setLan(boolean lan) {
+		this.lan = lan;
 	}
 
 	public void setIp(String ip) {
