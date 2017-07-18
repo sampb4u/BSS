@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
+import com.finsol.model.ITUserLinks;
 import com.finsol.model.SeqGenericTbl;
 import com.finsol.model.Users;
 
@@ -94,6 +95,19 @@ public class ITUserDaoImpl {
 
 		return query.list();
 		
+
+	}
+	
+	
+	public List getItlinks(String id) {
+
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM ITUserLinks where id = :id";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", id);
+		query.addEntity(ITUserLinks.class);
+
+		return query.list();
 
 	}
 

@@ -44,20 +44,41 @@
 								<button type="button" class="btn" ng-click="upload()">upload</button> -->
 
 								<ol class="attach-links">
-									<li><a href="#">File name</a></li>
-									<li><a href="#">File name</a></li>
-									<li><a href="#">File name</a></li>
+									<li ng-repeat="a in attachments"><a href="#"
+										ng-click="download(a.name)">{{a.filename}}</a></li>
+
 								</ol>
 							</div>
 						</div>
 						<div class="align-right">
-							<button type="button" class="btn btn-sm custom-btn">
-								<span class="glyphicon glyphicon-paperclip"></span>Attach file
-							</button>
+						
+	
+							
+						
+							<form method="post" id="fromFileUpload"
+								enctype="multipart/form-data" ng-submit="continueFileUpload()" ng-hide="tkt">
+
+								
+									
+										<input class="inline-block" type="file" name="file"
+											ng-model="file" data-rule-required="true" id="file"
+											class="photoinput" style="display: none;"
+											accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
+											data-max-size="2097152"
+											onchange="angular.element(this).scope().continueFileUpload()(this.files)">
+								
+								<button onclick="document.getElementById('file').click();" 
+											class="btn btn-sm custom-btn">
+											<span class="glyphicon glyphicon-paperclip"></span>Attach
+											file
+										</button>
 							<div class="small-text">
 								Limit size: <strong>2MB</strong> per attachment. Allowed file
 								extensions : XLs/ PDF/ JPEG/ DOC
 							</div>
+								
+							</form>
+							
 						</div>
 					</div>
 					<div class="panel-body">
@@ -80,7 +101,7 @@
 											</select>
 
 										</div>
-									
+
 									</div>
 									<div class="form-group">
 										<label for="ticketid" class="col-md-4 control-label">Ticket

@@ -1,15 +1,18 @@
 package com.finsol.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
+import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.Consumes;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.finsol.bean.ITAdmin;
 import com.finsol.dao.ITUserDaoImpl;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
+import com.finsol.model.ITUserLinks;
 
 import net.sf.json.JSONObject;
 
@@ -80,23 +83,88 @@ public class ITManagementController {
 
 	}
 
-	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
-	public @ResponseBody JSONObject saveimage(@RequestParam MultipartFile file) throws Exception {
-
-		// ServletContext context = session.getServletContext();
-		String path = "C:/files/";
-		String filename = file.getOriginalFilename();
-
-		System.out.println(path + " " + filename);
-
-		byte[] bytes = file.getBytes();
-		BufferedOutputStream stream = new BufferedOutputStream(
-				new FileOutputStream(new File(path + File.separator + filename)));
-		stream.write(bytes);
-		stream.flush();
-		stream.close();
-
+	@RequestMapping(value = "/createITlink", method = RequestMethod.POST)
+	public @ResponseBody JSONObject createAttachmentData(@RequestBody ITUserLinks link) {
+		dataSource.save(link);
 		return getSucessobject();
+
+	}
+
+	@RequestMapping(value = "/getITlinks", method = RequestMethod.POST)
+	public @ResponseBody String getAttachmentData(@RequestBody ITUserLinks link) {
+
+		return convertPojoToJson(dataSource.getItlinks(link.getId()));
+
+	}
+
+	@RequestMapping(value = "/continueFileUpload", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject continueFileUpload(HttpServletRequest request, HttpServletResponse response) {
+		MultipartHttpServletRequest mRequest;
+		String filePath = null;
+		String fileName = null;
+		String ff1=null;
+		try {
+			mRequest = (MultipartHttpServletRequest) request;
+			mRequest.getParameterMap();
+
+			Iterator<String> itr = mRequest.getFileNames();
+			while (itr.hasNext()) {
+				MultipartFile mFile = mRequest.getFile(itr.next());
+				fileName = mFile.getOriginalFilename();
+
+				String id = UUID.randomUUID().toString();
+				final File file = getLinkFilePath();
+				ff1 = id + fileName;
+				filePath = file.getAbsolutePath() + File.separator + ff1;
+
+				mFile.transferTo(new File(filePath));
+
+				System.out.println(fileName);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JSONObject j1 = new JSONObject();
+		j1.put("data", ff1);
+		
+		j1.put("filename", fileName);
+		return j1;
+
+		// return filePath;
+	}
+
+	private File getLinkFilePath() {
+		String d = System.getProperty("user.home");
+
+		final File file = new File(d, ".IT");
+		file.mkdirs();
+		return file;
+	}
+
+	@RequestMapping(value = "/getlink", method = RequestMethod.GET)
+	public void download(@RequestParam("name") String name, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		// log.trace("name : {}", name);
+
+		File file = new File(getLinkFilePath().getAbsolutePath() + File.separator+name);
+
+		try (InputStream fileInputStream = new FileInputStream(file);
+				OutputStream output = response.getOutputStream();) {
+
+			response.reset();
+
+			response.setContentType("application/octet-stream");
+			response.setContentLength((int) (file.length()));
+
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+
+			IOUtils.copyLarge(fileInputStream, output);
+			output.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private JSONObject getSucessobject() {

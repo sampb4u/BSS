@@ -10,5 +10,5 @@ angular.module('app', [
     'ncy-angular-breadcrumb',
     'ui.bootstrap',
     'ui.utils',
-    'oc.lazyLoad','ngRoute', 'ui.calendar','ui.bootstrap.datetimepicker','ngMaterial'
+    'oc.lazyLoad','ngRoute', 'ui.calendar','ui.bootstrap.datetimepicker','ngMaterial','components.download'
 ]);

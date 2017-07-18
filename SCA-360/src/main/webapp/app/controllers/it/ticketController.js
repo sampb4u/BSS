@@ -1,12 +1,13 @@
 ﻿'use strict';
 angular
-	.module('app', [ 'ngAnimate', 'toaster' ])
+	.module('app', [ 'ngAnimate', 'toaster', 'components.download' ])
 	.controller(
 		'TicketController',
 		function($scope, $modal, $log, $http, $state, $stateParams,
-			$mdToast, toaster, $timeout, $filter) {
+			$mdToast, toaster, $timeout, $filter, downloadService) {
 
 			$scope.ticket = $stateParams.ticket;
+			$scope.attachments = [];
 
 
 
@@ -17,6 +18,8 @@ angular
 
 			if ($scope.ticket != undefined) {
 				$scope.con = true;
+				$scope.id = parseInt($scope.ticket.ticketid.substr(3));
+
 
 
 				if ($stateParams.read
@@ -59,13 +62,15 @@ angular
 										$scope.ticket.createdate),
 									'yyyy-MM-dd HH:mm:ss');
 								$scope.ticket.assignedto = 'IT Admin';
-								createticketid();
+								$scope.createticketid();
 
 							},
 							function() {
 								console
 									.log("failed to create ticket")
 							});
+				} else {
+					$scope.getlinks();
 				}
 			}
 
@@ -75,25 +80,28 @@ angular
 			}
 			$scope.createticketid = function() {
 				$scope.country = $scope.ticket.country;
-				if ($scope.ticket.ticketid == undefined) {
-					$scope.ticket.ticketid = 'R' + $scope.country
-					+ $scope.id;
-					if ($scope.ticket.ticketid.length < 10) {
-
-						$scope.ticket.ticketid = 'R' + $scope.country;
-						for (var i = 0; i < 10 - $scope.ticket.ticketid.length; i++) {
-							$scope.ticket.ticketid = $scope.ticket.ticketid
-								+ '0';
-						}
-						$scope.ticket.ticketid = $scope.ticket.ticketid
+				if ($scope.country != undefined) {
+					if ($scope.ticket.ticketid == undefined) {
+						$scope.ticket.ticketid = 'R' + $scope.country
 						+ $scope.id;
-					}
-				} else {
-					$scope.ticket.ticketid = 'R' + $scope.country
-					+ $scope.ticket.ticketid.substr(3);
-					;
+						if ($scope.ticket.ticketid.length < 10) {
 
+							$scope.ticket.ticketid = 'R' + $scope.country;
+							for (var i = 0; i < 10 - $scope.ticket.ticketid.length; i++) {
+								$scope.ticket.ticketid = $scope.ticket.ticketid
+									+ '0';
+							}
+							$scope.ticket.ticketid = $scope.ticket.ticketid
+							+ $scope.id;
+						}
+					} else {
+						$scope.ticket.ticketid = 'R' + $scope.country
+						+ $scope.ticket.ticketid.substr(3);
+						;
+
+					}
 				}
+
 
 			}
 
@@ -122,12 +130,6 @@ angular
 								$scope.con = true;
 
 							}
-							/*
-							 * $timeout(function() {
-							 * $state.go('app.SearchRequests'); },
-							 * 3000);
-							 */
-
 						},
 						function() {
 							console
@@ -138,7 +140,7 @@ angular
 
 			$scope.gettickets = function() {
 				var tic = {};
-				
+
 				if ($stateParams.mytickets) {
 					tic.user = sessionStorage
 						.getItem("sessionUserName");
@@ -158,6 +160,27 @@ angular
 				// console.log("users ::::::::" + data);
 				}, function() {
 					console.log("failed to get tickets")
+				});
+
+			}
+			$scope.getlinks = function() {
+				var tic = {};
+				tic.id = "T" + $scope.id;
+
+				var req = {
+					method : 'POST',
+					url : "/SCA-360/getITlinks.do",
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					data : tic
+				}
+
+				$http(req).then(function(data) {
+					$scope.attachments = data.data;
+				// console.log("users ::::::::" + data);
+				}, function() {
+					console.log("failed to get attachments")
 				});
 
 			}
@@ -337,27 +360,73 @@ angular
 			};
 			$scope.myData = {};
 
-			/*                    $scope.upload = function(){ 
-			                          var formData = new FormData(); 
-			                          formData.append("file",$scope.myFile); 
-			                      //    formData.append("data", myData.message.value); 
-			                 
-			                          
-			                          $.ajax({
-			                        	    url: '/SCA-360/savefile.do',
-			                        	    data: formData,
-			                        	   
-			                        	    processData: false,
-			                        	    contentType: false,
-			                        	    type: 'POST',
-			                        	    success: function(data){
-			                        	    	alert("done"); 
-			                        	    }
-			                        	  });
-			                          
-			                          
-			                          
-			                   
-						}*/
+			var formdata = new FormData();
+			$scope.getTheFiles = function($files) {
+				angular.forEach($files, function(value, key) {
+					formdata.append(key, value);
+				});
+			};
+
+			$scope.continueFileUpload = function() {
+				//	var uploadUrl=serverUrl+"continueFileUpload";
+				var formData = new FormData();
+				formData.append("file", file.files[0]);
+				//formData.append("id", "R" + $scope.id);
+				$http({
+					method : 'POST',
+					url : "/SCA-360/continueFileUpload.do",
+					headers : {
+						'Content-Type' : undefined
+					},
+					data : formData,
+					transformRequest : function(data, headersGetterFunction) {
+						return data;
+					}
+				})
+					.success(function(data, status) {
+						if ($scope.id == undefined) {
+							$scope.createnewticketid()
+						}
+						console.log("success" + data.data);
+						
+						var filedata = {
+							"type" : "tickets",
+							"name" : data.data,
+							"id" : "T" + $scope.id,
+							"filename" : data.filename
+						};
+						var req = {
+							method : 'POST',
+							url : "/SCA-360/createITlink.do",
+							headers : {
+								'Content-Type' : 'application/json'
+							},
+							data : filedata
+						}
+
+						$http(req)
+							.then(
+								function(data) {
+									toaster.success({
+										title : "File Uploaded "
+										
+									});
+									console.log("file uploaded");
+									$scope.getlinks();
+								}, function(data) {});
+
+
+					})
+
+			};
+			$scope.download = function(fileName) {
+				downloadService.download(fileName)
+					.then(function(success) {
+						console.log('success : ' + success);
+					}, function(error) {
+						console.log('error : ' + error);
+					});
+			};
+
 
 		});
