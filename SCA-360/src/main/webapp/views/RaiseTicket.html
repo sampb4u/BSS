@@ -45,7 +45,7 @@
 
 								<ol class="attach-links">
 									<li ng-repeat="a in attachments"><a href="#"
-										ng-click="download(a.name)">{{a.filename}}</a></li>
+										ng-click="download(a.uuid)">{{a.filename}}</a></li>
 
 								</ol>
 							</div>
@@ -56,7 +56,7 @@
 							
 						
 							<form method="post" id="fromFileUpload"
-								enctype="multipart/form-data" ng-submit="continueFileUpload()" ng-hide="tkt">
+								enctype="multipart/form-data" ng-submit="continueFileUpload()" ng-show="ticket.ticketid" >
 
 								
 									
@@ -85,7 +85,7 @@
 						<form class="form-horizontal" role="form">
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
+									<div class="form-group"  ng-hide="ticket.ticketid">
 										<label for="Country" class="col-md-4 control-label">Country</label>
 										<div class="col-md-7 ">
 											<select class="form-control" id="Country"
@@ -221,7 +221,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row"  ng-show="ticket.ticketid">
 								<div class="col-md-6">
 									<div class="form-group">
 										<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4">

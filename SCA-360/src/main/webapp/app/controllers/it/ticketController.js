@@ -36,39 +36,21 @@ angular
 
 			$scope.createnewticketid = function() {
 				if ($scope.ticket == undefined) {
+
 					$scope.ticket = {
 						status : 'New'
 					};
-					var req = {
-						method : 'GET',
-						url : "/SCA-360/getTicketSQid.do",
-						headers : {
-							'Content-Type' : 'application/json'
-						}
-					}
-
-					$http(req)
-						.then(
-							function(data) {
-								$scope.id = data.data;
-								$scope.ticket.raisedby = sessionStorage
-									.getItem("sessionUserName");
-								var date = new Date();
-								$scope.ticket.createdate = date
-									.getTime();
-								$scope.ticket.createdatestring = $filter(
-									'date')(
-									new Date(
-										$scope.ticket.createdate),
-									'yyyy-MM-dd HH:mm:ss');
-								$scope.ticket.assignedto = 'IT Admin';
-								$scope.createticketid();
-
-							},
-							function() {
-								console
-									.log("failed to create ticket")
-							});
+					$scope.ticket.raisedby = sessionStorage
+						.getItem("sessionUserName");
+					var date = new Date();
+					$scope.ticket.createdate = date
+						.getTime();
+					$scope.ticket.createdatestring = $filter(
+						'date')(
+						new Date(
+							$scope.ticket.createdate),
+						'yyyy-MM-dd HH:mm:ss');
+					$scope.ticket.assignedto = 'IT Admin';
 				} else {
 					$scope.getlinks();
 				}
@@ -82,18 +64,39 @@ angular
 				$scope.country = $scope.ticket.country;
 				if ($scope.country != undefined) {
 					if ($scope.ticket.ticketid == undefined) {
-						$scope.ticket.ticketid = 'R' + $scope.country
-						+ $scope.id;
-						if ($scope.ticket.ticketid.length < 10) {
-
-							$scope.ticket.ticketid = 'R' + $scope.country;
-							for (var i = 0; i < 10 - $scope.ticket.ticketid.length; i++) {
-								$scope.ticket.ticketid = $scope.ticket.ticketid
-									+ '0';
+						var req = {
+							method : 'GET',
+							url : "/SCA-360/getTicketSQid.do",
+							headers : {
+								'Content-Type' : 'application/json'
 							}
-							$scope.ticket.ticketid = $scope.ticket.ticketid
-							+ $scope.id;
 						}
+
+						$http(req)
+							.then(
+								function(data) {
+									$scope.id = data.data;
+
+									$scope.ticket.ticketid = 'R' + $scope.country
+									+ $scope.id;
+									if ($scope.ticket.ticketid.length < 10) {
+
+										$scope.ticket.ticketid = 'R' + $scope.country;
+										for (var i = 0; i < 10 - $scope.ticket.ticketid.length; i++) {
+											$scope.ticket.ticketid = $scope.ticket.ticketid
+												+ '0';
+										}
+										$scope.ticket.ticketid = $scope.ticket.ticketid
+										+ $scope.id;
+									}
+									$scope.createticket();
+
+								},
+								function() {
+									console
+										.log("failed to create ticket")
+								});
+
 					} else {
 						$scope.ticket.ticketid = 'R' + $scope.country
 						+ $scope.ticket.ticketid.substr(3);
@@ -165,7 +168,7 @@ angular
 			}
 			$scope.getlinks = function() {
 				var tic = {};
-				tic.id = "T" + $scope.id;
+				tic.id = $scope.ticket.ticketid;
 
 				var req = {
 					method : 'POST',
@@ -198,15 +201,7 @@ angular
 					'read' : true
 				});
 			}
-			/*			$scope.convertToDate = function(date) {
 
-							if (date == 0) {
-								return '-';
-							}
-							return $filter('date')(new Date(date),
-									'yyyy-MM-dd HH:mm:ss');
-
-						};*/
 
 			$scope.closecheck = function() {
 				if ($scope.ticket.status == 'Closed') {
@@ -353,20 +348,7 @@ angular
 
 			}
 
-		/*	$scope.selectedFile = [];
-			$scope.onFileSelect = function($files) {
-				$scope.uploadProgress = 0;
-				$scope.selectedFile = $files;
-			};
-			$scope.myData = {};*/
 
-			/*var formdata = new FormData();
-			$scope.getTheFiles = function($files) {
-				angular.forEach($files, function(value, key) {
-					formdata.append(key, value);
-				});
-			};
-*/
 			$scope.continueFileUpload = function() {
 				//	var uploadUrl=serverUrl+"continueFileUpload";
 				var formData = new FormData();
@@ -388,12 +370,13 @@ angular
 							$scope.createnewticketid()
 						}
 						console.log("success" + data.data);
-						
+
 						var filedata = {
-							"type" : "tickets",
 							"name" : data.data,
-							"id" : "T" + $scope.id,
-							"filename" : data.filename
+							"id" : $scope.ticket.ticketid,
+							"type" : 'Tickets',
+							"filename" : data.filename,
+							"uuid" : data.id
 						};
 						var req = {
 							method : 'POST',
@@ -409,7 +392,6 @@ angular
 								function(data) {
 									toaster.success({
 										title : "File Uploaded "
-										
 									});
 									console.log("file uploaded");
 									$scope.getlinks();
