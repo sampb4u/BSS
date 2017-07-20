@@ -45,7 +45,7 @@
 									<li><a href="#tabs-2">IT Admin</a></li>
 								</ul>
 								<div id="tabs-1">
-									<div class="attach-box clearfix" ng-show="user.requestid">
+									<div class="attach-box clearfix" >
 										<div class="pull-left">
 											<div class="attach-box-inner">
 												<span class="attach-title">Manage Attachment:</span>
@@ -70,7 +70,7 @@
 													data-max-size="2097152"
 													onchange="angular.element(this).scope().uploadhr()(this.files)">
 
-												<button onclick="document.getElementById('file').click();"
+												<button onclick="document.getElementById('file').click();" ng-show="user.requestid"
 													class="btn btn-sm custom-btn">
 													<span class="glyphicon glyphicon-paperclip"></span>Attach
 													file
@@ -86,10 +86,10 @@
 									<form class="form-horizontal" role="form">
 										<div class="row">
 											<div class="col-md-6">
-												<div class="form-group" ng-hide="user.requestid">
+												<div class="form-group" >
 													<label for="country" class="col-md-4 control-label">Country</label>
 													<div class="col-md-7">
-														<select class="form-control" id="country"
+														<select class="form-control" id="country" ng-disabled="con"
 															ng-model="user.country" ng-change="createrequestid()">
 															<option value="SG">Singapore</option>
 															<option value="MY">Malaysia</option>

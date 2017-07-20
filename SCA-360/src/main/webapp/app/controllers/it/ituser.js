@@ -118,7 +118,7 @@ angular
 
 			$scope.createUser = function(status) {
 
-
+					$scope.con=true;
 				if (status == 'hrsave') {
 					$scope.user.status = 'HR-In Progress';
 				} else if (status == 'hrsubmit') {
