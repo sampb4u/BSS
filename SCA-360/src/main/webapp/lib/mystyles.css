@@ -568,7 +568,7 @@ margin-right:0.6em;
 	font-size: 13px;
 	font-weight: normal;
 }
-.mycontainer table th {
+.mycontainer table th, .mycontainer table th a {
 	background: #b4daf2;
     color: #333;
     text-align: left;
@@ -576,6 +576,7 @@ margin-right:0.6em;
     border: 0px;
     border-bottom: 1px solid #b4daf2;
 }
+.mycontainer table th a:hover {text-decoration:none;}
 .mycontainer table td {
 	border: 0px;
     border-bottom: 1px solid #ddd;
@@ -584,4 +585,35 @@ margin-right:0.6em;
 .mycontainer table tr:nth-child(odd) td{ background-color:#f6f5f5; 
 }
 .mycontainer table tr:nth-child(even) td{ background-color:#fff; 
+}
+
+.custom-search {
+	padding: 0;
+	border: 1px solid #dadada;
+	background-color: #ffffff;
+	box-shadow: none;
+	text-shadow: none;
+	margin: 0;
+	-webkit-border-radius: 4px!important;
+	-moz-border-radius: 4px!important;
+	border-radius: 4px!important;
+}
+.custom-search .input-group-addon {
+	border: 0;
+	border-top-left-radius: 4px!important;
+	border-bottom-left-radius: 4px !important;
+	color: #c0bfbf;
+}
+.custom-search .custom-search-input {
+	padding-left: 5px;
+	border: 0;
+	border-radius: 6px!important;
+	background-color: #fff;
+	-webkit-border-radius: 4px!important;
+	-moz-border-radius: 4px!important;
+	border-radius: 4px!important;
+}
+.custom-search input.custom-search-input[type="text"]:focus{
+	border-color:transparent;
+	box-shadow:none;
 }

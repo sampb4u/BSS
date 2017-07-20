@@ -63,9 +63,9 @@
 
 
 
-												<input class="inline-block" type="file" name="file"
+												<input type="file" name="file"
 													ng-model="file" data-rule-required="true" id="file"
-													class="photoinput" style="display: none;"
+													class="photoinput inline-block" style="display: none;"
 													accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
 													data-max-size="2097152"
 													onchange="angular.element(this).scope().uploadhr()(this.files)">
@@ -203,7 +203,7 @@
 													<label for="EndDate" class="col-md-4 control-label"
 														ng-show="close">End Date</label>
 													<div class="col-md-7">
-														<input type="text" ng-readonly="true" class="form-control"
+														<input type="text" class="form-control"
 															ng-model="user.enddatestring" ng-readonly="true"
 															ng-show="close" />
 
@@ -299,7 +299,7 @@
 									</form>
 								</div>
 
-								<div id="tabs-2">
+								<div id="tabs-2" class="form-horizontal">
 									<div class="attach-box clearfix">
 										<div class="pull-left">
 											<div class="attach-box-inner">
@@ -317,9 +317,9 @@
 
 
 
-												<input class="inline-block" type="file" name="fileit"
+												<input type="file" name="fileit"
 													ng-model="fileit" data-rule-required="true" id="fileit"
-													class="photoinput" style="display: none;"
+													class="photoinput inline-block" style="display: none;"
 													accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
 													data-max-size="2097152"
 													onchange="angular.element(this).scope().uploadit()(this.files)">
@@ -454,9 +454,9 @@
 
 
 
-													<input class="inline-block" type="file" name="filelan"
+													<input type="file" name="filelan"
 														ng-model="file" data-rule-required="true" id="filelan"
-														class="photoinput" style="display: none;"
+														class="photoinput inline-block" style="display: none;"
 														accept=".jpg,.png,.jpeg,.doc,.csv,.xsl,.xml,.mpp,application/vnd.ms-excel"
 														data-max-size="2097152"
 														onchange="angular.element(this).scope().uploadlan()(this.files)">

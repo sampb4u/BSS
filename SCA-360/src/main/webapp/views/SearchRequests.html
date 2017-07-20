@@ -17,22 +17,23 @@
 					</ol>
 					<h1>Search Requests</h1>
 				</div>
-				<div class="pull-right"></div>
+				<form>
+					<div class="form-group">
+						<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right custom-search">
+							<div class="input-group col-md-12">
+								<div class="input-group-addon">
+									<i class="fa fa-search"></i>
+								</div>
+								<input type="text" class="form-control custom-search-input pull-left" placeholder="Search" ng-model="searchFish">
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 
-	<form>
-		<div class="form-group">
-			<div class="input-group">
-				<div class="input-group-addon">
-					<i class="fa fa-search"></i>
-				</div>
-				<input type="text" class="form-control" placeholder="Search"
-					ng-model="searchFish">
-			</div>
-		</div>
-	</form>
+	
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="panel-box">
