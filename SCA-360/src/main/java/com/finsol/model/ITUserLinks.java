@@ -17,7 +17,18 @@ public class ITUserLinks {
 	@Column
 	private String filename;
 	
+	@Column
+	private String uuid;
 	
+	
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getFilename() {
 		return filename;

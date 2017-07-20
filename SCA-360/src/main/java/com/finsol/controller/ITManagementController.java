@@ -85,7 +85,19 @@ public class ITManagementController {
 
 	@RequestMapping(value = "/createITlink", method = RequestMethod.POST)
 	public @ResponseBody JSONObject createAttachmentData(@RequestBody ITUserLinks link) {
+		File file = getLinkFilePath();
+		final File file1 = new File(file.getAbsolutePath(), link.getId());
+		final File file2 = new File(file1.getAbsolutePath(), link.getType());
+		
+		file2.mkdirs();
+
+		String pathname = file2.getAbsolutePath() + File.separator + link.getFilename();
+		File afile = new File(file.getAbsolutePath() + File.separator + link.getName());
+		afile.renameTo(new File(pathname));
+		link.setName(file1.getName() + File.separator+file2.getName() + File.separator + link.getFilename());
+
 		dataSource.save(link);
+
 		return getSucessobject();
 
 	}
@@ -103,7 +115,8 @@ public class ITManagementController {
 		MultipartHttpServletRequest mRequest;
 		String filePath = null;
 		String fileName = null;
-		String ff1=null;
+		String ff1 = null;
+		String id =null;
 		try {
 			mRequest = (MultipartHttpServletRequest) request;
 			mRequest.getParameterMap();
@@ -113,22 +126,23 @@ public class ITManagementController {
 				MultipartFile mFile = mRequest.getFile(itr.next());
 				fileName = mFile.getOriginalFilename();
 
-				String id = UUID.randomUUID().toString();
+				 id = UUID.randomUUID().toString();
 				final File file = getLinkFilePath();
 				ff1 = id + fileName;
 				filePath = file.getAbsolutePath() + File.separator + ff1;
 
 				mFile.transferTo(new File(filePath));
 
-				System.out.println(fileName);
+				System.out.println(filePath);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		JSONObject j1 = new JSONObject();
 		j1.put("data", ff1);
-		
+
 		j1.put("filename", fileName);
+		j1.put("id", id);
 		return j1;
 
 		// return filePath;
@@ -146,8 +160,13 @@ public class ITManagementController {
 	public void download(@RequestParam("name") String name, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		// log.trace("name : {}", name);
+		String dfile = dataSource.getlink(name);
+				if(dfile==null){
+					
+			return ;
+		}
 
-		File file = new File(getLinkFilePath().getAbsolutePath() + File.separator+name);
+		File file = new File(getLinkFilePath().getAbsolutePath() + File.separator + dfile);
 
 		try (InputStream fileInputStream = new FileInputStream(file);
 				OutputStream output = response.getOutputStream();) {

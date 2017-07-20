@@ -111,4 +111,19 @@ public class ITUserDaoImpl {
 
 	}
 
+	public String getlink(String name) {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM ITUserLinks where uuid = :id";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", name);
+		query.addEntity(ITUserLinks.class);
+		ITUserLinks ituserlink = (ITUserLinks) query.list().get(0);
+		if (ituserlink!=null){
+			return ituserlink.getName();
+		}
+		
+		return null;
+		
+	}
+
 }

@@ -14,7 +14,7 @@ angular
 			$scope.hratt = [];
 			$scope.itatt = [];
 			$scope.lanatt = [];
-			$scope.type ='';
+			$scope.type = '';
 
 			if ($scope.user != undefined) {
 				$scope.con = true;
@@ -54,60 +54,65 @@ angular
 					$scope.user = {
 						status : 'New'
 					};
-					var req = {
-						method : 'GET',
-						url : "/SCA-360/getSQid.do",
-						headers : {
-							'Content-Type' : 'application/json'
-						}
-					}
+					$scope.it = true;
+					var date = new Date();
+					$scope.user.createdate = date
+						.getTime();
+					$scope.user.createdatestring = $filter(
+						'date')(new Date($scope.user.createdate),
+						'yyyy-MM-dd HH:mm:ss');
+					$scope.user.assignedto = 'IT Admin';
 
-					$http(req).then(function(data) {
-						$scope.id = data.data;
-						$scope.it = true;
-						var date = new Date();
-						$scope.user.createdate = date
-							.getTime();
-						$scope.user.createdatestring = $filter(
-							'date')(new Date($scope.user.createdate),
-							'yyyy-MM-dd HH:mm:ss');
-						$scope.user.assignedto = 'IT Admin';
-						$scope.createrequestid();
-
-
-					}, function() {
-						console.log("failed to create user")
-					});
 				} else {
-					 $scope.getlinks("HR");
-				   
-					$scope.getlinks("IT");
-					$scope.getlinks("LAN");
+					$scope.getlinks();
 				}
 			}
 
 			$scope.createrequestid = function(status) {
+
+
+
+
 				if ($scope.user.country != undefined) {
 					if ($scope.user.requestid == undefined) {
-						$scope.user.requestid = 'R' + $scope.user.country
-						+ $scope.id;
-						if ($scope.user.requestid.length < 10) {
-
-							$scope.user.requestid = 'R' + $scope.user.country;
-							for (var i = 0; i < 10 - $scope.user.requestid.length; i++) {
-								$scope.user.requestid = $scope.user.requestid
-									+ '0';
+						var req = {
+							method : 'GET',
+							url : "/SCA-360/getSQid.do",
+							headers : {
+								'Content-Type' : 'application/json'
 							}
-							$scope.user.requestid = $scope.user.requestid
-							+ $scope.id;
 						}
+
+						$http(req).then(function(data) {
+							$scope.id = data.data;
+							$scope.user.requestid = 'R' + $scope.user.country
+							+ $scope.id;
+							if ($scope.user.requestid.length < 10) {
+
+								$scope.user.requestid = 'R' + $scope.user.country;
+								for (var i = 0; i < 10 - $scope.user.requestid.length; i++) {
+									$scope.user.requestid = $scope.user.requestid
+										+ '0';
+								}
+								$scope.user.requestid = $scope.user.requestid
+								+ $scope.id;
+							}
+							//	$scope.createrequestid();
+							$scope.createUser('hrsave');
+
+
+						}, function() {
+							console.log("failed to create user")
+						});
+
 					} else {
 						$scope.user.requestid = 'R' + $scope.user.country
 						+ $scope.user.requestid.substr(3);
 
-
+						$scope.createUser('hrsave');
 					}
 				}
+
 
 			}
 
@@ -375,9 +380,9 @@ angular
 
 			}
 
-			$scope.getlinks = function(type) {
+			$scope.getlinks = function() {
 				var tic = {};
-				tic.id = type + $scope.id;
+				tic.id = $scope.user.requestid;
 
 				var req = {
 					method : 'POST',
@@ -389,93 +394,101 @@ angular
 				}
 
 				$http(req).then(function(data) {
-					if (type == 'HR') {
-						$scope.hratt = data.data;
-					}
-					if (type == 'IT') {
-						$scope.itatt = data.data;
-					}
-					if (type == 'LAN') {
-						$scope.lanatt = data.data;
-					}
+					$scope.hratt = [];
+					$scope.itatt = [];
+					$scope.lanatt = [];
+					data.data.forEach(function(entry) {
+						if (entry.type == 'HR') {
+							$scope.hratt.push(entry);
+						}
+						if (entry.type == 'IT') {
+							$scope.itatt.push(entry);
+						}
+						if (entry.type == 'LAN') {
+							$scope.lanatt.push(entry);
+						}
+					});
+
+
 
 				}, function() {
 					console.log("failed to get attachments")
 				});
 
 			}
-			
-			$scope.uploadhr= function() {
-				$scope.continueFileUpload("HR") 
+
+			$scope.uploadhr = function() {
+				$scope.continueFileUpload("HR")
 			}
-			$scope.uploadit= function() {
-				$scope.continueFileUpload("IT") 
+			$scope.uploadit = function() {
+				$scope.continueFileUpload("IT")
 			}
-			$scope.uploadlan= function() {
-				$scope.continueFileUpload("LAN") 
+			$scope.uploadlan = function() {
+				$scope.continueFileUpload("LAN")
 			}
-			
+
 			$scope.continueFileUpload = function(type) {
-				
-					var formData = new FormData();
-					if (type == 'HR') {
-						formData.append("file", file.files[0]);
-					}
-					if (type == 'IT') {
-						formData.append("file", fileit.files[0]);
-					}
-					if (type == 'LAN') {
-						formData.append("file", filelan.files[0]);
-					}
+
+				var formData = new FormData();
+				if (type == 'HR') {
 					formData.append("file", file.files[0]);
+				}
+				if (type == 'IT') {
+					formData.append("file", fileit.files[0]);
+				}
+				if (type == 'LAN') {
+					formData.append("file", filelan.files[0]);
+				}
 
-					$http({
-						method : 'POST',
-						url : "/SCA-360/continueFileUpload.do",
-						headers : {
-							'Content-Type' : undefined
-						},
-						data : formData,
-						transformRequest : function(data, headersGetterFunction) {
-							return data;
+
+				$http({
+					method : 'POST',
+					url : "/SCA-360/continueFileUpload.do",
+					headers : {
+						'Content-Type' : undefined
+					},
+					data : formData,
+					transformRequest : function(data, headersGetterFunction) {
+						return data;
+					}
+				})
+					.success(function(data, status) {
+						if ($scope.id == undefined) {
+							$scope.createnewrequestid()
 						}
+						console.log("success" + data.data);
+
+						var filedata = {
+							"name" : data.data,
+							"id" : $scope.user.requestid,
+							"type" : type,
+							"filename" : data.filename,
+							"uuid" : data.id
+						};
+						var req = {
+							method : 'POST',
+							url : "/SCA-360/createITlink.do",
+							headers : {
+								'Content-Type' : 'application/json'
+							},
+							data : filedata
+						}
+
+						$http(req)
+							.then(
+								function(data) {
+									toaster.success({
+										title : "File Uploaded "
+									});
+									console.log("file uploaded");
+									$scope.getlinks();
+								/*$scope.getlinks("IT");
+								$scope.getlinks("LAN");*/
+								}, function(data) {});
+
+
 					})
-						.success(function(data, status) {
-							if ($scope.id == undefined) {
-								$scope.createnewrequestid()
-							}
-							console.log("success" + data.data);
 
-							var filedata = {
-								"type" : "users",
-								"name" : data.data,
-								"id" : type + $scope.id,
-								"filename" : data.filename
-							};
-							var req = {
-								method : 'POST',
-								url : "/SCA-360/createITlink.do",
-								headers : {
-									'Content-Type' : 'application/json'
-								},
-								data : filedata
-							}
-
-							$http(req)
-								.then(
-									function(data) {
-										toaster.success({
-											title : "File Uploaded "
-										});
-										console.log("file uploaded");
-										$scope.getlinks(type);
-									/*$scope.getlinks("IT");
-									$scope.getlinks("LAN");*/
-									}, function(data) {});
-
-
-						})
-				
 
 
 			};
