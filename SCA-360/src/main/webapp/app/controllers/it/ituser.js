@@ -118,7 +118,7 @@ angular
 
 			$scope.createUser = function(status) {
 
-					
+
 				if (status == 'hrsave') {
 					$scope.user.status = 'HR-In Progress';
 				} else if (status == 'hrsubmit') {
@@ -430,15 +430,16 @@ angular
 			$scope.continueFileUpload = function(type) {
 
 				var formData = new FormData();
-				var fileInput =''; document.getElementById('file');
+				var fileInput = '';
+				document.getElementById('file');
 				if (type == 'HR') {
-					document.getElementById('file');
+					fileInput = document.getElementById('file');
 				}
 				if (type == 'IT') {
-					document.getElementById('fileit'); 
+					fileInput = document.getElementById('fileit');
 				}
 				if (type == 'LAN') {
-					document.getElementById('filelan');
+					fileInput = document.getElementById('filelan');
 				}
 
 				formData.append("file", fileInput.files[0]);
