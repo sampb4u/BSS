@@ -67,7 +67,7 @@ public class ITUserDaoImpl {
 	public List getItUser() {
 
 		Session session = hibernateDao.getSessionFactory().openSession();
-		String sql = "SELECT * FROM ITUser";
+		String sql = "SELECT * FROM ITUser  ORDER BY createdate DESC";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(ITUser.class);
 
@@ -77,7 +77,7 @@ public class ITUserDaoImpl {
 
 	public List getTickets() {
 		Session session = hibernateDao.getSessionFactory().openSession();
-		String sql = "SELECT * FROM ITTicket";
+		String sql = "SELECT * FROM ITTicket ORDER BY createdate DESC";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(ITTicket.class);
 
@@ -87,7 +87,7 @@ public class ITUserDaoImpl {
 
 	public List getTickets(String user) {
 		Session session = hibernateDao.getSessionFactory().openSession();
-		String sql = "SELECT * FROM ITTicket where assignedto = :key or raisedby = :key1 ";
+		String sql = "SELECT * FROM ITTicket where assignedto = :key or raisedby = :key1  ORDER BY createdate DESC";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.setParameter("key", user);
 		query.setParameter("key1", user);
