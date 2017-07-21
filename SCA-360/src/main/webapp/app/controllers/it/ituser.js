@@ -155,6 +155,7 @@ angular
 								$scope.hr = true;
 								$scope.it = true;
 							}
+							$scope.getusers();
 
 						},
 						function() {
