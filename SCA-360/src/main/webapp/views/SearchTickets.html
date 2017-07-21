@@ -41,7 +41,7 @@
 				<div class="panel">
 					<div class="panel-heading">
 						<span class="panel-title">Ticket List</span> 
-					<span>	<a href="#" class="panel-title"
+					<span>	<a href="javascript:void(0)" class="panel-title"
 									ng-click="exportData()"> <span class="status-new">
 											Export to Excel
 									</span>
@@ -170,12 +170,12 @@
 										class="status status-completed">Completed</span></td>
 									<td ng-if="ticket.status=='Closed'"><span
 										class="status status-closed">Closed</span></td>
-									<td><a href="#" class="option-link" title="View"
+									<td><a href="javascript:void(0)" class="option-link" title="View"
 										ng-click="openreadticket(ticket)"> <span
 											class="option-box"> <i
 												class="glyphicon glyphicon-eye-open"></i>
 										</span>
-									</a> <a href="#" class="option-link" title="Edit"
+									</a> <a href="javascript:void(0)" class="option-link" title="Edit"
 										ng-hide="ticket.status=='Closed' || ticket.status=='Completed' || ticket.status=='Cancelled'"
 										ng-click="openeditticket(ticket)"> <span
 											class="option-box"> <i
