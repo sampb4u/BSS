@@ -352,7 +352,8 @@ angular
 			$scope.continueFileUpload = function() {
 				//	var uploadUrl=serverUrl+"continueFileUpload";
 				var formData = new FormData();
-				formData.append("file", file.files[0]);
+				var fileInput = document.getElementById('file');
+				formData.append("file", fileInput.files[0]);
 				//formData.append("id", "R" + $scope.id);
 				$http({
 					method : 'POST',

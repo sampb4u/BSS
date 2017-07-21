@@ -430,17 +430,18 @@ angular
 			$scope.continueFileUpload = function(type) {
 
 				var formData = new FormData();
+				var fileInput =''; document.getElementById('file');
 				if (type == 'HR') {
-					formData.append("file", file.files[0]);
+					document.getElementById('file');
 				}
 				if (type == 'IT') {
-					formData.append("file", fileit.files[0]);
+					document.getElementById('fileit'); 
 				}
 				if (type == 'LAN') {
-					formData.append("file", filelan.files[0]);
+					document.getElementById('filelan');
 				}
 
-
+				formData.append("file", fileInput.files[0]);
 				$http({
 					method : 'POST',
 					url : "/SCA-360/continueFileUpload.do",
