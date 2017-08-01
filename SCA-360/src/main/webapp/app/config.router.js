@@ -6092,6 +6092,83 @@ angular.module('app')
                             ]
                         }
                     })
+                    	.state('app.NewRole', {
+                        url: '/NewRole',
+                        templateUrl: 'views/NewRole.html',
+                        params : { user : null , read : false } ,
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/it/ituser.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+
+                                }
+                            ]
+                        }
+                    })
+					.state('app.SearchRole', {
+                        url: '/SearchRole',
+                        templateUrl: 'views/SearchRole.html',
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/jquery.dataTables.min.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/it/ituser.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+                                }
+                            ]
+                        }
+                    })
 					.state('app.MyTickets', {
                         url: '/MyTickets',
                         templateUrl: 'views/SearchTickets.html',
@@ -6206,7 +6283,85 @@ angular.module('app')
                                 }
                             ]
                         }
-                    })					
+                    })	
+                       .state('app.SearchAccessPoint', {
+                        url: '/SearchAccessPoint',
+                        templateUrl: 'views/SearchAccesspoints.html',
+                        params : { access : null  } ,
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/user/accesspoint.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.NewAccessPoint', {
+                        url: '/NewAccessPoint',
+                        templateUrl: 'views/NewAccessPoint.html',
+                        params : { access : null , read : false } ,
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/user/accesspoint.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+
+                                }
+                            ]
+                        }
+                    })
 					.state('app.ProjectProgress', {
                         url: '/ProjectProgress',
                         templateUrl: 'views/Project Progress.html',

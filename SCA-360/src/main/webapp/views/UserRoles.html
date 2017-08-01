@@ -1,0 +1,36 @@
+
+<p align="right">
+	<span class="btn btn-blue popup-btn" ng-click="reset(userMaster);">Add User</span>
+</p>
+<div class="horizontal-space"></div>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-blue" id="pageHeadding">
+               Added Users
+            </div>
+			<div class="table-scrollable">
+				<table class="table table-hover table-striped table-bordered">
+					<thead class="bordered-blue">
+						<tr>
+							<th>Role Id</th>
+							<th>User Name</th>
+							<th>E-mail ID</th>
+							<th>Country</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="UserData in AddedUserData">
+							<td>
+							<a   href="#/app/UserMaster" ng-click="showPopup(UserData);">{{UserData.loginId}}</a></td>
+							<td>{{UserData.userFirstName}} {{UserData.userLastName}}</td>
+							<td>{{UserData.emailId}}</td>
+							<td>{{UserData.countryCode}}</td>
+						</tr>						
+					</tbody>
+				</table>
+			</div>			
+        </div>
+    </div>
+</div>
+</div>

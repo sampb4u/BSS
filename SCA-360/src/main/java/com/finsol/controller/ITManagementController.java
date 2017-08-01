@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.finsol.bean.ITAdmin;
 import com.finsol.dao.ITUserDaoImpl;
+import com.finsol.model.Access;
+import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
@@ -48,7 +50,20 @@ public class ITManagementController {
 		return getSucessobject();
 
 	}
+	
+	@RequestMapping(value = "/createRoleAccess", method = RequestMethod.POST)
+	public @ResponseBody JSONObject createITUser(@RequestBody Access access) {
+		dataSource.save(access);
+		return getSucessobject();
 
+	}
+
+	@RequestMapping(value = "/getRoleAccess", method = RequestMethod.POST)
+	public @ResponseBody String getRoleAccess(@RequestBody Access access) {
+
+		return convertPojoToJson(dataSource.getRoleAccess(access.getRoleid()));
+
+	}
 	@RequestMapping(value = "/getITUsers", method = RequestMethod.GET)
 	public @ResponseBody String getITUser() {
 
@@ -64,10 +79,23 @@ public class ITManagementController {
 
 	}
 
+	@RequestMapping(value = "/getAccesspoints", method = RequestMethod.GET)
+	public @ResponseBody String getIAccesspoints() {
+
+		return convertPojoToJson(dataSource.getAccesspoints());
+
+	}
+
 	@RequestMapping(value = "/getTicketSQid", method = RequestMethod.GET)
 	public @ResponseBody long getSQID() {
 
 		return dataSource.getNextSequanceID("reqsqid");
+	}
+
+	@RequestMapping(value = "/getAccessSQid", method = RequestMethod.GET)
+	public @ResponseBody long getAccSQID() {
+
+		return dataSource.getNextSequanceID("accsqid");
 	}
 
 	@RequestMapping(value = "/getSQid", method = RequestMethod.GET)
@@ -83,18 +111,25 @@ public class ITManagementController {
 
 	}
 
+	@RequestMapping(value = "/createAccessPoint", method = RequestMethod.POST)
+	public @ResponseBody JSONObject createAccessPoint(@RequestBody AccessPoint accessPoint) {
+		dataSource.save(accessPoint);
+		return getSucessobject();
+
+	}
+
 	@RequestMapping(value = "/createITlink", method = RequestMethod.POST)
 	public @ResponseBody JSONObject createAttachmentData(@RequestBody ITUserLinks link) {
 		File file = getLinkFilePath();
 		final File file1 = new File(file.getAbsolutePath(), link.getId());
 		final File file2 = new File(file1.getAbsolutePath(), link.getType());
-		
+
 		file2.mkdirs();
 
 		String pathname = file2.getAbsolutePath() + File.separator + link.getFilename();
 		File afile = new File(file.getAbsolutePath() + File.separator + link.getName());
 		afile.renameTo(new File(pathname));
-		link.setName(file1.getName() + File.separator+file2.getName() + File.separator + link.getFilename());
+		link.setName(file1.getName() + File.separator + file2.getName() + File.separator + link.getFilename());
 
 		dataSource.save(link);
 
@@ -116,7 +151,7 @@ public class ITManagementController {
 		String filePath = null;
 		String fileName = null;
 		String ff1 = null;
-		String id =null;
+		String id = null;
 		try {
 			mRequest = (MultipartHttpServletRequest) request;
 			mRequest.getParameterMap();
@@ -126,7 +161,7 @@ public class ITManagementController {
 				MultipartFile mFile = mRequest.getFile(itr.next());
 				fileName = mFile.getOriginalFilename();
 
-				 id = UUID.randomUUID().toString();
+				id = UUID.randomUUID().toString();
 				final File file = getLinkFilePath();
 				ff1 = id + fileName;
 				filePath = file.getAbsolutePath() + File.separator + ff1;
@@ -161,9 +196,9 @@ public class ITManagementController {
 			final HttpServletResponse response) {
 		// log.trace("name : {}", name);
 		String dfile = dataSource.getlink(name);
-				if(dfile==null){
-					
-			return ;
+		if (dfile == null) {
+
+			return;
 		}
 
 		File file = new File(getLinkFilePath().getAbsolutePath() + File.separator + dfile);

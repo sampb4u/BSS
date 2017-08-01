@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.finsol.model.Access;
+import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
@@ -74,6 +76,21 @@ public class ITUserDaoImpl {
 		return query.list();
 
 	}
+	
+
+	public List getRoleAccess(String key) {
+
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM Access where roleid  LIKE :searchKeyword";
+		
+		SQLQuery query = session.createSQLQuery(sql);
+		
+		query.setParameter("searchKeyword", key);
+		query.addEntity(Access.class);
+
+		return query.list();
+
+	}
 
 	public List getTickets() {
 		Session session = hibernateDao.getSessionFactory().openSession();
@@ -124,6 +141,14 @@ public class ITUserDaoImpl {
 		
 		return null;
 		
+	}
+
+	public List getAccesspoints() {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM AccessPoint";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(AccessPoint.class);
+		return query.list();
 	}
 
 }
