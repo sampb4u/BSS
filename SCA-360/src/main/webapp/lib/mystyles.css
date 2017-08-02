@@ -617,3 +617,40 @@ margin-right:0.6em;
 	border-color:transparent;
 	box-shadow:none;
 }
+
+/*user management styles starts here*/
+.inner-container {
+    padding: 15px;
+}
+.tr-row:before,
+.tr-row:after {
+  display: table;
+  content: " ";
+}
+.tr-row:after {
+  clear: both;
+}
+.tr-row{
+	margin-bottom:7px;
+}
+.tr-row p {
+	margin-bottom:0;
+	text-align: center;
+}
+
+.headline-row{
+	background-color:#f9f9f9;
+    padding: 7px 15px;	
+	font-weight:bold;
+	border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+	font-size:14px;
+	margin-top: 10px;
+}
+.headline-row p, p.role-title {
+    text-align: left;
+}
+.txt-uppercase{text-transform:uppercase; }
+.tr-row.txt-uppercase{ font-weight:bold; padding: 10px 0 0px 0;font-size:15px;}
+.pL0{padding-left:0px}
+/*user management styles ends here*/
