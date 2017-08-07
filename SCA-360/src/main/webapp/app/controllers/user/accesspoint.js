@@ -97,8 +97,7 @@ angular
 									.then(
 										function(data) {
 											toaster.success({
-												title : "Accesspoint created ",
-												body : "Accesspoint created"
+												title : "Accesspoint created "
 												
 											});
 											
@@ -121,7 +120,7 @@ angular
 
 							$http(req).then(function(data) {
 								$scope.points = data.data;
-								console.log("users ::::::::" + points);
+								console.log("users ::::::::" + $scope.points);
 							}, function() {
 								console.log("failed to get points")
 							});

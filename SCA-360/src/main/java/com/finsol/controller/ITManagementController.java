@@ -172,6 +172,13 @@ public class ITManagementController {
 		return convertPojoToJson(dataSource.getItlinks(link.getId()));
 
 	}
+	
+	@RequestMapping(value = "/getRoleId", method = RequestMethod.GET)
+	public @ResponseBody int getRoleId() {
+
+		return dataSource.getRoleId();
+
+	}
 
 	@RequestMapping(value = "/continueFileUpload", method = RequestMethod.POST)
 	@ResponseBody

@@ -1,7 +1,8 @@
 <div ng-controller="RoleController" data-ng-init="getroles()">
 
 
-
+<toaster-container
+		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
 
 	<div class="form-group">
@@ -10,7 +11,7 @@
 		<div class="col-md-7">
 
 			<input type="text" id="RoleID" class="form-control"
-				ng-model="role.roleid">
+				ng-model="role.roleid" ng-readonly="true">
 		</div>
 	</div>
 	<div class="form-group">

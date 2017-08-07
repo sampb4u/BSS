@@ -170,4 +170,19 @@ public class ITUserDaoImpl {
 		return query.list();
 	}
 
+	public int getRoleId() {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT max(roleid) FROM UserRole";
+		SQLQuery query = session.createSQLQuery(sql);
+		
+		
+		 List list = query.list();
+		  
+		if (list.size() > 0) {
+			return ((int) list.get(0) +1 );
+		}
+		return 1;
+		
+	}
+
 }

@@ -12,7 +12,7 @@ angular
 			$scope.sortReverse = false; // set the default sort order
 			$scope.searchFish = '';
 			$scope.read = $stateParams.read;
-			
+
 			$scope.invalid = false;
 
 
@@ -137,7 +137,7 @@ angular
 			}
 
 			$scope.createrole = function() {
-				if ($scope.role == undefined || $scope.role.roleid == undefined || $scope.role.rolename == undefined || isNaN($scope.role.roleid) || $scope.role.roleid =='' || $scope.role.rolename =='') {
+				if ($scope.role == undefined || $scope.role.roleid == undefined || $scope.role.rolename == undefined || isNaN($scope.role.roleid) || $scope.role.roleid == '' || $scope.role.rolename == '') {
 					$scope.invalid = true;
 
 				} else {
@@ -188,21 +188,40 @@ angular
 
 			$scope.getroles = function() {
 				var req = {
-					method : 'GET',
-					url : "/SCA-360/getRoles.do",
-					headers : {
-						'Content-Type' : 'application/json'
+						method : 'GET',
+						url : "/SCA-360/getRoleId.do",
+						headers : {
+							'Content-Type' : 'application/json'
+						}
 					}
-				}
 
-				$http(req).then(function(data) {
-					$scope.roles = data.data
-					console.log("success to get roles")
-				}
-					, function() {
+					$http(req).then(function(data) {
+						if ($scope.role == undefined){
+							$scope.role ={}
+						}
+						$scope.role.roleid=data.data;
+						var req = {
+								method : 'GET',
+								url : "/SCA-360/getRoles.do",
+								headers : {
+									'Content-Type' : 'application/json'
+								}
+							}
+
+							$http(req).then(function(data) {
+								$scope.roles = data.data
+								console.log("success to get roles")
+							}, function() {
+								console.log("failed to get roles")
+							});
+
+						
+					}, function() {
 						console.log("failed to get roles")
 					});
-
+				
+				
+				
 			}
 
 			$scope.openeditrole = function(role) {
