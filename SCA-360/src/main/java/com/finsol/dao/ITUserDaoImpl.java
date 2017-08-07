@@ -77,16 +77,15 @@ public class ITUserDaoImpl {
 		return query.list();
 
 	}
-	
 
 	public List getRoleAccess(String key) {
 
 		Session session = hibernateDao.getSessionFactory().openSession();
 		String sql = "SELECT * FROM Access where roleid  LIKE :searchKeyword";
-		
+
 		SQLQuery query = session.createSQLQuery(sql);
-		
-		query.setParameter("searchKeyword", key +"%");
+
+		query.setParameter("searchKeyword", key + "%");
 		query.addEntity(Access.class);
 
 		return query.list();
@@ -112,11 +111,9 @@ public class ITUserDaoImpl {
 		query.addEntity(ITTicket.class);
 
 		return query.list();
-		
 
 	}
-	
-	
+
 	public List getItlinks(String id) {
 
 		Session session = hibernateDao.getSessionFactory().openSession();
@@ -136,12 +133,12 @@ public class ITUserDaoImpl {
 		query.setParameter("id", name);
 		query.addEntity(ITUserLinks.class);
 		ITUserLinks ituserlink = (ITUserLinks) query.list().get(0);
-		if (ituserlink!=null){
+		if (ituserlink != null) {
 			return ituserlink.getName();
 		}
-		
+
 		return null;
-		
+
 	}
 
 	public List getAccesspoints() {
@@ -174,15 +171,14 @@ public class ITUserDaoImpl {
 		Session session = hibernateDao.getSessionFactory().openSession();
 		String sql = "SELECT max(roleid) FROM UserRole";
 		SQLQuery query = session.createSQLQuery(sql);
-		
-		
-		 List list = query.list();
-		  
-		if (list.size() > 0) {
-			return ((int) list.get(0) +1 );
+
+		List list = query.list();
+
+		if (list.get(0) == null) {
+			return 1;
 		}
-		return 1;
-		
+		return ((int) list.get(0) + 1);
+
 	}
 
 }
