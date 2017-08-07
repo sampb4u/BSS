@@ -1,294 +1,86 @@
-      <div class="mycontainer">				
-						<div class="row">
-						  <div class="col-xs-12">
-							<div class="page-header-section clearfix">
-							<div class="pull-left">
-								<ol class="breadcrumb-new">
-									<li><a href="#">Dashboard</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li><a href="#">Operations</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-									<li class="active"><span>User Management</span></li>
-								</ol>
-								<h1>Role Portfolio</h1>
-							</div>
-							<div class="pull-right">
 
+<div class="mycontainer" ng-controller="RoleController as vm">
 
-							</div>	
-							</div>
-						 </div>
-					    </div>
+<toaster-container
+		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 
-							
-					<div class="row center-block">
-					  <div class="col-md-12">
-					    <div class="panel-box">
-						<div class="panel">
-						  <div class="panel-heading">
-							<span class="panel-title">Role Portfolio</span>
-						  </div>
-						
-						  <div class="panel-body">						  
-						    <div class="mytabs">
-								<div class="tabs">
-									  <ul>
-										<li><a href="#case-tab">Case</a></li>
-										<li><a href="#sales-tab">Sales</a></li>				
-									  </ul>
-									  <div id="case-tab">											 
-										<div class="inner-container">
-										    <div class="tr-row txt-uppercase">												
-												<div class="col-xs-2 col-xs-offset-4 col-lg-1 col-lg-offset-6 pL0">																										
-													Write 																																															
-												</div>
-												<div class="col-xs-2 col-lg-1 pL0">
-													Read
-												</div>
-												<div class="col-xs-2 col-lg-1 pL0">
-													Edit
-												</div>
-												<div class="col-xs-2 col-lg-1 pL0">
-													Delete
-												</div>
-											</div>
-											
-											<div class="tr-row">
-												<div class="col-xs-12 headline-row">
-													<p>Masters</p>
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Departments</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Prospect Master</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Customer Master</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Currency Exchange Rate</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Country Tax</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											
-											<div class="tr-row">
-												<div class="col-xs-12 headline-row">
-													<p>Functional Screens</p>
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">New Case</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Added Case</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Quotation</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Added Quotation</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Product Selection</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Selection Result</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-12 headline-row">
-													<p>Case Reports</p>
-												</div>
-											</div>
-											<div class="tr-row">
-												<div class="col-xs-4 col-lg-6">
-													<p class="role-title">Customer DB</p>
-												</div>
-												<div class="col-xs-2 col-lg-1">																										
-													<input type="checkbox">																																																
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox">
-												</div>
-											</div>
-											
-										</div> 
-									  </div>
-								  
-									  <div id="sales-tab">									    
-										tab2
-									  </div>
-								</div>
-							</div>													
-						  </div>
-						</div>
-					   </div>
-                       </div>
-					  
+	<div class="row center-block">
+		<div class="col-md-12">
+			<div class="panel-box">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Role Portfolio</span>
 					</div>
-                    </div>					
-				
-    <script type='text/javascript'>
+
+					<div class="panel-body" ng-readonly='read'>
+						<div >
+
+							<ul ng-init="vm.tab=1"  class="nav nav-tabs">
+								<li ng-repeat="item in role.templates" ng-init="vm.tab=$first"><a ng-click="vm.tab = item.accessname">{{item.accessname}}</a></li>
+							</ul>
+
+							<div ng-repeat="item in role.templates"
+								ng-show="vm.tab === item.accessname">
+								
+								<div class="inner-container" >
+									<div class="tr-row txt-uppercase">
+										<div
+											class="col-xs-2 col-xs-offset-4 col-lg-1 col-lg-offset-6 pL0">
+											Write</div>
+										<div class="col-xs-2 col-lg-1 pL0">Read</div>
+										<div class="col-xs-2 col-lg-1 pL0">Edit</div>
+										<div class="col-xs-2 col-lg-1 pL0">Delete</div>
+									</div>
+									<div>
+										<div ng-repeat="menu in item.menulist">
+											<div class="tr-row">
+												<div class="col-xs-12 headline-row">
+													<p>{{menu.menuname}}</p>
+												</div>
+											</div>
+											<div class="tr-row" ng-repeat="submenu in menu.submenulist">
+												<div class="col-xs-4 col-lg-6">
+													<p class="role-title">{{submenu.name}}</p>
+												</div>
+												<div class="col-xs-2 col-lg-1">
+													<input type="checkbox" ng-model="submenu.writeaccess" ng-disabled='read'>
+												</div>
+												<div class="col-xs-2 col-lg-1">
+													<input type="checkbox" ng-model="submenu.readaccess" ng-disabled='read'>
+												</div>
+												<div class="col-xs-2 col-lg-1">
+													<input type="checkbox" ng-model="submenu.deleteaccess" ng-disabled='read'>
+												</div>
+												<div class="col-xs-2 col-lg-1">
+													<input type="checkbox" ng-model="submenu.editaccess" ng-disabled='read'>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+			<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4" ng-hide='read'>
+														
+														<button type="button" class="btn btn-primary" 
+															ng-click="saverole()">Save</button>
+													</div>
+
+	</div>
+</div>
+
+<script type='text/javascript'>
 	$(".mytabs").tabs();
-  
-    </script>
+</script>

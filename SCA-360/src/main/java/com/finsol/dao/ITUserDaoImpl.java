@@ -14,6 +14,7 @@ import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
 import com.finsol.model.SeqGenericTbl;
+import com.finsol.model.UserRole;
 import com.finsol.model.Users;
 
 /**
@@ -85,7 +86,7 @@ public class ITUserDaoImpl {
 		
 		SQLQuery query = session.createSQLQuery(sql);
 		
-		query.setParameter("searchKeyword", key);
+		query.setParameter("searchKeyword", key +"%");
 		query.addEntity(Access.class);
 
 		return query.list();
@@ -148,6 +149,24 @@ public class ITUserDaoImpl {
 		String sql = "SELECT * FROM AccessPoint";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(AccessPoint.class);
+		return query.list();
+	}
+
+	public List getRoles() {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM UserRole";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(UserRole.class);
+		return query.list();
+	}
+
+	public List getRole(int roleid) {
+		// TODO Auto-generated method stub
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM UserRole where roleid =:id";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", roleid);
+		query.addEntity(UserRole.class);
 		return query.list();
 	}
 

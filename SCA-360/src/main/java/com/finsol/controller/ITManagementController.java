@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +30,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.finsol.bean.ITAdmin;
 import com.finsol.dao.ITUserDaoImpl;
 import com.finsol.model.Access;
+import com.finsol.model.AccessList;
 import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
+import com.finsol.model.UserRole;
 
 import net.sf.json.JSONObject;
 
@@ -50,10 +53,35 @@ public class ITManagementController {
 		return getSucessobject();
 
 	}
-	
+
 	@RequestMapping(value = "/createRoleAccess", method = RequestMethod.POST)
-	public @ResponseBody JSONObject createITUser(@RequestBody Access access) {
+	public @ResponseBody JSONObject createRoleAccess(@RequestBody Access access) {
 		dataSource.save(access);
+		return getSucessobject();
+
+	}
+
+	@RequestMapping(value = "/createRole", method = RequestMethod.POST)
+	public @ResponseBody JSONObject createRole(@RequestBody UserRole role) {
+		dataSource.save(role);
+		return getSucessobject();
+
+	}
+	
+	@RequestMapping(value = "/getRole", method = RequestMethod.POST)
+	public @ResponseBody String getRoleAccess(@RequestBody  UserRole role) {
+
+		return convertPojoToJson(dataSource.getRole(role.getRoleid()));
+
+	}
+	
+	
+	@RequestMapping(value = "/createRoleAccesses", method = RequestMethod.POST)
+	public @ResponseBody JSONObject createITUsers(@RequestBody AccessList access) {
+		for(Access ac : access.getAccesslist()) {
+			dataSource.save(ac);
+		}
+		
 		return getSucessobject();
 
 	}
@@ -64,6 +92,7 @@ public class ITManagementController {
 		return convertPojoToJson(dataSource.getRoleAccess(access.getRoleid()));
 
 	}
+
 	@RequestMapping(value = "/getITUsers", method = RequestMethod.GET)
 	public @ResponseBody String getITUser() {
 
@@ -80,7 +109,7 @@ public class ITManagementController {
 	}
 
 	@RequestMapping(value = "/getAccesspoints", method = RequestMethod.GET)
-	public @ResponseBody String getIAccesspoints() {
+	public @ResponseBody String getAccesspoints() {
 
 		return convertPojoToJson(dataSource.getAccesspoints());
 
@@ -240,5 +269,12 @@ public class ITManagementController {
 
 	public String uploadFileToDisk(File file) {
 		return null;
+	}
+
+	@RequestMapping(value = "/getRoles", method = RequestMethod.GET)
+	public @ResponseBody String getRoles() {
+
+		return convertPojoToJson(dataSource.getRoles());
+
 	}
 }

@@ -1,0 +1,53 @@
+<div ng-controller="RoleController" data-ng-init="getroles()">
+
+
+
+
+
+	<div class="form-group">
+
+		<label for="RoleID" class="col-md-4 control-label">Role ID</label>
+		<div class="col-md-7">
+
+			<input type="text" id="RoleID" class="form-control"
+				ng-model="role.roleid">
+		</div>
+	</div>
+	<div class="form-group">
+
+		<label for="RoleName" class="col-md-4 control-label">Role Name
+		</label>
+		<div class="col-md-7">
+
+			<input type="text" id="RoleName" class="form-control"
+				ng-model="role.rolename">
+		</div>
+	</div>
+
+	<div class="form-group" ng-hide='role.new'>
+
+		<label for="RoleName" class="col-md-4 control-label">Role to
+			copy </label>
+		<div class="col-md-7">
+
+			<select id="RoleName" class="form-control" ng-model='copy'>
+
+				<option value='new'>New Role</option>
+				<option ng-repeat="x in roles" value="{{x.roleid}}">{{x.roleid}}
+					- {{x.rolename}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-4">
+
+			<button type="button" class="btn btn-primary" ng-click="createrole()">Submit</button>
+				<span ng-show="invalid"><font color="red">The Role id and
+					role name is mandatory! Role id should be a number! </font></span>
+		</div>
+	</div>
+
+</div>
+
+
+</div>

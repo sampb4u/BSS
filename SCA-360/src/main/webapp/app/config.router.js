@@ -6092,7 +6092,7 @@ angular.module('app')
                             ]
                         }
                     })
-                    	.state('app.NewRole', {
+                    .state('app.NewRole', {
                         url: '/NewRole',
                         templateUrl: 'views/NewRole.html',
                         params : { user : null , read : false } ,
@@ -6121,7 +6121,47 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
                                                     'app/controllers/datatable.js',
-													'app/controllers/it/ituser.js'
+													'app/controllers/it/ituser.js',
+													'app/controllers/user/role.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+
+                                }
+                            ]
+                        }
+                    })
+                    	.state('app.RolePortfolio', {
+                        url: '/RolePortfolio',
+                        templateUrl: 'views/RolePortfolio.html',
+                        params : { role : null , read : false ,edit : false  } ,
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/user/role.js'
                                                 ]
                                             });
                                         }
@@ -6133,7 +6173,7 @@ angular.module('app')
                     })
 					.state('app.SearchRole', {
                         url: '/SearchRole',
-                        templateUrl: 'views/SearchRole.html',
+                        templateUrl: 'views/SearchRoles.html',
                         ncyBreadcrumb: {
                             label: '',
                             description: ''
@@ -6160,7 +6200,7 @@ angular.module('app')
                                                     'lib/jquery/datatable/dataTables.bootstrap.min.js',
 													'lib/jquery/jquery-ui.min.js',
                                                     'app/controllers/datatable.js',
-													'app/controllers/it/ituser.js'
+													'app/controllers/user/role.js'
                                                 ]
                                             });
                                         }
