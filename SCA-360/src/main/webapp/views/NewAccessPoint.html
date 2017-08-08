@@ -1,42 +1,157 @@
+<div class="mycontainer">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header-section clearfix">
+                <div class="pull-left">
+                    <ol class="breadcrumb-new">
+                        <li><a href="#">Dashboard</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+                        <li><a href="#">Settings</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+						<li><a href="#">User Management</a><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+                        <li class="active"><span>Add Template</span></li>
+                    </ol>
+                    <h1>Add Template</h1>
+                </div>
+                <div class="pull-right">
 
-<div ng-controller="AccessController">
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row center-block">
+        <div class="col-md-12">
+            <div class="panel-box">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span class="panel-title">Add Template</span>
+                    </div>
+
+                    <div class="panel-body">
+							<form class="form-horizontal" role="form">
+                                <div ng-controller="AccessController">																													
 <toaster-container
 		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
-	<div>
+										<!--
+										<div class="row">
+											<div class="col-xs-12 col-lg-12">
+												<div class="form-group">
+													<label class="control-label col-md-2 col-lg-2 col-sm-2">Template Name</label>
+														<div class="col-sm-4 col-lg-3 col-md-7 col-xs-6">
+															<input type=text ng-model="access.accessname" ng-readonly="acc" class="form-control">															
+														</div>
+														<div class="col-sm-2 col-lg-2 col-md-3 col-xs-6 pL0">															    
+															<button type="button" class="btn btn-sm custom-btn2" ng-click="addaccesspoint()" ng-hide="acc">Add</button>
+															<div ng-hide="read">															    
+																<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn2">
+																	 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
+																</button>
+														    </div>
+														</div>
+														
+														
+												</div>
+											</div>
+										</div>
+										-->
+										<div class="form-group"> 
+											<label class="col-md-2 control-label">Template Name</label>
+											<div class="col-md-9">
+												<div class="row">		
+													<div class="col-md-4">																	
+															<input type=text ng-model="access.accessname" ng-readonly="acc" class="form-control">																			
+													</div>
+													<button type="button" class="btn btn-sm custom-btn2" ng-click="addaccesspoint()" ng-hide="acc">Add</button>
+													
+													<span ng-hide="read">															    
+														<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn2">
+															 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
+														</button>
+													</span>
+												</div>																									
+											</div>
+										</div>
+										
+										
+										<div data-ng-repeat="choice in access.menulist" ng-readonly="read">
+											<div class="form-group"> 
+												<label class="col-md-2 control-label"></label>
+												<div class="col-md-9">
+													<div class="row">		
+														<div class="col-md-4">																	
+																<input type="text" class="form-control marginB15" ng-model="choice.menuname">																			
+														</div>
+														<span ng-hide="read">
+															<button type="button" class="btn btn-sm custom-btn2 remove" ng-show="$last" ng-click="removeChoice()">
+																 <span class="glyphicon glyphicon-minus-sign" ></span>Remove Item
+															</button>
+														</span>
+														
+														<span ng-hide="read"> 
+															<button ng-click="addsubmenulist(choice.submenulist)" ng-show="choice.menuname" class="btn btn-sm custom-btn2">
+															<span class="glyphicon glyphicon-plus-sign" ></span>Add Sub-Item</button>
+														</span>
+													</div>																									
+												</div>
+											</div>
+											
+											
+											
+											<div ng-repeat="sm in choice.submenulist">
+												<div class="form-group"> 
+													<label class="col-md-2 control-label"></label>
+													<div class="col-md-9">
+														<div class="row">		
+															<div class="col-md-4">
+																<div class="row">
+																	<div class="col-md-10 col-md-offset-1">			
+																		<input type="text" class="form-control marginB15" ng-model="sm.name">						
+																	</div>
+																	<span ng-hide="read">
+																		<button type="button" class="no-button remove" ng-show="$last" ng-click="removesubmenulist(choice.submenulist)">
+																			 <span class="glyphicon glyphicon-minus-sign icon-txt" ></span>
+																		</button>
+																	</span>
+																</div>
+															</div>
+															
+														</div>																									
+													</div>
+												</div>
+											</div>
+											
+										</div>									
+										
+										<!--<div class="row">
+											<div class="col-md-12" ng-hide="read">								  																		  																  														  
+												  <div class="form-group">
+														<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-2">
+															<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn">
+																 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
+															</button>
+														</div>
+												  </div>									  
+											</div>
+										</div>-->
+										
+										
+										<div class="row">
+											<div class="col-md-12" ng-hide="read">								  																		  																  														  
+												  <div class="form-group">
+														<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-2">
+															<button ng-click="submitaccesspoint()" ng-show="acc" class="btn btn-primary">Submit</button>
+														</div>
+												  </div>									  
+											</div>
+										</div>
+																			
+								</div>
+							</form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<label>AccessPoint Name</label><input type=text
-			ng-model="access.accessname" ng-readonly="acc">
-		<button ng-click="addaccesspoint()" ng-hide="acc">Add</button>
-
-
-		<div>
-			<table data-ng-repeat="choice in access.menulist"  ng-readonly="read">
-				<tr>
-					<td><input type="text" ng-model="choice.menuname" name="">
-					<div ng-hide="read">
-						<button class="remove" ng-show="$last" ng-click="removeChoice()">-</button> </div>
-					</td>
-					<td>
-					
-					<div ng-hide="read"> <button ng-click="addsubmenulist(choice.submenulist)"
-							ng-show="choice.menuname">Add submenulist</button></div>
-						
-						<div ng-repeat="sm in choice.submenulist">
-							<input type="text" ng-model="sm.name" name="">
-						<div ng-hide="read">
-						<button class="remove" ng-show="$last"
-								ng-click="removesubmenulist(choice.submenulist)">-</button>
-						</div>	
-							<td>
-						</div>
-				<tr>
-			</table>
-		</div>
-<div ng-hide="read">
-		<button ng-click="addNewChoice()" ng-show="acc">Add Menu</button> </div>
-	</div>
-	<div ng-hide="read">
-		<button ng-click="submitaccesspoint()" ng-show="acc">submit</button>
-	</div>
-</div> 
+    </div>
+</div>

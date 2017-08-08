@@ -588,12 +588,13 @@ margin-right:0.6em;
 }
 
 .custom-search {
-	padding: 0;
+	padding: 0!important;
 	border: 1px solid #dadada;
 	background-color: #ffffff;
 	box-shadow: none;
 	text-shadow: none;
-	margin: 0;
+	margin: 0!important;
+	margin-top: 4px!important;
 	-webkit-border-radius: 4px!important;
 	-moz-border-radius: 4px!important;
 	border-radius: 4px!important;
@@ -653,4 +654,29 @@ margin-right:0.6em;
 .txt-uppercase{text-transform:uppercase; }
 .tr-row.txt-uppercase{ font-weight:bold; padding: 10px 0 0px 0;font-size:15px;}
 .pL0{padding-left:0px}
+.no-button{ 
+background-color:transparent!important; border:0!important; padding:0!important;
+}
+
+	.icon-txt{
+    line-height: 33px!important;
+    margin-left: -7px;
+	}
+	button .glyphicon{color:#666; font-size:14px!important}
+	.mycontainer .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+	}
+	.mycontainer .alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.mycontainer .alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.mycontainer table th a {padding:0}
 /*user management styles ends here*/
