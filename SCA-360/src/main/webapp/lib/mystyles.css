@@ -753,7 +753,8 @@ text-decoration:none;
 	margin-bottom:-1px
 }
 .panel-box .custom-tabs .custom-tabs-nav li:hover.active  { 
-background:none; border-color: #cccbcb;
+background:#fff; 
+border-color: #cccbcb;
 }
 .panel-box .custom-tabs .custom-tabs-nav li:hover {
 	border-color: #8a8a8a;
