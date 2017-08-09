@@ -33,40 +33,19 @@
                                 <div ng-controller="AccessController">																													
 <toaster-container
 		toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
-										<!--
-										<div class="row">
-											<div class="col-xs-12 col-lg-12">
-												<div class="form-group">
-													<label class="control-label col-md-2 col-lg-2 col-sm-2">Template Name</label>
-														<div class="col-sm-4 col-lg-3 col-md-7 col-xs-6">
-															<input type=text ng-model="access.accessname" ng-readonly="acc" class="form-control">															
-														</div>
-														<div class="col-sm-2 col-lg-2 col-md-3 col-xs-6 pL0">															    
-															<button type="button" class="btn btn-sm custom-btn2" ng-click="addaccesspoint()" ng-hide="acc">Add</button>
-															<div ng-hide="read">															    
-																<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn2">
-																	 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
-																</button>
-														    </div>
-														</div>
-														
-														
-												</div>
-											</div>
-										</div>
-										-->
+										
 										<div class="form-group"> 
 											<label class="col-md-2 control-label">Template Name</label>
 											<div class="col-md-9">
 												<div class="row">		
-													<div class="col-md-4">																	
+													<div class="col-md-5">																	
 															<input type=text ng-model="access.accessname" ng-readonly="acc" class="form-control">																			
 													</div>
 													<button type="button" class="btn btn-sm custom-btn2" ng-click="addaccesspoint()" ng-hide="acc">Add</button>
 													
 													<span ng-hide="read">															    
 														<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn2">
-															 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
+															 <span class="glyphicon glyphicon-plus-sign" ></span>Add Menu Item
 														</button>
 													</span>
 												</div>																									
@@ -79,18 +58,22 @@
 												<label class="col-md-2 control-label"></label>
 												<div class="col-md-9">
 													<div class="row">		
-														<div class="col-md-4">																	
-																<input type="text" class="form-control marginB15" ng-model="choice.menuname">																			
+														<div class="col-md-5">	
+                                                                <div class="row">	
+																	<div class="col-md-11 col-md-offset-1">
+																			  <input type="text" class="form-control marginB15" ng-model="choice.menuname">
+																	</div>	
+                                                                </div>																
 														</div>
 														<span ng-hide="read">
 															<button type="button" class="btn btn-sm custom-btn2 remove" ng-show="$last" ng-click="removeChoice()">
-																 <span class="glyphicon glyphicon-minus-sign" ></span>Remove Item
+																 <span class="glyphicon glyphicon-minus-sign" ></span>Remove Menu Item
 															</button>
 														</span>
 														
 														<span ng-hide="read"> 
 															<button ng-click="addsubmenulist(choice.submenulist)" ng-show="choice.menuname" class="btn btn-sm custom-btn2">
-															<span class="glyphicon glyphicon-plus-sign" ></span>Add Sub-Item</button>
+															<span class="glyphicon glyphicon-plus-sign" ></span>Add Sub-Menu Item</button>
 														</span>
 													</div>																									
 												</div>
@@ -103,9 +86,9 @@
 													<label class="col-md-2 control-label"></label>
 													<div class="col-md-9">
 														<div class="row">		
-															<div class="col-md-4">
+															<div class="col-md-5">
 																<div class="row">
-																	<div class="col-md-10 col-md-offset-1">			
+																	<div class="col-md-9 col-md-offset-2">			
 																		<input type="text" class="form-control marginB15" ng-model="sm.name">						
 																	</div>
 																	<span ng-hide="read">
@@ -122,20 +105,7 @@
 											</div>
 											
 										</div>									
-										
-										<!--<div class="row">
-											<div class="col-md-12" ng-hide="read">								  																		  																  														  
-												  <div class="form-group">
-														<div class="col-md-9 col-sm-6 col-xs-12 col-md-offset-2">
-															<button ng-click="addNewChoice()" ng-show="acc" class="btn btn-sm custom-btn">
-																 <span class="glyphicon glyphicon-plus-sign" ></span>Add Item
-															</button>
-														</div>
-												  </div>									  
-											</div>
-										</div>-->
-										
-										
+																			
 										<div class="row">
 											<div class="col-md-12" ng-hide="read">								  																		  																  														  
 												  <div class="form-group">

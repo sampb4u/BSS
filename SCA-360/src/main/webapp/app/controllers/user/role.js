@@ -239,5 +239,4 @@ angular
 					'read' : true
 				});
 			}
-
 		});
