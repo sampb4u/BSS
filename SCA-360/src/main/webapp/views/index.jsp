@@ -22,7 +22,13 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-		
+		<style>
+		.register form button.mysignin{ margin-top:0; margin-left:0; width:40%;}
+			.forgotlink{text-align:right;display:inline-block;padding:10px 0 0 170px}
+			.forgotlink a{ text-decoration:underline;}
+			.forgotlink a:hover{ text-decoration:none;}
+			.space-top{text-align:left;margin-top:20px}
+		</style>
     </head>
 
     <body>
@@ -56,7 +62,10 @@
                         <input type="text" id="username" name="username" placeholder="username..." autofocus>
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="password...">
-                        <button type="button" id="register">SIGN IN</button>
+						<div class="space-top">
+							<button type="button" id="register" class="mysignin">SIGN IN</button>
+							<span class="forgotlink"><a href="">Forgot Password?</a></span>
+						</div>
                     </form>
                 </div>
             </div>
