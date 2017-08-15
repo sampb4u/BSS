@@ -36,7 +36,7 @@ import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
-import com.finsol.model.SecretQuestions;
+import com.finsol.model.SecretQus;
 import com.finsol.model.UserRole;
 import com.finsol.model.Users;
 
@@ -303,7 +303,7 @@ public class ITManagementController {
 			Users user = (Users) list.get(0);
 			if (user.getPassword().equals(pass.getOldpass())) {
 
-				SecretQuestions sq = new SecretQuestions();
+				SecretQus sq = new SecretQus();
 				sq.setSq1(pass.getSq1());
 				sq.setSq2(pass.getSq2());
 
@@ -329,7 +329,7 @@ public class ITManagementController {
 
 		List list = dataSource.getsqs(pass.getUsername());
 		if (list.size() > 0) {
-			SecretQuestions sq = (SecretQuestions) list.get(0);
+			SecretQus sq = (SecretQus) list.get(0);
 			if (sq.getAns1().equalsIgnoreCase(pass.getAns1()) && sq.getAns2().equalsIgnoreCase(pass.getAns2())) {
 				List list1 = dataSource.getpassword(pass.getUsername());
 				if (list.size() > 0) {
@@ -353,7 +353,7 @@ public class ITManagementController {
 
 		List list = dataSource.getpassword(pass.getUsername());
 		if (list.size() > 0) {
-			SecretQuestions sq = (SecretQuestions) list.get(0);
+			SecretQus sq = (SecretQus) list.get(0);
 			
 				j1.put("error", "UserName not found");
 			

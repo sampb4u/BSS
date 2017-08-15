@@ -13,7 +13,7 @@ import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
-import com.finsol.model.SecretQuestions;
+import com.finsol.model.SecretQus;
 import com.finsol.model.SeqGenericTbl;
 import com.finsol.model.UserRole;
 import com.finsol.model.Users;
@@ -203,10 +203,10 @@ public class ITUserDaoImpl {
 
 	public List getsqs(String username) {
 		Session session = hibernateDao.getSessionFactory().openSession();
-		String sql = "SELECT * FROM SecretQuestions where username =:id ";
+		String sql = "SELECT * FROM SecretQus where username =:id ";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.setParameter("id", username);
-		query.addEntity(SecretQuestions.class);
+		query.addEntity(SecretQus.class);
 		return query.list();
 
 	}
