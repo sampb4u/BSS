@@ -347,13 +347,25 @@ public class ITManagementController {
 		return j1;
 	}
 	
+	@RequestMapping(value = "/getsqs", method = RequestMethod.POST)
+	public @ResponseBody String getsqs(@RequestBody Pass pass) {
+		List getsqs = dataSource.getsqs(pass.getUsername());
+		if (getsqs.size() >0 ){
+			SecretQus sq = (SecretQus) getsqs.get(0);
+			sq.setAns1("");
+			sq.setAns2("");
+			
+		}
+		return convertPojoToJson(getsqs);
+	}
+	
 	@RequestMapping(value = "/forgotpassworduser", method = RequestMethod.POST)
 	public @ResponseBody JSONObject forgotpassworduser(@RequestBody Pass pass) {
 		JSONObject j1 = new JSONObject();
 
 		List list = dataSource.getpassword(pass.getUsername());
-		if (list.size() > 0) {
-			SecretQus sq = (SecretQus) list.get(0);
+		if (list.size() == 0) {
+		
 			
 				j1.put("error", "UserName not found");
 			

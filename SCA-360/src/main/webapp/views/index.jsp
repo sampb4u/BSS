@@ -64,7 +64,7 @@
                         <input type="password" id="password" name="password" placeholder="password...">
 						<div class="space-top">
 							<button type="button" id="register" class="mysignin">SIGN IN</button>
-							<span class="forgotlink"><a href="">Forgot Password?</a></span>
+							<span class="forgotlink"><a href="views/forgotPasswordSetUser.html">Forgot Password?</a></span>
 						</div>
                     </form>
                 </div>
