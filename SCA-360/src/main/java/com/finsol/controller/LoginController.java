@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finsol.bean.Password;
+
 import com.finsol.bean.UserBean;
 import com.finsol.model.ApplicationIndustryCode;
 import com.finsol.model.ExplositionClassfication;

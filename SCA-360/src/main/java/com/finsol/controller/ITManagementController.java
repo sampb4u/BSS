@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.finsol.bean.ITAdmin;
-import com.finsol.bean.Password;
+import com.finsol.bean.Pass;
 import com.finsol.dao.ITUserDaoImpl;
 import com.finsol.model.Access;
 import com.finsol.model.AccessList;
@@ -295,7 +295,7 @@ public class ITManagementController {
 	}
 
 	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
-	public @ResponseBody JSONObject resetpassword(@RequestBody Password pass) {
+	public @ResponseBody JSONObject resetpassword(@RequestBody Pass pass) {
 		JSONObject j1 = new JSONObject();
 
 		List list = dataSource.getpassword(pass.getUsername());
@@ -324,7 +324,7 @@ public class ITManagementController {
 	}
 
 	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
-	public @ResponseBody JSONObject forgotpassword(@RequestBody Password pass) {
+	public @ResponseBody JSONObject forgotpassword(@RequestBody Pass pass) {
 		JSONObject j1 = new JSONObject();
 
 		List list = dataSource.getsqs(pass.getUsername());
@@ -348,7 +348,7 @@ public class ITManagementController {
 	}
 	
 	@RequestMapping(value = "/forgotpassworduser", method = RequestMethod.POST)
-	public @ResponseBody JSONObject forgotpassworduser(@RequestBody Password pass) {
+	public @ResponseBody JSONObject forgotpassworduser(@RequestBody Pass pass) {
 		JSONObject j1 = new JSONObject();
 
 		List list = dataSource.getpassword(pass.getUsername());
