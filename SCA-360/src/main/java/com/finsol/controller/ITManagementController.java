@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.finsol.bean.ITAdmin;
+import com.finsol.bean.Password;
 import com.finsol.dao.ITUserDaoImpl;
 import com.finsol.model.Access;
 import com.finsol.model.AccessList;
@@ -35,7 +36,9 @@ import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
+import com.finsol.model.SecretQuestions;
 import com.finsol.model.UserRole;
+import com.finsol.model.Users;
 
 import net.sf.json.JSONObject;
 
@@ -67,21 +70,20 @@ public class ITManagementController {
 		return getSucessobject();
 
 	}
-	
+
 	@RequestMapping(value = "/getRole", method = RequestMethod.POST)
-	public @ResponseBody String getRoleAccess(@RequestBody  UserRole role) {
+	public @ResponseBody String getRoleAccess(@RequestBody UserRole role) {
 
 		return convertPojoToJson(dataSource.getRole(role.getRoleid()));
 
 	}
-	
-	
+
 	@RequestMapping(value = "/createRoleAccesses", method = RequestMethod.POST)
 	public @ResponseBody JSONObject createITUsers(@RequestBody AccessList access) {
-		for(Access ac : access.getAccesslist()) {
+		for (Access ac : access.getAccesslist()) {
 			dataSource.save(ac);
 		}
-		
+
 		return getSucessobject();
 
 	}
@@ -112,6 +114,13 @@ public class ITManagementController {
 	public @ResponseBody String getAccesspoints() {
 
 		return convertPojoToJson(dataSource.getAccesspoints());
+
+	}
+
+	@RequestMapping(value = "/getAccesspoints", method = RequestMethod.POST)
+	public @ResponseBody String getAccesspoint(@RequestBody AccessPoint accessPoint) {
+
+		return convertPojoToJson(dataSource.getAccesspoint(accessPoint.getAccessname()));
 
 	}
 
@@ -172,7 +181,7 @@ public class ITManagementController {
 		return convertPojoToJson(dataSource.getItlinks(link.getId()));
 
 	}
-	
+
 	@RequestMapping(value = "/getRoleId", method = RequestMethod.GET)
 	public @ResponseBody int getRoleId() {
 
@@ -284,4 +293,58 @@ public class ITManagementController {
 		return convertPojoToJson(dataSource.getRoles());
 
 	}
+
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+	public @ResponseBody JSONObject resetpassword(@RequestBody Password pass) {
+		JSONObject j1 = new JSONObject();
+
+		List list = dataSource.getpassword(pass.getUsername());
+		if (list.size() > 0) {
+			Users user = (Users) list.get(0);
+			if (user.getPassword().equals(pass.getOldpass())) {
+
+				SecretQuestions sq = new SecretQuestions();
+				sq.setSq1(pass.getSq1());
+				sq.setSq2(pass.getSq2());
+
+				sq.setAns1(pass.getAns1());
+				sq.setAns2(pass.getAns2());
+				sq.setUsername(pass.getUsername());
+				dataSource.save(sq);
+				user.setIspwdchanged((byte) 2);
+				user.setPassword(pass.getNewpass());
+				dataSource.save(user);
+				j1.put("sucess", "password changed ");
+			} else {
+				j1.put("error", "old password did not match");
+			}
+
+		}
+		return j1;
+	}
+
+	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
+	public @ResponseBody JSONObject forgotpassword(@RequestBody Password pass) {
+		JSONObject j1 = new JSONObject();
+
+		List list = dataSource.getsqs(pass.getUsername());
+		if (list.size() > 0) {
+			SecretQuestions sq = (SecretQuestions) list.get(0);
+			if (sq.getAns1().equalsIgnoreCase(pass.getAns1()) && sq.getAns2().equalsIgnoreCase(pass.getAns2())) {
+				List list1 = dataSource.getpassword(pass.getUsername());
+				if (list.size() > 0) {
+					Users user = (Users) list1.get(0);
+					user.setPassword(pass.getNewpass());
+					dataSource.save(user);
+				}
+
+				j1.put("sucess", "password changed ");
+			} else {
+				j1.put("error", "Answers did not match");
+			}
+
+		}
+		return j1;
+	}
+
 }

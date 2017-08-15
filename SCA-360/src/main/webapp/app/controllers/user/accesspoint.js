@@ -28,8 +28,34 @@ angular
 		 
 
 			$scope.addaccesspoint= function (){
-				$scope.acc=true;
-				$scope.addNewChoice();
+				  var req = {
+							method : 'POST',
+							url : "/SCA-360/getAccesspoints.do",
+							headers : {
+								'Content-Type' : 'application/json'
+							},
+							data :$scope.access
+						}
+
+						$http(req)
+							.then(
+								function(data) {
+								if (data == null){
+									$scope.acc=true;
+									$scope.addNewChoice();
+								}else {
+									$state.go('app.NewAccessPoint', {
+										'access' : data.data
+									});
+								}
+									
+								},
+								function() {
+									console
+										.log("failed")
+								});
+				  
+				
 			}
 			
 			$scope.addNewChoice = function() {
@@ -55,34 +81,7 @@ angular
 					  };
 					  
 					  
-					  /*$scope.submitaccesspoint = function() {
-							if ($scope.access.accessid == undefined) {
-								var req = {
-									method : 'GET',
-									url : "/SCA-360/getAccessSQid.do",
-									headers : {
-										'Content-Type' : 'application/json'
-									}
-								}
-
-								$http(req)
-									.then(
-										function(data) {
-											$scope.access.accessid = data.data;
-											$scope.createaccesspoint();
-
-										},
-										function() {
-											console
-												.log("failed to get id")
-										});
-
-							}else {
-								$scope.createaccesspoint();
-							}
-						  
-					  }*/
-					  
+		
 					  $scope.submitaccesspoint = function() {
 						  var req = {
 									method : 'POST',

@@ -97,6 +97,7 @@ jQuery(document).ready(function() {
 					sessionStorage.setItem('countryCode',respSplit[1]);
 					
 					sessionStorage.setItem('sessionUserName',username);
+					sessionStorage.setItem('roleid',respSplit[3]);
 					
 					 window.location.assign(respSplit[0]);
 				 }

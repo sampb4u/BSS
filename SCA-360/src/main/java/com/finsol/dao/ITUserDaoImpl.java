@@ -13,6 +13,7 @@ import com.finsol.model.AccessPoint;
 import com.finsol.model.ITTicket;
 import com.finsol.model.ITUser;
 import com.finsol.model.ITUserLinks;
+import com.finsol.model.SecretQuestions;
 import com.finsol.model.SeqGenericTbl;
 import com.finsol.model.UserRole;
 import com.finsol.model.Users;
@@ -149,6 +150,15 @@ public class ITUserDaoImpl {
 		return query.list();
 	}
 
+	public Object getAccesspoint(String id) {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM AccessPoint where accessname = :id";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", id);
+		query.addEntity(AccessPoint.class);
+		return query.list().size() > 0 ? query.list().get(0) : null;
+	}
+
 	public List getRoles() {
 		Session session = hibernateDao.getSessionFactory().openSession();
 		String sql = "SELECT * FROM UserRole";
@@ -178,6 +188,26 @@ public class ITUserDaoImpl {
 			return 1;
 		}
 		return ((int) list.get(0) + 1);
+
+	}
+
+	public List getpassword(String username) {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM Users where loginid =:id ";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", username);
+		query.addEntity(Users.class);
+		return query.list();
+
+	}
+
+	public List getsqs(String username) {
+		Session session = hibernateDao.getSessionFactory().openSession();
+		String sql = "SELECT * FROM SecretQuestions where username =:id ";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setParameter("id", username);
+		query.addEntity(SecretQuestions.class);
+		return query.list();
 
 	}
 

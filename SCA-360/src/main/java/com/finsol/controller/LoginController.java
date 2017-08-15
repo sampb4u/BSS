@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finsol.bean.Password;
 import com.finsol.bean.UserBean;
 import com.finsol.model.ApplicationIndustryCode;
 import com.finsol.model.ExplositionClassfication;
@@ -73,7 +74,11 @@ public class LoginController
 		if(user!=null)
 		{		
 			if(user.getLoginid().equalsIgnoreCase(uName) && user.getPassword().equals(uPassword))
-			{				
+			{	
+				session.setAttribute("userid",user.getUserid());
+				if (user.getIspwdchanged() == 1){
+					 return "views/resetPassword.html";
+				}
 				String countryCode=user.getCountrycode();
 				session.setAttribute("countrycode",countryCode);
 				
@@ -113,6 +118,7 @@ public class LoginController
 				session.setAttribute("ecode1",explosionclassification);
 				session.setAttribute("mcode1",mtrkw);
 				session.setAttribute("scode1",voltageforcase);
+				session.setAttribute("pwdchanged",user.getIspwdchanged());
 				
 				
 				
@@ -129,7 +135,7 @@ public class LoginController
 				
 				session.setAttribute("userfname",user.getUserfirstname());;
 				 session.setMaxInactiveInterval(60*60);
- 				 return "login.htm?"+countryCode+"?"+user.getUserfirstname();
+ 				 return "login.htm?"+countryCode+"?"+user.getUserfirstname()+"?"+user.getRoleid();
 								
 			}
 			else
@@ -286,5 +292,6 @@ public class LoginController
 		 
 	}
 	
+
 	
 }
