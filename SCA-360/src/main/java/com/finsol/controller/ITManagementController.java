@@ -346,5 +346,21 @@ public class ITManagementController {
 		}
 		return j1;
 	}
+	
+	@RequestMapping(value = "/forgotpassworduser", method = RequestMethod.POST)
+	public @ResponseBody JSONObject forgotpassworduser(@RequestBody Password pass) {
+		JSONObject j1 = new JSONObject();
+
+		List list = dataSource.getpassword(pass.getUsername());
+		if (list.size() > 0) {
+			SecretQuestions sq = (SecretQuestions) list.get(0);
+			
+				j1.put("error", "UserName not found");
+			
+
+		}
+		j1.put("sucess", "user found ");
+		return j1;
+	}
 
 }
