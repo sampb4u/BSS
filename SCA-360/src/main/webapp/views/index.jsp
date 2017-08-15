@@ -23,7 +23,7 @@
         <![endif]-->
 
 		<style>
-		.register form button.mysignin{ margin-top:0; margin-left:0; width:40%;}
+		.register form button.mysignin{ margin-top:0; margin-left:8px; width:40%;}
 			.forgotlink{text-align:right;display:inline-block;padding:10px 0 0 170px}
 			.forgotlink a{ text-decoration:underline;}
 			.forgotlink a:hover{ text-decoration:none;}
