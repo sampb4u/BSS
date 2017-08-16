@@ -133,6 +133,10 @@ angular
 					$scope.error = "Password not matched"
 					return
 				}
+				if ($scope.user.oldpass != $scope.user.newpass) {
+					$scope.error = "new password and old password should not be same"
+					return
+				}
 				if ($scope.user.sq1 == undefined || $scope.user.sq1.length < 0) {
 					$scope.error = "SecurityQuestion 1 is required"
 					return
