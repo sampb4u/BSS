@@ -29,10 +29,13 @@
 			<div class="panel-box">
 				<div class="panel">
 					<div class="panel-heading">
-						<span class="panel-title">Role Portfolio</span>
+						<span class="panel-title">Role Portfolio</span> 
+						
 					</div>
 
 					<div class="panel-body" ng-readonly='read'>
+					<div > <span class="panel-title">Role Id : {{role.roleid}}</span> 
+						<span class="panel-title">Role Name : {{role.rolename}}</span> </div>
 						<div class="custom-tabs">							
 							<ul ng-init="vm.tab=1" class="custom-tabs-nav">
 								<li ng-repeat="item in role.templates" ng-init="vm.tab=$first" ng-class="{active: vm.tab === item.accessname}"><a ng-click="vm.tab = item.accessname">{{item.accessname}}</a></li>

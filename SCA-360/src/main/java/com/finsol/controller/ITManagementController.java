@@ -316,7 +316,26 @@ public class ITManagementController {
 				dataSource.save(user);
 				j1.put("sucess", "password changed ");
 			} else {
-				j1.put("error", "old password did not match");
+				j1.put("error", "old password is incorrect");
+			}
+
+		}
+		return j1;
+	}
+	
+	@RequestMapping(value = "/resetpasswordpostlogin", method = RequestMethod.POST)
+	public @ResponseBody JSONObject resetpasswordpost(@RequestBody Pass pass) {
+		JSONObject j1 = new JSONObject();
+
+		List list = dataSource.getpassword(pass.getUsername());
+		if (list.size() > 0) {
+			Users user = (Users) list.get(0);
+			if (user.getPassword().equals(pass.getOldpass())) {
+			user.setPassword(pass.getNewpass());
+				dataSource.save(user);
+				j1.put("sucess", "password changed ");
+			} else {
+				j1.put("error", "old password is incorrect");
 			}
 
 		}

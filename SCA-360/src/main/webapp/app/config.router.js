@@ -6054,6 +6054,45 @@ angular.module('app')
                             ]
                         }
                     })
+                    	.state('app.ResetPassword', {
+                        url: '/ResetPassword',
+                        templateUrl: 'views/resetPassword-postLogin.html',
+                        params : { user : null , read : false } ,
+                        ncyBreadcrumb: {
+                            label: '',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load(['ngGrid']).then(
+                                        function() {
+                                            return $ocLazyLoad.load(
+                                            {
+                                                serie: true,
+                                                files: [
+                                                    'app/controllers/nggrid.js',
+													 'app/controllers/modal.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.css',
+													'lib/mystyles.css',
+													'lib/jquerydatepicker/jquery-ui.css',													
+                                                    'lib/jquery/datatable/jquery.dataTables.min.js',
+                                                    'lib/jquery/datatable/ZeroClipboard.js',
+                                                    'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                                    'lib/jquery/datatable/dataTables.bootstrap.min.js',
+													'lib/jquery/jquery-ui.min.js',
+                                                    'app/controllers/datatable.js',
+													'app/controllers/resetpassword.js'
+                                                ]
+                                            });
+                                        }
+                                    );
+
+                                }
+                            ]
+                        }
+                    })
 					.state('app.SearchRequests', {
                         url: '/SearchRequests',
                         templateUrl: 'views/SearchRequests.html',
