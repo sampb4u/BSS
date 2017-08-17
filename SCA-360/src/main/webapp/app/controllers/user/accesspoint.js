@@ -40,7 +40,7 @@ angular
 						$http(req)
 							.then(
 								function(data) {
-								if (data == null){
+								if (data.data == null){
 									$scope.acc=true;
 									$scope.addNewChoice();
 								}else {

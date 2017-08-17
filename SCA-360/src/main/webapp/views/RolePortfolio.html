@@ -60,8 +60,9 @@
 											class="col-xs-2 col-xs-offset-4 col-lg-1 col-lg-offset-6 pL0">
 											<div class="icon-roles-sprite icon-write"></div>Write</div>
 										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-read"></div>Read</div>
-										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-delete"></div>Delete</div>
 										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-edit"></div>Edit</div>
+										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-delete"></div>Delete</div>
+										
 									</div>
 									<div>
 										<div ng-repeat="menu in item.menulist">
@@ -81,11 +82,12 @@
 													<input type="checkbox" ng-model="submenu.readaccess" ng-disabled='read'>
 												</div>
 												<div class="col-xs-2 col-lg-1">
-													<input type="checkbox" ng-model="submenu.deleteaccess" ng-disabled='read'>
-												</div>
-												<div class="col-xs-2 col-lg-1">
 													<input type="checkbox" ng-model="submenu.editaccess" ng-disabled='read'>
 												</div>
+												<div class="col-xs-2 col-lg-1">
+													<input type="checkbox" ng-model="submenu.deleteaccess" ng-disabled='read'>
+												</div>
+												
 											</div>
 										</div>
 
