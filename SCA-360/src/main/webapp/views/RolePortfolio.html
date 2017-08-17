@@ -34,8 +34,18 @@
 					</div>
 
 					<div class="panel-body" ng-readonly='read'>
-					<div > <span class="panel-title">Role Id : {{role.roleid}}</span> 
-						<span class="panel-title">Role Name : {{role.rolename}}</span> </div>
+					
+					<div class="space-bottom">
+						<span class="titlename">Role Id:</span> 
+						<span class="text-bold">{{role.roleid}}</span>
+					</div>
+					<div class="space-bottom">
+						<span class="titlename">Role Name:</span> 
+						<span class="text-bold">{{role.rolename}}</span>
+					</div>
+					
+					
+					
 						<div class="custom-tabs">							
 							<ul ng-init="vm.tab=1" class="custom-tabs-nav">
 								<li ng-repeat="item in role.templates" ng-init="vm.tab=$first" ng-class="{active: vm.tab === item.accessname}"><a ng-click="vm.tab = item.accessname">{{item.accessname}}</a></li>
@@ -48,10 +58,10 @@
 									<div class="tr-row txt-uppercase">
 										<div
 											class="col-xs-2 col-xs-offset-4 col-lg-1 col-lg-offset-6 pL0">
-											Write</div>
-										<div class="col-xs-2 col-lg-1 pL0">Read</div>
-										<div class="col-xs-2 col-lg-1 pL0">Delete</div>
-										<div class="col-xs-2 col-lg-1 pL0">Edit</div>
+											<div class="icon-roles-sprite icon-write"></div>Write</div>
+										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-read"></div>Read</div>
+										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-delete"></div>Delete</div>
+										<div class="col-xs-2 col-lg-1 pL0"><div class="icon-roles-sprite icon-edit"></div>Edit</div>
 									</div>
 									<div>
 										<div ng-repeat="menu in item.menulist">

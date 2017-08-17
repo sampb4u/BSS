@@ -15,16 +15,16 @@ li.open ul.submenu li.open ul.submenu li.open ul.submenu {
 	padding-right: 5px;
 }
 .space-bottom {
-	margin-bottom: 15px;
+	margin-bottom: 15px!important;
 }
 .space-top {
-	margin-top: 15px;
+	margin-top: 15px!important;
 }
 .space-left {
-	margin-left: 15px;
+	margin-left: 15px!important;
 }
 .space-right {
-	margin-right: 15px;
+	margin-right: 15px!important;
 }
 .text-bold {
 	font-weight: bold
@@ -767,5 +767,38 @@ border-color: #cccbcb;
 border-top-color: #2b94d6!important;
 -webkit-box-shadow: inset 0 1px 0px 0px #2b94d6!important; 
     box-shadow: inset 0 1px 0px 0px #2b94d6!important;
+}
+.titlename{width:100px; display:inline-block;}
+.msg-error{
+color: #a94442!important;
+	background-color: #f2dede!important;
+	border: 1px solid #ebccd1!important;
+	padding:5px;
+	margin:5px;
+	margin-bottom:0;
+	 -webkit-border-radius: 3px;
+		    -moz-border-radius: 3px;
+			    border-radius: 3px;
+	}
+	.icon-roles-sprite {
+	width:32px;
+	height:32px;
+	background:transparent url("../assets/img/icons-role-portfolio.png") no-repeat;
+	margin-left: 7px;
+    margin-bottom: 7px;
+}
+.icon-roles-sprite.icon-write {
+	background-position:0 0;	
+}
+.icon-roles-sprite.icon-read {
+	background-position:-34px 0;	
+}
+.icon-roles-sprite.icon-edit {
+	background-position:-68px 0;
+    margin-left: 3px;	
+}
+.icon-roles-sprite.icon-delete {
+	background-position:-102px 0;
+    margin-left: 20px;	
 }
 /*user management styles ends here*/
