@@ -780,4 +780,25 @@ color: #a94442!important;
 		    -moz-border-radius: 3px;
 			    border-radius: 3px;
 	}
+	.icon-roles-sprite {
+	width:32px;
+	height:32px;
+	background:transparent url("../assets/img/icons-role-portfolio.png") no-repeat;
+	margin-left: 7px;
+    margin-bottom: 7px;
+}
+.icon-roles-sprite.icon-write {
+	background-position:0 0;	
+}
+.icon-roles-sprite.icon-read {
+	background-position:-34px 0;	
+}
+.icon-roles-sprite.icon-edit {
+	background-position:-68px 0;
+    margin-left: 3px;	
+}
+.icon-roles-sprite.icon-delete {
+	background-position:-102px 0;
+    margin-left: 20px;	
+}
 /*user management styles ends here*/
