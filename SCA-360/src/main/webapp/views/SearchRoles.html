@@ -1,5 +1,7 @@
 <div class="mycontainer" ng-controller="RoleController"
 	data-ng-init="getroles()">
+<div ng-show="srole.readaccess"> 
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="page-header-section clearfix">
@@ -72,7 +74,7 @@
 											<i class="glyphicon glyphicon-eye-open"></i>
 									</span>
 								</a> <a  href="javascript:void(0)" class="option-link" title="Edit"
-									ng-hide="user.status=='Closed' || user.status=='Completed'"
+									ng-hide="!(srole.editaccess) || (user.status=='Closed' || user.status=='Completed')"
 									ng-click="openeditrole(role)"> <span class="option-box">
 											<i class="glyphicon glyphicon-edit"></i>
 									</span>
@@ -87,6 +89,10 @@
 		</div>
 
 	</div>
+</div>
+<div ng-hide="srole.readaccess">you dont
+		have access to this page please contact admin</div>
+
 </div>
 <!-- 
 <script type='text/javascript'>

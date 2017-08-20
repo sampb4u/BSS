@@ -80,8 +80,10 @@ public class LoginController
 					 return "views/resetPassword.html";
 				}
 				String countryCode=user.getCountrycode();
+				Integer roleid	=user.getRoleid();/*Role Id*/
 				session.setAttribute("countrycode",countryCode);
-				
+				session.setAttribute("roleid", roleid);
+			
 				
 				String value =  user.getLoginid();
 				StringBuilder sb = new StringBuilder(value);
@@ -135,7 +137,7 @@ public class LoginController
 				
 				session.setAttribute("userfname",user.getUserfirstname());;
 				 session.setMaxInactiveInterval(60*60);
- 				 return "login.htm?"+countryCode+"?"+user.getUserfirstname()+"?"+user.getRoleid();
+ 				 return "login.htm?"+countryCode+"?"+user.getUserfirstname()+"?"+roleid;
 								
 			}
 			else

@@ -14,8 +14,66 @@ angular
 			 $scope.points=[];
 			
 			
-			if ($stateParams.read) {
+				$scope.atemp = {};
+				$scope.atemp.readaccess =false ;
+				$scope.atemp.writeaccess =false;
+				$scope.atemp.deleteaccess=false;
+				$scope.atemp.editaccess=false;
 				
+				var access = function (){
+					
+				var	roleid =sessionStorage.getItem("roleid");
+				var acc={"roleid" : roleid+':Setting:User Mgmt:Add Template'};
+				var httpRequest = $http({
+					method: 'POST',
+					url : "/SCA-360/getRoleAccess.do",
+					data: acc
+				   }).success(function(data, status) 
+					{
+					   if (data.length > 0 ) {
+						   $scope.atemp.readaccess =data[0].readaccess ;
+							$scope.atemp.writeaccess =data[0].writeaccess;
+							$scope.atemp.deleteaccess=data[0].deleteaccess;
+							$scope.atemp.editaccess=data[0].editaccess;
+					   }
+					   
+					
+					});
+				}
+				
+				 access();	
+				 $scope.stemp = {};
+					$scope.stemp.readaccess =false ;
+					$scope.stemp.writeaccess =false;
+					$scope.stemp.deleteaccess=false;
+					$scope.stemp.editaccess=false;
+					
+					var searchaccess = function (){
+						
+					var	roleid =sessionStorage.getItem("roleid");
+					var acc={"roleid" : roleid+':Setting:User Mgmt:Search Template'};
+					var httpRequest = $http({
+						method: 'POST',
+						url : "/SCA-360/getRoleAccess.do",
+						data: acc
+					   }).success(function(data, status) 
+						{
+						   if (data.length > 0 ){
+							   $scope.stemp.readaccess =data[0].readaccess ;
+								$scope.stemp.writeaccess =data[0].writeaccess;
+								$scope.stemp.deleteaccess=data[0].deleteaccess;
+								$scope.stemp.editaccess=data[0].editaccess;
+						   }
+						
+						
+						});
+					}
+					searchaccess ();
+				
+			 
+			
+			if ($stateParams.read) {
+				 $scope.acc = true;
 				$scope.read = true;
 
 			}
@@ -139,4 +197,6 @@ angular
 								'read' : true
 							});
 						}
+		
+		
 		});

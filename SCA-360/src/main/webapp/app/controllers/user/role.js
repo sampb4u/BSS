@@ -239,4 +239,61 @@ angular
 					'read' : true
 				});
 			}
+		
+		
+			$scope.arole = {};
+			$scope.arole.readaccess =false ;
+			$scope.arole.writeaccess =false;
+			$scope.arole.deleteaccess=false;
+			$scope.arole.editaccess=false;
+			
+			var access = function (){
+				
+			var	roleid =sessionStorage.getItem("roleid");
+			var acc={"roleid" : roleid+':Setting:User Mgmt:Add Role'};
+			var httpRequest = $http({
+				method: 'POST',
+				url : "/SCA-360/getRoleAccess.do",
+				data: acc
+			   }).success(function(data, status) 
+				{
+				   if (data.length > 0 ) {
+					   $scope.arole.readaccess =data[0].readaccess ;
+						$scope.arole.writeaccess =data[0].writeaccess;
+						$scope.arole.deleteaccess=data[0].deleteaccess;
+						$scope.arole.editaccess=data[0].editaccess;
+				   }
+				   
+				
+				});
+			}
+			
+			 access();	
+			 $scope.srole = {};
+				$scope.srole.readaccess =false ;
+				$scope.srole.writeaccess =false;
+				$scope.srole.deleteaccess=false;
+				$scope.srole.editaccess=false;
+				
+				var searchaccess = function (){
+					
+				var	roleid =sessionStorage.getItem("roleid");
+				var acc={"roleid" : roleid+':Setting:User Mgmt:Search Role'};
+				var httpRequest = $http({
+					method: 'POST',
+					url : "/SCA-360/getRoleAccess.do",
+					data: acc
+				   }).success(function(data, status) 
+					{
+					   if (data.length > 0 ){
+						   $scope.srole.readaccess =data[0].readaccess ;
+							$scope.srole.writeaccess =data[0].writeaccess;
+							$scope.srole.deleteaccess=data[0].deleteaccess;
+							$scope.srole.editaccess=data[0].editaccess;
+					   }
+					
+					
+					});
+				}
+				searchaccess ();
 		});
