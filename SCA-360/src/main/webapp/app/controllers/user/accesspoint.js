@@ -166,6 +166,9 @@ angular
 					  }
 					  
 					  $scope.getpoints = function(status) {
+						  if (!$scope.stemp.readaccess){
+							  return
+						  }
 
 							var req = {
 								method : 'GET',

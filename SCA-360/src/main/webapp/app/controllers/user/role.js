@@ -187,6 +187,9 @@ angular
 			$scope.getroleAccesspoints = function() {}
 
 			$scope.getroles = function() {
+				if (!$scope.srole.readaccess){
+					return;
+				}
 				var req = {
 						method : 'GET',
 						url : "/SCA-360/getRoleId.do",

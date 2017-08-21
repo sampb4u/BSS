@@ -1,4 +1,4 @@
-define([
+zdefine([
 	"../core",
 	"../ajax"
 ], function( jQuery ) {
