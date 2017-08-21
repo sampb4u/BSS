@@ -63,6 +63,11 @@ angular
 								$scope.stemp.writeaccess =data[0].writeaccess;
 								$scope.stemp.deleteaccess=data[0].deleteaccess;
 								$scope.stemp.editaccess=data[0].editaccess;
+								
+							
+									  if ($scope.stemp.readaccess){
+										  $scope.getpoints()
+									  }
 						   }
 						
 						

@@ -293,6 +293,9 @@ angular
 							$scope.srole.writeaccess =data[0].writeaccess;
 							$scope.srole.deleteaccess=data[0].deleteaccess;
 							$scope.srole.editaccess=data[0].editaccess;
+							if ($scope.srole.readaccess){
+								$scope.getroles();
+							}
 					   }
 					
 					
