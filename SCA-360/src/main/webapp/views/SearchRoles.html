@@ -1,6 +1,6 @@
 <div class="mycontainer" ng-controller="RoleController"
-	data-ng-init="getroles()">
-<div ng-show="srole.readaccess"> 
+	data-ng-init="searchaccess()">
+
 
 	<div class="row">
 		<div class="col-xs-12">
@@ -15,12 +15,12 @@
 					<h1>Search Roles</h1>
 				</div>
 
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right custom-search">
+				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right custom-search" ng-show="srole.readaccess">
 					<div class="input-group col-md-12">
 						<div class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</div>
-						<input type="text" class="form-control custom-search-input pull-left" placeholder="Search" ng-model="searchFish">
+						<input type="text" class="form-control custom-search-input pull-left" placeholder="Search" ng-model="searchFish" >
 					</div>
 				</div>
 
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	
+	<div ng-show="srole.readaccess"> 
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="panel-box">

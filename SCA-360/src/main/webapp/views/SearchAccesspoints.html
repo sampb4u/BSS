@@ -1,6 +1,6 @@
 <div class="mycontainer" ng-controller="AccessController"
 	data-ng-init="getpoints()">
-	<div ng-show='stemp.readaccess'>
+	
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="page-header-section clearfix">
@@ -16,7 +16,7 @@
 						</ol>
 						<h1>Search Template</h1>
 					</div>
-					<div
+					<div  ng-show='stemp.readaccess'
 						class="col-md-5 col-sm-5 col-xs-12 form-group pull-right custom-search">
 						<div class="input-group col-md-12">
 							<div class="input-group-addon">
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-
+<div ng-show='stemp.readaccess'>
 		<div class="row center-block">
 			<div class="col-md-12">
 				<div class="panel-box">
