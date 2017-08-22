@@ -48,7 +48,7 @@ angular
 					$scope.stemp.deleteaccess=false;
 					$scope.stemp.editaccess=false;
 					
-					var searchaccess = function (){
+					$scope.searchaccess = function (){
 						
 					var	roleid =sessionStorage.getItem("roleid");
 					var acc={"roleid" : roleid+':Setting:User Mgmt:Search Template'};
@@ -73,7 +73,7 @@ angular
 						
 						});
 					}
-					searchaccess ();
+					
 				
 			 
 			
