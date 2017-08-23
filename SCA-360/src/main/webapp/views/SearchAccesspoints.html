@@ -79,7 +79,7 @@
 												class="glyphicon glyphicon-eye-open"></i>
 										</span>
 									</a> <a href="javascript:void(0)" class="option-link" title="Edit"
-										ng-hide="!(stemp.editaccess) && (user.status=='Closed' || user.status=='Completed' )  "
+										ng-hide="!(stemp.editaccess) || (user.status=='Closed' || user.status=='Completed' )  "
 										ng-click="openedituser(point)"> <span class="option-box">
 												<i class="glyphicon glyphicon-edit"></i>
 										</span>
