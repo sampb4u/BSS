@@ -187,9 +187,6 @@ angular
 			$scope.getroleAccesspoints = function() {}
 
 			$scope.getroles = function() {
-				if (!$scope.srole.readaccess){
-					return;
-				}
 				var req = {
 						method : 'GET',
 						url : "/SCA-360/getRoleId.do",
@@ -250,7 +247,7 @@ angular
 			$scope.arole.deleteaccess=false;
 			$scope.arole.editaccess=false;
 			
-			var access = function (){
+			$scope.access = function (){
 				
 			var	roleid =sessionStorage.getItem("roleid");
 			var acc={"roleid" : roleid+':Setting:User Mgmt:Add Role'};
@@ -265,13 +262,15 @@ angular
 						$scope.arole.writeaccess =data[0].writeaccess;
 						$scope.arole.deleteaccess=data[0].deleteaccess;
 						$scope.arole.editaccess=data[0].editaccess;
+						if ($scope.arole.readaccess){
+							$scope.getroles();
+						}
 				   }
 				   
 				
 				});
 			}
 			
-			 access();	
 			 $scope.srole = {};
 				$scope.srole.readaccess =false ;
 				$scope.srole.writeaccess =false;
