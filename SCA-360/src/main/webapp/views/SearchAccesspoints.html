@@ -12,9 +12,9 @@
 								class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
 							<li><a href="#">User Management</a><span
 								class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
-							<li class="active"><span>Search Template</span></li>
+							<li class="active"><span>Search Templates</span></li>
 						</ol>
-						<h1>Search Template</h1>
+						<h1>Search Templates</h1>
 					</div>
 					<div  ng-show='stemp.readaccess'
 						class="col-md-5 col-sm-5 col-xs-12 form-group pull-right custom-search">
@@ -38,7 +38,7 @@
 				<div class="panel-box">
 					<div class="panel">
 						<div class="panel-heading">
-							<span class="panel-title">Search Template</span>
+							<span class="panel-title">Search Templates</span>
 							<!-- 	<span>	
 							<a href="javascript:void(0)" class="panel-title"
 									ng-click="exportData()"> <span class="status-new">
@@ -97,6 +97,25 @@
 
 	</div>
 
-	<div ng-hide='stemp.readaccess'>you dont have access to this page
-		please contact admin</div>
+	
+	<div ng-hide='stemp.readaccess'>
+		<div class="row center-block">
+			<div class="col-md-12">
+				<div class="panel-box">
+					<div class="panel">
+						<div class="panel-heading">
+							<span class="panel-title">Search Templates</span>
+						</div>
+
+						<div class="panel-body">
+							<div class="msg msg-info">
+								<span class="glyphicon glyphicon-info-sign"></span>
+								You don't have access to this page. Please contact your Admin.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

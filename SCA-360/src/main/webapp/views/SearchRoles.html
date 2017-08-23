@@ -34,7 +34,7 @@
 			<div class="panel-box">
 				<div class="panel">
 					<div class="panel-heading">
-						<span class="panel-title">Role List</span>
+						<span class="panel-title">Search Roles</span>
 					
 					</div>
 
@@ -90,9 +90,33 @@
 
 	</div>
 </div>
-<div ng-hide="srole.readaccess">you dont
-		have access to this page please contact admin</div>
 
+
+		
+		
+<div ng-hide="srole.readaccess">
+	<div class="row center-block">
+		<div class="col-md-12">
+			<div class="panel-box">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">Search Roles</span>
+					</div>
+
+					<div class="panel-body">
+						<div class="msg msg-info">
+							<span class="glyphicon glyphicon-info-sign"></span>
+							You don't have access to this page. Please contact your Admin.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+			
+		
 </div>
 <!-- 
 <script type='text/javascript'>
