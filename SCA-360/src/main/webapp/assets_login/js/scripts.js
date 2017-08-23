@@ -94,12 +94,13 @@ jQuery(document).ready(function() {
 				 
 					var respSplit=responce.split("?");
 					
-					sessionStorage.setItem('countryCode',respSplit[1]);
 					
-					sessionStorage.setItem('sessionUserName',username);
-					sessionStorage.setItem('roleid',respSplit[3]);
+					 
 					
-					 window.location.assign(respSplit[0]);
+						sessionStorage.setItem('countryCode',respSplit[1]);
+						sessionStorage.setItem('sessionUserName',username);
+						sessionStorage.setItem('roleid',respSplit[3]);
+						 window.location.assign(respSplit[0]);
 				 }
 			});		
 		
@@ -149,10 +150,10 @@ $('.register').keydown(function(event){
 				  {
 					   //alert(responce);
 					var respSplit=responce.split("?");
-					sessionStorage.setItem('countryCode',respSplit[1]);
-					sessionStorage.setItem('sessionUserFirstName',respSplit[2]);
-					sessionStorage.setItem('sessionUserName',username);
-					 window.location.assign(respSplit[0]);
+							sessionStorage.setItem('countryCode',respSplit[1]);
+							sessionStorage.setItem('sessionUserName',username);
+							sessionStorage.setItem('roleid',respSplit[3]);
+						 window.location.assign(respSplit[0]);
 				 }
 			});	
     }
