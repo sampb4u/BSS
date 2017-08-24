@@ -1,0 +1,13 @@
+BEGIN TRANSACTION
+	INSERT INTO [bssdb].[dbo].[AccessPoint] ([accessname]) VALUES ('SETTING')
+	INSERT INTO [bssdb].[dbo].[Menu] ([menuname] ,[accessid]) VALUES ('User Mgmt','SETTING')
+	INSERT INTO [bssdb].[dbo].[SubMenu]([name],[id]) VALUES ('Add Role', 1)
+	INSERT INTO [bssdb].[dbo].[SubMenu]([name],[id]) VALUES ('Add Template',1)
+	INSERT INTO [bssdb].[dbo].[SubMenu]([name],[id]) VALUES ('Search Role',1)
+	INSERT INTO [bssdb].[dbo].[SubMenu]([name],[id]) VALUES ('Search Template',1)
+				
+	INSERT INTO [bssdb].[dbo].[Access]([roleid],[deleteaccess],[editaccess],[readaccess],[writeaccess]) VALUES ('1:SETTING:User Mgmt:Add Role','T','T','T','T')
+	INSERT INTO [bssdb].[dbo].[Access]([roleid],[deleteaccess],[editaccess],[readaccess],[writeaccess]) VALUES ('1:SETTING:User Mgmt:Add Template','T','T','T','T')
+	INSERT INTO [bssdb].[dbo].[Access]([roleid],[deleteaccess],[editaccess],[readaccess],[writeaccess]) VALUES ('1:SETTING:User Mgmt:Search Role','T','T','T','T')
+	INSERT INTO [bssdb].[dbo].[Access]([roleid],[deleteaccess],[editaccess],[readaccess],[writeaccess]) VALUES ('1:SETTING:User Mgmt:Search Template','T','T','T','T')
+COMMIT TRANSACTION
